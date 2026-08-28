@@ -3,7 +3,7 @@
 set -e
 
 APP_NAME="CRESCI"
-APP_VERSION="v1.0.0"
+APP_VERSION="v1.0.1"
 REPO_URL="https://github.com/Tkoczu/Cresci.git"
 
 CPU_CORES=2
@@ -187,6 +187,14 @@ systemctl enable cresci
 systemctl start cresci
 "
 
+echo
+echo "Installing CRESCI management command..."
+
+pct exec "${CTID}" -- bash -c "
+chmod +x /opt/cresci/scripts/update.sh
+chmod +x /opt/cresci/scripts/cresci
+ln -sf /opt/cresci/scripts/cresci /usr/local/bin/cresci
+"
 echo
 echo "[10/10] Checking CRESCI..."
 
