@@ -1,8 +1,8 @@
-{
-  "name": "gym-progress-tracker",
-  "version": "0.1.0",
+﻿{
+  "name": "cresci",
+  "version": "1.0.1",
   "private": true,
-  "description": "CRESCI — self-hosted gym progress tracker for Marek and Domii",
+  "description": "CRESCI - self-hosted gym progress tracker",
   "type": "module",
   "scripts": {
     "start": "node server.js",
@@ -13,3 +13,4 @@
     "node": ">=22.5"
   }
 }
+

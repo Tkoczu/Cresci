@@ -1,0 +1,2 @@
+*.sh text eol=lf
+scripts/cresci text eol=lf
