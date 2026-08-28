@@ -69,7 +69,7 @@ echo "[3/10] Looking for Debian 13 template..."
 
 pveam update >/dev/null
 
-TEMPLATE="$(pveam available --section system | awk '/debian-13-standard/ {print $2}' | tail -n 1)"
+TEMPLATE="$(pveam available --section system | awk '/debian-13-standard/ && /amd64/ {print $2}' | tail -n 1)"
 
 if [ -z "${TEMPLATE}" ]; then
   echo "ERROR: Debian 13 LXC template was not found."
