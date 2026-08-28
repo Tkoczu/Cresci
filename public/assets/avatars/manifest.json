@@ -1,0 +1,21 @@
+{
+  "version": 8,
+  "packId": "cresci-avatar-locked-rig-v8",
+  "format": "png",
+  "canvas": { "width": 256, "height": 384 },
+  "displayCanvas": { "width": 128, "height": 192 },
+  "rendering": "pixelated",
+  "root": "/assets/avatars/final-v8",
+  "layerOrder": ["body", "eyes", "hair", "bottom", "top", "shoes", "headwear", "accessories"],
+  "bases": ["female", "male"],
+  "layers": {
+    "body": { "fixed": "base" },
+    "eyes": { "fixed": "brown" },
+    "hair": { "fixedByGender": { "female": "ponytail_brown", "male": "short_brown" } },
+    "bottom": { "field": "bottom_style", "empty": "none", "values": { "training_shorts": "cresci_training_bottom" } },
+    "top": { "field": "top_style", "empty": "none", "values": { "cresci_tank": "cresci_training_top" } },
+    "shoes": { "field": "shoes_style", "empty": "none", "values": { "trainers": "cresci_runners" } },
+    "headwear": { "field": "headwear", "empty": "none", "values": { "cap": "cresci_cap" } },
+    "accessories": { "field": "accessory", "empty": "none", "values": { "wrist_wraps": "cresci_wristbands" } }
+  }
+}

@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101315">
+  <meta name="description" content="CRESCI — self-hosted dziennik progresu treningowego Marka i Domii">
+  <link rel="icon" type="image/png" href="/cresci-icon.png">
+  <link rel="apple-touch-icon" href="/cresci-icon.png">
+  <title>CRESCI — progres treningowy</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="#dashboard"><img class="brand-mark" src="/cresci-icon.png" alt=""><span>CRESCI<small>PROGRESS TRACKER</small></span></a>
+    <nav aria-label="Główna nawigacja">
+      <button class="nav-item active" data-view="dashboard"><span>⌂</span> Dashboard</button>
+      <button class="nav-item" data-view="history"><span>↗</span> Historia</button>
+      <button class="nav-item" data-view="chart"><span>⌁</span> Wykres progresu</button>
+      <button class="nav-item" data-view="exercises"><span>＋</span> Ćwiczenia</button>
+      <button class="nav-item" id="characterNav" data-view="character" hidden><span>◆</span> Postać</button>
+      <button class="nav-item" id="inventoryNav" data-view="inventory" hidden><span>▦</span> Ekwipunek</button>
+      <button class="nav-item" id="shopNav" data-view="shop" hidden><span>◆</span> Sklep</button>
+      <button class="nav-item" id="achievementsNav" data-view="achievements" hidden><span>★</span> Osiągnięcia</button>
+      <button class="nav-item" data-view="settings"><span>⚙</span> Ustawienia</button>
+    </nav>
+    <div class="sidebar-foot"><span class="status-dot"></span> Dane zapisane lokalnie<small>SQLite · self-hosted</small></div>
+  </aside>
+  <button class="menu-backdrop" id="menuBackdrop" type="button" aria-label="Zamknij menu" tabindex="-1"></button>
+
+  <main>
+    <header class="topbar">
+      <button class="menu-button" id="menuButton" aria-label="Otwórz menu" aria-expanded="false">☰</button>
+      <div><p class="eyebrow">TRENING SIŁOWY</p><h1 id="pageTitle">Twój progres</h1></div>
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Włącz ciemny motyw" title="Zmień motyw">☾</button>
+    </header>
+
+    <section class="view active" id="dashboardView">
+      <section class="score-section" id="scoreSection" hidden><div class="score-section-heading"><div><p class="eyebrow">OSTATNIE 30 DNI</p><h2>CRESCI Score</h2></div><small>Porównanie z poprzednimi 30 dniami</small></div><div class="score-grid" id="scoreGrid"></div></section>
+      <div class="section-heading"><div><p class="eyebrow">AKTUALNY PLAN</p><h2>Twoje ciężary</h2></div><div class="dashboard-tools"><input class="search" id="exerciseSearch" type="search" placeholder="Szukaj ćwiczenia…" aria-label="Szukaj ćwiczenia"><button class="primary" id="quickAdd">+ Zapisz serię</button></div></div>
+      <div class="exercise-grid" id="exerciseGrid"></div>
+    </section>
+
+    <section class="view" id="historyView">
+      <div class="section-heading"><div><p class="eyebrow">DZIENNIK ZMIAN</p><h2>Historia progresu</h2></div><div class="filters"><select id="historyProfile" aria-label="Filtr osoby"></select><select id="historyExercise" aria-label="Filtr ćwiczenia"></select></div></div>
+      <div class="table-wrap"><table><thead><tr><th>Data</th><th>Osoba</th><th>Ćwiczenie</th><th>Stary kg</th><th>Nowy kg</th><th>Przyrost</th><th>Krążki / stopnie</th><th>Typ</th></tr></thead><tbody id="historyBody"></tbody></table></div>
+    </section>
+
+    <section class="view" id="chartView">
+      <div class="section-heading"><div><p class="eyebrow">TREND W CZASIE</p><h2>Wykres progresu</h2></div><div class="filters"><select id="chartProfile" aria-label="Osoby na wykresie"></select><select id="chartExercise" aria-label="Ćwiczenie na wykresie"></select></div></div>
+      <div class="chart-card"><div class="chart-summary" id="chartSummary"></div><div class="chart-legend" id="chartLegend"></div><canvas id="progressChart" height="360" aria-label="Wykres zmian ciężaru"></canvas><div class="empty-chart" id="emptyChart">Dodaj co najmniej jeden wpis, aby zobaczyć wykres.</div></div>
+      <aside class="index-note" id="indexNote"><strong>Jak działa indeks całego planu?</strong><span>Każde ćwiczenie zaczyna od 100. Wykres pokazuje średnią procentową zmianę ciężaru we wszystkich rozpoczętych ćwiczeniach, więc ciężkie boje nie dominują nad lekkimi. To wskaźnik kierunku, nie medyczny pomiar siły — zapis samych kilogramów nie uwzględnia liczby powtórzeń, serii, techniki ani zakresu ruchu.</span></aside>
+    </section>
+
+    <section class="view" id="exercisesView">
+      <div class="section-heading"><div><p class="eyebrow">BAZA ĆWICZEŃ</p><h2>Zarządzaj ćwiczeniami</h2></div><button class="primary" id="newExercise">+ Nowe ćwiczenie</button></div>
+      <div class="exercise-list" id="exerciseList"></div>
+    </section>
+
+    <section class="view" id="characterView">
+      <div class="game-nav" aria-label="CRESCI GAME"><button class="active" data-game-view="character">Postać</button><button data-game-view="inventory">Ekwipunek</button><button data-game-view="shop">Sklep</button><button data-game-view="achievements">Osiągnięcia</button></div>
+      <div class="section-heading"><div><p class="eyebrow">CRESCI GAME</p><h2>Twoja postać</h2></div><span class="game-status-pill">● GAME ACTIVE</span></div>
+      <div class="character-grid" id="characterGrid"></div>
+    </section>
+
+    <section class="view" id="inventoryView">
+      <div class="game-nav" aria-label="CRESCI GAME"><button data-game-view="character">Postać</button><button class="active" data-game-view="inventory">Ekwipunek</button><button data-game-view="shop">Sklep</button><button data-game-view="achievements">Osiągnięcia</button></div>
+      <div class="section-heading"><div><p class="eyebrow">CRESCI GAME</p><h2>Ekwipunek</h2></div><div class="filters"><select id="inventoryProfile" aria-label="Profil ekwipunku"></select></div></div>
+      <div class="game-balance" id="inventoryBalance"></div>
+      <div class="slot-filters" id="inventoryFilters"></div>
+      <div class="item-grid" id="inventoryGrid"></div>
+    </section>
+
+    <section class="view" id="shopView">
+      <div class="game-nav" aria-label="CRESCI GAME"><button data-game-view="character">Postać</button><button data-game-view="inventory">Ekwipunek</button><button class="active" data-game-view="shop">Sklep</button><button data-game-view="achievements">Osiągnięcia</button></div>
+      <div class="section-heading"><div><p class="eyebrow">CRESCI GAME</p><h2>Sklep</h2></div><div class="filters"><select id="shopProfile" aria-label="Profil sklepu"></select></div></div>
+      <div class="game-balance" id="shopBalance"></div>
+      <div class="item-grid shop-grid" id="shopGrid"></div>
+    </section>
+
+    <section class="view" id="achievementsView">
+      <div class="game-nav" aria-label="CRESCI GAME"><button data-game-view="character">Postać</button><button data-game-view="inventory">Ekwipunek</button><button data-game-view="shop">Sklep</button><button class="active" data-game-view="achievements">Osiągnięcia</button></div>
+      <div class="section-heading"><div><p class="eyebrow">CRESCI GAME</p><h2>Osiągnięcia</h2></div><div class="filters"><select id="achievementProfile" aria-label="Profil osiągnięć"></select></div></div>
+      <div class="achievement-summary" id="achievementSummary"></div>
+      <div class="achievement-groups" id="achievementGroups"></div>
+    </section>
+
+    <section class="view" id="settingsView">
+      <div class="section-heading"><div><p class="eyebrow">USTAWIENIA APLIKACJI</p><h2>Ustawienia</h2></div></div>
+      <div class="settings-tabs" role="tablist" aria-label="Sekcje ustawień"><button class="settings-tab active" type="button" role="tab" aria-selected="true" data-settings-tab="general">Ogólne</button><button class="settings-tab" type="button" role="tab" aria-selected="false" data-settings-tab="backup">Dane i backup</button></div>
+      <section class="settings-panel active" data-settings-panel="general">
+        <div class="data-grid settings-general-grid"><article class="data-card"><span class="data-icon">◐</span><h3>Wygląd</h3><p>Wybierz jasny albo ciemny motyw interfejsu CRESCI.</p><button class="secondary" id="settingsThemeToggle" type="button">Zmień motyw</button></article><article class="data-card"><span class="data-icon">●</span><h3>Tryb aplikacji</h3><p>Dane są przechowywane w lokalnej bazie SQLite na tym serwerze.</p><span class="settings-status"><i></i> Self-hosted</span></article><article class="data-card score-settings-card"><span class="data-icon">★</span><h3>CRESCI Score</h3><p>Jawna punktacja aktywności i progresu z ostatnich 30 dni. Włącz osobno dla każdego profilu i ustaw cel treningów tygodniowo.</p><div class="score-settings-list" id="scoreSettingsList"></div></article><article class="data-card score-settings-card game-settings-card"><span class="data-icon">◆</span><h3>CRESCI GAME</h3><p>Avatar, poziomy i meldunki XP. Funkcja jest domyślnie wyłączona i działa osobno dla każdego profilu.</p><div class="score-settings-list" id="gameSettingsList"></div></article></div>
+      </section>
+      <section class="settings-panel" data-settings-panel="backup" hidden>
+      <div class="settings-subheading"><h3>Dane i backup</h3><p>Eksport, import, Google Drive i automatyczne kopie zapasowe.</p></div>
+      <div class="data-grid">
+        <article class="data-card"><span class="data-icon">↓</span><h3>Eksport kopii</h3><p>Pobierz pełną kopię profili, ćwiczeń i historii w jednym pliku JSON.</p><a class="primary" href="/api/export" download>Eksportuj dane</a></article>
+        <article class="data-card"><span class="data-icon">↑</span><h3>Import kopii</h3><p>Przywrócenie zastąpi aktualne dane. Przed importem warto wykonać eksport.</p><label class="secondary file-label">Wybierz plik<input id="importFile" type="file" accept="application/json,.json"></label></article>
+        <article class="data-card drive-card"><span class="data-icon">☁</span><span class="connection-badge" id="driveBadge">SPRAWDZAM…</span><h3>Google Drive</h3><p id="driveConnectionText">Sprawdzam połączenie z kontem Google.</p><p class="drive-setup" id="driveSetupText"></p><div class="drive-actions"><button class="secondary" id="configureDrive" type="button">Konfiguruj krok po kroku</button><button class="primary" id="connectDrive" type="button">Połącz Google Drive</button><button class="secondary" id="disconnectDrive" type="button" hidden>Odłącz konto</button></div></article>
+        <article class="data-card backup-settings-card"><div class="backup-card-head"><span class="data-icon">↻</span><div><h3>Automatyczne kopie</h3><p id="backupLastStatus">Ładowanie ustawień…</p></div></div><form id="backupSettingsForm"><fieldset><legend>Miejsce zapisu</legend><label class="backup-choice"><input id="localBackupEnabled" name="local_enabled" type="checkbox"><span><strong>Lokalnie</strong><small>Dodatkowy plik JSON na serwerze</small></span></label><label class="backup-choice"><input id="driveBackupEnabled" name="drive_enabled" type="checkbox"><span><strong>Google Drive</strong><small>Folder „CRESCI Backups” na Dysku</small></span></label></fieldset><label class="backup-interval">Częstotliwość<select name="interval_hours" id="backupInterval"><option value="0">Tylko ręcznie</option><option value="1">Co godzinę</option><option value="6">Co 6 godzin</option><option value="12">Co 12 godzin</option><option value="24">Codziennie</option><option value="72">Co 3 dni</option><option value="168">Co tydzień</option></select></label><div class="backup-actions"><button class="secondary" type="submit">Zapisz ustawienia</button><button class="primary" id="runBackupNow" type="button">↻ Synchronizuj teraz</button></div></form><section class="restore-panel"><div><strong>Przywracanie kopii</strong><small id="restoreBackupHint">CRESCI przechowuje 3 najnowsze kopie.</small></div><select id="restoreBackupSelect" aria-label="Wybierz kopię do przywrócenia"><option>Ładowanie kopii…</option></select><button class="secondary refresh-backups" id="refreshBackupList" type="button">↻ Odśwież</button><button class="danger-button" id="restoreBackup" type="button" disabled>Przywróć wybraną kopię</button></section></article>
+      </div>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="entryDialog">
+    <form method="dialog" id="entryForm"><button class="dialog-close" type="button" data-close-dialog="entryDialog" aria-label="Zamknij">×</button><p class="eyebrow">NOWY WPIS</p><h2>Zapisz trening</h2>
+      <label>Osoba<select name="profile_id" id="entryProfile" required></select></label>
+      <label>Ćwiczenie<select name="exercise_id" id="entryExercise" required></select></label>
+      <div class="form-row"><label>Nowy ciężar (kg) <span class="muted">(opcjonalnie)</span><input name="new_weight" type="number" min="0" step="0.25" inputmode="decimal" placeholder="Bez zmian"></label><label>Data<input name="performed_at" type="date" required></label></div>
+      <label>Krążki / stopnie obciążenia<input name="plates_or_steps" placeholder="np. 2 × 20 kg / stopień 8"></label>
+      <label>Notatka <span class="muted">(opcjonalnie)</span><input name="note" placeholder="np. 3 × 8, ostatnia seria ciężka"></label>
+      <p class="load-hint" id="loadHint"></p><button class="primary full" type="submit">Zapisz wynik</button>
+    </form>
+  </dialog>
+
+  <dialog id="exerciseDialog"><form method="dialog" id="exerciseForm"><button class="dialog-close" type="button" data-close-dialog="exerciseDialog" aria-label="Zamknij">×</button><p class="eyebrow">BAZA ĆWICZEŃ</p><h2 id="exerciseDialogTitle">Nowe ćwiczenie</h2><input type="hidden" name="id">
+    <div class="exercise-source-tabs" id="exerciseSourceTabs" aria-label="Sposób dodawania ćwiczenia"><button class="source-tab active" type="button" data-source-mode="custom">Własne ćwiczenie</button><button class="source-tab" type="button" data-source-mode="catalog">Pobierz z katalogu</button></div>
+    <section class="catalog-panel" id="catalogPanel" hidden><label>Wyszukaj w katalogu wger<div class="catalog-search-row"><input id="catalogQuery" type="search" placeholder="np. bench press" autocomplete="off"><button class="secondary" id="catalogSearch" type="button">Szukaj</button></div></label><p class="catalog-status" id="catalogStatus">Wyszukuj po angielskiej nazwie. Nie jest potrzebne konto ani klucz API.</p><div class="catalog-results" id="catalogResults"></div></section>
+    <label>Nazwa<input name="name" required placeholder="np. Martwy ciąg"></label><label>Partia<select name="category"><option>Nogi</option><option>Klatka piersiowa</option><option>Plecy</option><option>Barki</option><option>Biceps</option><option>Triceps</option><option>Brzuch</option><option>Inne</option></select></label>
+    <label id="exerciseCreatorLabel">Dodaje jako <select name="creator_user_id" id="exerciseCreator"></select><small>Potrzebne tylko do achievementu za własne ćwiczenie.</small></label>
+    <label>Sposób obciążenia<select name="load_mode"><option value="direct">Ciężar wpisywany bezpośrednio</option><option value="plates">Sztanga / krążki</option><option value="steps">Maszyna / stopnie</option></select></label>
+    <div class="form-row"><label>Waga gryfu (kg)<input name="bar_weight" type="number" min="0" step="0.25" value="0"></label><label>Najmniejszy skok (kg)<input name="step_size" type="number" min="0.25" step="0.25" value="1"></label></div>
+    <button class="primary full" type="submit">Zapisz ćwiczenie</button></form></dialog>
+
+  <dialog id="historyDialog" class="history-dialog"><form method="dialog" id="historyEditForm"><button class="dialog-close" type="button" data-close-dialog="historyDialog" aria-label="Zamknij">×</button><p class="eyebrow">SZCZEGÓŁY WPISU</p><h2 id="historyDialogTitle">Zmiana obciążenia</h2>
+    <input type="hidden" name="id">
+    <div id="historyDetails"><div class="history-entry-heading" id="historyEntryHeading"></div><div class="change-visuals"><article class="change-visual"><small>CIĘŻAR</small><div><strong id="detailOldWeight"></strong><span class="change-arrow" aria-hidden="true">→</span><strong class="change-new" id="detailNewWeight"></strong></div></article><article class="change-visual"><small>KRĄŻKI / STOPNIE</small><div><strong id="detailOldPlates"></strong><span class="change-arrow" aria-hidden="true">→</span><strong class="change-new" id="detailNewPlates"></strong></div></article></div><p class="history-entry-note" id="historyEntryNote"></p></div>
+    <div id="historyEditFields" hidden><div class="form-row"><label>Nowy ciężar (kg)<input name="new_weight" type="number" min="0" step="0.25" inputmode="decimal" required></label><label>Data<input name="performed_at" type="date" required></label></div><label>Krążki / stopnie<input name="plates_or_steps" placeholder="np. 2 × 20 kg / stopień 8"></label><label>Typ zmiany<input name="change_label" placeholder="np. Zmiana ciężaru"></label><label>Notatka<input name="note" placeholder="Opcjonalna notatka"></label></div>
+    <div class="history-dialog-actions"><button class="danger-button" id="deleteHistoryEntry" type="button">Usuń</button><button class="secondary" id="cancelHistoryEdit" type="button" hidden>Anuluj</button><button class="primary" id="editHistoryEntry" type="button">Edytuj</button><button class="primary" id="saveHistoryEntry" type="submit" hidden>Zapisz zmiany</button></div>
+  </form></dialog>
+
+  <dialog id="scoreDialog" class="score-dialog"><form method="dialog"><button class="dialog-close" type="button" data-close-dialog="scoreDialog" aria-label="Zamknij">×</button><p class="eyebrow">OSTATNIE 30 DNI</p><h2 id="scoreDialogTitle">CRESCI Score</h2><div id="scoreDialogContent"></div><button class="primary full" type="button" data-close-dialog="scoreDialog">Zamknij</button></form></dialog>
+
+  <dialog id="itemDialog" class="item-dialog"><form method="dialog"><button class="dialog-close" type="button" data-close-dialog="itemDialog" aria-label="Zamknij">×</button><p class="eyebrow">CRESCI GAME ITEM</p><div id="itemDialogContent"></div><button class="primary full" id="itemEquipToggle" type="button">Załóż</button></form></dialog>
+
+  <dialog id="avatarDialog" class="avatar-dialog"><form method="dialog" id="avatarForm"><button class="dialog-close" type="button" data-close-dialog="avatarDialog" aria-label="Zamknij">×</button><p class="eyebrow">KREATOR POSTACI</p><h2>Stwórz swoją postać</h2><input type="hidden" name="user_id"><div class="avatar-creator"><div><div class="avatar-preview" id="avatarPreview" aria-label="Podgląd warstwowego avatara pixel-art"></div><small class="sprite-hint">Podgląd używa warstw PNG 64 × 96 px. Finalne sprite’y można później podmienić bez zmiany kodu.</small></div><div class="avatar-controls"><label>Baza postaci<select name="gender"><option value="female">Kobieta</option><option value="male">Mężczyzna</option></select></label><label>Kolor skóry<select name="skin_tone"><option value="light">Jasny</option><option value="warm">Ciepły</option><option value="tan">Śniady</option><option value="deep">Ciemny</option></select></label><label>Kolor oczu<select name="eye_color"><option value="brown">Brązowe</option><option value="blue">Niebieskie</option><option value="green">Zielone</option><option value="gray">Szare</option></select></label><label>Fryzura<select name="hairstyle"><option value="short">Krótka</option><option value="fade">Fade</option><option value="long">Długa</option><option value="bun">Kok</option></select></label><label>Kolor włosów<select name="hair_color"><option value="black">Czarne</option><option value="brown">Brązowe</option><option value="blonde">Blond</option><option value="red">Rude</option></select></label><label>Góra stroju<select name="top_style"><option value="cresci_tank">Top CRESCI</option><option value="black_tee">Czarny T-shirt</option></select></label><label>Dół stroju<select name="bottom_style"><option value="training_shorts">Szorty treningowe</option><option value="leggings">Legginsy</option></select></label><label>Buty<select name="shoes_style"><option value="trainers">Buty treningowe</option><option value="high_tops">Buty wysokie</option></select></label><label>Nakrycie głowy<select name="headwear"><option value="none">Brak</option><option value="headband">Opaska</option><option value="cap">Czapka</option></select></label><label>Akcesorium<select name="accessory"><option value="none">Brak</option><option value="wrist_wraps">Owijki na nadgarstki</option><option value="lifting_belt">Pas treningowy</option></select></label></div></div><p class="avatar-note">Konfiguracja warstw zostanie zapisana tylko dla wybranego profilu. Możesz ją później zmienić na ekranie Postać.</p><button class="primary full" type="submit">Zapisz avatar i włącz GAME</button></form></dialog>
+
+  <dialog id="driveConfigDialog" class="drive-config-dialog"><form method="dialog" id="driveConfigForm"><button class="dialog-close" type="button" data-close-dialog="driveConfigDialog" aria-label="Zamknij">×</button><p class="eyebrow">KONFIGURACJA GOOGLE DRIVE</p><h2>Połącz CRESCI z Google</h2><div class="wizard-progress" aria-label="Postęp konfiguracji"><span class="active" data-wizard-dot="1">1</span><i></i><span data-wizard-dot="2">2</span><i></i><span data-wizard-dot="3">3</span></div>
+    <section class="wizard-step" data-wizard-step="1"><h3>Włącz Google Drive API</h3><p>Otwórz Google Cloud, zaloguj się i utwórz albo wybierz projekt. Na stronie biblioteki kliknij <strong>Włącz</strong>.</p><a class="primary wizard-external" href="https://console.cloud.google.com/apis/library/drive.googleapis.com" target="_blank" rel="noopener">Otwórz Google Drive API ↗</a><aside class="wizard-tip">To jednorazowa konfiguracja Twojej prywatnej aplikacji. Nie wymaga domeny ani płatnego konta.</aside></section>
+    <section class="wizard-step" data-wizard-step="2" hidden><h3>Utwórz klienta OAuth</h3><ol><li>W Google Cloud otwórz <strong>Google Auth Platform</strong> i skonfiguruj ekran zgody.</li><li>W sekcji <strong>Odbiorcy / Audience</strong> dodaj swój adres Google jako użytkownika testowego.</li><li>Przejdź do <strong>Klienci / Clients → Utwórz klienta</strong>.</li><li>Wybierz typ <strong>Aplikacja internetowa / Web application</strong>.</li><li>W polu autoryzowanych adresów przekierowania wklej dokładnie poniższy adres:</li></ol><div class="redirect-copy"><code id="wizardRedirectUri"></code><button class="secondary" id="copyRedirectUri" type="button">Kopiuj</button></div><a class="text-button wizard-auth-link" href="https://console.cloud.google.com/auth/clients" target="_blank" rel="noopener">Otwórz klientów OAuth w Google Cloud ↗</a></section>
+    <section class="wizard-step" data-wizard-step="3" hidden><h3>Wklej dane aplikacji</h3><p>Google pokaże identyfikator i sekret po utworzeniu klienta. CRESCI zapisze je wyłącznie w lokalnym pliku <code>.env</code>.</p><label>GOOGLE_CLIENT_ID<input name="client_id" autocomplete="off" required placeholder="…apps.googleusercontent.com"></label><label>GOOGLE_CLIENT_SECRET<input name="client_secret" type="password" autocomplete="new-password" required placeholder="Wklej sekret klienta"></label><input name="redirect_uri" type="hidden"><aside class="wizard-tip">Sekret nie trafia do bazy treningowej, eksportu ani Google Drive.</aside></section>
+    <div class="wizard-actions"><button class="secondary" id="wizardBack" type="button" hidden>← Wstecz</button><button class="primary" id="wizardNext" type="button">Dalej →</button><button class="primary" id="wizardSave" type="submit" hidden>Zapisz i przejdź do logowania</button></div>
+  </form></dialog>
+
+  <div class="toast" id="toast" role="status"></div>
+  <script type="module" src="/app.js"></script>
+</body></html>

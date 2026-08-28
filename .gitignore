@@ -1,0 +1,14 @@
+.env
+node_modules/
+
+# Runtime database
+data/*.sqlite
+data/*.sqlite-shm
+data/*.sqlite-wal
+data/google-drive-token.json
+data/backup-settings.json
+!data/.gitkeep
+
+# Local backups
+backups/*
+!backups/.gitkeep
