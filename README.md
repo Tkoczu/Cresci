@@ -34,6 +34,8 @@ Opcjonalne zmienne środowiskowe:
 PORT=4173
 HOST=0.0.0.0
 DATABASE_PATH=./data/gym-progress.sqlite
+NODE_ENV=development
+CRESCI_UPDATE_ENABLED=0
 GOOGLE_CLIENT_ID=identyfikator-klienta-oauth
 GOOGLE_CLIENT_SECRET=sekret-klienta-oauth
 GOOGLE_REDIRECT_URI=http://localhost:4173/api/google-drive/callback
@@ -101,7 +103,7 @@ Nazwy w katalogu wger są głównie angielskie, ale kategorię CRESCI mapuje na 
 
 GAME jest domyślnie wyłączony osobno dla każdego `user_id`. Pierwsze włączenie w **Ustawienia → Ogólne → CRESCI GAME** otwiera kreator avatara. Wybór bazy postaci, koloru skóry i oczu, włosów, góry i dołu stroju, butów, nakrycia głowy oraz akcesorium jest przechowywany w SQLite per użytkownik. Po aktywacji pojawia się ekran **Postać**.
 
-Avatar korzysta z finalnych, warstwowych sprite'ów rastrowych CRESCI v8, a nie z SVG ani rysowania postaci w CSS. Obie bazy (`female` i `male`) mają identyczny źródłowy canvas 256 × 384 px oraz osiem warstw w kolejności: `body`, `eyes`, `hair`, `bottom`, `top`, `shoes`, `headwear`, `accessories`. Pliki są renderowane pixel-perfect i mogą być wyświetlane w UI jako 128 × 192 lub 256 × 384 bez zmiany źródeł. Kolejność, mapowanie modeli i ścieżki określa `public/assets/avatars/manifest.json`, a niezmodyfikowana paczka znajduje się w `public/assets/avatars/final-v8`.
+Aktywnym zestawem jest **CRESCI Avatar HD Creator + Shop v4-production**. Główny ekran Postać składa dziewięć warstw PNG w wariancie `runtime` 512 × 768 px, natomiast kreator, inventory, sklep i małe podglądy używają wyłącznie warstw `compact` 256 × 384 px. Wariant `master` 1024 × 1536 pozostaje materiałem źródłowym i nie jest wybierany przez GUI. Kolejność pochodzi bezpośrednio z manifestu: `back → body → eyes → hair → bottom → top → shoes → headwear → accessories`. Wszystkie warstwy danego avatara mają jeden canvas, pozycję `(0,0)`, wspólną skalę `contain` i kotwicę `feet-center`; nie mają indywidualnych przesunięć ani filtrów. Aplikacja ładuje wyłącznie `public/assets/avatars/v4-production` z parametrem cache `?v=4`, a kreator i sklep korzystają z katalogów dostarczonych w tej samej paczce.
 
 Przycisk **Zamelduj się** zapisuje niezależne zdarzenie GAME i przyznaje 25 XP raz dziennie. Nie rozpoczyna treningu i nie dopisuje nic do historii ciężarów. Poziom jest wyliczany deterministycznie z całkowitego XP: poziom 1 wymaga 100 XP, a koszt każdego kolejnego wzrasta o 25 XP. Wyłączenie GAME ukrywa jego interfejs, ale zachowuje avatar, XP i dane do późniejszego ponownego włączenia.
 
@@ -109,7 +111,7 @@ Przy aktywnym GAME faktyczne pobicie najwyższego ciężaru użytkownika w danym
 
 Ekran **Osiągnięcia** pokazuje 29 achievementów z kategorii Trening, Progres, Regularność, Eksploracja i Ukryte. Każdy jest odblokowywany tylko raz per `user_id`, zapisuje datę i może przyznać PR. Ukryte warunki pozostają oznaczone jako `???` do chwili zdobycia. Księga `pr_transactions` rozróżnia źródła `RECORD`, `ACHIEVEMENT` i `SHOP_PURCHASE`, a tabela `user_achievements` ma również pola na przyszłe nagrody-itemy.
 
-Nawigacja GAME prowadzi przez **Postać | Ekwipunek | Sklep | Osiągnięcia**. Sklep zawiera 20 itemów w pięciu slotach, blokuje ponowny zakup i odejmuje cenę od `pr_balance`. Zakupiony item trafia do tabeli `user_items`; założenie zapisuje odpowiednią istniejącą warstwę w `game_profiles`, dlatego strój pozostaje po restarcie. Starterowy strój istniejących avatarów jest automatycznie dodawany do inventory podczas migracji. Finalna paczka v8 zawiera sprite'y dla bazowego topu, dołu, butów, czapki i owijek; pozostałe pozycje katalogu zachowują dane i są oznaczone w UI jako oczekujące na własny sprite.
+Nawigacja GAME prowadzi przez **Postać | Ekwipunek | Sklep | Osiągnięcia**. Sklep obsługuje 35 produktów z paczki v21: katalog **CRESCI Core** oraz kolekcje **Ember Elite**, **Neon Night** i **Royal Crest** w sześciu slotach. Blokuje ponowny zakup i odejmuje cenę od `pr_balance`. Zakupiony item trafia do tabeli `user_items`; założenie nadal zapisuje odpowiednią warstwę w `game_profiles`, dlatego strój pozostaje po restarcie. W trybie testowym HD podgląd świadomie pokazuje kompletny master zależny tylko od płci; inventory, zakupy i zapisane wyposażenie pozostają aktywne i niezmienione.
 
 Tabela `game_events` jest dziennikiem meldunków, zakupów i nagród, `game_records` przechowuje nieobniżalny rekord per użytkownik i ćwiczenie, a `game_profiles` zawiera `pr_balance`, `pr_total_earned` oraz wyposażone warstwy. Wszystkie te dane należą do eksportu JSON i backupu Google Drive. Starsze kopie bez inventory pozostają zgodne — posiadane elementy są odbudowywane z zapisanego avatara.
 
@@ -120,6 +122,42 @@ Baza zawiera 14 ćwiczeń wynikających z przekazanej tabeli oraz 59 wpisów his
 Skrypt `scripts/import-user-history.js` pozwala odtworzyć ten import. Kopia bazy sprzed zastąpienia przykładowych danych znajduje się w `backups/before-history-import-2026-08-26.sqlite`.
 
 ## API
+
+W **Ustawienia → Aktualizacje** CRESCI pokazuje wersję odczytaną z `package.json` i sprawdza najnowszy publiczny GitHub Release repozytorium `Tkoczu/Cresci`. Gdy nowsze wydanie jest dostępne, można uruchomić aktualizację z UI. Przycisk nie wykonuje dowolnych poleceń: endpoint może jedynie zlecić systemd uruchomienie stałej usługi `cresci-update.service`. Helper pobiera wyłącznie tag wskazany przez najnowszy publiczny GitHub Release, tworzy backup, sprawdza zgodność wersji, restartuje usługę, wykonuje health check i w razie błędu przywraca poprzedni commit i dane.
+
+Serwer aplikacji działa jako nieuprzywilejowany użytkownik `cresci`. Jedyny wpis sudoers pozwala mu wykonać dokładnie `/usr/bin/systemctl start --no-block cresci-update.service`; kod aplikacji i updater pozostają własnością `root`, a użytkownik `cresci` zapisuje tylko `.env`, `data/` i `backups/`. Status w `/var/lib/cresci-updater/status.json` przetrwa restart aplikacji. Ręczne `sudo cresci update` nadal działa i prosi o potwierdzenie.
+
+Nowa instalacja przez `scripts/install-proxmox.sh` konfiguruje ten model automatycznie. Istniejącą instalację LXC, w której `cresci.service` nadal działa jako root, migruje idempotentne polecenie uruchomione wewnątrz kontenera:
+
+```bash
+sudo /opt/cresci/scripts/install-update-helper.sh
+```
+
+W zwykłym uruchomieniu lokalnym `CRESCI_UPDATE_ENABLED=0`, więc endpoint zwraca czytelny komunikat o niedostępnej instalacji. Samo sprawdzanie GitHub Releases nadal działa.
+
+Kontrola konfiguracji na istniejącym LXC 102 z hosta Proxmox, bez uruchamiania aktualizacji:
+
+```bash
+pct exec 102 -- systemctl show cresci -p User -p Group -p Environment
+pct exec 102 -- sudo -l -U cresci
+pct exec 102 -- systemctl cat cresci-update.service
+pct exec 102 -- curl -fsS http://127.0.0.1:4173/api/system/update-status
+```
+
+Po opublikowaniu zatwierdzonego release można użyć przycisku w UI i obserwować przebieg:
+
+```bash
+pct exec 102 -- journalctl -fu cresci-update.service
+pct exec 102 -- cat /var/lib/cresci-updater/status.json
+pct exec 102 -- curl -fsS http://127.0.0.1:4173/api/version
+```
+
+Nie testuj rollbacku przez ręczne uszkadzanie produkcyjnych danych. Do próby awarii użyj klona/snapshotu LXC 102 i kontrolowanego testowego release dopiero po jego osobnym zatwierdzeniu.
+
+- `GET /api/version` — aktualnie zainstalowana wersja,
+- `GET /api/updates/check` — porównanie z najnowszym publicznym GitHub Release,
+- `POST /api/system/update` — zlecenie stałego helpera aktualizacji (tylko produkcyjny LXC),
+- `GET /api/system/update-status` — trwały etap, wynik health checku i informacja o rollbacku,
 
 - `GET /api/bootstrap` — profile, ćwiczenia, aktualne wyniki i statystyki,
 - `POST /api/entries` — nowy wpis treningowy,

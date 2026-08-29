@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 
 set -e
 
 APP_NAME="CRESCI"
-APP_VERSION="v1.0.1"
+APP_VERSION="v1.0.2"
 REPO_URL="https://github.com/Tkoczu/Cresci.git"
 
 CPU_CORES=2
@@ -119,7 +119,8 @@ apt-get install -y \
   ca-certificates \
   curl \
   git \
-  gnupg
+  gnupg \
+  sudo
 
 curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
 apt-get install -y nodejs
@@ -173,15 +174,23 @@ Wants=network-online.target
 Type=simple
 WorkingDirectory=/opt/cresci
 EnvironmentFile=/opt/cresci/.env
+Environment=NODE_ENV=production
+Environment=CRESCI_UPDATE_ENABLED=1
 ExecStart=/usr/bin/node /opt/cresci/server.js
 Restart=unless-stopped
 RestartSec=5
-User=root
+User=cresci
+Group=cresci
 
 [Install]
 WantedBy=multi-user.target
 EOF
 
+id cresci >/dev/null 2>&1 || useradd --system --home-dir /opt/cresci --shell /usr/sbin/nologin cresci
+chown -R root:root /opt/cresci
+chown -R cresci:cresci /opt/cresci/data /opt/cresci/backups
+chown cresci:cresci /opt/cresci/.env
+chmod 0600 /opt/cresci/.env
 systemctl daemon-reload
 systemctl enable cresci
 systemctl start cresci
@@ -193,7 +202,10 @@ echo "Installing CRESCI management command..."
 pct exec "${CTID}" -- bash -c "
 chmod +x /opt/cresci/scripts/update.sh
 chmod +x /opt/cresci/scripts/cresci
+chmod +x /opt/cresci/scripts/update-runner.sh
+chmod +x /opt/cresci/scripts/install-update-helper.sh
 ln -sf /opt/cresci/scripts/cresci /usr/local/bin/cresci
+/opt/cresci/scripts/install-update-helper.sh
 "
 echo
 echo "[10/10] Checking CRESCI..."
@@ -228,3 +240,5 @@ echo
 echo "The container will start automatically"
 echo "with the Proxmox host."
 echo
+
+

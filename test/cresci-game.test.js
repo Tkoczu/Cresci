@@ -11,6 +11,8 @@ test('level curve is deterministic and exposes progress within current level',()
 test('avatar accepts only supported options',()=>{
   const avatar=validateAvatar({gender:'female',skin_tone:'deep',eye_color:'blue',hairstyle:'bun',hair_color:'black'});
   assert.equal(avatar.hairstyle,'bun');assert.equal(avatar.top_style,'cresci_tank');assert.equal(avatar.accessory,'none');
+  const v18=validateAvatar({gender:'male',skin_tone:'olive',eye_color:'gray',hairstyle:'side_swept',hair_color:'silver'});
+  assert.equal(v18.skin_tone,'olive');assert.equal(v18.hairstyle,'side_swept');assert.equal(v18.hair_color,'silver');
   assert.throws(()=>validateAvatar({gender:'robot'}),/wszystkie opcje/);
   assert.throws(()=>validateAvatar({top_style:'armor'}),/wszystkie opcje/);
 });

@@ -1,0 +1,28 @@
+{
+  "schemaVersion": "2.0.0",
+  "status": "PROOF_OF_CONCEPT_NOT_FULL_LAYER_PACK",
+  "canvas": {
+    "width": 512,
+    "height": 768,
+    "transparent": true
+  },
+  "anchor": {
+    "name": "feet-center",
+    "x": 256,
+    "y": 758
+  },
+  "genders": [
+    "male",
+    "female"
+  ],
+  "assets": {
+    "male": {
+      "png": "male/locked_dressed_master.png",
+      "webp": "male/locked_dressed_master.webp"
+    },
+    "female": {
+      "png": "female/locked_dressed_master.png",
+      "webp": "female/locked_dressed_master.webp"
+    }
+  }
+}

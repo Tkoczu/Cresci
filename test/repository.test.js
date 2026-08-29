@@ -10,7 +10,7 @@ function memoryRepo() {
     CREATE TABLE exercises(id INTEGER PRIMARY KEY,name TEXT,category TEXT,load_mode TEXT,bar_weight REAL,step_size REAL,active INTEGER DEFAULT 1,created_at TEXT DEFAULT CURRENT_TIMESTAMP,updated_at TEXT DEFAULT CURRENT_TIMESTAMP);
     CREATE TABLE progress_entries(id INTEGER PRIMARY KEY,profile_id INTEGER REFERENCES profiles(id),exercise_id INTEGER REFERENCES exercises(id),performed_at TEXT,old_weight REAL,new_weight REAL,increment REAL,plates_or_steps TEXT,change_type TEXT,change_label TEXT NOT NULL DEFAULT '',note TEXT,created_at TEXT DEFAULT CURRENT_TIMESTAMP);
     CREATE TABLE score_settings(profile_id INTEGER PRIMARY KEY REFERENCES profiles(id) ON DELETE CASCADE,enabled INTEGER DEFAULT 0,weekly_goal INTEGER DEFAULT 3,updated_at TEXT DEFAULT CURRENT_TIMESTAMP);
-    CREATE TABLE game_profiles(profile_id INTEGER PRIMARY KEY REFERENCES profiles(id) ON DELETE CASCADE,enabled INTEGER DEFAULT 0,avatar_configured INTEGER DEFAULT 0,avatar_gender TEXT,skin_tone TEXT,eye_color TEXT,hairstyle TEXT,hair_color TEXT,top_style TEXT DEFAULT 'cresci_tank',bottom_style TEXT DEFAULT 'training_shorts',shoes_style TEXT DEFAULT 'trainers',headwear TEXT DEFAULT 'none',accessory TEXT DEFAULT 'none',total_xp INTEGER DEFAULT 0,pr_balance INTEGER DEFAULT 0,pr_total_earned INTEGER DEFAULT 0,created_at TEXT DEFAULT CURRENT_TIMESTAMP,updated_at TEXT DEFAULT CURRENT_TIMESTAMP);
+    CREATE TABLE game_profiles(profile_id INTEGER PRIMARY KEY REFERENCES profiles(id) ON DELETE CASCADE,enabled INTEGER DEFAULT 0,avatar_configured INTEGER DEFAULT 0,avatar_gender TEXT,skin_tone TEXT,eye_color TEXT,hairstyle TEXT,hair_color TEXT,back_style TEXT DEFAULT 'none',top_style TEXT DEFAULT 'cresci_tank',bottom_style TEXT DEFAULT 'training_shorts',shoes_style TEXT DEFAULT 'trainers',headwear TEXT DEFAULT 'none',accessory TEXT DEFAULT 'none',total_xp INTEGER DEFAULT 0,pr_balance INTEGER DEFAULT 0,pr_total_earned INTEGER DEFAULT 0,created_at TEXT DEFAULT CURRENT_TIMESTAMP,updated_at TEXT DEFAULT CURRENT_TIMESTAMP);
     CREATE TABLE game_events(id INTEGER PRIMARY KEY,profile_id INTEGER REFERENCES profiles(id) ON DELETE CASCADE,event_type TEXT,event_key TEXT,xp_delta INTEGER DEFAULT 0,pr_delta INTEGER DEFAULT 0,metadata_json TEXT DEFAULT '{}',occurred_at TEXT,created_at TEXT DEFAULT CURRENT_TIMESTAMP,UNIQUE(profile_id,event_type,event_key));
     CREATE TABLE game_records(profile_id INTEGER REFERENCES profiles(id) ON DELETE CASCADE,exercise_id INTEGER REFERENCES exercises(id) ON DELETE CASCADE,record_weight REAL,last_source_entry_id INTEGER,achieved_at TEXT,created_at TEXT DEFAULT CURRENT_TIMESTAMP,updated_at TEXT DEFAULT CURRENT_TIMESTAMP,PRIMARY KEY(profile_id,exercise_id));
     CREATE TABLE pr_transactions(id INTEGER PRIMARY KEY,profile_id INTEGER REFERENCES profiles(id) ON DELETE CASCADE,source_type TEXT,source_key TEXT,amount INTEGER,balance_after INTEGER,metadata_json TEXT DEFAULT '{}',created_at TEXT,UNIQUE(profile_id,source_type,source_key));
@@ -220,9 +220,9 @@ test('backup preserves a deleted high-water record and prevents duplicate PR aft
 
 test('GAME backups from before layered outfits receive visual defaults',()=>{
   const a=memoryRepo();a.repo.updateGameSettings(1,{enabled:true,avatar});const backup=a.repo.exportData();
-  for(const profile of backup.game_profiles)for(const field of ['top_style','bottom_style','shoes_style','headwear','accessory'])delete profile[field];
+  for(const profile of backup.game_profiles)for(const field of ['back_style','top_style','bottom_style','shoes_style','headwear','accessory'])delete profile[field];
   const b=memoryRepo();b.repo.importData(backup);const restored=b.repo.gameSettings().find(item=>item.user_id===1);
-  assert.equal(restored.top_style,'cresci_tank');assert.equal(restored.bottom_style,'training_shorts');assert.equal(restored.shoes_style,'trainers');assert.equal(restored.headwear,'none');assert.equal(restored.accessory,'none');
+  assert.equal(restored.back_style,'none');assert.equal(restored.top_style,'cresci_tank');assert.equal(restored.bottom_style,'training_shorts');assert.equal(restored.shoes_style,'trainers');assert.equal(restored.headwear,'none');assert.equal(restored.accessory,'none');
   a.db.close();b.db.close();
 });
 
@@ -316,6 +316,15 @@ test('equip persists per user, updates avatar layer and can be removed',()=>{
   const removed=repo.equipItem(1,'headwear',null);assert.equal(removed.game.headwear,'none');assert.equal(removed.inventory.items.find(item=>item.key==='headband').equipped,false);
   assert.equal(repo.achievements(1).items.find(item=>item.key==='full_equipment').unlocked,true);
   db.close();
+});
+
+test('v21 back item is purchased, equipped and restored per user',()=>{
+  const a=memoryRepo();a.repo.updateGameSettings(1,{enabled:true,avatar});a.db.prepare('UPDATE game_profiles SET pr_balance=40 WHERE profile_id=1').run();
+  a.repo.purchaseItem(1,'utility_backpack');const equipped=a.repo.equipItem(1,'back','utility_backpack');
+  assert.equal(equipped.game.back_style,'utility_backpack');assert.equal(equipped.inventory.slots.find(slot=>slot.key==='back').equipped_key,'utility_backpack');
+  const backup=a.repo.exportData(),b=memoryRepo();b.repo.importData(backup);
+  assert.equal(b.repo.gameStates()[0].back_style,'utility_backpack');assert.equal(b.repo.inventory(1).items.find(item=>item.key==='utility_backpack').equipped,true);
+  a.db.close();b.db.close();
 });
 
 test('shop blocks GAME OFF, insufficient balance and wrong-slot equip',()=>{

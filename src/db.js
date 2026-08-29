@@ -6,7 +6,7 @@ import { CHECK_IN_XP, levelFromXp, validateAvatar } from './cresci-game.js';
 import { ACHIEVEMENTS, ACHIEVEMENT_CATEGORIES, achievementProgress, longestCompletedWeeklyStreak } from './achievements.js';
 import { GAME_ITEMS, ITEM_SLOTS, SLOT_LABELS, RARITY_LABELS, avatarFieldForSlot, avatarItems, gameItem } from './game-items.js';
 
-export const SCHEMA_VERSION = 8;
+export const SCHEMA_VERSION = 9;
 
 const seedExercises = [
   ['Wyciskanie sztangi leżąc', 'Klatka piersiowa', 'plates', 20, 1.25],
@@ -205,6 +205,11 @@ function runMigrations(db) {
     `);
     db.prepare('UPDATE schema_meta SET version=?').run(8);
   }
+  if (currentVersion < 9) {
+    const columns = db.prepare('PRAGMA table_info(game_profiles)').all().map(column=>column.name);
+    if (!columns.includes('back_style')) db.exec("ALTER TABLE game_profiles ADD COLUMN back_style TEXT NOT NULL DEFAULT 'none'");
+    db.prepare('UPDATE schema_meta SET version=?').run(9);
+  }
 }
 
 function seed(db) {
@@ -285,7 +290,7 @@ export function createRepository(db) {
 
   function hasFullEquipment(profileId) {
     const profile=db.prepare('SELECT * FROM game_profiles WHERE profile_id=?').get(profileId);if(!profile)return false;
-    const keys=ITEM_SLOTS.map(slot=>profile[avatarFieldForSlot(slot)]);
+    const keys=ITEM_SLOTS.filter(slot=>slot!=='back').map(slot=>profile[avatarFieldForSlot(slot)]);
     if(keys.some(key=>!key||key==='none'))return false;
     const owned=new Set(db.prepare('SELECT item_key FROM user_items WHERE profile_id=?').all(profileId).map(row=>row.item_key));
     return keys.every(key=>owned.has(key));
@@ -388,7 +393,7 @@ export function createRepository(db) {
     gameSettings() {
       return db.prepare(`SELECT p.id AS user_id,p.name AS user_name,p.color,
         COALESCE(g.enabled,0) AS enabled,COALESCE(g.avatar_configured,0) AS avatar_configured,
-        g.avatar_gender AS gender,g.skin_tone,g.eye_color,g.hairstyle,g.hair_color,
+        g.avatar_gender AS gender,g.skin_tone,g.eye_color,g.hairstyle,g.hair_color,COALESCE(g.back_style,'none') AS back_style,
         COALESCE(g.top_style,'cresci_tank') AS top_style,COALESCE(g.bottom_style,'training_shorts') AS bottom_style,
         COALESCE(g.shoes_style,'trainers') AS shoes_style,COALESCE(g.headwear,'none') AS headwear,COALESCE(g.accessory,'none') AS accessory,
         COALESCE(g.total_xp,0) AS total_xp,COALESCE(g.pr_balance,0) AS pr_balance,
@@ -411,11 +416,11 @@ export function createRepository(db) {
         }
       }
       if (!current) {
-        db.prepare(`INSERT INTO game_profiles(profile_id,enabled,avatar_configured,avatar_gender,skin_tone,eye_color,hairstyle,hair_color,top_style,bottom_style,shoes_style,headwear,accessory)
-          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)`).run(userId,enabled,avatar?1:0,avatar?.gender||null,avatar?.skin_tone||null,avatar?.eye_color||null,avatar?.hairstyle||null,avatar?.hair_color||null,avatar?.top_style||'cresci_tank',avatar?.bottom_style||'training_shorts',avatar?.shoes_style||'trainers',avatar?.headwear||'none',avatar?.accessory||'none');
+        db.prepare(`INSERT INTO game_profiles(profile_id,enabled,avatar_configured,avatar_gender,skin_tone,eye_color,hairstyle,hair_color,back_style,top_style,bottom_style,shoes_style,headwear,accessory)
+          VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)`).run(userId,enabled,avatar?1:0,avatar?.gender||null,avatar?.skin_tone||null,avatar?.eye_color||null,avatar?.hairstyle||null,avatar?.hair_color||null,avatar?.back_style||'none',avatar?.top_style||'cresci_tank',avatar?.bottom_style||'training_shorts',avatar?.shoes_style||'trainers',avatar?.headwear||'none',avatar?.accessory||'none');
       } else if (avatar) {
-        db.prepare(`UPDATE game_profiles SET enabled=?,avatar_configured=1,avatar_gender=?,skin_tone=?,eye_color=?,hairstyle=?,hair_color=?,top_style=?,bottom_style=?,shoes_style=?,headwear=?,accessory=?,updated_at=datetime('now') WHERE profile_id=?`)
-          .run(enabled,avatar.gender,avatar.skin_tone,avatar.eye_color,avatar.hairstyle,avatar.hair_color,avatar.top_style,avatar.bottom_style,avatar.shoes_style,avatar.headwear,avatar.accessory,userId);
+        db.prepare(`UPDATE game_profiles SET enabled=?,avatar_configured=1,avatar_gender=?,skin_tone=?,eye_color=?,hairstyle=?,hair_color=?,back_style=?,top_style=?,bottom_style=?,shoes_style=?,headwear=?,accessory=?,updated_at=datetime('now') WHERE profile_id=?`)
+          .run(enabled,avatar.gender,avatar.skin_tone,avatar.eye_color,avatar.hairstyle,avatar.hair_color,avatar.back_style,avatar.top_style,avatar.bottom_style,avatar.shoes_style,avatar.headwear,avatar.accessory,userId);
       } else {
         db.prepare(`UPDATE game_profiles SET enabled=?,updated_at=datetime('now') WHERE profile_id=?`).run(enabled,userId);
       }
@@ -778,8 +783,8 @@ export function createRepository(db) {
         for (const x of payload.profiles) profileInsert.run(x.id, x.name, x.color, x.created_at);
         const scoreSettingsInsert=db.prepare('INSERT INTO score_settings(profile_id,enabled,weekly_goal,updated_at) VALUES(?,?,?,?)');
         for(const x of payload.score_settings||[])scoreSettingsInsert.run(x.profile_id,Number(Boolean(x.enabled)),Number(x.weekly_goal)||3,x.updated_at||new Date().toISOString());
-        const gameProfileInsert=db.prepare(`INSERT INTO game_profiles(profile_id,enabled,avatar_configured,avatar_gender,skin_tone,eye_color,hairstyle,hair_color,top_style,bottom_style,shoes_style,headwear,accessory,total_xp,pr_balance,pr_total_earned,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`);
-        for(const x of payload.game_profiles||[])gameProfileInsert.run(x.profile_id,Number(Boolean(x.enabled)),Number(Boolean(x.avatar_configured)),x.avatar_gender||null,x.skin_tone||null,x.eye_color||null,x.hairstyle||null,x.hair_color||null,x.top_style||'cresci_tank',x.bottom_style||'training_shorts',x.shoes_style||'trainers',x.headwear||'none',x.accessory||'none',Math.max(0,Number(x.total_xp)||0),Math.max(0,Number(x.pr_balance)||0),Math.max(0,Number(x.pr_total_earned)||0),x.created_at||new Date().toISOString(),x.updated_at||new Date().toISOString());
+        const gameProfileInsert=db.prepare(`INSERT INTO game_profiles(profile_id,enabled,avatar_configured,avatar_gender,skin_tone,eye_color,hairstyle,hair_color,back_style,top_style,bottom_style,shoes_style,headwear,accessory,total_xp,pr_balance,pr_total_earned,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`);
+        for(const x of payload.game_profiles||[])gameProfileInsert.run(x.profile_id,Number(Boolean(x.enabled)),Number(Boolean(x.avatar_configured)),x.avatar_gender||null,x.skin_tone||null,x.eye_color||null,x.hairstyle||null,x.hair_color||null,x.back_style||'none',x.top_style||'cresci_tank',x.bottom_style||'training_shorts',x.shoes_style||'trainers',x.headwear||'none',x.accessory||'none',Math.max(0,Number(x.total_xp)||0),Math.max(0,Number(x.pr_balance)||0),Math.max(0,Number(x.pr_total_earned)||0),x.created_at||new Date().toISOString(),x.updated_at||new Date().toISOString());
         const exerciseInsert = db.prepare(`INSERT INTO exercises(id,name,category,load_mode,bar_weight,step_size,active,created_at,updated_at) VALUES (?,?,?,?,?,?,?,?,?)`);
         for (const x of payload.exercises) exerciseInsert.run(x.id,x.name,x.category,x.load_mode,x.bar_weight,x.step_size,x.active,x.created_at,x.updated_at);
         const entryInsert = db.prepare(`INSERT INTO progress_entries(id,profile_id,exercise_id,performed_at,old_weight,new_weight,increment,plates_or_steps,change_type,change_label,note,created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)`);

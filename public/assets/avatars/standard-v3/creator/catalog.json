@@ -1,0 +1,153 @@
+{
+  "schemaVersion": "3.0.0",
+  "canvas": {
+    "width": 256,
+    "height": 384
+  },
+  "defaults": {
+    "male": {
+      "skin": "fair",
+      "eyes": "brown",
+      "hairStyle": "short_textured",
+      "hairColor": "dark_brown"
+    },
+    "female": {
+      "skin": "fair",
+      "eyes": "brown",
+      "hairStyle": "ponytail",
+      "hairColor": "dark_brown"
+    }
+  },
+  "skinTones": [
+    {
+      "id": "porcelain",
+      "displayName": "Porcelain",
+      "swatch": "#FFCA9E"
+    },
+    {
+      "id": "fair",
+      "displayName": "Fair",
+      "swatch": "#EEA979"
+    },
+    {
+      "id": "tan",
+      "displayName": "Tan",
+      "swatch": "#CF8552"
+    },
+    {
+      "id": "olive",
+      "displayName": "Olive",
+      "swatch": "#AE6940"
+    },
+    {
+      "id": "brown",
+      "displayName": "Brown",
+      "swatch": "#804C2F"
+    },
+    {
+      "id": "deep",
+      "displayName": "Deep",
+      "swatch": "#543222"
+    }
+  ],
+  "eyeColors": [
+    {
+      "id": "green",
+      "displayName": "Green",
+      "swatch": "#41B856"
+    },
+    {
+      "id": "blue",
+      "displayName": "Blue",
+      "swatch": "#3797EC"
+    },
+    {
+      "id": "brown",
+      "displayName": "Brown",
+      "swatch": "#8E4C26"
+    },
+    {
+      "id": "gray",
+      "displayName": "Gray",
+      "swatch": "#96A3B0"
+    }
+  ],
+  "hairColors": [
+    {
+      "id": "black",
+      "displayName": "Black",
+      "swatch": "#302B2A"
+    },
+    {
+      "id": "dark_brown",
+      "displayName": "Dark Brown",
+      "swatch": "#5B311C"
+    },
+    {
+      "id": "chestnut",
+      "displayName": "Chestnut",
+      "swatch": "#945027"
+    },
+    {
+      "id": "blonde",
+      "displayName": "Blonde",
+      "swatch": "#E1A648"
+    },
+    {
+      "id": "red",
+      "displayName": "Red",
+      "swatch": "#A63022"
+    },
+    {
+      "id": "silver",
+      "displayName": "Silver",
+      "swatch": "#ACB4B9"
+    }
+  ],
+  "hairStyles": {
+    "male": [
+      {
+        "id": "short_textured",
+        "displayName": "Short Textured"
+      },
+      {
+        "id": "spiky",
+        "displayName": "Spiky"
+      },
+      {
+        "id": "side_swept",
+        "displayName": "Side Swept"
+      },
+      {
+        "id": "buzz_cut",
+        "displayName": "Buzz Cut"
+      },
+      {
+        "id": "undercut",
+        "displayName": "Undercut"
+      }
+    ],
+    "female": [
+      {
+        "id": "ponytail",
+        "displayName": "Ponytail"
+      },
+      {
+        "id": "bob",
+        "displayName": "Bob"
+      },
+      {
+        "id": "long",
+        "displayName": "Long"
+      },
+      {
+        "id": "high_bun",
+        "displayName": "High Bun"
+      },
+      {
+        "id": "side_braid",
+        "displayName": "Side Braid"
+      }
+    ]
+  }
+}

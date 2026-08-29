@@ -10,6 +10,9 @@ COMMAND="${1:-help}"
 case "${COMMAND}" in
 
   update)
+    if [ -x /usr/local/libexec/cresci-update-runner ]; then
+      exec /usr/local/libexec/cresci-update-runner --interactive
+    fi
     exec "${APP_DIR}/scripts/update.sh"
     ;;
 

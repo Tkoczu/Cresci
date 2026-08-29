@@ -2,15 +2,16 @@ import { GAME_ITEMS, avatarFieldForSlot } from './game-items.js';
 
 export const CHECK_IN_XP = 25;
 
-const outfitOptions={top_style:['none'],bottom_style:['none'],shoes_style:['none'],headwear:['none'],accessory:['none']};
+const outfitOptions={back_style:['none'],top_style:['none'],bottom_style:['none'],shoes_style:['none'],headwear:['none'],accessory:['none']};
 for(const item of GAME_ITEMS){const field=avatarFieldForSlot(item.slot);if(!outfitOptions[field].includes(item.key))outfitOptions[field].push(item.key);}
 
 export const AVATAR_OPTIONS = Object.freeze({
   gender: ['female', 'male'],
-  skin_tone: ['light', 'warm', 'tan', 'deep'],
+  skin_tone: ['porcelain', 'fair', 'tan', 'olive', 'brown', 'deep', 'light', 'warm'],
   eye_color: ['brown', 'blue', 'green', 'gray'],
-  hairstyle: ['short', 'fade', 'long', 'bun'],
-  hair_color: ['black', 'brown', 'blonde', 'red'],
+  hairstyle: ['short_textured', 'spiky', 'side_swept', 'buzz_cut', 'undercut', 'ponytail', 'bob', 'long', 'high_bun', 'side_braid', 'short', 'fade', 'bun'],
+  hair_color: ['black', 'dark_brown', 'chestnut', 'blonde', 'red', 'silver', 'brown'],
+  back_style: Object.freeze(outfitOptions.back_style),
   top_style: Object.freeze(outfitOptions.top_style),
   bottom_style: Object.freeze(outfitOptions.bottom_style),
   shoes_style: Object.freeze(outfitOptions.shoes_style),
@@ -19,7 +20,7 @@ export const AVATAR_OPTIONS = Object.freeze({
 });
 
 export const AVATAR_DEFAULTS = Object.freeze({
-  gender: 'female', skin_tone: 'light', eye_color: 'brown', hairstyle: 'short', hair_color: 'black',
+  gender: 'female', skin_tone: 'fair', eye_color: 'brown', hairstyle: 'ponytail', hair_color: 'dark_brown', back_style: 'none',
   top_style: 'cresci_tank', bottom_style: 'training_shorts', shoes_style: 'trainers', headwear: 'none', accessory: 'none'
 });
 
