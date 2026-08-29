@@ -1,0 +1,208 @@
+{
+  "schemaVersion": "3.0.0",
+  "packId": "cresci-avatar-standard-v3",
+  "status": "HD_DRESSED_MASTER_MULTI_RESOLUTION",
+  "aspectRatio": "2:3",
+  "variants": {
+    "master": {
+      "width": 1024,
+      "height": 1536,
+      "anchor": {
+        "name": "feet-center",
+        "x": 512,
+        "y": 1516
+      },
+      "intendedUse": "authoring/source"
+    },
+    "runtime": {
+      "width": 512,
+      "height": 768,
+      "anchor": {
+        "name": "feet-center",
+        "x": 256,
+        "y": 758
+      },
+      "intendedUse": "main avatar"
+    },
+    "compact": {
+      "width": 256,
+      "height": 384,
+      "anchor": {
+        "name": "feet-center",
+        "x": 128,
+        "y": 379
+      },
+      "intendedUse": "creator/shop/profile"
+    }
+  },
+  "assets": [
+    {
+      "id": "male.master.png",
+      "gender": "male",
+      "variant": "master",
+      "format": "png",
+      "path": "male/master/locked_dressed_master.png",
+      "width": 1024,
+      "height": 1536,
+      "anchor": {
+        "x": 512,
+        "y": 1516
+      },
+      "sha256": "a128b6cdcd920c35088d761512d3c54b2ce487ec4e7fcadd45e706defa690bef"
+    },
+    {
+      "id": "male.master.webp",
+      "gender": "male",
+      "variant": "master",
+      "format": "webp",
+      "path": "male/master/locked_dressed_master.webp",
+      "width": 1024,
+      "height": 1536,
+      "anchor": {
+        "x": 512,
+        "y": 1516
+      },
+      "sha256": "cf9195feee8fb8453ee2ad95687ef81ba88844f03b0365b7dafb448cdeeb377b"
+    },
+    {
+      "id": "male.runtime.png",
+      "gender": "male",
+      "variant": "runtime",
+      "format": "png",
+      "path": "male/runtime/locked_dressed_master.png",
+      "width": 512,
+      "height": 768,
+      "anchor": {
+        "x": 256,
+        "y": 758
+      },
+      "sha256": "47be6914fd99b9d9a855ba54bc0ece85593be67cffbea03d88b2c21fd326a436"
+    },
+    {
+      "id": "male.runtime.webp",
+      "gender": "male",
+      "variant": "runtime",
+      "format": "webp",
+      "path": "male/runtime/locked_dressed_master.webp",
+      "width": 512,
+      "height": 768,
+      "anchor": {
+        "x": 256,
+        "y": 758
+      },
+      "sha256": "0b7d340198c5a7d4699a5475a06ea722b9c2492e2d242989ea35fb0d432b0766"
+    },
+    {
+      "id": "male.compact.png",
+      "gender": "male",
+      "variant": "compact",
+      "format": "png",
+      "path": "male/compact/locked_dressed_master.png",
+      "width": 256,
+      "height": 384,
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1d3e8e88349f5e8557fa24b913719a1dc51f35d88412adc91a012b351303b3d0"
+    },
+    {
+      "id": "male.compact.webp",
+      "gender": "male",
+      "variant": "compact",
+      "format": "webp",
+      "path": "male/compact/locked_dressed_master.webp",
+      "width": 256,
+      "height": 384,
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a9e92668e68bc35fa59fad7a16cf18f4cfc0775351db2f05d52da160f8747a15"
+    },
+    {
+      "id": "female.master.png",
+      "gender": "female",
+      "variant": "master",
+      "format": "png",
+      "path": "female/master/locked_dressed_master.png",
+      "width": 1024,
+      "height": 1536,
+      "anchor": {
+        "x": 512,
+        "y": 1516
+      },
+      "sha256": "a04722559101cf24236325e1599a6898d84f9a8cb877fe6f4cf0ce3a37e0fb99"
+    },
+    {
+      "id": "female.master.webp",
+      "gender": "female",
+      "variant": "master",
+      "format": "webp",
+      "path": "female/master/locked_dressed_master.webp",
+      "width": 1024,
+      "height": 1536,
+      "anchor": {
+        "x": 512,
+        "y": 1516
+      },
+      "sha256": "abc21a9a29b665893b9fb3fa24ee638fa305420eafe08e255da5cab9ca46c0d8"
+    },
+    {
+      "id": "female.runtime.png",
+      "gender": "female",
+      "variant": "runtime",
+      "format": "png",
+      "path": "female/runtime/locked_dressed_master.png",
+      "width": 512,
+      "height": 768,
+      "anchor": {
+        "x": 256,
+        "y": 758
+      },
+      "sha256": "c677723d4236a714abd74fd6b3ba9da590047405299ca34e68434e484cad70a6"
+    },
+    {
+      "id": "female.runtime.webp",
+      "gender": "female",
+      "variant": "runtime",
+      "format": "webp",
+      "path": "female/runtime/locked_dressed_master.webp",
+      "width": 512,
+      "height": 768,
+      "anchor": {
+        "x": 256,
+        "y": 758
+      },
+      "sha256": "b52faa0048a16ddac174332d7281988c797becbf12d31ee5a5c7d4b627789389"
+    },
+    {
+      "id": "female.compact.png",
+      "gender": "female",
+      "variant": "compact",
+      "format": "png",
+      "path": "female/compact/locked_dressed_master.png",
+      "width": 256,
+      "height": 384,
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "0c6b6ac6d1eff166fcf9a5db12094f90c2eb109f9f401296d6a1955f611ee812"
+    },
+    {
+      "id": "female.compact.webp",
+      "gender": "female",
+      "variant": "compact",
+      "format": "webp",
+      "path": "female/compact/locked_dressed_master.webp",
+      "width": 256,
+      "height": 384,
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1790364a6455c7b6abe110b8a952e4fff367fb0675918a7df6e5552faa2a89ae"
+    }
+  ]
+}

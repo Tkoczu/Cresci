@@ -1,0 +1,5679 @@
+{
+  "schemaVersion": "1.0.0",
+  "packId": "cresci-avatar-complete-shop-v21",
+  "version": "21.0.0",
+  "canvas": {
+    "width": 256,
+    "height": 384,
+    "transparent": true
+  },
+  "anchor": {
+    "name": "feet-center",
+    "x": 128,
+    "y": 379
+  },
+  "layerOrder": [
+    "back",
+    "body",
+    "eyes",
+    "hair",
+    "bottom",
+    "top",
+    "shoes",
+    "headwear",
+    "accessories"
+  ],
+  "genders": [
+    "male",
+    "female"
+  ],
+  "rendering": {
+    "cssImageRendering": "pixelated"
+  },
+  "assets": [
+    {
+      "id": "male.body.base.png",
+      "gender": "male",
+      "slot": "body",
+      "name": "base",
+      "format": "png",
+      "path": "male/body/base.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ab167c031b10b576b8b13c3f226ef9d094cccdb64e0384d7952f58e577e5e16b"
+    },
+    {
+      "id": "male.body.base.webp",
+      "gender": "male",
+      "slot": "body",
+      "name": "base",
+      "format": "webp",
+      "path": "male/body/base.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "5e215f72c53a0258795c7aecbaf8c66c7d0d30964e1d4b4ee66f5dc50da0098f"
+    },
+    {
+      "id": "male.eyes.brown.png",
+      "gender": "male",
+      "slot": "eyes",
+      "name": "brown",
+      "format": "png",
+      "path": "male/eyes/brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "fde4d68afee8499e65a2a052617f0b15bee5052ab6285e5c3642d12632f8531f"
+    },
+    {
+      "id": "male.eyes.brown.webp",
+      "gender": "male",
+      "slot": "eyes",
+      "name": "brown",
+      "format": "webp",
+      "path": "male/eyes/brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "da71a491b9bd69f1264327783c9d7d6e0b732b2be08fe08acde6867d7f0bc618"
+    },
+    {
+      "id": "male.hair.short_brown.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_brown",
+      "format": "png",
+      "path": "male/hair/short_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "013789070cadd7f1923fc82a9763b6411b21b10da5696789374576cdeb7ec946"
+    },
+    {
+      "id": "male.hair.short_brown.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_brown",
+      "format": "webp",
+      "path": "male/hair/short_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "6c438c314647ef89f16c35b861894f826553a97e8df6160ab229993130a63f96"
+    },
+    {
+      "id": "male.bottom.cresci_training_bottom.png",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "cresci_training_bottom",
+      "format": "png",
+      "path": "male/bottom/cresci_training_bottom.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e7a508f72adcb324cd139db023b313cbcb82f94f0ec28bd3d6a7f9dfbe80c9cb"
+    },
+    {
+      "id": "male.bottom.cresci_training_bottom.webp",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "cresci_training_bottom",
+      "format": "webp",
+      "path": "male/bottom/cresci_training_bottom.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "3aaae41e5addde141795880c4f3ecb8d41f10346ddfd90514c163ef03dae2aa6"
+    },
+    {
+      "id": "male.top.cresci_training_top.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "cresci_training_top",
+      "format": "png",
+      "path": "male/top/cresci_training_top.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "353703bb258da0842c9cd5dd1097f36e88efd0a650dc4097dfc6061143c2f0f2"
+    },
+    {
+      "id": "male.top.cresci_training_top.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "cresci_training_top",
+      "format": "webp",
+      "path": "male/top/cresci_training_top.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e945874ed7ae2e6f9de80e2a0fbba3db301afbae4569303ecd2462bed21e6820"
+    },
+    {
+      "id": "male.shoes.cresci_runners.png",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "cresci_runners",
+      "format": "png",
+      "path": "male/shoes/cresci_runners.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a276bfe0fc20c821dd2a2b35b1e0cc527bd88b75aa44cbd049d0e58254ea25f5"
+    },
+    {
+      "id": "male.shoes.cresci_runners.webp",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "cresci_runners",
+      "format": "webp",
+      "path": "male/shoes/cresci_runners.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "2365f6a988f794481f23210277835390f96ca7b51483650ee69ab96c268be589"
+    },
+    {
+      "id": "male.headwear.cresci_cap.png",
+      "gender": "male",
+      "slot": "headwear",
+      "name": "cresci_cap",
+      "format": "png",
+      "path": "male/headwear/cresci_cap.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "603ff6863aff04b40ef1a2a1bcd7f94cc5adc728804b9ebab3967c064267bd3b"
+    },
+    {
+      "id": "male.headwear.cresci_cap.webp",
+      "gender": "male",
+      "slot": "headwear",
+      "name": "cresci_cap",
+      "format": "webp",
+      "path": "male/headwear/cresci_cap.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b71d556bd0bbf9575ae53b2e3265be90f0a86968cb74835d73621e8c87c88741"
+    },
+    {
+      "id": "male.accessories.cresci_wristbands.png",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "cresci_wristbands",
+      "format": "png",
+      "path": "male/accessories/cresci_wristbands.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "dc50c09a433ffedfd4c1b2d8e224bc52a1aae8a6924724ba964d0b15e6ba19fb"
+    },
+    {
+      "id": "male.accessories.cresci_wristbands.webp",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "cresci_wristbands",
+      "format": "webp",
+      "path": "male/accessories/cresci_wristbands.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "96c2a005b049d6e4a84f3194d809aa267b9ee1615c9b0943f2b7b81714cac0c6"
+    },
+    {
+      "id": "female.body.base.png",
+      "gender": "female",
+      "slot": "body",
+      "name": "base",
+      "format": "png",
+      "path": "female/body/base.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "0e1ca4287f0dc0436c49fe844a17527a3dca13b9328a52d5d88796ac9fc650c1"
+    },
+    {
+      "id": "female.body.base.webp",
+      "gender": "female",
+      "slot": "body",
+      "name": "base",
+      "format": "webp",
+      "path": "female/body/base.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "bb43e37f3786ceb1c8db5493de8a7896b9b2bc55950d9be1350de706b8601f79"
+    },
+    {
+      "id": "female.eyes.brown.png",
+      "gender": "female",
+      "slot": "eyes",
+      "name": "brown",
+      "format": "png",
+      "path": "female/eyes/brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "bb3f780dde4cf02b0bf382550e89a5f35e61a53ed43de4c227d615995f2c8036"
+    },
+    {
+      "id": "female.eyes.brown.webp",
+      "gender": "female",
+      "slot": "eyes",
+      "name": "brown",
+      "format": "webp",
+      "path": "female/eyes/brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "7a61bf57b997f634a194a2488cddf82a61bb26c1e132d27d1c97b55e7034b90b"
+    },
+    {
+      "id": "female.hair.ponytail_brown.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_brown",
+      "format": "png",
+      "path": "female/hair/ponytail_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "6d5aaa85bbf84ba962315aae2457d1e2a1bd0ba415c3afc5ef2cce1987d3ed6c"
+    },
+    {
+      "id": "female.hair.ponytail_brown.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_brown",
+      "format": "webp",
+      "path": "female/hair/ponytail_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "4fd9c467758921e64b69fa77966e657ac184e048edcc3f850db4582a4ec03d32"
+    },
+    {
+      "id": "female.bottom.cresci_training_bottom.png",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "cresci_training_bottom",
+      "format": "png",
+      "path": "female/bottom/cresci_training_bottom.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "58e354fd70a4d03b3f35a661ce225e9b59a27a37fb71b9f9f186914de20e9949"
+    },
+    {
+      "id": "female.bottom.cresci_training_bottom.webp",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "cresci_training_bottom",
+      "format": "webp",
+      "path": "female/bottom/cresci_training_bottom.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "700e24529b71f0c5caa428b5257f6481e831dedd43f3b6db0619467dd349c82d"
+    },
+    {
+      "id": "female.top.cresci_training_top.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "cresci_training_top",
+      "format": "png",
+      "path": "female/top/cresci_training_top.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "4219aae227f6719c39c99a8f9175c91adc810dd8aa447a397e7b645ef1cb8d8f"
+    },
+    {
+      "id": "female.top.cresci_training_top.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "cresci_training_top",
+      "format": "webp",
+      "path": "female/top/cresci_training_top.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8476bb065f102e7007fdf7b9340f455c1c033c7ae02951cca8065d552237d69b"
+    },
+    {
+      "id": "female.shoes.cresci_runners.png",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "cresci_runners",
+      "format": "png",
+      "path": "female/shoes/cresci_runners.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8af5b1b564014b6c895d00c2a6516e7c6686f60eb62d8cee607c03f73904ea9b"
+    },
+    {
+      "id": "female.shoes.cresci_runners.webp",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "cresci_runners",
+      "format": "webp",
+      "path": "female/shoes/cresci_runners.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "cfc2bbfac0b1ea61ffb2241a6fb908ca72c5bfa8e96e193a1744b5cb5518c069"
+    },
+    {
+      "id": "female.headwear.cresci_cap.png",
+      "gender": "female",
+      "slot": "headwear",
+      "name": "cresci_cap",
+      "format": "png",
+      "path": "female/headwear/cresci_cap.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "01ebc8f44c1f49cd863c50edab94685df77ee21344dabac7383774247e0189c1"
+    },
+    {
+      "id": "female.headwear.cresci_cap.webp",
+      "gender": "female",
+      "slot": "headwear",
+      "name": "cresci_cap",
+      "format": "webp",
+      "path": "female/headwear/cresci_cap.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b71d0c5d0737e72da76d032d8bd29b1e1c5907f264831580a5e6294658820238"
+    },
+    {
+      "id": "female.accessories.cresci_wristbands.png",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "cresci_wristbands",
+      "format": "png",
+      "path": "female/accessories/cresci_wristbands.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "694862092e80b38659cc031289cd1d734947009f6206d16ac38f346be970af26"
+    },
+    {
+      "id": "female.accessories.cresci_wristbands.webp",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "cresci_wristbands",
+      "format": "webp",
+      "path": "female/accessories/cresci_wristbands.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b21b699e8bf825b49c812c979229e00fad5c6fa06a7d102b460884206928b5a8"
+    },
+    {
+      "id": "male.top.ember_elite_top.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "ember_elite_top",
+      "format": "png",
+      "path": "male/top/ember_elite_top.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a7fe641d0632a7e5ecd752d1e6057bb39ccac7e039ae2137fc139999449265ab"
+    },
+    {
+      "id": "male.top.ember_elite_top.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "ember_elite_top",
+      "format": "webp",
+      "path": "male/top/ember_elite_top.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "11956d12fb7aec3e505fb05877ce1e353c54e90fb705d6d11995fcea62296f1b"
+    },
+    {
+      "id": "male.bottom.ember_elite_bottom.png",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "ember_elite_bottom",
+      "format": "png",
+      "path": "male/bottom/ember_elite_bottom.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "4036f4899c9be32e7389b4ab5cf90610c2d07ea457ffcadfec7acdbf7dcf317c"
+    },
+    {
+      "id": "male.bottom.ember_elite_bottom.webp",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "ember_elite_bottom",
+      "format": "webp",
+      "path": "male/bottom/ember_elite_bottom.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "3d00a154069b5d8a3ae8b0a674ec67ead231338a87ccf2cafaaa25bc4bf65cb1"
+    },
+    {
+      "id": "male.shoes.ember_elite_shoes.png",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "ember_elite_shoes",
+      "format": "png",
+      "path": "male/shoes/ember_elite_shoes.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e623144348d043a00d8b8668ecfd6ded379e0cca65b79de491d4db6bbd843e95"
+    },
+    {
+      "id": "male.shoes.ember_elite_shoes.webp",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "ember_elite_shoes",
+      "format": "webp",
+      "path": "male/shoes/ember_elite_shoes.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "4e446203fa30035a90ec5c1be921da2618fc11bd8bbe051c0fb109fa5915e781"
+    },
+    {
+      "id": "male.headwear.ember_elite_headwear.png",
+      "gender": "male",
+      "slot": "headwear",
+      "name": "ember_elite_headwear",
+      "format": "png",
+      "path": "male/headwear/ember_elite_headwear.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "5d83167f856a485af179faac732aa82d19f8b63625ff121af96b1b43bb966585"
+    },
+    {
+      "id": "male.headwear.ember_elite_headwear.webp",
+      "gender": "male",
+      "slot": "headwear",
+      "name": "ember_elite_headwear",
+      "format": "webp",
+      "path": "male/headwear/ember_elite_headwear.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b5b8de4d27828494ea950cb1204dca171510d59e7508cd9cd2d94338a679a025"
+    },
+    {
+      "id": "male.accessories.ember_elite_accessories.png",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "ember_elite_accessories",
+      "format": "png",
+      "path": "male/accessories/ember_elite_accessories.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b0e6d41d26a899fe90e7e1e30b8ea2f8dd8233ea2b5477cba34479cab8f01683"
+    },
+    {
+      "id": "male.accessories.ember_elite_accessories.webp",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "ember_elite_accessories",
+      "format": "webp",
+      "path": "male/accessories/ember_elite_accessories.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a3c21e9aa1dd4406d702336e9bc4bf2e8536581d260b0fbbe78919d7111e09e5"
+    },
+    {
+      "id": "female.top.ember_elite_top.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "ember_elite_top",
+      "format": "png",
+      "path": "female/top/ember_elite_top.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8f519681922fb0446b71b3120e4504cf057790cdafb93159e7b3ac85640bec3b"
+    },
+    {
+      "id": "female.top.ember_elite_top.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "ember_elite_top",
+      "format": "webp",
+      "path": "female/top/ember_elite_top.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "2e87440f050e522d8c1423b479638756c608382ccc2ade872a76bdd910fa7113"
+    },
+    {
+      "id": "female.bottom.ember_elite_bottom.png",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "ember_elite_bottom",
+      "format": "png",
+      "path": "female/bottom/ember_elite_bottom.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "184c6ac221a0901e2d27f1339d73c0d0c05ee2bf459b6b0bf8017a2b563016e4"
+    },
+    {
+      "id": "female.bottom.ember_elite_bottom.webp",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "ember_elite_bottom",
+      "format": "webp",
+      "path": "female/bottom/ember_elite_bottom.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8f522c895f38fdec3d632cb77c3abcb55a1b5842cb5d74428c56d29a7a6565b1"
+    },
+    {
+      "id": "female.shoes.ember_elite_shoes.png",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "ember_elite_shoes",
+      "format": "png",
+      "path": "female/shoes/ember_elite_shoes.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a163b3bd3ba88bae34e0077a39dc7e538179d2e97d7d66e87d70abc779b9928a"
+    },
+    {
+      "id": "female.shoes.ember_elite_shoes.webp",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "ember_elite_shoes",
+      "format": "webp",
+      "path": "female/shoes/ember_elite_shoes.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "95f96e8807e694867c25dff6daa8e45f43e54000702cec4ecd2db8e0be725034"
+    },
+    {
+      "id": "female.headwear.ember_elite_headwear.png",
+      "gender": "female",
+      "slot": "headwear",
+      "name": "ember_elite_headwear",
+      "format": "png",
+      "path": "female/headwear/ember_elite_headwear.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "97ff370aa1dd35093a5832729ffc62f1681244836b1864338393718c51507eb3"
+    },
+    {
+      "id": "female.headwear.ember_elite_headwear.webp",
+      "gender": "female",
+      "slot": "headwear",
+      "name": "ember_elite_headwear",
+      "format": "webp",
+      "path": "female/headwear/ember_elite_headwear.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ca9f50ed8c43bd37ede547ee3bb76cc64ccd45db81fbba5384f7b041b8b5e1fd"
+    },
+    {
+      "id": "female.accessories.ember_elite_accessories.png",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "ember_elite_accessories",
+      "format": "png",
+      "path": "female/accessories/ember_elite_accessories.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f8a2897a2698a4f5e1468eec44d23735fa5b29876f1618e15f0dae3931e37ba4"
+    },
+    {
+      "id": "female.accessories.ember_elite_accessories.webp",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "ember_elite_accessories",
+      "format": "webp",
+      "path": "female/accessories/ember_elite_accessories.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1287c98c8038f5142da9aecec91849ac7d41321fed4c186cce45845cad434fba"
+    },
+    {
+      "id": "male.top.neon_night_top.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "neon_night_top",
+      "format": "png",
+      "path": "male/top/neon_night_top.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "9a3b95da8b45845b0be728795a0616bb3479225b15c657310510938d11afcf63"
+    },
+    {
+      "id": "male.top.neon_night_top.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "neon_night_top",
+      "format": "webp",
+      "path": "male/top/neon_night_top.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "429e90929099e34f5dfef0c46c96f15a7a99e9ff3247034e6cf970f822f267a9"
+    },
+    {
+      "id": "male.bottom.neon_night_bottom.png",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "neon_night_bottom",
+      "format": "png",
+      "path": "male/bottom/neon_night_bottom.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "5919e1b108d491557a94adfc2f83f83764cf3c25a82f30833bbc0c4358d01b2e"
+    },
+    {
+      "id": "male.bottom.neon_night_bottom.webp",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "neon_night_bottom",
+      "format": "webp",
+      "path": "male/bottom/neon_night_bottom.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "fd1a643969bdc917f908cee2c451c8fc4bcd4aaf7b0c4df9638f24257352ef97"
+    },
+    {
+      "id": "male.shoes.neon_night_shoes.png",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "neon_night_shoes",
+      "format": "png",
+      "path": "male/shoes/neon_night_shoes.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1efd5a50e8d03b7fbdd6b30a41d4b632977c391034695c3b6f692813bc789c8f"
+    },
+    {
+      "id": "male.shoes.neon_night_shoes.webp",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "neon_night_shoes",
+      "format": "webp",
+      "path": "male/shoes/neon_night_shoes.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f59805a51fd474cceb7d6e2a7f5ff9201781560f0c7fc654a686e6dc31af0816"
+    },
+    {
+      "id": "male.headwear.neon_night_headwear.png",
+      "gender": "male",
+      "slot": "headwear",
+      "name": "neon_night_headwear",
+      "format": "png",
+      "path": "male/headwear/neon_night_headwear.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f589268f4ba98051bf1030fac09ac8bb2893b05797561801cb2230855a82e1ac"
+    },
+    {
+      "id": "male.headwear.neon_night_headwear.webp",
+      "gender": "male",
+      "slot": "headwear",
+      "name": "neon_night_headwear",
+      "format": "webp",
+      "path": "male/headwear/neon_night_headwear.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e8cbcf99a98aa3f6e8217e9b1370c2e276cdaa141bcfcc56f8e4b3da9d69a729"
+    },
+    {
+      "id": "male.accessories.neon_night_accessories.png",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "neon_night_accessories",
+      "format": "png",
+      "path": "male/accessories/neon_night_accessories.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "db5fa8ff0a52c4d642ec961fdca5f804bed69e60b338825e146bda602d0911b0"
+    },
+    {
+      "id": "male.accessories.neon_night_accessories.webp",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "neon_night_accessories",
+      "format": "webp",
+      "path": "male/accessories/neon_night_accessories.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "93917f93659441efa26b804a4f580ebe5adfc9f3476607d30e3b76a85e43c912"
+    },
+    {
+      "id": "female.top.neon_night_top.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "neon_night_top",
+      "format": "png",
+      "path": "female/top/neon_night_top.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b294a2989b6158a4507010c30bfb2c1a1b8d327f5e7c697ebd83eea25732dbf2"
+    },
+    {
+      "id": "female.top.neon_night_top.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "neon_night_top",
+      "format": "webp",
+      "path": "female/top/neon_night_top.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "5318684b47c444819aba2582d49e9a82e0dcf985fc105b63db6963258cd48809"
+    },
+    {
+      "id": "female.bottom.neon_night_bottom.png",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "neon_night_bottom",
+      "format": "png",
+      "path": "female/bottom/neon_night_bottom.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "15acdae1113e6521d5fd66d85f10a5aaab302d7203c619572d32cafb25bc9f00"
+    },
+    {
+      "id": "female.bottom.neon_night_bottom.webp",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "neon_night_bottom",
+      "format": "webp",
+      "path": "female/bottom/neon_night_bottom.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "6b56bca4aab57e8a65558964e541c6c2b8a05e8b4ae43b1eb6946ae1e5bac09c"
+    },
+    {
+      "id": "female.shoes.neon_night_shoes.png",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "neon_night_shoes",
+      "format": "png",
+      "path": "female/shoes/neon_night_shoes.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "54373dd319a918045672b0975cdbdc6095297f6d7488017675af709b4f5526d4"
+    },
+    {
+      "id": "female.shoes.neon_night_shoes.webp",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "neon_night_shoes",
+      "format": "webp",
+      "path": "female/shoes/neon_night_shoes.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b21d0d4a2619a3c9da0afb2f71a58d6d8150ba2aaff4a04aeac819716bebfbed"
+    },
+    {
+      "id": "female.headwear.neon_night_headwear.png",
+      "gender": "female",
+      "slot": "headwear",
+      "name": "neon_night_headwear",
+      "format": "png",
+      "path": "female/headwear/neon_night_headwear.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "d8ed3d6ae874920187d7124211d01965f24d256ce18050a3407ceff82498dfe9"
+    },
+    {
+      "id": "female.headwear.neon_night_headwear.webp",
+      "gender": "female",
+      "slot": "headwear",
+      "name": "neon_night_headwear",
+      "format": "webp",
+      "path": "female/headwear/neon_night_headwear.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "df02f67b33a4025c25d27236ec2c94d77ff103279515a7b0708201f2652639aa"
+    },
+    {
+      "id": "female.accessories.neon_night_accessories.png",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "neon_night_accessories",
+      "format": "png",
+      "path": "female/accessories/neon_night_accessories.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "216efcfbc2633ef900460a64b707767b706a31edaee05a61ad067f654cee3f05"
+    },
+    {
+      "id": "female.accessories.neon_night_accessories.webp",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "neon_night_accessories",
+      "format": "webp",
+      "path": "female/accessories/neon_night_accessories.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1d71072de96b8f96f5e613b832656f838ca4df8b94e2fbf047433e6404a1eb8f"
+    },
+    {
+      "id": "male.top.royal_crest_top.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "royal_crest_top",
+      "format": "png",
+      "path": "male/top/royal_crest_top.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "55f9ef1d24175dc62db8d6d3b011c5b597b0486395a6b048527ab8d5757cf257"
+    },
+    {
+      "id": "male.top.royal_crest_top.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "royal_crest_top",
+      "format": "webp",
+      "path": "male/top/royal_crest_top.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "0d6fe6a16990518f2a37b1e25e4c51ef507d39eb770c30363578181cc77f70e3"
+    },
+    {
+      "id": "male.bottom.royal_crest_bottom.png",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "royal_crest_bottom",
+      "format": "png",
+      "path": "male/bottom/royal_crest_bottom.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "d9b8022eb37cc06532b54ab5a7c3f8834831c36f8268e4f09b28b28f584fa54f"
+    },
+    {
+      "id": "male.bottom.royal_crest_bottom.webp",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "royal_crest_bottom",
+      "format": "webp",
+      "path": "male/bottom/royal_crest_bottom.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "08025f8b08174af09d3b7fc3b03859e5ffd2760c23b332b7b35bf9029864ba5c"
+    },
+    {
+      "id": "male.shoes.royal_crest_shoes.png",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "royal_crest_shoes",
+      "format": "png",
+      "path": "male/shoes/royal_crest_shoes.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "abf216816833123942a816b3103fdedf6122ee46df0ef566b5cef8340a75b937"
+    },
+    {
+      "id": "male.shoes.royal_crest_shoes.webp",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "royal_crest_shoes",
+      "format": "webp",
+      "path": "male/shoes/royal_crest_shoes.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "9801aeb6e8e16ef5495e7b35f6df146d7bbc0f77e34eb86783240d2e6b80c864"
+    },
+    {
+      "id": "male.headwear.royal_crest_headwear.png",
+      "gender": "male",
+      "slot": "headwear",
+      "name": "royal_crest_headwear",
+      "format": "png",
+      "path": "male/headwear/royal_crest_headwear.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f062735ac3b035c3989f1963cfea6964606942d602303f20ea25b8287139a003"
+    },
+    {
+      "id": "male.headwear.royal_crest_headwear.webp",
+      "gender": "male",
+      "slot": "headwear",
+      "name": "royal_crest_headwear",
+      "format": "webp",
+      "path": "male/headwear/royal_crest_headwear.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "269f34399e3877a0c08b8f13985017f2f39f27c93840be9723fd40589e3e9286"
+    },
+    {
+      "id": "male.accessories.royal_crest_accessories.png",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "royal_crest_accessories",
+      "format": "png",
+      "path": "male/accessories/royal_crest_accessories.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f85837cfbb55d5ac6a0ea6e258513030495d2f71365170d62ade26522b59feda"
+    },
+    {
+      "id": "male.accessories.royal_crest_accessories.webp",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "royal_crest_accessories",
+      "format": "webp",
+      "path": "male/accessories/royal_crest_accessories.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "3626fc7a5ffaca6c06e1014b01e79af1d1cc302c114019ee5d1f46759c2bd975"
+    },
+    {
+      "id": "female.top.royal_crest_top.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "royal_crest_top",
+      "format": "png",
+      "path": "female/top/royal_crest_top.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1c86a582e09f8950fa46325e783c6abd15423d7ea5f2e5e2e9e2899cf1a0d835"
+    },
+    {
+      "id": "female.top.royal_crest_top.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "royal_crest_top",
+      "format": "webp",
+      "path": "female/top/royal_crest_top.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "94f7318e99b1abb398cb406f270cb2d8e96f390cc7855c1ec72967fb272c4a67"
+    },
+    {
+      "id": "female.bottom.royal_crest_bottom.png",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "royal_crest_bottom",
+      "format": "png",
+      "path": "female/bottom/royal_crest_bottom.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "12d71de7f6d8bf0f3ba602f036b99c77067493c14aa0bf8f35d596390b6cbaac"
+    },
+    {
+      "id": "female.bottom.royal_crest_bottom.webp",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "royal_crest_bottom",
+      "format": "webp",
+      "path": "female/bottom/royal_crest_bottom.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8c177b9e8ffdbbef357615ebc5ce6744e5e827eaf84a78ccbe7bad5e7d2fda56"
+    },
+    {
+      "id": "female.shoes.royal_crest_shoes.png",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "royal_crest_shoes",
+      "format": "png",
+      "path": "female/shoes/royal_crest_shoes.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "cc2d327322763933485be608c338adc5caca2f0dd648f6e316bb1e9df70086e5"
+    },
+    {
+      "id": "female.shoes.royal_crest_shoes.webp",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "royal_crest_shoes",
+      "format": "webp",
+      "path": "female/shoes/royal_crest_shoes.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b1b084f366760a373ffe8401d63b7b3a98eef646eb4b2863e5a6856a870b70d1"
+    },
+    {
+      "id": "female.headwear.royal_crest_headwear.png",
+      "gender": "female",
+      "slot": "headwear",
+      "name": "royal_crest_headwear",
+      "format": "png",
+      "path": "female/headwear/royal_crest_headwear.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1cc013a3e0b13173db10c04f740d0a00e04976da35c6bb3512e560885b48decd"
+    },
+    {
+      "id": "female.headwear.royal_crest_headwear.webp",
+      "gender": "female",
+      "slot": "headwear",
+      "name": "royal_crest_headwear",
+      "format": "webp",
+      "path": "female/headwear/royal_crest_headwear.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "c7f71e247cb8c55b6908f4352f53f5166a2800915045a981b38fb54e1233e996"
+    },
+    {
+      "id": "female.accessories.royal_crest_accessories.png",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "royal_crest_accessories",
+      "format": "png",
+      "path": "female/accessories/royal_crest_accessories.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "31afe61cadcf6667b94dde041f0ebb7cdcf2ae7d59122cfb826f33f30cb9d191"
+    },
+    {
+      "id": "female.accessories.royal_crest_accessories.webp",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "royal_crest_accessories",
+      "format": "webp",
+      "path": "female/accessories/royal_crest_accessories.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "eede9f580624323b87a66f71a96a1e7a8a67158bc5a9d330c50062e67086335a"
+    },
+    {
+      "id": "male.body.skin_porcelain.png",
+      "gender": "male",
+      "slot": "body",
+      "name": "skin_porcelain",
+      "format": "png",
+      "path": "male/body/skin_porcelain.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "af3399060b5630a572ca8956997256cd5e3d9593e274f46609c559bcd9ede1ad"
+    },
+    {
+      "id": "male.body.skin_porcelain.webp",
+      "gender": "male",
+      "slot": "body",
+      "name": "skin_porcelain",
+      "format": "webp",
+      "path": "male/body/skin_porcelain.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ebf4646d883ad8eedd904ce6d77d5491f047141e3bab1ee54bc8b673afdf8e22"
+    },
+    {
+      "id": "male.body.skin_fair.png",
+      "gender": "male",
+      "slot": "body",
+      "name": "skin_fair",
+      "format": "png",
+      "path": "male/body/skin_fair.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "0403f08557d9cff9d0236a0103a432d1ec32d38e7cd5eca1db962ef3b769a0d7"
+    },
+    {
+      "id": "male.body.skin_fair.webp",
+      "gender": "male",
+      "slot": "body",
+      "name": "skin_fair",
+      "format": "webp",
+      "path": "male/body/skin_fair.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "7f220d54ff8fea5f93a9424e1f397eec792e9b0d8f2b440daa2693f1a1be9221"
+    },
+    {
+      "id": "male.body.skin_tan.png",
+      "gender": "male",
+      "slot": "body",
+      "name": "skin_tan",
+      "format": "png",
+      "path": "male/body/skin_tan.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "08f8914a23d003e2746e93aacdd458c26448ca645c3ac807dfa6b3bb08941369"
+    },
+    {
+      "id": "male.body.skin_tan.webp",
+      "gender": "male",
+      "slot": "body",
+      "name": "skin_tan",
+      "format": "webp",
+      "path": "male/body/skin_tan.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "52d017d6ac1a591658c964968c1f87adac272af57c2e5d0b2e6d047bd30d781b"
+    },
+    {
+      "id": "male.body.skin_olive.png",
+      "gender": "male",
+      "slot": "body",
+      "name": "skin_olive",
+      "format": "png",
+      "path": "male/body/skin_olive.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ccd3f25c772b0f1e4026e2cfe707d4d57f1ab7ea7b764ac8e1899a0454c781b6"
+    },
+    {
+      "id": "male.body.skin_olive.webp",
+      "gender": "male",
+      "slot": "body",
+      "name": "skin_olive",
+      "format": "webp",
+      "path": "male/body/skin_olive.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1f994af66fef66727deaf2470d4a0089baf97ee45d722f8f7e186a49c442b55e"
+    },
+    {
+      "id": "male.body.skin_brown.png",
+      "gender": "male",
+      "slot": "body",
+      "name": "skin_brown",
+      "format": "png",
+      "path": "male/body/skin_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a70263c85d0cf41ea7b73eadefb54dcc32a071a657283e91253d8c0bbb462b4e"
+    },
+    {
+      "id": "male.body.skin_brown.webp",
+      "gender": "male",
+      "slot": "body",
+      "name": "skin_brown",
+      "format": "webp",
+      "path": "male/body/skin_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "fa46d5a47606c904797257acf2a1b1f200a1749c718c171a06613503c3021b0f"
+    },
+    {
+      "id": "male.body.skin_deep.png",
+      "gender": "male",
+      "slot": "body",
+      "name": "skin_deep",
+      "format": "png",
+      "path": "male/body/skin_deep.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "49ea23ccc6ad02c8901b3c30b01ddbebdf532398c1058e9b820a0aeef09cf5e2"
+    },
+    {
+      "id": "male.body.skin_deep.webp",
+      "gender": "male",
+      "slot": "body",
+      "name": "skin_deep",
+      "format": "webp",
+      "path": "male/body/skin_deep.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ce10dd6e58867e706a3ede6fc5c1620f84f041f64f885879369d32322e2d8fc0"
+    },
+    {
+      "id": "male.eyes.eyes_green.png",
+      "gender": "male",
+      "slot": "eyes",
+      "name": "eyes_green",
+      "format": "png",
+      "path": "male/eyes/eyes_green.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "9e9639ec017bf6d049ecc44b7be33aaa3c27a95debd23b2992bc4ef88fb63ad7"
+    },
+    {
+      "id": "male.eyes.eyes_green.webp",
+      "gender": "male",
+      "slot": "eyes",
+      "name": "eyes_green",
+      "format": "webp",
+      "path": "male/eyes/eyes_green.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "efe50b59f6f0bbea21b83e1988e24e4b41cd079f97c7a9f5f75ef76520117a6a"
+    },
+    {
+      "id": "male.eyes.eyes_blue.png",
+      "gender": "male",
+      "slot": "eyes",
+      "name": "eyes_blue",
+      "format": "png",
+      "path": "male/eyes/eyes_blue.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "88b55a7c599b5b46a1e6720ca9dddf0cb46578504393e110da77d6f520469961"
+    },
+    {
+      "id": "male.eyes.eyes_blue.webp",
+      "gender": "male",
+      "slot": "eyes",
+      "name": "eyes_blue",
+      "format": "webp",
+      "path": "male/eyes/eyes_blue.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "208e7f46711daa4553e219559c7cabaf38699230e666a9c59381f9b09b527418"
+    },
+    {
+      "id": "male.eyes.eyes_brown.png",
+      "gender": "male",
+      "slot": "eyes",
+      "name": "eyes_brown",
+      "format": "png",
+      "path": "male/eyes/eyes_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "fde4d68afee8499e65a2a052617f0b15bee5052ab6285e5c3642d12632f8531f"
+    },
+    {
+      "id": "male.eyes.eyes_brown.webp",
+      "gender": "male",
+      "slot": "eyes",
+      "name": "eyes_brown",
+      "format": "webp",
+      "path": "male/eyes/eyes_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "da71a491b9bd69f1264327783c9d7d6e0b732b2be08fe08acde6867d7f0bc618"
+    },
+    {
+      "id": "male.eyes.eyes_gray.png",
+      "gender": "male",
+      "slot": "eyes",
+      "name": "eyes_gray",
+      "format": "png",
+      "path": "male/eyes/eyes_gray.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "9ebb532853113d40d22ac59e0dc7fb887a445b36a5849f2c33b28266e14c4d9b"
+    },
+    {
+      "id": "male.eyes.eyes_gray.webp",
+      "gender": "male",
+      "slot": "eyes",
+      "name": "eyes_gray",
+      "format": "webp",
+      "path": "male/eyes/eyes_gray.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "0dc6fb22600bc651566a3262e16201014c0b295fb4b9e5a91617e920d117bcf0"
+    },
+    {
+      "id": "male.hair.short_textured_black.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_textured_black",
+      "format": "png",
+      "path": "male/hair/short_textured_black.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a08b2abc5b8a44b10950aa0f387c194e9195ed02b7aa9bc8eb194bfba41d1626"
+    },
+    {
+      "id": "male.hair.short_textured_black.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_textured_black",
+      "format": "webp",
+      "path": "male/hair/short_textured_black.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b2ac5c2f761314e1b87f35a3d3a4ed0dd3fa61f69d2d078fd9cb9de10b2fb3d1"
+    },
+    {
+      "id": "male.hair.short_textured_dark_brown.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_textured_dark_brown",
+      "format": "png",
+      "path": "male/hair/short_textured_dark_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "bed1907fee75107e2b02d6e38fd38cca277f0b9a2e2ebb7352a405812b7e9d27"
+    },
+    {
+      "id": "male.hair.short_textured_dark_brown.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_textured_dark_brown",
+      "format": "webp",
+      "path": "male/hair/short_textured_dark_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a9032d3ad5fe41b7d70b2ec9ff43b8db7ec2565472e0e12af78385736153f6b9"
+    },
+    {
+      "id": "male.hair.short_textured_chestnut.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_textured_chestnut",
+      "format": "png",
+      "path": "male/hair/short_textured_chestnut.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "2971bedaddb46083652ee0ef0f36f3d42d9588eb4943992ee39a42266fb9e702"
+    },
+    {
+      "id": "male.hair.short_textured_chestnut.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_textured_chestnut",
+      "format": "webp",
+      "path": "male/hair/short_textured_chestnut.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "744062417de9bfa77fcbd6fef0a2cee5461d039df75740a54cbc03eac2a0174b"
+    },
+    {
+      "id": "male.hair.short_textured_blonde.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_textured_blonde",
+      "format": "png",
+      "path": "male/hair/short_textured_blonde.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b394d2648680f51be8bc75b60d9952143cae83efe03815e9f51eb3a421dac527"
+    },
+    {
+      "id": "male.hair.short_textured_blonde.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_textured_blonde",
+      "format": "webp",
+      "path": "male/hair/short_textured_blonde.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "546f1ea343b45eaf3eea89a9d3808912d1517c4ff04bceffb9f8e623e8b29fe4"
+    },
+    {
+      "id": "male.hair.short_textured_red.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_textured_red",
+      "format": "png",
+      "path": "male/hair/short_textured_red.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b2f0469640746596cca62a7922249a28b47cffcf58dcd303ff412f51b3ba8498"
+    },
+    {
+      "id": "male.hair.short_textured_red.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_textured_red",
+      "format": "webp",
+      "path": "male/hair/short_textured_red.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b25a07222467fe889c4125b20dfe214fa4e90128aebb46f0824b38c529cfb761"
+    },
+    {
+      "id": "male.hair.short_textured_silver.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_textured_silver",
+      "format": "png",
+      "path": "male/hair/short_textured_silver.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "166bcf7655b664c891d723480b448a7790cc62b4a0eebdbb238c36de4227ce38"
+    },
+    {
+      "id": "male.hair.short_textured_silver.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_textured_silver",
+      "format": "webp",
+      "path": "male/hair/short_textured_silver.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "4eb6e33c12e6ec1947457af184b348657784e94c63c001828a6f5f94d0798bfc"
+    },
+    {
+      "id": "male.hair.spiky_black.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "spiky_black",
+      "format": "png",
+      "path": "male/hair/spiky_black.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "0377c401945fac4e61e877236f24665a8270fdb4da86f9e4124572cd9b23e29b"
+    },
+    {
+      "id": "male.hair.spiky_black.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "spiky_black",
+      "format": "webp",
+      "path": "male/hair/spiky_black.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b846706e2321286a27c50b9bc18a057f68d8ba708746d6c3801001954df78bd1"
+    },
+    {
+      "id": "male.hair.spiky_dark_brown.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "spiky_dark_brown",
+      "format": "png",
+      "path": "male/hair/spiky_dark_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "c6907203f50fe29a1c6933c877e0af1d455d64b05865befd762b395d9cc6cf4d"
+    },
+    {
+      "id": "male.hair.spiky_dark_brown.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "spiky_dark_brown",
+      "format": "webp",
+      "path": "male/hair/spiky_dark_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ac0f0bbd2cc945d4d33cf2cab6a07393a747338e3cd470b8a842b21def926f67"
+    },
+    {
+      "id": "male.hair.spiky_chestnut.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "spiky_chestnut",
+      "format": "png",
+      "path": "male/hair/spiky_chestnut.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "00ce12f25dd4f36d2a187aebadcf9eb375a468e23f60cd58f8aaf34894057940"
+    },
+    {
+      "id": "male.hair.spiky_chestnut.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "spiky_chestnut",
+      "format": "webp",
+      "path": "male/hair/spiky_chestnut.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "17fcc8049bf932b096ddad3d85ccc1b7c3a7c5e061c438333a7b42637f7a4de7"
+    },
+    {
+      "id": "male.hair.spiky_blonde.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "spiky_blonde",
+      "format": "png",
+      "path": "male/hair/spiky_blonde.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "433d2eb72eea64e2924ea8c9301392cd9608baca04a0178758ecafa515cca3c5"
+    },
+    {
+      "id": "male.hair.spiky_blonde.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "spiky_blonde",
+      "format": "webp",
+      "path": "male/hair/spiky_blonde.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b2b2960a7097bf074cf2ded77b5c30b5d4754dd7772c607b3c7f20fcabc78c70"
+    },
+    {
+      "id": "male.hair.spiky_red.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "spiky_red",
+      "format": "png",
+      "path": "male/hair/spiky_red.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "03d0d78092a20bb65785887f797d6bd0dcb2058e8105a7172f8388a2888f6c1b"
+    },
+    {
+      "id": "male.hair.spiky_red.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "spiky_red",
+      "format": "webp",
+      "path": "male/hair/spiky_red.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "4cfba07c3e293032c3c213ba7860b93fae0f03a95fb1b004988f6bafbc79068e"
+    },
+    {
+      "id": "male.hair.spiky_silver.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "spiky_silver",
+      "format": "png",
+      "path": "male/hair/spiky_silver.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f413486dbc6e72f7c36534044a77fd0c6bc13a49869dc108da7939d25879d061"
+    },
+    {
+      "id": "male.hair.spiky_silver.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "spiky_silver",
+      "format": "webp",
+      "path": "male/hair/spiky_silver.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8f932ebf036294fe9312bae01a8709d5693b109dca07704e91a6c6372ce1b00f"
+    },
+    {
+      "id": "male.hair.side_swept_black.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "side_swept_black",
+      "format": "png",
+      "path": "male/hair/side_swept_black.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ab4d0a9bd3f36521c305ef51801ccf43897da6bf68946cbfeb53ce07d6ade0d9"
+    },
+    {
+      "id": "male.hair.side_swept_black.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "side_swept_black",
+      "format": "webp",
+      "path": "male/hair/side_swept_black.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "dabe2cd6dcd027d22c1c1e7e358c5e3cdc0c631194b97617d70dfea6238160a4"
+    },
+    {
+      "id": "male.hair.side_swept_dark_brown.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "side_swept_dark_brown",
+      "format": "png",
+      "path": "male/hair/side_swept_dark_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "96446e25d3831341117a291e8fe8807ac27c8f4a63b171977cd5af05e5dd4ee3"
+    },
+    {
+      "id": "male.hair.side_swept_dark_brown.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "side_swept_dark_brown",
+      "format": "webp",
+      "path": "male/hair/side_swept_dark_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "5799f9651f9f9e5a615e3c2759b47a0e31c4d6c4d6252e18dd7c35aaf4898f19"
+    },
+    {
+      "id": "male.hair.side_swept_chestnut.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "side_swept_chestnut",
+      "format": "png",
+      "path": "male/hair/side_swept_chestnut.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "26c537067724abb1cd0e5a949f6461f7781f3db524dae0bc0cd80092ca24157f"
+    },
+    {
+      "id": "male.hair.side_swept_chestnut.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "side_swept_chestnut",
+      "format": "webp",
+      "path": "male/hair/side_swept_chestnut.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f69711c8c67be2fa5494dcd2bd20354d15f6567cbac22efd2f2832b771472d8a"
+    },
+    {
+      "id": "male.hair.side_swept_blonde.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "side_swept_blonde",
+      "format": "png",
+      "path": "male/hair/side_swept_blonde.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "79f3420d09d0d9c3ec0e6bd320109b9ffc1b5960cb7445ae5c5d3a340db070af"
+    },
+    {
+      "id": "male.hair.side_swept_blonde.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "side_swept_blonde",
+      "format": "webp",
+      "path": "male/hair/side_swept_blonde.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8a28bcabec82ec52273e7ec5745b51d799f0712d1492bdafe9adde532069651d"
+    },
+    {
+      "id": "male.hair.side_swept_red.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "side_swept_red",
+      "format": "png",
+      "path": "male/hair/side_swept_red.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8cc70bd377b09f3fb8f118b6b2ae133b8edb52072463938ba1d9a6220cb3e5ad"
+    },
+    {
+      "id": "male.hair.side_swept_red.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "side_swept_red",
+      "format": "webp",
+      "path": "male/hair/side_swept_red.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "30d4742e1a1d31e33239e63778ce901f77709cd4168eff48ff8f7b42e4337ec9"
+    },
+    {
+      "id": "male.hair.side_swept_silver.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "side_swept_silver",
+      "format": "png",
+      "path": "male/hair/side_swept_silver.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "fa09c86e6dec3a21258bf25cc7ad0d53e6dbdead5b1461f212344b7393432160"
+    },
+    {
+      "id": "male.hair.side_swept_silver.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "side_swept_silver",
+      "format": "webp",
+      "path": "male/hair/side_swept_silver.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "5f2b209ce45dd0cefe73cecda19f5190056c436cf1ef1f14a810fe0fc6eb87b2"
+    },
+    {
+      "id": "male.hair.buzz_cut_black.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "buzz_cut_black",
+      "format": "png",
+      "path": "male/hair/buzz_cut_black.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "7ffdc00616456e6b606c2525c72269f18fa6780827bb047c6e78c4e914d7406d"
+    },
+    {
+      "id": "male.hair.buzz_cut_black.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "buzz_cut_black",
+      "format": "webp",
+      "path": "male/hair/buzz_cut_black.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1d2e2d15dd33e99dab0b029b03e19cc973110177b7fc0a45f87877f90751dfe0"
+    },
+    {
+      "id": "male.hair.buzz_cut_dark_brown.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "buzz_cut_dark_brown",
+      "format": "png",
+      "path": "male/hair/buzz_cut_dark_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "66241c54cce2126fb75d7498bf4873af7a7c78673d3f8b4de89403517fcf2934"
+    },
+    {
+      "id": "male.hair.buzz_cut_dark_brown.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "buzz_cut_dark_brown",
+      "format": "webp",
+      "path": "male/hair/buzz_cut_dark_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "9867efd0f0e0391f369fd9cd7f2ca762f1c523d503b06ebafb30250428f9e0e7"
+    },
+    {
+      "id": "male.hair.buzz_cut_chestnut.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "buzz_cut_chestnut",
+      "format": "png",
+      "path": "male/hair/buzz_cut_chestnut.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "39002b241100e34b43f243a10370ff65feab17bb00cbc0c86211b72484136d9d"
+    },
+    {
+      "id": "male.hair.buzz_cut_chestnut.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "buzz_cut_chestnut",
+      "format": "webp",
+      "path": "male/hair/buzz_cut_chestnut.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "4e663581fab7289c9dd67cf0e5bd500803cd6ef5996d907ae788df42c2764dd2"
+    },
+    {
+      "id": "male.hair.buzz_cut_blonde.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "buzz_cut_blonde",
+      "format": "png",
+      "path": "male/hair/buzz_cut_blonde.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "49871c296b4cae2c2e34dce31a29bec3f041caf3c73b9fbfb6d2d725b56b2291"
+    },
+    {
+      "id": "male.hair.buzz_cut_blonde.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "buzz_cut_blonde",
+      "format": "webp",
+      "path": "male/hair/buzz_cut_blonde.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "cac142da565769944ab875ffca42ca4f7b8cdb7adeb5e0895569bfa38d0b8c4a"
+    },
+    {
+      "id": "male.hair.buzz_cut_red.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "buzz_cut_red",
+      "format": "png",
+      "path": "male/hair/buzz_cut_red.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ceb8ac1d0a3b71da21196b85ae60bc3d8a2ac86c304d0a4abf5ee70620949adf"
+    },
+    {
+      "id": "male.hair.buzz_cut_red.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "buzz_cut_red",
+      "format": "webp",
+      "path": "male/hair/buzz_cut_red.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b1506f2bd1ef0e495bd09d45cf4db9f823034f4feba414590115dd13e2982834"
+    },
+    {
+      "id": "male.hair.buzz_cut_silver.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "buzz_cut_silver",
+      "format": "png",
+      "path": "male/hair/buzz_cut_silver.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e962b044027b0ef419606c388b59afeabd74425adfdabf48db70c164d2035c0e"
+    },
+    {
+      "id": "male.hair.buzz_cut_silver.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "buzz_cut_silver",
+      "format": "webp",
+      "path": "male/hair/buzz_cut_silver.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "5fc4ab61e2193a7ff78d638ef41db9ce3ede9b30b9a05726a27956a66fbac4c5"
+    },
+    {
+      "id": "male.hair.undercut_black.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "undercut_black",
+      "format": "png",
+      "path": "male/hair/undercut_black.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "fa9bf6459987e2329a0dd8b14118ce8310c290d742ed855998f02de479157fdb"
+    },
+    {
+      "id": "male.hair.undercut_black.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "undercut_black",
+      "format": "webp",
+      "path": "male/hair/undercut_black.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "0d076f286e96df4b27bc1e1ae10b184b1ad54eb55609a545094d98f2205b6f65"
+    },
+    {
+      "id": "male.hair.undercut_dark_brown.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "undercut_dark_brown",
+      "format": "png",
+      "path": "male/hair/undercut_dark_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "d5d2075d4d0c3bf4655abb40439f722f39a7567beaf4eed9fd7162963d68d466"
+    },
+    {
+      "id": "male.hair.undercut_dark_brown.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "undercut_dark_brown",
+      "format": "webp",
+      "path": "male/hair/undercut_dark_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "61cccc7d12f3014570cafac60b24474e12b2315761e1c5af3bad377aba92ccbd"
+    },
+    {
+      "id": "male.hair.undercut_chestnut.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "undercut_chestnut",
+      "format": "png",
+      "path": "male/hair/undercut_chestnut.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1515ce6fff853b7b1b21da37e58b1fdb40abe401de6fb5743ed47afe6669ec6e"
+    },
+    {
+      "id": "male.hair.undercut_chestnut.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "undercut_chestnut",
+      "format": "webp",
+      "path": "male/hair/undercut_chestnut.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "733f9aa9c7959dc6a6ef6e3c5160409f82b66525d339a85d01e63284f84f3596"
+    },
+    {
+      "id": "male.hair.undercut_blonde.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "undercut_blonde",
+      "format": "png",
+      "path": "male/hair/undercut_blonde.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "3f06dbd53a99959e905d529787e71633b709fa12a4df11d44cffdcb50149815b"
+    },
+    {
+      "id": "male.hair.undercut_blonde.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "undercut_blonde",
+      "format": "webp",
+      "path": "male/hair/undercut_blonde.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "65fa8026d23e56c133427c192612e9cf47ab33dd236b72e1ef4c5473d66fd837"
+    },
+    {
+      "id": "male.hair.undercut_red.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "undercut_red",
+      "format": "png",
+      "path": "male/hair/undercut_red.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8081d67dae55bb4a14bc7976b8dac22f6fa1a790a912a48dc84c492dd8e9b0cd"
+    },
+    {
+      "id": "male.hair.undercut_red.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "undercut_red",
+      "format": "webp",
+      "path": "male/hair/undercut_red.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "c02ba0e65021168f20a146e36f2029114d737de7728c739e4940898ad6a933fe"
+    },
+    {
+      "id": "male.hair.undercut_silver.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "undercut_silver",
+      "format": "png",
+      "path": "male/hair/undercut_silver.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "56c7955457cb3a8579c1eda4dec6b2b779113fc5066a006dce073b328c8c012c"
+    },
+    {
+      "id": "male.hair.undercut_silver.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "undercut_silver",
+      "format": "webp",
+      "path": "male/hair/undercut_silver.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8899bea72277d5a5366ba432dac54e63d8c2a3df9d5d4570a8104a8826f97412"
+    },
+    {
+      "id": "female.body.skin_porcelain.png",
+      "gender": "female",
+      "slot": "body",
+      "name": "skin_porcelain",
+      "format": "png",
+      "path": "female/body/skin_porcelain.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "df272a786232e96cc6b75c6e97e452fadf5442d3dee25180531eea4fd868e6b7"
+    },
+    {
+      "id": "female.body.skin_porcelain.webp",
+      "gender": "female",
+      "slot": "body",
+      "name": "skin_porcelain",
+      "format": "webp",
+      "path": "female/body/skin_porcelain.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "c5e67dd5d23d36673ce231b3e82ee44f4736c0545cfd9fd2d071202a229ff6bd"
+    },
+    {
+      "id": "female.body.skin_fair.png",
+      "gender": "female",
+      "slot": "body",
+      "name": "skin_fair",
+      "format": "png",
+      "path": "female/body/skin_fair.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8ea5677af4a899dda1c9fe7a4bee34aa9a3e9807616522aa82909aa6fff06e75"
+    },
+    {
+      "id": "female.body.skin_fair.webp",
+      "gender": "female",
+      "slot": "body",
+      "name": "skin_fair",
+      "format": "webp",
+      "path": "female/body/skin_fair.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "6de9efc2380a906188a5d304cc454fea816001a20ce73df1531b987515db24d1"
+    },
+    {
+      "id": "female.body.skin_tan.png",
+      "gender": "female",
+      "slot": "body",
+      "name": "skin_tan",
+      "format": "png",
+      "path": "female/body/skin_tan.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "04b2fd5b10102f7c265a2595d84037d41abd7e4f59451ad4488159fcf265ce7f"
+    },
+    {
+      "id": "female.body.skin_tan.webp",
+      "gender": "female",
+      "slot": "body",
+      "name": "skin_tan",
+      "format": "webp",
+      "path": "female/body/skin_tan.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "980ccea18516b1a571a1c2899da664ddea6a59a2f0bdf38e325f2c3cef51712f"
+    },
+    {
+      "id": "female.body.skin_olive.png",
+      "gender": "female",
+      "slot": "body",
+      "name": "skin_olive",
+      "format": "png",
+      "path": "female/body/skin_olive.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f77c49d89519ab89e25f98ff10a05141b7976f63045ee74f2825555d40fc82c9"
+    },
+    {
+      "id": "female.body.skin_olive.webp",
+      "gender": "female",
+      "slot": "body",
+      "name": "skin_olive",
+      "format": "webp",
+      "path": "female/body/skin_olive.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "bda9eea1db0f4699f1ea9f90ba09532c1046f00f715b84ce67ac8767d7995640"
+    },
+    {
+      "id": "female.body.skin_brown.png",
+      "gender": "female",
+      "slot": "body",
+      "name": "skin_brown",
+      "format": "png",
+      "path": "female/body/skin_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "3228da341e9ed16522ef81ee4f1cdf077ae23f3ecb935e342fd0ee8499c21029"
+    },
+    {
+      "id": "female.body.skin_brown.webp",
+      "gender": "female",
+      "slot": "body",
+      "name": "skin_brown",
+      "format": "webp",
+      "path": "female/body/skin_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b1fc8616df7cc51af07d517e37f0954107d9d6cf96ce23a909bcc16d063e5c6e"
+    },
+    {
+      "id": "female.body.skin_deep.png",
+      "gender": "female",
+      "slot": "body",
+      "name": "skin_deep",
+      "format": "png",
+      "path": "female/body/skin_deep.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "5d899807a6e6aa62625de3429a774228ada552e7dee44de67d21609c04d94f6c"
+    },
+    {
+      "id": "female.body.skin_deep.webp",
+      "gender": "female",
+      "slot": "body",
+      "name": "skin_deep",
+      "format": "webp",
+      "path": "female/body/skin_deep.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "579acf09337a090ad87f7f788ac6539b815011535070633f22fcb030e05e0394"
+    },
+    {
+      "id": "female.eyes.eyes_green.png",
+      "gender": "female",
+      "slot": "eyes",
+      "name": "eyes_green",
+      "format": "png",
+      "path": "female/eyes/eyes_green.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "50d5d57dbd2abfaf252faa2b9a9b780cccd370f3cb37e7b86fbe6a58406e85a3"
+    },
+    {
+      "id": "female.eyes.eyes_green.webp",
+      "gender": "female",
+      "slot": "eyes",
+      "name": "eyes_green",
+      "format": "webp",
+      "path": "female/eyes/eyes_green.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "6ff47dd0450014b7ec9f3cd08766926f2ca041be9f022a79281342b8493d5763"
+    },
+    {
+      "id": "female.eyes.eyes_blue.png",
+      "gender": "female",
+      "slot": "eyes",
+      "name": "eyes_blue",
+      "format": "png",
+      "path": "female/eyes/eyes_blue.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "88606c4f4d882567b89d719f3fec62758b0e47958f04c129b1d97fe71e9420cc"
+    },
+    {
+      "id": "female.eyes.eyes_blue.webp",
+      "gender": "female",
+      "slot": "eyes",
+      "name": "eyes_blue",
+      "format": "webp",
+      "path": "female/eyes/eyes_blue.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "67e9a5933b0436d64c5f600e7360c59b4cbfbb5e27d236a8ee2bbf5431a92405"
+    },
+    {
+      "id": "female.eyes.eyes_brown.png",
+      "gender": "female",
+      "slot": "eyes",
+      "name": "eyes_brown",
+      "format": "png",
+      "path": "female/eyes/eyes_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "bb3f780dde4cf02b0bf382550e89a5f35e61a53ed43de4c227d615995f2c8036"
+    },
+    {
+      "id": "female.eyes.eyes_brown.webp",
+      "gender": "female",
+      "slot": "eyes",
+      "name": "eyes_brown",
+      "format": "webp",
+      "path": "female/eyes/eyes_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "7a61bf57b997f634a194a2488cddf82a61bb26c1e132d27d1c97b55e7034b90b"
+    },
+    {
+      "id": "female.eyes.eyes_gray.png",
+      "gender": "female",
+      "slot": "eyes",
+      "name": "eyes_gray",
+      "format": "png",
+      "path": "female/eyes/eyes_gray.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8516db426f2dc5fe050e9abaea47107d3cd6332879410bfbd38422762ad434cf"
+    },
+    {
+      "id": "female.eyes.eyes_gray.webp",
+      "gender": "female",
+      "slot": "eyes",
+      "name": "eyes_gray",
+      "format": "webp",
+      "path": "female/eyes/eyes_gray.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "d53b43588afa536a529e2bbf0bd2e93b5c071125cb01eb5e446e74c278d5c1ac"
+    },
+    {
+      "id": "female.hair.ponytail_black.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_black",
+      "format": "png",
+      "path": "female/hair/ponytail_black.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "7f400226e4dab7be9e0ed47437e6508339cce6aa45a0e726e0e4d7d192a5185d"
+    },
+    {
+      "id": "female.hair.ponytail_black.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_black",
+      "format": "webp",
+      "path": "female/hair/ponytail_black.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "06d774c2f388bc057a45eb3556a0f3ec5100fa5e5040880743a52507bfad2521"
+    },
+    {
+      "id": "female.hair.ponytail_dark_brown.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_dark_brown",
+      "format": "png",
+      "path": "female/hair/ponytail_dark_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1282fdf4cba0362f93aa728315a75b7701218afa5db8121a30c7f74adf6fbe41"
+    },
+    {
+      "id": "female.hair.ponytail_dark_brown.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_dark_brown",
+      "format": "webp",
+      "path": "female/hair/ponytail_dark_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "d1286f27113be738ab12ab102c80f4f132bb4d1d0d7da31299b2bc8d9a27a34f"
+    },
+    {
+      "id": "female.hair.ponytail_chestnut.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_chestnut",
+      "format": "png",
+      "path": "female/hair/ponytail_chestnut.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "68d74a4b3a81bec32b370d0806cdf2ac6b1ac38d90e0a2fae75ace564e6194f0"
+    },
+    {
+      "id": "female.hair.ponytail_chestnut.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_chestnut",
+      "format": "webp",
+      "path": "female/hair/ponytail_chestnut.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "aa5cd006b8d08e607280c0392edf4893dc6ffe62cfe45b7a3fa1d468281c1432"
+    },
+    {
+      "id": "female.hair.ponytail_blonde.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_blonde",
+      "format": "png",
+      "path": "female/hair/ponytail_blonde.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "6f237716da1d6c306e968f54bfbbdd4bd72bd0f6fcbb136fac99bf1ea8487fd0"
+    },
+    {
+      "id": "female.hair.ponytail_blonde.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_blonde",
+      "format": "webp",
+      "path": "female/hair/ponytail_blonde.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f2d87a7bb4d2f6a024a0e944553547dbf570c57f2dd8441b78b28402ed3d87ad"
+    },
+    {
+      "id": "female.hair.ponytail_red.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_red",
+      "format": "png",
+      "path": "female/hair/ponytail_red.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8acf793b9915d85b9e9450ec7c8255febc862fa7733e23e9b0d66e51533bcf3d"
+    },
+    {
+      "id": "female.hair.ponytail_red.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_red",
+      "format": "webp",
+      "path": "female/hair/ponytail_red.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8eb3159f02389bd399a35ac07ba90c906f8bb2f37939aa3b0cd971c8af334e7e"
+    },
+    {
+      "id": "female.hair.ponytail_silver.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_silver",
+      "format": "png",
+      "path": "female/hair/ponytail_silver.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1a3eae063c2ebed9ae765f434cd5600c2e2f2e20fbfcad4a8cca3d7f7734f60b"
+    },
+    {
+      "id": "female.hair.ponytail_silver.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_silver",
+      "format": "webp",
+      "path": "female/hair/ponytail_silver.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a1622182bd52639fe9e5c8fb6efef0e88d2007ea523b9bc9492594a40ba617cd"
+    },
+    {
+      "id": "female.hair.bob_black.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "bob_black",
+      "format": "png",
+      "path": "female/hair/bob_black.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b387933872331addda393a70dcca983cbd659f30a04beec8e8d1a0e33dbc995c"
+    },
+    {
+      "id": "female.hair.bob_black.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "bob_black",
+      "format": "webp",
+      "path": "female/hair/bob_black.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e20636519097e3f2a6b3f70e92b98428420f89dad1465ddb01408ccbbc4c9612"
+    },
+    {
+      "id": "female.hair.bob_dark_brown.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "bob_dark_brown",
+      "format": "png",
+      "path": "female/hair/bob_dark_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "d6a1efc45aa2822d4d286f78888dc7d4b166aae815ca2b6cd325476b4a9f9620"
+    },
+    {
+      "id": "female.hair.bob_dark_brown.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "bob_dark_brown",
+      "format": "webp",
+      "path": "female/hair/bob_dark_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "3c0f7854895f1999a90a54b2140d15bbd1bd084c6a1a0f03242c168c01f1c3d0"
+    },
+    {
+      "id": "female.hair.bob_chestnut.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "bob_chestnut",
+      "format": "png",
+      "path": "female/hair/bob_chestnut.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ee5f53a0494bfc53651045916040d5e2fdf784b6e59080eade8517442de28790"
+    },
+    {
+      "id": "female.hair.bob_chestnut.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "bob_chestnut",
+      "format": "webp",
+      "path": "female/hair/bob_chestnut.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "9e9a9753040d2f21b4de73727f786ea34b48537e7875815cd0710c582aab8371"
+    },
+    {
+      "id": "female.hair.bob_blonde.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "bob_blonde",
+      "format": "png",
+      "path": "female/hair/bob_blonde.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "72017c7584197765439e0ef176a42268a56aafb7cef4da5e4c59ebc8738e7ba3"
+    },
+    {
+      "id": "female.hair.bob_blonde.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "bob_blonde",
+      "format": "webp",
+      "path": "female/hair/bob_blonde.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "3feae84716c1fdb7a069b076a89f5658bd1b776fafa4e19632bb468f6caa296b"
+    },
+    {
+      "id": "female.hair.bob_red.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "bob_red",
+      "format": "png",
+      "path": "female/hair/bob_red.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "dec1d5c9c8057f79014b6f40c572c827af6005cae9fd1827cebf09b978243bbe"
+    },
+    {
+      "id": "female.hair.bob_red.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "bob_red",
+      "format": "webp",
+      "path": "female/hair/bob_red.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1f68ab1896bc652f5f1ef32dabed39fa46392a5c8681ed4dba7290a6e8b585da"
+    },
+    {
+      "id": "female.hair.bob_silver.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "bob_silver",
+      "format": "png",
+      "path": "female/hair/bob_silver.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "2a8f5a4cbf96dfa1f1b7322d9f3fd1f39d92ec817676526cc78a98756629414a"
+    },
+    {
+      "id": "female.hair.bob_silver.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "bob_silver",
+      "format": "webp",
+      "path": "female/hair/bob_silver.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "7de2a959713cffd47ca099b6f6b06d8be4d645d932dae7114e203de7c8887cb3"
+    },
+    {
+      "id": "female.hair.long_black.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "long_black",
+      "format": "png",
+      "path": "female/hair/long_black.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "5d8b1ddfb1a36cbda56b47edbae47e9eeede2b665f1ebcf25445a92594f4c65d"
+    },
+    {
+      "id": "female.hair.long_black.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "long_black",
+      "format": "webp",
+      "path": "female/hair/long_black.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ae9ac3374351d36137adfd36b49aba72ec7e96358f81b801edc543002c79b344"
+    },
+    {
+      "id": "female.hair.long_dark_brown.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "long_dark_brown",
+      "format": "png",
+      "path": "female/hair/long_dark_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "2bffbb8096e247c9ec8b2df6bb38ae529f554d19fd846b20bbb9b0ef0585e416"
+    },
+    {
+      "id": "female.hair.long_dark_brown.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "long_dark_brown",
+      "format": "webp",
+      "path": "female/hair/long_dark_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "4342e96a5e923356faafd292430a3aa0a82f8b594df7acbb8def751eeec164ef"
+    },
+    {
+      "id": "female.hair.long_chestnut.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "long_chestnut",
+      "format": "png",
+      "path": "female/hair/long_chestnut.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "9d721ef988956801922bd9617325bbe71597727ee7bf34db346fa8c9ab2c073e"
+    },
+    {
+      "id": "female.hair.long_chestnut.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "long_chestnut",
+      "format": "webp",
+      "path": "female/hair/long_chestnut.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8fc4dc318295c07ee6e3582ef127970c9ac162238b269929aa66cdc74f2c0bd4"
+    },
+    {
+      "id": "female.hair.long_blonde.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "long_blonde",
+      "format": "png",
+      "path": "female/hair/long_blonde.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "13ba71a951c2573b188f860f5ad9894de7b12f1517af81c6e216e066157800af"
+    },
+    {
+      "id": "female.hair.long_blonde.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "long_blonde",
+      "format": "webp",
+      "path": "female/hair/long_blonde.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a425510fe54a2ef175911d9c8ca016554b1b2b2f074d72feb6a77a5d981ae6ad"
+    },
+    {
+      "id": "female.hair.long_red.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "long_red",
+      "format": "png",
+      "path": "female/hair/long_red.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1fbccf2159a65c71a53036455b218857e207db29b852dda0decdfda5c1bc0640"
+    },
+    {
+      "id": "female.hair.long_red.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "long_red",
+      "format": "webp",
+      "path": "female/hair/long_red.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "eaacdab8d3e6ef161c3e83c4abeaf41b545464d71f681b00da04d6e038785228"
+    },
+    {
+      "id": "female.hair.long_silver.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "long_silver",
+      "format": "png",
+      "path": "female/hair/long_silver.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "d4f04d1a9021858f957f4e11d5df8d65f8a998f3e2da1251d0529b7eb3c090c8"
+    },
+    {
+      "id": "female.hair.long_silver.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "long_silver",
+      "format": "webp",
+      "path": "female/hair/long_silver.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "4d4abcaeab553465ca23b3daae47be71e6a92985c02d7d48cd8206777320259d"
+    },
+    {
+      "id": "female.hair.high_bun_black.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "high_bun_black",
+      "format": "png",
+      "path": "female/hair/high_bun_black.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "2c73dbec43bd52cc55549e67f749516a37034b1ea1e3589489974ab1070ed96d"
+    },
+    {
+      "id": "female.hair.high_bun_black.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "high_bun_black",
+      "format": "webp",
+      "path": "female/hair/high_bun_black.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ba3b89430a880b816fde4431e325db97588b2790205f45a6d71e05ec6aa56ed7"
+    },
+    {
+      "id": "female.hair.high_bun_dark_brown.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "high_bun_dark_brown",
+      "format": "png",
+      "path": "female/hair/high_bun_dark_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "cc956bc2664da02b984e6ef729aa2b32e19fff6d04996428b9916554d23a2a2b"
+    },
+    {
+      "id": "female.hair.high_bun_dark_brown.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "high_bun_dark_brown",
+      "format": "webp",
+      "path": "female/hair/high_bun_dark_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e4578d5316acc2d5892b7e975b94db4290498d72227d9373fe43c044b821139c"
+    },
+    {
+      "id": "female.hair.high_bun_chestnut.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "high_bun_chestnut",
+      "format": "png",
+      "path": "female/hair/high_bun_chestnut.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f57dd9ff8e1f274a37db267ec7423cbbe84cf9ae04897e633fc9f114a40b553b"
+    },
+    {
+      "id": "female.hair.high_bun_chestnut.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "high_bun_chestnut",
+      "format": "webp",
+      "path": "female/hair/high_bun_chestnut.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "43b10c4ca9cdc921b3ef8e758427193e0a8e06126743f24902afaedd3d129005"
+    },
+    {
+      "id": "female.hair.high_bun_blonde.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "high_bun_blonde",
+      "format": "png",
+      "path": "female/hair/high_bun_blonde.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "c01866049ec379fe9112b916a64c82065bbe672c7f2ee56ae073d69d44969ba0"
+    },
+    {
+      "id": "female.hair.high_bun_blonde.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "high_bun_blonde",
+      "format": "webp",
+      "path": "female/hair/high_bun_blonde.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "0e5603dd27708df9de071382bcae9bc827a0876b68b8c0caa9c7400406257e39"
+    },
+    {
+      "id": "female.hair.high_bun_red.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "high_bun_red",
+      "format": "png",
+      "path": "female/hair/high_bun_red.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "5bfd8bbc5d66f81750a439691545a042d5e29b082423f21de78df230e0637dfa"
+    },
+    {
+      "id": "female.hair.high_bun_red.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "high_bun_red",
+      "format": "webp",
+      "path": "female/hair/high_bun_red.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "747d00304a033a2e5231bc6b80f97161fb0a529cf0bce78f907ef309dfbf9663"
+    },
+    {
+      "id": "female.hair.high_bun_silver.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "high_bun_silver",
+      "format": "png",
+      "path": "female/hair/high_bun_silver.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "cdb5c26c61702839f0e575257657e77bd28aaaa44c6a52bbd23e82d83c4181ca"
+    },
+    {
+      "id": "female.hair.high_bun_silver.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "high_bun_silver",
+      "format": "webp",
+      "path": "female/hair/high_bun_silver.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "98dc355cd47e95e9996aee0029b7e1d1ee615788079594d3dd702bdf2fee77a2"
+    },
+    {
+      "id": "female.hair.side_braid_black.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "side_braid_black",
+      "format": "png",
+      "path": "female/hair/side_braid_black.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8015534a2a08e989856457f43db5323308ce23cd6b9f983bbbf7eb4868d7da43"
+    },
+    {
+      "id": "female.hair.side_braid_black.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "side_braid_black",
+      "format": "webp",
+      "path": "female/hair/side_braid_black.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "6cc62c650481366843221d2bc140047c4262a1d425bf8d5c7991a7547d333f86"
+    },
+    {
+      "id": "female.hair.side_braid_dark_brown.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "side_braid_dark_brown",
+      "format": "png",
+      "path": "female/hair/side_braid_dark_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "6c9ee222adbf17d594cd3ca25278c92ad3f282625bb972032a9396f084a1655a"
+    },
+    {
+      "id": "female.hair.side_braid_dark_brown.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "side_braid_dark_brown",
+      "format": "webp",
+      "path": "female/hair/side_braid_dark_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "89540110b78847ef1928d0cec982de4d1650d2997d4a0c095c5264476239f600"
+    },
+    {
+      "id": "female.hair.side_braid_chestnut.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "side_braid_chestnut",
+      "format": "png",
+      "path": "female/hair/side_braid_chestnut.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "3d6b9bf70538b56500fc7c73f8f8d25371933e36c510fc3a882698abf499f26f"
+    },
+    {
+      "id": "female.hair.side_braid_chestnut.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "side_braid_chestnut",
+      "format": "webp",
+      "path": "female/hair/side_braid_chestnut.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "38c36fcef00c9576eead926810ea37b71f7c6571b6eabe7dfb5b370d35d274c7"
+    },
+    {
+      "id": "female.hair.side_braid_blonde.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "side_braid_blonde",
+      "format": "png",
+      "path": "female/hair/side_braid_blonde.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e5e34f178ea908455fbbbc50b75f618160651a3cf035cfd3d5ef12648cb74453"
+    },
+    {
+      "id": "female.hair.side_braid_blonde.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "side_braid_blonde",
+      "format": "webp",
+      "path": "female/hair/side_braid_blonde.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "c12fa2f20bc6c277b16faf7d4726395ade9a69146bd23d52735850622e2da473"
+    },
+    {
+      "id": "female.hair.side_braid_red.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "side_braid_red",
+      "format": "png",
+      "path": "female/hair/side_braid_red.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "113952129892aeb66b6cb130eff13b1091d47cc2a1c153ecf11f6c2f39a3fb03"
+    },
+    {
+      "id": "female.hair.side_braid_red.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "side_braid_red",
+      "format": "webp",
+      "path": "female/hair/side_braid_red.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "55e9aaea75b461e42e7fa72298384cb1ef291d9c7e2532df56a3cca35a39545c"
+    },
+    {
+      "id": "female.hair.side_braid_silver.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "side_braid_silver",
+      "format": "png",
+      "path": "female/hair/side_braid_silver.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "dffc06dc841da3ad42e0aa7eb5afa2fff0af200651692b0c4e75e874e1db6bad"
+    },
+    {
+      "id": "female.hair.side_braid_silver.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "side_braid_silver",
+      "format": "webp",
+      "path": "female/hair/side_braid_silver.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "5e7a1cc4d25ae0fa6f7f59db84207515e04b1741d1e2a58f1874f955aa565da9"
+    },
+    {
+      "id": "male.headwear.white_classic_cap.png",
+      "gender": "male",
+      "slot": "headwear",
+      "name": "white_classic_cap",
+      "format": "png",
+      "path": "male/headwear/white_classic_cap.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "d37c5f474bb770423d712a53adc5cfe58a6e5679e3e68f67d53df76f6f605dbd"
+    },
+    {
+      "id": "male.headwear.white_classic_cap.webp",
+      "gender": "male",
+      "slot": "headwear",
+      "name": "white_classic_cap",
+      "format": "webp",
+      "path": "male/headwear/white_classic_cap.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a6983b9e012dc4641d4934a0019967312d4ad7c36f6c888ce74dce84f12abfa2"
+    },
+    {
+      "id": "male.headwear.red_knit_beanie.png",
+      "gender": "male",
+      "slot": "headwear",
+      "name": "red_knit_beanie",
+      "format": "png",
+      "path": "male/headwear/red_knit_beanie.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a832a4d6fc029869bfe0f9437d7ad72661da53dbc84bbeb5f1a6d77b3c5dd440"
+    },
+    {
+      "id": "male.headwear.red_knit_beanie.webp",
+      "gender": "male",
+      "slot": "headwear",
+      "name": "red_knit_beanie",
+      "format": "webp",
+      "path": "male/headwear/red_knit_beanie.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "6962acbf8def7e15625097441ce4320a3422dca393da878118e96951e0fce8bd"
+    },
+    {
+      "id": "male.top.black_performance_tank.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "black_performance_tank",
+      "format": "png",
+      "path": "male/top/black_performance_tank.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "3610276642382e611ac7512438960d8e93d4722af2b3ff6c2592c33b5d697deb"
+    },
+    {
+      "id": "male.top.black_performance_tank.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "black_performance_tank",
+      "format": "webp",
+      "path": "male/top/black_performance_tank.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "00b5501b1bd5986dcfd0c7ef3bcb50d98dd5cb5eced128ea7a295fcb8f7ddc2d"
+    },
+    {
+      "id": "male.top.orange_training_tee.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "orange_training_tee",
+      "format": "png",
+      "path": "male/top/orange_training_tee.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "878298d122410ffbec7130537fb23d5a846ca2057a68173cde556e243bf05421"
+    },
+    {
+      "id": "male.top.orange_training_tee.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "orange_training_tee",
+      "format": "webp",
+      "path": "male/top/orange_training_tee.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "c66ee165ae1c3d5289a6df5bf0877dfb0446230a20e676e31da4e6cfb27d4b25"
+    },
+    {
+      "id": "male.top.charcoal_zip_hoodie.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "charcoal_zip_hoodie",
+      "format": "png",
+      "path": "male/top/charcoal_zip_hoodie.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "4ffd6b2ace927578a0b6c4a6ee3daeb63d21883f7460b09410bccf428a0eef39"
+    },
+    {
+      "id": "male.top.charcoal_zip_hoodie.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "charcoal_zip_hoodie",
+      "format": "webp",
+      "path": "male/top/charcoal_zip_hoodie.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "9cf8d94e7555dafbfdf0d7baea1078db617acf65670af4a3aa09d2af0fa66848"
+    },
+    {
+      "id": "male.top.orange_pullover_hoodie.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "orange_pullover_hoodie",
+      "format": "png",
+      "path": "male/top/orange_pullover_hoodie.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "37033a3d183f3968cea7f5a045b66e0d4a02ba3f08d34695a77721b6f156be5c"
+    },
+    {
+      "id": "male.top.orange_pullover_hoodie.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "orange_pullover_hoodie",
+      "format": "webp",
+      "path": "male/top/orange_pullover_hoodie.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "428ad9f4374590eba1273d1232fbecac73035abd57a3705e02b0189127fd5cdd"
+    },
+    {
+      "id": "male.top.red_pullover_hoodie.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "red_pullover_hoodie",
+      "format": "png",
+      "path": "male/top/red_pullover_hoodie.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "7657c4bae89284a2b18fa90dac3c2d7550bce8b8bfdaa533a847172b101af459"
+    },
+    {
+      "id": "male.top.red_pullover_hoodie.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "red_pullover_hoodie",
+      "format": "webp",
+      "path": "male/top/red_pullover_hoodie.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "afb118a9c152b412c6bb6d7201004d988dd73e7cb857b4f05187d090da645d4b"
+    },
+    {
+      "id": "male.top.inferno_flame_tee.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "inferno_flame_tee",
+      "format": "png",
+      "path": "male/top/inferno_flame_tee.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "2e1f4b564e2cb95f64b182ec08b8429218015105faa1e48be421633a451d8b23"
+    },
+    {
+      "id": "male.top.inferno_flame_tee.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "inferno_flame_tee",
+      "format": "webp",
+      "path": "male/top/inferno_flame_tee.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "86031ed3937b3c067757b33f242775aba9ee0e9d850a60a7c87da315c60dfb8b"
+    },
+    {
+      "id": "male.bottom.gray_training_shorts.png",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "gray_training_shorts",
+      "format": "png",
+      "path": "male/bottom/gray_training_shorts.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f372240d697d1a2fe00d0d4fbcbb7edc654a8b2c308ee23aa5047177bb8b2e3c"
+    },
+    {
+      "id": "male.bottom.gray_training_shorts.webp",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "gray_training_shorts",
+      "format": "webp",
+      "path": "male/bottom/gray_training_shorts.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "4b072b4613431e37617f1adf11dd97b027755a49bc90910ee077f7136bf7aa29"
+    },
+    {
+      "id": "male.bottom.red_training_shorts.png",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "red_training_shorts",
+      "format": "png",
+      "path": "male/bottom/red_training_shorts.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "2221156293900c394dcd553ec30ebd8f78114fa64ef0dfa0f3f56a3d9c3d324e"
+    },
+    {
+      "id": "male.bottom.red_training_shorts.webp",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "red_training_shorts",
+      "format": "webp",
+      "path": "male/bottom/red_training_shorts.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "09f9d813f1ba85c0d6ada332bce8df6ceb9e341fe1ce03c82261e95a6e772e4c"
+    },
+    {
+      "id": "male.bottom.black_elite_joggers.png",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "black_elite_joggers",
+      "format": "png",
+      "path": "male/bottom/black_elite_joggers.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "c31c06347a63eded0fcd1b3601927ef30912c11065680891419054376427f3e5"
+    },
+    {
+      "id": "male.bottom.black_elite_joggers.webp",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "black_elite_joggers",
+      "format": "webp",
+      "path": "male/bottom/black_elite_joggers.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "eddd979118e71750a86d5b966704803aa9cfb1aa2bdcf18a5eb978b34b63164b"
+    },
+    {
+      "id": "male.bottom.camo_cargo_pants.png",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "camo_cargo_pants",
+      "format": "png",
+      "path": "male/bottom/camo_cargo_pants.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "d6dd15ad2b6afa94c7360f6bac7a705cb18141dda01220c0d16912ca778b875f"
+    },
+    {
+      "id": "male.bottom.camo_cargo_pants.webp",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "camo_cargo_pants",
+      "format": "webp",
+      "path": "male/bottom/camo_cargo_pants.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f9a59f67e6413a4b26ecb0741b6176bf14c619a14d771fd867b72d9019b63d93"
+    },
+    {
+      "id": "male.shoes.white_sprint_sneakers.png",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "white_sprint_sneakers",
+      "format": "png",
+      "path": "male/shoes/white_sprint_sneakers.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "4ff6679a8e5146c7b632ca4e59cf8bfb1fc9bc100b9b71a3a04d0ffa4f015123"
+    },
+    {
+      "id": "male.shoes.white_sprint_sneakers.webp",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "white_sprint_sneakers",
+      "format": "webp",
+      "path": "male/shoes/white_sprint_sneakers.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e0484723a8280832fb18c9ec2f6978b3327e652682895001bf995e0149eedea5"
+    },
+    {
+      "id": "male.shoes.red_power_sneakers.png",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "red_power_sneakers",
+      "format": "png",
+      "path": "male/shoes/red_power_sneakers.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ce68d948bf0a7dd82868009fbceba8529332df128c021cdff7859052757ad6e6"
+    },
+    {
+      "id": "male.shoes.red_power_sneakers.webp",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "red_power_sneakers",
+      "format": "webp",
+      "path": "male/shoes/red_power_sneakers.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "96ccbc446172d48d025c19051e1b9bb69c5c6e60f1b59e41db312a1a4246d5be"
+    },
+    {
+      "id": "male.shoes.black_shadow_hightops.png",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "black_shadow_hightops",
+      "format": "png",
+      "path": "male/shoes/black_shadow_hightops.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "29abe3d3846c679121483f2ad4db9623347fecc6d46307e73ae7f827a707526c"
+    },
+    {
+      "id": "male.shoes.black_shadow_hightops.webp",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "black_shadow_hightops",
+      "format": "webp",
+      "path": "male/shoes/black_shadow_hightops.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "66978ca47eb75822f8c90d498725cb1bb8535daea48dd8cb12354f620c100dea"
+    },
+    {
+      "id": "male.shoes.orange_utility_boots.png",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "orange_utility_boots",
+      "format": "png",
+      "path": "male/shoes/orange_utility_boots.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "174dc0015e481dcc56782f79efec10ef5e621d4b32e92bf3488b5778db95e62c"
+    },
+    {
+      "id": "male.shoes.orange_utility_boots.webp",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "orange_utility_boots",
+      "format": "webp",
+      "path": "male/shoes/orange_utility_boots.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "195e459268c4971dcd6c2f7d85e6d0030181990e76370aee714c82b68822719f"
+    },
+    {
+      "id": "male.accessories.black_utility_belt.png",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "black_utility_belt",
+      "format": "png",
+      "path": "male/accessories/black_utility_belt.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "98fb759d5c3d9f3523fc66ab115b30383dda0e84b6b9b77eadc13e2630756fee"
+    },
+    {
+      "id": "male.accessories.black_utility_belt.webp",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "black_utility_belt",
+      "format": "webp",
+      "path": "male/accessories/black_utility_belt.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e6f6d4e99dd3467ca6a43a67eb46a6f1a1904d48c98a36e14c6a5ab9882b75e4"
+    },
+    {
+      "id": "male.accessories.gold_power_chain.png",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "gold_power_chain",
+      "format": "png",
+      "path": "male/accessories/gold_power_chain.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "3dce4d63d8ce7ac13dc7279e21a4c42d900de28e7ba42da4ac7b40e87c6d4cf9"
+    },
+    {
+      "id": "male.accessories.gold_power_chain.webp",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "gold_power_chain",
+      "format": "webp",
+      "path": "male/accessories/gold_power_chain.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "da88b9fe82bf0c818013c7cf9e3db495a7ea168ef307a66467d345e7d565b211"
+    },
+    {
+      "id": "male.accessories.compact_dumbbells.png",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "compact_dumbbells",
+      "format": "png",
+      "path": "male/accessories/compact_dumbbells.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "d1e3bc55ce1181438427118763b19ee1f7087899f30d751a6fdd160f42ad7d69"
+    },
+    {
+      "id": "male.accessories.compact_dumbbells.webp",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "compact_dumbbells",
+      "format": "webp",
+      "path": "male/accessories/compact_dumbbells.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "216ba530dc5d446ede083fd77d81cf9fdcd4ea3d04ffdaa9909b40175f84929b"
+    },
+    {
+      "id": "male.back.utility_backpack.png",
+      "gender": "male",
+      "slot": "back",
+      "name": "utility_backpack",
+      "format": "png",
+      "path": "male/back/utility_backpack.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "6741b8f4907dea8d6a4d0410adf0efb92dd9eacd0a5088ed575250b9b8bb5a8e"
+    },
+    {
+      "id": "male.back.utility_backpack.webp",
+      "gender": "male",
+      "slot": "back",
+      "name": "utility_backpack",
+      "format": "webp",
+      "path": "male/back/utility_backpack.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "abdfc2cafa3c74414aae7f5471171470a1556bc72f692e337dc9e253507ccc28"
+    },
+    {
+      "id": "female.headwear.white_classic_cap.png",
+      "gender": "female",
+      "slot": "headwear",
+      "name": "white_classic_cap",
+      "format": "png",
+      "path": "female/headwear/white_classic_cap.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "c1626184dd6861df4164ee993e1f54ab36a789fb6c30c82a9a0ea7b1c5e3b4ad"
+    },
+    {
+      "id": "female.headwear.white_classic_cap.webp",
+      "gender": "female",
+      "slot": "headwear",
+      "name": "white_classic_cap",
+      "format": "webp",
+      "path": "female/headwear/white_classic_cap.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "feed1cf3498b4c62a302705bbc6c7d44fe8b7c37218e474cd5d4d759ed570c8f"
+    },
+    {
+      "id": "female.headwear.red_knit_beanie.png",
+      "gender": "female",
+      "slot": "headwear",
+      "name": "red_knit_beanie",
+      "format": "png",
+      "path": "female/headwear/red_knit_beanie.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a89833f42fce03114fb1fa9a8358a66d0cf27b5a4fae5126a3ff732017273e41"
+    },
+    {
+      "id": "female.headwear.red_knit_beanie.webp",
+      "gender": "female",
+      "slot": "headwear",
+      "name": "red_knit_beanie",
+      "format": "webp",
+      "path": "female/headwear/red_knit_beanie.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b783a3a4af1af386ebed68821e2a3c00098830f6b87a51b4ab72cdc0e1e680d8"
+    },
+    {
+      "id": "female.top.black_performance_tank.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "black_performance_tank",
+      "format": "png",
+      "path": "female/top/black_performance_tank.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "6e68a2b45ffdbb5b8b3d42ea58a513bf443d4701ec31c3aa88adbdf680f7aa23"
+    },
+    {
+      "id": "female.top.black_performance_tank.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "black_performance_tank",
+      "format": "webp",
+      "path": "female/top/black_performance_tank.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "6965d0a8a0620115cf3e1fed60de936ac26a6aa78ca8e64b91a4a7be2bcf2b81"
+    },
+    {
+      "id": "female.top.orange_training_tee.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "orange_training_tee",
+      "format": "png",
+      "path": "female/top/orange_training_tee.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e753cc6edf5616cd5197754a041f7e9bc4d8105d19a4f109ccfa9774f337a37c"
+    },
+    {
+      "id": "female.top.orange_training_tee.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "orange_training_tee",
+      "format": "webp",
+      "path": "female/top/orange_training_tee.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e2c7bd4f4634366c191e7125f7eaac136714da9d2f61346985f702209ed4bf95"
+    },
+    {
+      "id": "female.top.charcoal_zip_hoodie.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "charcoal_zip_hoodie",
+      "format": "png",
+      "path": "female/top/charcoal_zip_hoodie.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "cfec8f693f6894734ea9a00a73db74df24f813ea79736d7345f7985efe38798f"
+    },
+    {
+      "id": "female.top.charcoal_zip_hoodie.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "charcoal_zip_hoodie",
+      "format": "webp",
+      "path": "female/top/charcoal_zip_hoodie.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1731420d604079999b8c34743d2509b2c22608d1fb7aa0d7b7769102832a86db"
+    },
+    {
+      "id": "female.top.orange_pullover_hoodie.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "orange_pullover_hoodie",
+      "format": "png",
+      "path": "female/top/orange_pullover_hoodie.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f9627b74be019f43b4dd44815bc3144013777e82de135ee8d12621a6a1a2fda2"
+    },
+    {
+      "id": "female.top.orange_pullover_hoodie.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "orange_pullover_hoodie",
+      "format": "webp",
+      "path": "female/top/orange_pullover_hoodie.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "fd1c08fd3177e1ea3486086523c7a1558ec123622e4b6108d4189d2140404322"
+    },
+    {
+      "id": "female.top.red_pullover_hoodie.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "red_pullover_hoodie",
+      "format": "png",
+      "path": "female/top/red_pullover_hoodie.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "2fa924ef415d0750a5e176915c776662b91b680bf6e66413b3d30f14ece8938c"
+    },
+    {
+      "id": "female.top.red_pullover_hoodie.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "red_pullover_hoodie",
+      "format": "webp",
+      "path": "female/top/red_pullover_hoodie.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "d623f4877081aa3c889e722d1ce859bb5b579d6cd2911a3970fa73c045ea62a6"
+    },
+    {
+      "id": "female.top.inferno_flame_tee.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "inferno_flame_tee",
+      "format": "png",
+      "path": "female/top/inferno_flame_tee.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "dc1a6ef02adb34b5e0716e729ec49ef3f33202e7fcef17c2c8d31302c5cfd9c3"
+    },
+    {
+      "id": "female.top.inferno_flame_tee.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "inferno_flame_tee",
+      "format": "webp",
+      "path": "female/top/inferno_flame_tee.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a7611d2a2ecc9d8bd0e8ea84f985f3c5232cd347773781b6631e899dd5e7c5c8"
+    },
+    {
+      "id": "female.bottom.gray_training_shorts.png",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "gray_training_shorts",
+      "format": "png",
+      "path": "female/bottom/gray_training_shorts.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e313a71ed3e6849f8faf0c2908fb6df55cd8c80dc050a6fad829f140ba50a94f"
+    },
+    {
+      "id": "female.bottom.gray_training_shorts.webp",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "gray_training_shorts",
+      "format": "webp",
+      "path": "female/bottom/gray_training_shorts.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a109732be5e9144cede9d1358b125de124d0333f0a83ca2e0b1d5ad72db4106f"
+    },
+    {
+      "id": "female.bottom.red_training_shorts.png",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "red_training_shorts",
+      "format": "png",
+      "path": "female/bottom/red_training_shorts.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "846c57674cd166ae9f68c5a78c38cbc9a4b22b3b7dc2542e9843430f322d473e"
+    },
+    {
+      "id": "female.bottom.red_training_shorts.webp",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "red_training_shorts",
+      "format": "webp",
+      "path": "female/bottom/red_training_shorts.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "fc66195d121a1c6b1e1a39452a7a7fd11c074aec491f127cd2faedff5424ad28"
+    },
+    {
+      "id": "female.bottom.black_elite_joggers.png",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "black_elite_joggers",
+      "format": "png",
+      "path": "female/bottom/black_elite_joggers.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a0d64a250f975ffa7ca2689682b1eb597d1020683ce141b4e287c7c03ad88391"
+    },
+    {
+      "id": "female.bottom.black_elite_joggers.webp",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "black_elite_joggers",
+      "format": "webp",
+      "path": "female/bottom/black_elite_joggers.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "c00d70d4e75f186159162f2840f341efb93607aaab823633bf73496f7401dc4e"
+    },
+    {
+      "id": "female.bottom.camo_cargo_pants.png",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "camo_cargo_pants",
+      "format": "png",
+      "path": "female/bottom/camo_cargo_pants.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "1fe5909932534835276c1e9ceac1816498e0931ce12244440182c8f6295483ae"
+    },
+    {
+      "id": "female.bottom.camo_cargo_pants.webp",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "camo_cargo_pants",
+      "format": "webp",
+      "path": "female/bottom/camo_cargo_pants.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "5941f1fce15b45fc2e789505452ade5bd7261a18602479c3317151d46836ec43"
+    },
+    {
+      "id": "female.shoes.white_sprint_sneakers.png",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "white_sprint_sneakers",
+      "format": "png",
+      "path": "female/shoes/white_sprint_sneakers.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "3f61dfda6ff56d0fd1406ef0eef1d3a77a40619ed99b5bd7e4b13d10edfd25df"
+    },
+    {
+      "id": "female.shoes.white_sprint_sneakers.webp",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "white_sprint_sneakers",
+      "format": "webp",
+      "path": "female/shoes/white_sprint_sneakers.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f2bc7aeed1412c6e7659d8303476fe3fc56b229ac9199e432b60a484c537bfbc"
+    },
+    {
+      "id": "female.shoes.red_power_sneakers.png",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "red_power_sneakers",
+      "format": "png",
+      "path": "female/shoes/red_power_sneakers.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b0a2248a0b34490f429c1354991dbd5733a6c264006957c289941efe8de76451"
+    },
+    {
+      "id": "female.shoes.red_power_sneakers.webp",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "red_power_sneakers",
+      "format": "webp",
+      "path": "female/shoes/red_power_sneakers.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "17ce9961c633eae1356c724f8ce7a3cb5fc9d39456100b1763fbbd272e06e8dd"
+    },
+    {
+      "id": "female.shoes.black_shadow_hightops.png",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "black_shadow_hightops",
+      "format": "png",
+      "path": "female/shoes/black_shadow_hightops.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "78dd42e7ef2430d7c067ccb8543583eeee17974e03a2d48f7cffd5b5636e00e6"
+    },
+    {
+      "id": "female.shoes.black_shadow_hightops.webp",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "black_shadow_hightops",
+      "format": "webp",
+      "path": "female/shoes/black_shadow_hightops.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ff671a11c8c73a14fa9e19db53666289a5366a264619812e6e01844fd5e8113e"
+    },
+    {
+      "id": "female.shoes.orange_utility_boots.png",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "orange_utility_boots",
+      "format": "png",
+      "path": "female/shoes/orange_utility_boots.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ebf207bf1d143d476c95c47b3435d1e594022ee25eb02fef0b6f4608086c8228"
+    },
+    {
+      "id": "female.shoes.orange_utility_boots.webp",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "orange_utility_boots",
+      "format": "webp",
+      "path": "female/shoes/orange_utility_boots.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "c7877dd46f01c0b7884444a2d8f796b992d6bf3962d26f3f97a94ded70c54b80"
+    },
+    {
+      "id": "female.accessories.black_utility_belt.png",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "black_utility_belt",
+      "format": "png",
+      "path": "female/accessories/black_utility_belt.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "89b958eed0dadb92164f0f75346142cf88993d228627af339f182f92a0e3f1eb"
+    },
+    {
+      "id": "female.accessories.black_utility_belt.webp",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "black_utility_belt",
+      "format": "webp",
+      "path": "female/accessories/black_utility_belt.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "5b598e4581d4b25613c0d19c9239bf9c80e25284e155cfa53b199fb0a7f34f69"
+    },
+    {
+      "id": "female.accessories.gold_power_chain.png",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "gold_power_chain",
+      "format": "png",
+      "path": "female/accessories/gold_power_chain.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ea703f2d82d6a6f673f372aae8931e910b9fc804c7d7f1c4fc202416544ca66d"
+    },
+    {
+      "id": "female.accessories.gold_power_chain.webp",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "gold_power_chain",
+      "format": "webp",
+      "path": "female/accessories/gold_power_chain.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "9631fb74f0f10c587e935fe786e5a0379861d6f388d43b797e14a37769030922"
+    },
+    {
+      "id": "female.accessories.compact_dumbbells.png",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "compact_dumbbells",
+      "format": "png",
+      "path": "female/accessories/compact_dumbbells.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "0dc0bfa2f2a8a56c713df810a2fcb628a3623a556ca35cbd28a0c8b4f9506303"
+    },
+    {
+      "id": "female.accessories.compact_dumbbells.webp",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "compact_dumbbells",
+      "format": "webp",
+      "path": "female/accessories/compact_dumbbells.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "7a542092f8f1335b43504b3324745863d668f0f1b63348d36189c4879dd5fcb4"
+    },
+    {
+      "id": "female.back.utility_backpack.png",
+      "gender": "female",
+      "slot": "back",
+      "name": "utility_backpack",
+      "format": "png",
+      "path": "female/back/utility_backpack.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "cc6c15cb368a3aeed7fc734ec705a5e7848d4ac73ad8b676ae0639c9fed7e728"
+    },
+    {
+      "id": "female.back.utility_backpack.webp",
+      "gender": "female",
+      "slot": "back",
+      "name": "utility_backpack",
+      "format": "webp",
+      "path": "female/back/utility_backpack.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "887efabfb117664d9629e1a1188b089292fba1ceb7c8fdc220199326a79613ee"
+    }
+  ]
+}

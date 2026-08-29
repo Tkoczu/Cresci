@@ -1,16 +1,16 @@
 ﻿{
-  "name": "cresci",
-  "version": "1.0.1",
-  "private": true,
-  "description": "CRESCI - self-hosted gym progress tracker",
-  "type": "module",
-  "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js",
-    "test": "node --test"
-  },
-  "engines": {
-    "node": ">=22.5"
-  }
+    "name":  "cresci",
+    "version":  "1.0.2",
+    "private":  true,
+    "description":  "CRESCI - self-hosted gym progress tracker",
+    "type":  "module",
+    "scripts":  {
+                    "start":  "node server.js",
+                    "dev":  "node --watch server.js",
+                    "test":  "node --test"
+                },
+    "engines":  {
+                    "node":  "\u003e=22.5"
+                }
 }
 

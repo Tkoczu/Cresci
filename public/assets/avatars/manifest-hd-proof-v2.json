@@ -1,0 +1,40 @@
+{
+  "version": "hd-proof-v2",
+  "packId": "cresci-avatar-hd-proof-v2",
+  "rendererMode": "master",
+  "format": "png",
+  "canvas": { "width": 512, "height": 768 },
+  "displayCanvas": { "width": 256, "height": 384 },
+  "anchor": { "x": 256, "y": 758 },
+  "rendering": "pixelated",
+  "root": "/assets/avatars/hd-proof-v2",
+  "creatorCatalog": "/assets/avatars/final-v21/creator/catalog.json",
+  "masters": {
+    "male": "male/locked_dressed_master.png",
+    "female": "female/locked_dressed_master.png"
+  },
+  "fallbackManifest": "/assets/avatars/manifest-v21.json",
+  "layerOrder": ["back", "body", "eyes", "hair", "bottom", "top", "shoes", "headwear", "accessories"],
+  "bases": ["female", "male"],
+  "offsets": { "male": { "hair": {
+    "field": "hairstyle",
+    "yPercentByValue": {
+      "short_textured": -2.083333,
+      "spiky": -0.78125,
+      "side_swept": -1.5625,
+      "buzz_cut": -2.083333,
+      "undercut": -2.083333
+    }
+  } } },
+  "layers": {
+    "back": { "field": "back_style", "empty": "none", "passthrough": true },
+    "body": { "creatorVariant": "body" },
+    "eyes": { "creatorVariant": "eyes" },
+    "hair": { "creatorVariant": "hair" },
+    "bottom": { "field": "bottom_style", "empty": "none", "passthrough": true, "values": { "training_shorts": "cresci_training_bottom", "cargo_shorts": "camo_cargo_pants", "power_joggers": "black_elite_joggers", "ember_elite_bottom": "ember_elite_bottom", "neon_night_bottom": "neon_night_bottom", "royal_crest_bottom": "royal_crest_bottom" } },
+    "top": { "field": "top_style", "empty": "none", "passthrough": true, "values": { "cresci_tank": "cresci_training_top", "orange_hoodie": "orange_pullover_hoodie", "power_crop": "black_performance_tank", "ember_elite_top": "ember_elite_top", "neon_night_top": "neon_night_top", "royal_crest_top": "royal_crest_top" } },
+    "shoes": { "field": "shoes_style", "empty": "none", "passthrough": true, "values": { "trainers": "cresci_runners", "high_tops": "black_shadow_hightops", "orange_lifters": "orange_utility_boots", "ember_elite_shoes": "ember_elite_shoes", "neon_night_shoes": "neon_night_shoes", "royal_crest_shoes": "royal_crest_shoes" } },
+    "headwear": { "field": "headwear", "empty": "none", "passthrough": true, "values": { "cap": "cresci_cap", "beanie": "red_knit_beanie", "ember_elite_headwear": "ember_elite_headwear", "neon_night_headwear": "neon_night_headwear", "royal_crest_headwear": "royal_crest_headwear" } },
+    "accessories": { "field": "accessory", "empty": "none", "passthrough": true, "values": { "wrist_wraps": "cresci_wristbands", "lifting_belt": "black_utility_belt", "gym_chain": "gold_power_chain", "ember_elite_accessories": "ember_elite_accessories", "neon_night_accessories": "neon_night_accessories", "royal_crest_accessories": "royal_crest_accessories" } }
+  }
+}

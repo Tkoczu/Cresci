@@ -1,29 +1,16 @@
-# CRESCI GAME — finalne sprite'y v8
+# CRESCI Avatar v4-production
 
-Renderer używa niezmodyfikowanych assetów z dostarczonej paczki `cresci-avatar-assets-v8.zip`. Paczka deklaruje źródłowy canvas **256 × 384 px** i punkt zakotwiczenia `(128, 379)`. Wymiar 128 × 192 jest rozmiarem prezentacji w UI; pliki źródłowe nie zostały pomniejszone ani przetworzone.
+Jedynym aktywnym źródłem grafik jest `v4-production/`, rozpakowane bez modyfikacji z `cresci-avatar-hd-creator-shop-v4-production.zip`.
 
-## Struktura
+- `v4-production/manifest.json` — 996 assetów, hashe, canvasy, kotwice i kolejność warstw,
+- `v4-production/creator/catalog.json` — warianty skóry, oczu i włosów,
+- `v4-production/shop/catalog.json` — SKU i grafiki produktów,
+- `runtime` 512 × 768 — główny ekran Postać,
+- `compact` 256 × 384 — kreator, inventory, sklep i miniatury,
+- `master` 1024 × 1536 — wyłącznie materiał źródłowy.
 
-```text
-final-v8/
-  female/{body,eyes,hair,bottom,top,shoes,headwear,accessories}/
-  male/{body,eyes,hair,bottom,top,shoes,headwear,accessories}/
-  source-manifest.json
-  README.md
-manifest.json
-```
+Renderer wybiera PNG i dodaje `?v=4` do każdego żądania. Wszystkie warstwy jednego avatara pochodzą z tej samej rozdzielczości, zaczynają się w `(0,0)` i są nakładane w kolejności:
 
-PNG są formatem kanonicznym. Każda warstwa ma ten sam canvas, pozycję i skalę. Renderer nakłada je zawsze w kolejności:
+`back → body → eyes → hair → bottom → top → shoes → headwear → accessories`
 
-`body → eyes → hair → bottom → top → shoes → headwear → accessories`
-
-CSS używa `image-rendering: pixelated` i nie skaluje warstw niezależnie.
-
-## Dodawanie nowego itemu
-
-1. Dodaj dostarczony sprite o identycznym canvasie do właściwego slotu osobno dla `female` i `male`, zachowując tę samą nazwę pliku.
-2. Dodaj item do `src/game-items.js` z poprawnym `slot` oraz `spriteName`.
-3. Dodaj mapowanie `key → spriteName` do właściwej warstwy w `manifest.json`.
-4. Uruchom `npm test`; test integralności kontroluje canvas, kolejność warstw i niezmienione pliki finalnej paczki.
-
-Nie należy przycinać, przeskalowywać, recolorować ani osobno pozycjonować pojedynczej warstwy.
+Nie stosujemy osobnych przesunięć, skalowania warstw, filtrów, kadrowania ani wygładzania. Poprzednie katalogi mogą pozostać na dysku jako nieaktywne archiwum, ale kod aplikacji, aktywny manifest i żądania HTTP nie odwołują się do nich.

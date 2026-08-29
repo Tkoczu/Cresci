@@ -1,0 +1,1262 @@
+{
+  "schemaVersion": "2.0.0",
+  "canvas": {
+    "width": 256,
+    "height": 384
+  },
+  "defaults": {
+    "male": {
+      "skin": "fair",
+      "eyes": "brown",
+      "hairStyle": "short_textured",
+      "hairColor": "dark_brown"
+    },
+    "female": {
+      "skin": "fair",
+      "eyes": "brown",
+      "hairStyle": "ponytail",
+      "hairColor": "dark_brown"
+    }
+  },
+  "skinTones": [
+    {
+      "id": "porcelain",
+      "displayName": "Porcelain",
+      "swatch": "#FFCA9E"
+    },
+    {
+      "id": "fair",
+      "displayName": "Fair",
+      "swatch": "#EEA979"
+    },
+    {
+      "id": "tan",
+      "displayName": "Tan",
+      "swatch": "#CF8552"
+    },
+    {
+      "id": "olive",
+      "displayName": "Olive",
+      "swatch": "#AE6940"
+    },
+    {
+      "id": "brown",
+      "displayName": "Brown",
+      "swatch": "#804C2F"
+    },
+    {
+      "id": "deep",
+      "displayName": "Deep",
+      "swatch": "#543222"
+    }
+  ],
+  "eyeColors": [
+    {
+      "id": "green",
+      "displayName": "Green",
+      "swatch": "#41B856"
+    },
+    {
+      "id": "blue",
+      "displayName": "Blue",
+      "swatch": "#3797EC"
+    },
+    {
+      "id": "brown",
+      "displayName": "Brown",
+      "swatch": "#8E4C26"
+    },
+    {
+      "id": "gray",
+      "displayName": "Gray",
+      "swatch": "#96A3B0"
+    }
+  ],
+  "hairColors": [
+    {
+      "id": "black",
+      "displayName": "Black",
+      "swatch": "#302B2A"
+    },
+    {
+      "id": "dark_brown",
+      "displayName": "Dark Brown",
+      "swatch": "#5B311C"
+    },
+    {
+      "id": "chestnut",
+      "displayName": "Chestnut",
+      "swatch": "#945027"
+    },
+    {
+      "id": "blonde",
+      "displayName": "Blonde",
+      "swatch": "#E1A648"
+    },
+    {
+      "id": "red",
+      "displayName": "Red",
+      "swatch": "#A63022"
+    },
+    {
+      "id": "silver",
+      "displayName": "Silver",
+      "swatch": "#ACB4B9"
+    }
+  ],
+  "hairStyles": {
+    "male": [
+      {
+        "id": "short_textured",
+        "displayName": "Short Textured"
+      },
+      {
+        "id": "spiky",
+        "displayName": "Spiky"
+      },
+      {
+        "id": "side_swept",
+        "displayName": "Side Swept"
+      },
+      {
+        "id": "buzz_cut",
+        "displayName": "Buzz Cut"
+      },
+      {
+        "id": "undercut",
+        "displayName": "Undercut"
+      }
+    ],
+    "female": [
+      {
+        "id": "ponytail",
+        "displayName": "Ponytail"
+      },
+      {
+        "id": "bob",
+        "displayName": "Bob"
+      },
+      {
+        "id": "long",
+        "displayName": "Long"
+      },
+      {
+        "id": "high_bun",
+        "displayName": "High Bun"
+      },
+      {
+        "id": "side_braid",
+        "displayName": "Side Braid"
+      }
+    ]
+  },
+  "defaultResolution": "runtime",
+  "resolutions": {
+    "master": {
+      "canvas": {
+        "width": 1024,
+        "height": 1536
+      },
+      "anchor": {
+        "x": 512,
+        "y": 1516
+      }
+    },
+    "runtime": {
+      "canvas": {
+        "width": 512,
+        "height": 768
+      },
+      "anchor": {
+        "x": 256,
+        "y": 758
+      }
+    },
+    "compact": {
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      }
+    }
+  },
+  "variantsByResolution": {
+    "master": {
+      "male": {
+        "body": {
+          "porcelain": {
+            "png": "male/master/body/skin_porcelain.png",
+            "webp": "male/master/body/skin_porcelain.webp"
+          },
+          "fair": {
+            "png": "male/master/body/skin_fair.png",
+            "webp": "male/master/body/skin_fair.webp"
+          },
+          "tan": {
+            "png": "male/master/body/skin_tan.png",
+            "webp": "male/master/body/skin_tan.webp"
+          },
+          "olive": {
+            "png": "male/master/body/skin_olive.png",
+            "webp": "male/master/body/skin_olive.webp"
+          },
+          "brown": {
+            "png": "male/master/body/skin_brown.png",
+            "webp": "male/master/body/skin_brown.webp"
+          },
+          "deep": {
+            "png": "male/master/body/skin_deep.png",
+            "webp": "male/master/body/skin_deep.webp"
+          }
+        },
+        "eyes": {
+          "green": {
+            "png": "male/master/eyes/eyes_green.png",
+            "webp": "male/master/eyes/eyes_green.webp"
+          },
+          "blue": {
+            "png": "male/master/eyes/eyes_blue.png",
+            "webp": "male/master/eyes/eyes_blue.webp"
+          },
+          "brown": {
+            "png": "male/master/eyes/eyes_brown.png",
+            "webp": "male/master/eyes/eyes_brown.webp"
+          },
+          "gray": {
+            "png": "male/master/eyes/eyes_gray.png",
+            "webp": "male/master/eyes/eyes_gray.webp"
+          }
+        },
+        "hair": {
+          "short_textured": {
+            "black": {
+              "png": "male/master/hair/short_textured_black.png",
+              "webp": "male/master/hair/short_textured_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/master/hair/short_textured_dark_brown.png",
+              "webp": "male/master/hair/short_textured_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/master/hair/short_textured_chestnut.png",
+              "webp": "male/master/hair/short_textured_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/master/hair/short_textured_blonde.png",
+              "webp": "male/master/hair/short_textured_blonde.webp"
+            },
+            "red": {
+              "png": "male/master/hair/short_textured_red.png",
+              "webp": "male/master/hair/short_textured_red.webp"
+            },
+            "silver": {
+              "png": "male/master/hair/short_textured_silver.png",
+              "webp": "male/master/hair/short_textured_silver.webp"
+            }
+          },
+          "spiky": {
+            "black": {
+              "png": "male/master/hair/spiky_black.png",
+              "webp": "male/master/hair/spiky_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/master/hair/spiky_dark_brown.png",
+              "webp": "male/master/hair/spiky_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/master/hair/spiky_chestnut.png",
+              "webp": "male/master/hair/spiky_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/master/hair/spiky_blonde.png",
+              "webp": "male/master/hair/spiky_blonde.webp"
+            },
+            "red": {
+              "png": "male/master/hair/spiky_red.png",
+              "webp": "male/master/hair/spiky_red.webp"
+            },
+            "silver": {
+              "png": "male/master/hair/spiky_silver.png",
+              "webp": "male/master/hair/spiky_silver.webp"
+            }
+          },
+          "side_swept": {
+            "black": {
+              "png": "male/master/hair/side_swept_black.png",
+              "webp": "male/master/hair/side_swept_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/master/hair/side_swept_dark_brown.png",
+              "webp": "male/master/hair/side_swept_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/master/hair/side_swept_chestnut.png",
+              "webp": "male/master/hair/side_swept_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/master/hair/side_swept_blonde.png",
+              "webp": "male/master/hair/side_swept_blonde.webp"
+            },
+            "red": {
+              "png": "male/master/hair/side_swept_red.png",
+              "webp": "male/master/hair/side_swept_red.webp"
+            },
+            "silver": {
+              "png": "male/master/hair/side_swept_silver.png",
+              "webp": "male/master/hair/side_swept_silver.webp"
+            }
+          },
+          "buzz_cut": {
+            "black": {
+              "png": "male/master/hair/buzz_cut_black.png",
+              "webp": "male/master/hair/buzz_cut_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/master/hair/buzz_cut_dark_brown.png",
+              "webp": "male/master/hair/buzz_cut_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/master/hair/buzz_cut_chestnut.png",
+              "webp": "male/master/hair/buzz_cut_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/master/hair/buzz_cut_blonde.png",
+              "webp": "male/master/hair/buzz_cut_blonde.webp"
+            },
+            "red": {
+              "png": "male/master/hair/buzz_cut_red.png",
+              "webp": "male/master/hair/buzz_cut_red.webp"
+            },
+            "silver": {
+              "png": "male/master/hair/buzz_cut_silver.png",
+              "webp": "male/master/hair/buzz_cut_silver.webp"
+            }
+          },
+          "undercut": {
+            "black": {
+              "png": "male/master/hair/undercut_black.png",
+              "webp": "male/master/hair/undercut_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/master/hair/undercut_dark_brown.png",
+              "webp": "male/master/hair/undercut_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/master/hair/undercut_chestnut.png",
+              "webp": "male/master/hair/undercut_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/master/hair/undercut_blonde.png",
+              "webp": "male/master/hair/undercut_blonde.webp"
+            },
+            "red": {
+              "png": "male/master/hair/undercut_red.png",
+              "webp": "male/master/hair/undercut_red.webp"
+            },
+            "silver": {
+              "png": "male/master/hair/undercut_silver.png",
+              "webp": "male/master/hair/undercut_silver.webp"
+            }
+          }
+        }
+      },
+      "female": {
+        "body": {
+          "porcelain": {
+            "png": "female/master/body/skin_porcelain.png",
+            "webp": "female/master/body/skin_porcelain.webp"
+          },
+          "fair": {
+            "png": "female/master/body/skin_fair.png",
+            "webp": "female/master/body/skin_fair.webp"
+          },
+          "tan": {
+            "png": "female/master/body/skin_tan.png",
+            "webp": "female/master/body/skin_tan.webp"
+          },
+          "olive": {
+            "png": "female/master/body/skin_olive.png",
+            "webp": "female/master/body/skin_olive.webp"
+          },
+          "brown": {
+            "png": "female/master/body/skin_brown.png",
+            "webp": "female/master/body/skin_brown.webp"
+          },
+          "deep": {
+            "png": "female/master/body/skin_deep.png",
+            "webp": "female/master/body/skin_deep.webp"
+          }
+        },
+        "eyes": {
+          "green": {
+            "png": "female/master/eyes/eyes_green.png",
+            "webp": "female/master/eyes/eyes_green.webp"
+          },
+          "blue": {
+            "png": "female/master/eyes/eyes_blue.png",
+            "webp": "female/master/eyes/eyes_blue.webp"
+          },
+          "brown": {
+            "png": "female/master/eyes/eyes_brown.png",
+            "webp": "female/master/eyes/eyes_brown.webp"
+          },
+          "gray": {
+            "png": "female/master/eyes/eyes_gray.png",
+            "webp": "female/master/eyes/eyes_gray.webp"
+          }
+        },
+        "hair": {
+          "ponytail": {
+            "black": {
+              "png": "female/master/hair/ponytail_black.png",
+              "webp": "female/master/hair/ponytail_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/master/hair/ponytail_dark_brown.png",
+              "webp": "female/master/hair/ponytail_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/master/hair/ponytail_chestnut.png",
+              "webp": "female/master/hair/ponytail_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/master/hair/ponytail_blonde.png",
+              "webp": "female/master/hair/ponytail_blonde.webp"
+            },
+            "red": {
+              "png": "female/master/hair/ponytail_red.png",
+              "webp": "female/master/hair/ponytail_red.webp"
+            },
+            "silver": {
+              "png": "female/master/hair/ponytail_silver.png",
+              "webp": "female/master/hair/ponytail_silver.webp"
+            }
+          },
+          "bob": {
+            "black": {
+              "png": "female/master/hair/bob_black.png",
+              "webp": "female/master/hair/bob_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/master/hair/bob_dark_brown.png",
+              "webp": "female/master/hair/bob_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/master/hair/bob_chestnut.png",
+              "webp": "female/master/hair/bob_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/master/hair/bob_blonde.png",
+              "webp": "female/master/hair/bob_blonde.webp"
+            },
+            "red": {
+              "png": "female/master/hair/bob_red.png",
+              "webp": "female/master/hair/bob_red.webp"
+            },
+            "silver": {
+              "png": "female/master/hair/bob_silver.png",
+              "webp": "female/master/hair/bob_silver.webp"
+            }
+          },
+          "long": {
+            "black": {
+              "png": "female/master/hair/long_black.png",
+              "webp": "female/master/hair/long_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/master/hair/long_dark_brown.png",
+              "webp": "female/master/hair/long_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/master/hair/long_chestnut.png",
+              "webp": "female/master/hair/long_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/master/hair/long_blonde.png",
+              "webp": "female/master/hair/long_blonde.webp"
+            },
+            "red": {
+              "png": "female/master/hair/long_red.png",
+              "webp": "female/master/hair/long_red.webp"
+            },
+            "silver": {
+              "png": "female/master/hair/long_silver.png",
+              "webp": "female/master/hair/long_silver.webp"
+            }
+          },
+          "high_bun": {
+            "black": {
+              "png": "female/master/hair/high_bun_black.png",
+              "webp": "female/master/hair/high_bun_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/master/hair/high_bun_dark_brown.png",
+              "webp": "female/master/hair/high_bun_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/master/hair/high_bun_chestnut.png",
+              "webp": "female/master/hair/high_bun_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/master/hair/high_bun_blonde.png",
+              "webp": "female/master/hair/high_bun_blonde.webp"
+            },
+            "red": {
+              "png": "female/master/hair/high_bun_red.png",
+              "webp": "female/master/hair/high_bun_red.webp"
+            },
+            "silver": {
+              "png": "female/master/hair/high_bun_silver.png",
+              "webp": "female/master/hair/high_bun_silver.webp"
+            }
+          },
+          "side_braid": {
+            "black": {
+              "png": "female/master/hair/side_braid_black.png",
+              "webp": "female/master/hair/side_braid_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/master/hair/side_braid_dark_brown.png",
+              "webp": "female/master/hair/side_braid_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/master/hair/side_braid_chestnut.png",
+              "webp": "female/master/hair/side_braid_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/master/hair/side_braid_blonde.png",
+              "webp": "female/master/hair/side_braid_blonde.webp"
+            },
+            "red": {
+              "png": "female/master/hair/side_braid_red.png",
+              "webp": "female/master/hair/side_braid_red.webp"
+            },
+            "silver": {
+              "png": "female/master/hair/side_braid_silver.png",
+              "webp": "female/master/hair/side_braid_silver.webp"
+            }
+          }
+        }
+      }
+    },
+    "runtime": {
+      "male": {
+        "body": {
+          "porcelain": {
+            "png": "male/runtime/body/skin_porcelain.png",
+            "webp": "male/runtime/body/skin_porcelain.webp"
+          },
+          "fair": {
+            "png": "male/runtime/body/skin_fair.png",
+            "webp": "male/runtime/body/skin_fair.webp"
+          },
+          "tan": {
+            "png": "male/runtime/body/skin_tan.png",
+            "webp": "male/runtime/body/skin_tan.webp"
+          },
+          "olive": {
+            "png": "male/runtime/body/skin_olive.png",
+            "webp": "male/runtime/body/skin_olive.webp"
+          },
+          "brown": {
+            "png": "male/runtime/body/skin_brown.png",
+            "webp": "male/runtime/body/skin_brown.webp"
+          },
+          "deep": {
+            "png": "male/runtime/body/skin_deep.png",
+            "webp": "male/runtime/body/skin_deep.webp"
+          }
+        },
+        "eyes": {
+          "green": {
+            "png": "male/runtime/eyes/eyes_green.png",
+            "webp": "male/runtime/eyes/eyes_green.webp"
+          },
+          "blue": {
+            "png": "male/runtime/eyes/eyes_blue.png",
+            "webp": "male/runtime/eyes/eyes_blue.webp"
+          },
+          "brown": {
+            "png": "male/runtime/eyes/eyes_brown.png",
+            "webp": "male/runtime/eyes/eyes_brown.webp"
+          },
+          "gray": {
+            "png": "male/runtime/eyes/eyes_gray.png",
+            "webp": "male/runtime/eyes/eyes_gray.webp"
+          }
+        },
+        "hair": {
+          "short_textured": {
+            "black": {
+              "png": "male/runtime/hair/short_textured_black.png",
+              "webp": "male/runtime/hair/short_textured_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/runtime/hair/short_textured_dark_brown.png",
+              "webp": "male/runtime/hair/short_textured_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/runtime/hair/short_textured_chestnut.png",
+              "webp": "male/runtime/hair/short_textured_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/runtime/hair/short_textured_blonde.png",
+              "webp": "male/runtime/hair/short_textured_blonde.webp"
+            },
+            "red": {
+              "png": "male/runtime/hair/short_textured_red.png",
+              "webp": "male/runtime/hair/short_textured_red.webp"
+            },
+            "silver": {
+              "png": "male/runtime/hair/short_textured_silver.png",
+              "webp": "male/runtime/hair/short_textured_silver.webp"
+            }
+          },
+          "spiky": {
+            "black": {
+              "png": "male/runtime/hair/spiky_black.png",
+              "webp": "male/runtime/hair/spiky_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/runtime/hair/spiky_dark_brown.png",
+              "webp": "male/runtime/hair/spiky_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/runtime/hair/spiky_chestnut.png",
+              "webp": "male/runtime/hair/spiky_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/runtime/hair/spiky_blonde.png",
+              "webp": "male/runtime/hair/spiky_blonde.webp"
+            },
+            "red": {
+              "png": "male/runtime/hair/spiky_red.png",
+              "webp": "male/runtime/hair/spiky_red.webp"
+            },
+            "silver": {
+              "png": "male/runtime/hair/spiky_silver.png",
+              "webp": "male/runtime/hair/spiky_silver.webp"
+            }
+          },
+          "side_swept": {
+            "black": {
+              "png": "male/runtime/hair/side_swept_black.png",
+              "webp": "male/runtime/hair/side_swept_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/runtime/hair/side_swept_dark_brown.png",
+              "webp": "male/runtime/hair/side_swept_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/runtime/hair/side_swept_chestnut.png",
+              "webp": "male/runtime/hair/side_swept_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/runtime/hair/side_swept_blonde.png",
+              "webp": "male/runtime/hair/side_swept_blonde.webp"
+            },
+            "red": {
+              "png": "male/runtime/hair/side_swept_red.png",
+              "webp": "male/runtime/hair/side_swept_red.webp"
+            },
+            "silver": {
+              "png": "male/runtime/hair/side_swept_silver.png",
+              "webp": "male/runtime/hair/side_swept_silver.webp"
+            }
+          },
+          "buzz_cut": {
+            "black": {
+              "png": "male/runtime/hair/buzz_cut_black.png",
+              "webp": "male/runtime/hair/buzz_cut_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/runtime/hair/buzz_cut_dark_brown.png",
+              "webp": "male/runtime/hair/buzz_cut_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/runtime/hair/buzz_cut_chestnut.png",
+              "webp": "male/runtime/hair/buzz_cut_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/runtime/hair/buzz_cut_blonde.png",
+              "webp": "male/runtime/hair/buzz_cut_blonde.webp"
+            },
+            "red": {
+              "png": "male/runtime/hair/buzz_cut_red.png",
+              "webp": "male/runtime/hair/buzz_cut_red.webp"
+            },
+            "silver": {
+              "png": "male/runtime/hair/buzz_cut_silver.png",
+              "webp": "male/runtime/hair/buzz_cut_silver.webp"
+            }
+          },
+          "undercut": {
+            "black": {
+              "png": "male/runtime/hair/undercut_black.png",
+              "webp": "male/runtime/hair/undercut_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/runtime/hair/undercut_dark_brown.png",
+              "webp": "male/runtime/hair/undercut_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/runtime/hair/undercut_chestnut.png",
+              "webp": "male/runtime/hair/undercut_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/runtime/hair/undercut_blonde.png",
+              "webp": "male/runtime/hair/undercut_blonde.webp"
+            },
+            "red": {
+              "png": "male/runtime/hair/undercut_red.png",
+              "webp": "male/runtime/hair/undercut_red.webp"
+            },
+            "silver": {
+              "png": "male/runtime/hair/undercut_silver.png",
+              "webp": "male/runtime/hair/undercut_silver.webp"
+            }
+          }
+        }
+      },
+      "female": {
+        "body": {
+          "porcelain": {
+            "png": "female/runtime/body/skin_porcelain.png",
+            "webp": "female/runtime/body/skin_porcelain.webp"
+          },
+          "fair": {
+            "png": "female/runtime/body/skin_fair.png",
+            "webp": "female/runtime/body/skin_fair.webp"
+          },
+          "tan": {
+            "png": "female/runtime/body/skin_tan.png",
+            "webp": "female/runtime/body/skin_tan.webp"
+          },
+          "olive": {
+            "png": "female/runtime/body/skin_olive.png",
+            "webp": "female/runtime/body/skin_olive.webp"
+          },
+          "brown": {
+            "png": "female/runtime/body/skin_brown.png",
+            "webp": "female/runtime/body/skin_brown.webp"
+          },
+          "deep": {
+            "png": "female/runtime/body/skin_deep.png",
+            "webp": "female/runtime/body/skin_deep.webp"
+          }
+        },
+        "eyes": {
+          "green": {
+            "png": "female/runtime/eyes/eyes_green.png",
+            "webp": "female/runtime/eyes/eyes_green.webp"
+          },
+          "blue": {
+            "png": "female/runtime/eyes/eyes_blue.png",
+            "webp": "female/runtime/eyes/eyes_blue.webp"
+          },
+          "brown": {
+            "png": "female/runtime/eyes/eyes_brown.png",
+            "webp": "female/runtime/eyes/eyes_brown.webp"
+          },
+          "gray": {
+            "png": "female/runtime/eyes/eyes_gray.png",
+            "webp": "female/runtime/eyes/eyes_gray.webp"
+          }
+        },
+        "hair": {
+          "ponytail": {
+            "black": {
+              "png": "female/runtime/hair/ponytail_black.png",
+              "webp": "female/runtime/hair/ponytail_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/runtime/hair/ponytail_dark_brown.png",
+              "webp": "female/runtime/hair/ponytail_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/runtime/hair/ponytail_chestnut.png",
+              "webp": "female/runtime/hair/ponytail_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/runtime/hair/ponytail_blonde.png",
+              "webp": "female/runtime/hair/ponytail_blonde.webp"
+            },
+            "red": {
+              "png": "female/runtime/hair/ponytail_red.png",
+              "webp": "female/runtime/hair/ponytail_red.webp"
+            },
+            "silver": {
+              "png": "female/runtime/hair/ponytail_silver.png",
+              "webp": "female/runtime/hair/ponytail_silver.webp"
+            }
+          },
+          "bob": {
+            "black": {
+              "png": "female/runtime/hair/bob_black.png",
+              "webp": "female/runtime/hair/bob_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/runtime/hair/bob_dark_brown.png",
+              "webp": "female/runtime/hair/bob_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/runtime/hair/bob_chestnut.png",
+              "webp": "female/runtime/hair/bob_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/runtime/hair/bob_blonde.png",
+              "webp": "female/runtime/hair/bob_blonde.webp"
+            },
+            "red": {
+              "png": "female/runtime/hair/bob_red.png",
+              "webp": "female/runtime/hair/bob_red.webp"
+            },
+            "silver": {
+              "png": "female/runtime/hair/bob_silver.png",
+              "webp": "female/runtime/hair/bob_silver.webp"
+            }
+          },
+          "long": {
+            "black": {
+              "png": "female/runtime/hair/long_black.png",
+              "webp": "female/runtime/hair/long_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/runtime/hair/long_dark_brown.png",
+              "webp": "female/runtime/hair/long_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/runtime/hair/long_chestnut.png",
+              "webp": "female/runtime/hair/long_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/runtime/hair/long_blonde.png",
+              "webp": "female/runtime/hair/long_blonde.webp"
+            },
+            "red": {
+              "png": "female/runtime/hair/long_red.png",
+              "webp": "female/runtime/hair/long_red.webp"
+            },
+            "silver": {
+              "png": "female/runtime/hair/long_silver.png",
+              "webp": "female/runtime/hair/long_silver.webp"
+            }
+          },
+          "high_bun": {
+            "black": {
+              "png": "female/runtime/hair/high_bun_black.png",
+              "webp": "female/runtime/hair/high_bun_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/runtime/hair/high_bun_dark_brown.png",
+              "webp": "female/runtime/hair/high_bun_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/runtime/hair/high_bun_chestnut.png",
+              "webp": "female/runtime/hair/high_bun_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/runtime/hair/high_bun_blonde.png",
+              "webp": "female/runtime/hair/high_bun_blonde.webp"
+            },
+            "red": {
+              "png": "female/runtime/hair/high_bun_red.png",
+              "webp": "female/runtime/hair/high_bun_red.webp"
+            },
+            "silver": {
+              "png": "female/runtime/hair/high_bun_silver.png",
+              "webp": "female/runtime/hair/high_bun_silver.webp"
+            }
+          },
+          "side_braid": {
+            "black": {
+              "png": "female/runtime/hair/side_braid_black.png",
+              "webp": "female/runtime/hair/side_braid_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/runtime/hair/side_braid_dark_brown.png",
+              "webp": "female/runtime/hair/side_braid_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/runtime/hair/side_braid_chestnut.png",
+              "webp": "female/runtime/hair/side_braid_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/runtime/hair/side_braid_blonde.png",
+              "webp": "female/runtime/hair/side_braid_blonde.webp"
+            },
+            "red": {
+              "png": "female/runtime/hair/side_braid_red.png",
+              "webp": "female/runtime/hair/side_braid_red.webp"
+            },
+            "silver": {
+              "png": "female/runtime/hair/side_braid_silver.png",
+              "webp": "female/runtime/hair/side_braid_silver.webp"
+            }
+          }
+        }
+      }
+    },
+    "compact": {
+      "male": {
+        "body": {
+          "porcelain": {
+            "png": "male/compact/body/skin_porcelain.png",
+            "webp": "male/compact/body/skin_porcelain.webp"
+          },
+          "fair": {
+            "png": "male/compact/body/skin_fair.png",
+            "webp": "male/compact/body/skin_fair.webp"
+          },
+          "tan": {
+            "png": "male/compact/body/skin_tan.png",
+            "webp": "male/compact/body/skin_tan.webp"
+          },
+          "olive": {
+            "png": "male/compact/body/skin_olive.png",
+            "webp": "male/compact/body/skin_olive.webp"
+          },
+          "brown": {
+            "png": "male/compact/body/skin_brown.png",
+            "webp": "male/compact/body/skin_brown.webp"
+          },
+          "deep": {
+            "png": "male/compact/body/skin_deep.png",
+            "webp": "male/compact/body/skin_deep.webp"
+          }
+        },
+        "eyes": {
+          "green": {
+            "png": "male/compact/eyes/eyes_green.png",
+            "webp": "male/compact/eyes/eyes_green.webp"
+          },
+          "blue": {
+            "png": "male/compact/eyes/eyes_blue.png",
+            "webp": "male/compact/eyes/eyes_blue.webp"
+          },
+          "brown": {
+            "png": "male/compact/eyes/eyes_brown.png",
+            "webp": "male/compact/eyes/eyes_brown.webp"
+          },
+          "gray": {
+            "png": "male/compact/eyes/eyes_gray.png",
+            "webp": "male/compact/eyes/eyes_gray.webp"
+          }
+        },
+        "hair": {
+          "short_textured": {
+            "black": {
+              "png": "male/compact/hair/short_textured_black.png",
+              "webp": "male/compact/hair/short_textured_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/compact/hair/short_textured_dark_brown.png",
+              "webp": "male/compact/hair/short_textured_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/compact/hair/short_textured_chestnut.png",
+              "webp": "male/compact/hair/short_textured_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/compact/hair/short_textured_blonde.png",
+              "webp": "male/compact/hair/short_textured_blonde.webp"
+            },
+            "red": {
+              "png": "male/compact/hair/short_textured_red.png",
+              "webp": "male/compact/hair/short_textured_red.webp"
+            },
+            "silver": {
+              "png": "male/compact/hair/short_textured_silver.png",
+              "webp": "male/compact/hair/short_textured_silver.webp"
+            }
+          },
+          "spiky": {
+            "black": {
+              "png": "male/compact/hair/spiky_black.png",
+              "webp": "male/compact/hair/spiky_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/compact/hair/spiky_dark_brown.png",
+              "webp": "male/compact/hair/spiky_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/compact/hair/spiky_chestnut.png",
+              "webp": "male/compact/hair/spiky_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/compact/hair/spiky_blonde.png",
+              "webp": "male/compact/hair/spiky_blonde.webp"
+            },
+            "red": {
+              "png": "male/compact/hair/spiky_red.png",
+              "webp": "male/compact/hair/spiky_red.webp"
+            },
+            "silver": {
+              "png": "male/compact/hair/spiky_silver.png",
+              "webp": "male/compact/hair/spiky_silver.webp"
+            }
+          },
+          "side_swept": {
+            "black": {
+              "png": "male/compact/hair/side_swept_black.png",
+              "webp": "male/compact/hair/side_swept_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/compact/hair/side_swept_dark_brown.png",
+              "webp": "male/compact/hair/side_swept_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/compact/hair/side_swept_chestnut.png",
+              "webp": "male/compact/hair/side_swept_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/compact/hair/side_swept_blonde.png",
+              "webp": "male/compact/hair/side_swept_blonde.webp"
+            },
+            "red": {
+              "png": "male/compact/hair/side_swept_red.png",
+              "webp": "male/compact/hair/side_swept_red.webp"
+            },
+            "silver": {
+              "png": "male/compact/hair/side_swept_silver.png",
+              "webp": "male/compact/hair/side_swept_silver.webp"
+            }
+          },
+          "buzz_cut": {
+            "black": {
+              "png": "male/compact/hair/buzz_cut_black.png",
+              "webp": "male/compact/hair/buzz_cut_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/compact/hair/buzz_cut_dark_brown.png",
+              "webp": "male/compact/hair/buzz_cut_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/compact/hair/buzz_cut_chestnut.png",
+              "webp": "male/compact/hair/buzz_cut_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/compact/hair/buzz_cut_blonde.png",
+              "webp": "male/compact/hair/buzz_cut_blonde.webp"
+            },
+            "red": {
+              "png": "male/compact/hair/buzz_cut_red.png",
+              "webp": "male/compact/hair/buzz_cut_red.webp"
+            },
+            "silver": {
+              "png": "male/compact/hair/buzz_cut_silver.png",
+              "webp": "male/compact/hair/buzz_cut_silver.webp"
+            }
+          },
+          "undercut": {
+            "black": {
+              "png": "male/compact/hair/undercut_black.png",
+              "webp": "male/compact/hair/undercut_black.webp"
+            },
+            "dark_brown": {
+              "png": "male/compact/hair/undercut_dark_brown.png",
+              "webp": "male/compact/hair/undercut_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "male/compact/hair/undercut_chestnut.png",
+              "webp": "male/compact/hair/undercut_chestnut.webp"
+            },
+            "blonde": {
+              "png": "male/compact/hair/undercut_blonde.png",
+              "webp": "male/compact/hair/undercut_blonde.webp"
+            },
+            "red": {
+              "png": "male/compact/hair/undercut_red.png",
+              "webp": "male/compact/hair/undercut_red.webp"
+            },
+            "silver": {
+              "png": "male/compact/hair/undercut_silver.png",
+              "webp": "male/compact/hair/undercut_silver.webp"
+            }
+          }
+        }
+      },
+      "female": {
+        "body": {
+          "porcelain": {
+            "png": "female/compact/body/skin_porcelain.png",
+            "webp": "female/compact/body/skin_porcelain.webp"
+          },
+          "fair": {
+            "png": "female/compact/body/skin_fair.png",
+            "webp": "female/compact/body/skin_fair.webp"
+          },
+          "tan": {
+            "png": "female/compact/body/skin_tan.png",
+            "webp": "female/compact/body/skin_tan.webp"
+          },
+          "olive": {
+            "png": "female/compact/body/skin_olive.png",
+            "webp": "female/compact/body/skin_olive.webp"
+          },
+          "brown": {
+            "png": "female/compact/body/skin_brown.png",
+            "webp": "female/compact/body/skin_brown.webp"
+          },
+          "deep": {
+            "png": "female/compact/body/skin_deep.png",
+            "webp": "female/compact/body/skin_deep.webp"
+          }
+        },
+        "eyes": {
+          "green": {
+            "png": "female/compact/eyes/eyes_green.png",
+            "webp": "female/compact/eyes/eyes_green.webp"
+          },
+          "blue": {
+            "png": "female/compact/eyes/eyes_blue.png",
+            "webp": "female/compact/eyes/eyes_blue.webp"
+          },
+          "brown": {
+            "png": "female/compact/eyes/eyes_brown.png",
+            "webp": "female/compact/eyes/eyes_brown.webp"
+          },
+          "gray": {
+            "png": "female/compact/eyes/eyes_gray.png",
+            "webp": "female/compact/eyes/eyes_gray.webp"
+          }
+        },
+        "hair": {
+          "ponytail": {
+            "black": {
+              "png": "female/compact/hair/ponytail_black.png",
+              "webp": "female/compact/hair/ponytail_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/compact/hair/ponytail_dark_brown.png",
+              "webp": "female/compact/hair/ponytail_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/compact/hair/ponytail_chestnut.png",
+              "webp": "female/compact/hair/ponytail_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/compact/hair/ponytail_blonde.png",
+              "webp": "female/compact/hair/ponytail_blonde.webp"
+            },
+            "red": {
+              "png": "female/compact/hair/ponytail_red.png",
+              "webp": "female/compact/hair/ponytail_red.webp"
+            },
+            "silver": {
+              "png": "female/compact/hair/ponytail_silver.png",
+              "webp": "female/compact/hair/ponytail_silver.webp"
+            }
+          },
+          "bob": {
+            "black": {
+              "png": "female/compact/hair/bob_black.png",
+              "webp": "female/compact/hair/bob_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/compact/hair/bob_dark_brown.png",
+              "webp": "female/compact/hair/bob_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/compact/hair/bob_chestnut.png",
+              "webp": "female/compact/hair/bob_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/compact/hair/bob_blonde.png",
+              "webp": "female/compact/hair/bob_blonde.webp"
+            },
+            "red": {
+              "png": "female/compact/hair/bob_red.png",
+              "webp": "female/compact/hair/bob_red.webp"
+            },
+            "silver": {
+              "png": "female/compact/hair/bob_silver.png",
+              "webp": "female/compact/hair/bob_silver.webp"
+            }
+          },
+          "long": {
+            "black": {
+              "png": "female/compact/hair/long_black.png",
+              "webp": "female/compact/hair/long_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/compact/hair/long_dark_brown.png",
+              "webp": "female/compact/hair/long_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/compact/hair/long_chestnut.png",
+              "webp": "female/compact/hair/long_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/compact/hair/long_blonde.png",
+              "webp": "female/compact/hair/long_blonde.webp"
+            },
+            "red": {
+              "png": "female/compact/hair/long_red.png",
+              "webp": "female/compact/hair/long_red.webp"
+            },
+            "silver": {
+              "png": "female/compact/hair/long_silver.png",
+              "webp": "female/compact/hair/long_silver.webp"
+            }
+          },
+          "high_bun": {
+            "black": {
+              "png": "female/compact/hair/high_bun_black.png",
+              "webp": "female/compact/hair/high_bun_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/compact/hair/high_bun_dark_brown.png",
+              "webp": "female/compact/hair/high_bun_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/compact/hair/high_bun_chestnut.png",
+              "webp": "female/compact/hair/high_bun_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/compact/hair/high_bun_blonde.png",
+              "webp": "female/compact/hair/high_bun_blonde.webp"
+            },
+            "red": {
+              "png": "female/compact/hair/high_bun_red.png",
+              "webp": "female/compact/hair/high_bun_red.webp"
+            },
+            "silver": {
+              "png": "female/compact/hair/high_bun_silver.png",
+              "webp": "female/compact/hair/high_bun_silver.webp"
+            }
+          },
+          "side_braid": {
+            "black": {
+              "png": "female/compact/hair/side_braid_black.png",
+              "webp": "female/compact/hair/side_braid_black.webp"
+            },
+            "dark_brown": {
+              "png": "female/compact/hair/side_braid_dark_brown.png",
+              "webp": "female/compact/hair/side_braid_dark_brown.webp"
+            },
+            "chestnut": {
+              "png": "female/compact/hair/side_braid_chestnut.png",
+              "webp": "female/compact/hair/side_braid_chestnut.webp"
+            },
+            "blonde": {
+              "png": "female/compact/hair/side_braid_blonde.png",
+              "webp": "female/compact/hair/side_braid_blonde.webp"
+            },
+            "red": {
+              "png": "female/compact/hair/side_braid_red.png",
+              "webp": "female/compact/hair/side_braid_red.webp"
+            },
+            "silver": {
+              "png": "female/compact/hair/side_braid_silver.png",
+              "webp": "female/compact/hair/side_braid_silver.webp"
+            }
+          }
+        }
+      }
+    }
+  }
+}

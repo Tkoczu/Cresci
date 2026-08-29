@@ -1,0 +1,479 @@
+{
+  "schemaVersion": "1.0.0",
+  "currency": {
+    "id": "cresci_coins",
+    "symbol": "CC"
+  },
+  "collections": [
+    {
+      "id": "ember_elite",
+      "displayName": "Ember Elite",
+      "rarity": "rare",
+      "accentHex": "#FF4218"
+    },
+    {
+      "id": "neon_night",
+      "displayName": "Neon Night",
+      "rarity": "epic",
+      "accentHex": "#19DAFF"
+    },
+    {
+      "id": "royal_crest",
+      "displayName": "Royal Crest",
+      "rarity": "legendary",
+      "accentHex": "#FFBF26"
+    }
+  ],
+  "items": [
+    {
+      "sku": "ember_elite.male.top",
+      "displayName": "Ember Elite — Top",
+      "collection": "ember_elite",
+      "gender": "male",
+      "slot": "top",
+      "rarity": "rare",
+      "price": 650,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/top/ember_elite_top.png",
+        "webp": "male/top/ember_elite_top.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/top/ember_elite_top.png"
+    },
+    {
+      "sku": "ember_elite.male.bottom",
+      "displayName": "Ember Elite — Bottom",
+      "collection": "ember_elite",
+      "gender": "male",
+      "slot": "bottom",
+      "rarity": "rare",
+      "price": 600,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/bottom/ember_elite_bottom.png",
+        "webp": "male/bottom/ember_elite_bottom.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/bottom/ember_elite_bottom.png"
+    },
+    {
+      "sku": "ember_elite.male.shoes",
+      "displayName": "Ember Elite — Shoes",
+      "collection": "ember_elite",
+      "gender": "male",
+      "slot": "shoes",
+      "rarity": "rare",
+      "price": 500,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/shoes/ember_elite_shoes.png",
+        "webp": "male/shoes/ember_elite_shoes.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/shoes/ember_elite_shoes.png"
+    },
+    {
+      "sku": "ember_elite.male.headwear",
+      "displayName": "Ember Elite — Headwear",
+      "collection": "ember_elite",
+      "gender": "male",
+      "slot": "headwear",
+      "rarity": "rare",
+      "price": 400,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/headwear/ember_elite_headwear.png",
+        "webp": "male/headwear/ember_elite_headwear.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/headwear/ember_elite_headwear.png"
+    },
+    {
+      "sku": "ember_elite.male.accessories",
+      "displayName": "Ember Elite — Accessories",
+      "collection": "ember_elite",
+      "gender": "male",
+      "slot": "accessories",
+      "rarity": "rare",
+      "price": 300,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/accessories/ember_elite_accessories.png",
+        "webp": "male/accessories/ember_elite_accessories.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/accessories/ember_elite_accessories.png"
+    },
+    {
+      "sku": "ember_elite.female.top",
+      "displayName": "Ember Elite — Top",
+      "collection": "ember_elite",
+      "gender": "female",
+      "slot": "top",
+      "rarity": "rare",
+      "price": 650,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/top/ember_elite_top.png",
+        "webp": "female/top/ember_elite_top.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/top/ember_elite_top.png"
+    },
+    {
+      "sku": "ember_elite.female.bottom",
+      "displayName": "Ember Elite — Bottom",
+      "collection": "ember_elite",
+      "gender": "female",
+      "slot": "bottom",
+      "rarity": "rare",
+      "price": 600,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/bottom/ember_elite_bottom.png",
+        "webp": "female/bottom/ember_elite_bottom.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/bottom/ember_elite_bottom.png"
+    },
+    {
+      "sku": "ember_elite.female.shoes",
+      "displayName": "Ember Elite — Shoes",
+      "collection": "ember_elite",
+      "gender": "female",
+      "slot": "shoes",
+      "rarity": "rare",
+      "price": 500,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/shoes/ember_elite_shoes.png",
+        "webp": "female/shoes/ember_elite_shoes.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/shoes/ember_elite_shoes.png"
+    },
+    {
+      "sku": "ember_elite.female.headwear",
+      "displayName": "Ember Elite — Headwear",
+      "collection": "ember_elite",
+      "gender": "female",
+      "slot": "headwear",
+      "rarity": "rare",
+      "price": 400,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/headwear/ember_elite_headwear.png",
+        "webp": "female/headwear/ember_elite_headwear.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/headwear/ember_elite_headwear.png"
+    },
+    {
+      "sku": "ember_elite.female.accessories",
+      "displayName": "Ember Elite — Accessories",
+      "collection": "ember_elite",
+      "gender": "female",
+      "slot": "accessories",
+      "rarity": "rare",
+      "price": 300,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/accessories/ember_elite_accessories.png",
+        "webp": "female/accessories/ember_elite_accessories.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/accessories/ember_elite_accessories.png"
+    },
+    {
+      "sku": "neon_night.male.top",
+      "displayName": "Neon Night — Top",
+      "collection": "neon_night",
+      "gender": "male",
+      "slot": "top",
+      "rarity": "epic",
+      "price": 880,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/top/neon_night_top.png",
+        "webp": "male/top/neon_night_top.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/top/neon_night_top.png"
+    },
+    {
+      "sku": "neon_night.male.bottom",
+      "displayName": "Neon Night — Bottom",
+      "collection": "neon_night",
+      "gender": "male",
+      "slot": "bottom",
+      "rarity": "epic",
+      "price": 810,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/bottom/neon_night_bottom.png",
+        "webp": "male/bottom/neon_night_bottom.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/bottom/neon_night_bottom.png"
+    },
+    {
+      "sku": "neon_night.male.shoes",
+      "displayName": "Neon Night — Shoes",
+      "collection": "neon_night",
+      "gender": "male",
+      "slot": "shoes",
+      "rarity": "epic",
+      "price": 680,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/shoes/neon_night_shoes.png",
+        "webp": "male/shoes/neon_night_shoes.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/shoes/neon_night_shoes.png"
+    },
+    {
+      "sku": "neon_night.male.headwear",
+      "displayName": "Neon Night — Headwear",
+      "collection": "neon_night",
+      "gender": "male",
+      "slot": "headwear",
+      "rarity": "epic",
+      "price": 540,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/headwear/neon_night_headwear.png",
+        "webp": "male/headwear/neon_night_headwear.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/headwear/neon_night_headwear.png"
+    },
+    {
+      "sku": "neon_night.male.accessories",
+      "displayName": "Neon Night — Accessories",
+      "collection": "neon_night",
+      "gender": "male",
+      "slot": "accessories",
+      "rarity": "epic",
+      "price": 400,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/accessories/neon_night_accessories.png",
+        "webp": "male/accessories/neon_night_accessories.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/accessories/neon_night_accessories.png"
+    },
+    {
+      "sku": "neon_night.female.top",
+      "displayName": "Neon Night — Top",
+      "collection": "neon_night",
+      "gender": "female",
+      "slot": "top",
+      "rarity": "epic",
+      "price": 880,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/top/neon_night_top.png",
+        "webp": "female/top/neon_night_top.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/top/neon_night_top.png"
+    },
+    {
+      "sku": "neon_night.female.bottom",
+      "displayName": "Neon Night — Bottom",
+      "collection": "neon_night",
+      "gender": "female",
+      "slot": "bottom",
+      "rarity": "epic",
+      "price": 810,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/bottom/neon_night_bottom.png",
+        "webp": "female/bottom/neon_night_bottom.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/bottom/neon_night_bottom.png"
+    },
+    {
+      "sku": "neon_night.female.shoes",
+      "displayName": "Neon Night — Shoes",
+      "collection": "neon_night",
+      "gender": "female",
+      "slot": "shoes",
+      "rarity": "epic",
+      "price": 680,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/shoes/neon_night_shoes.png",
+        "webp": "female/shoes/neon_night_shoes.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/shoes/neon_night_shoes.png"
+    },
+    {
+      "sku": "neon_night.female.headwear",
+      "displayName": "Neon Night — Headwear",
+      "collection": "neon_night",
+      "gender": "female",
+      "slot": "headwear",
+      "rarity": "epic",
+      "price": 540,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/headwear/neon_night_headwear.png",
+        "webp": "female/headwear/neon_night_headwear.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/headwear/neon_night_headwear.png"
+    },
+    {
+      "sku": "neon_night.female.accessories",
+      "displayName": "Neon Night — Accessories",
+      "collection": "neon_night",
+      "gender": "female",
+      "slot": "accessories",
+      "rarity": "epic",
+      "price": 400,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/accessories/neon_night_accessories.png",
+        "webp": "female/accessories/neon_night_accessories.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/accessories/neon_night_accessories.png"
+    },
+    {
+      "sku": "royal_crest.male.top",
+      "displayName": "Royal Crest — Top",
+      "collection": "royal_crest",
+      "gender": "male",
+      "slot": "top",
+      "rarity": "legendary",
+      "price": 1170,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/top/royal_crest_top.png",
+        "webp": "male/top/royal_crest_top.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/top/royal_crest_top.png"
+    },
+    {
+      "sku": "royal_crest.male.bottom",
+      "displayName": "Royal Crest — Bottom",
+      "collection": "royal_crest",
+      "gender": "male",
+      "slot": "bottom",
+      "rarity": "legendary",
+      "price": 1080,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/bottom/royal_crest_bottom.png",
+        "webp": "male/bottom/royal_crest_bottom.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/bottom/royal_crest_bottom.png"
+    },
+    {
+      "sku": "royal_crest.male.shoes",
+      "displayName": "Royal Crest — Shoes",
+      "collection": "royal_crest",
+      "gender": "male",
+      "slot": "shoes",
+      "rarity": "legendary",
+      "price": 900,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/shoes/royal_crest_shoes.png",
+        "webp": "male/shoes/royal_crest_shoes.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/shoes/royal_crest_shoes.png"
+    },
+    {
+      "sku": "royal_crest.male.headwear",
+      "displayName": "Royal Crest — Headwear",
+      "collection": "royal_crest",
+      "gender": "male",
+      "slot": "headwear",
+      "rarity": "legendary",
+      "price": 720,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/headwear/royal_crest_headwear.png",
+        "webp": "male/headwear/royal_crest_headwear.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/headwear/royal_crest_headwear.png"
+    },
+    {
+      "sku": "royal_crest.male.accessories",
+      "displayName": "Royal Crest — Accessories",
+      "collection": "royal_crest",
+      "gender": "male",
+      "slot": "accessories",
+      "rarity": "legendary",
+      "price": 540,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "male/accessories/royal_crest_accessories.png",
+        "webp": "male/accessories/royal_crest_accessories.webp"
+      },
+      "thumbnail": "shop/thumbnails/male/accessories/royal_crest_accessories.png"
+    },
+    {
+      "sku": "royal_crest.female.top",
+      "displayName": "Royal Crest — Top",
+      "collection": "royal_crest",
+      "gender": "female",
+      "slot": "top",
+      "rarity": "legendary",
+      "price": 1170,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/top/royal_crest_top.png",
+        "webp": "female/top/royal_crest_top.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/top/royal_crest_top.png"
+    },
+    {
+      "sku": "royal_crest.female.bottom",
+      "displayName": "Royal Crest — Bottom",
+      "collection": "royal_crest",
+      "gender": "female",
+      "slot": "bottom",
+      "rarity": "legendary",
+      "price": 1080,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/bottom/royal_crest_bottom.png",
+        "webp": "female/bottom/royal_crest_bottom.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/bottom/royal_crest_bottom.png"
+    },
+    {
+      "sku": "royal_crest.female.shoes",
+      "displayName": "Royal Crest — Shoes",
+      "collection": "royal_crest",
+      "gender": "female",
+      "slot": "shoes",
+      "rarity": "legendary",
+      "price": 900,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/shoes/royal_crest_shoes.png",
+        "webp": "female/shoes/royal_crest_shoes.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/shoes/royal_crest_shoes.png"
+    },
+    {
+      "sku": "royal_crest.female.headwear",
+      "displayName": "Royal Crest — Headwear",
+      "collection": "royal_crest",
+      "gender": "female",
+      "slot": "headwear",
+      "rarity": "legendary",
+      "price": 720,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/headwear/royal_crest_headwear.png",
+        "webp": "female/headwear/royal_crest_headwear.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/headwear/royal_crest_headwear.png"
+    },
+    {
+      "sku": "royal_crest.female.accessories",
+      "displayName": "Royal Crest — Accessories",
+      "collection": "royal_crest",
+      "gender": "female",
+      "slot": "accessories",
+      "rarity": "legendary",
+      "price": 540,
+      "currency": "cresci_coins",
+      "assets": {
+        "png": "female/accessories/royal_crest_accessories.png",
+        "webp": "female/accessories/royal_crest_accessories.webp"
+      },
+      "thumbnail": "shop/thumbnails/female/accessories/royal_crest_accessories.png"
+    }
+  ]
+}

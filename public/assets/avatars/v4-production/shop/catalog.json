@@ -1,0 +1,1786 @@
+{
+  "schemaVersion": "3.0.0",
+  "currency": {
+    "id": "pr",
+    "symbol": "PR"
+  },
+  "collections": [
+    {
+      "id": "ember_elite",
+      "displayName": "Ember Elite",
+      "rarity": "rare",
+      "accentHex": "#FF4218"
+    },
+    {
+      "id": "neon_night",
+      "displayName": "Neon Night",
+      "rarity": "epic",
+      "accentHex": "#19DAFF"
+    },
+    {
+      "id": "royal_crest",
+      "displayName": "Royal Crest",
+      "rarity": "legendary",
+      "accentHex": "#FFBF26"
+    },
+    {
+      "id": "core_catalog",
+      "displayName": "CRESCI Core Catalog",
+      "rarity": "mixed",
+      "accentHex": "#FF741A"
+    }
+  ],
+  "items": [
+    {
+      "sku": "ember_elite.male.top",
+      "displayName": "Ember Elite — Top",
+      "collection": "ember_elite",
+      "gender": "male",
+      "slot": "top",
+      "rarity": "rare",
+      "price": 650,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/top/ember_elite_top.png",
+          "webp": "male/master/top/ember_elite_top.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/top/ember_elite_top.png",
+          "webp": "male/runtime/top/ember_elite_top.webp"
+        },
+        "compact": {
+          "png": "male/compact/top/ember_elite_top.png",
+          "webp": "male/compact/top/ember_elite_top.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/top/ember_elite_top.png"
+    },
+    {
+      "sku": "ember_elite.male.bottom",
+      "displayName": "Ember Elite — Bottom",
+      "collection": "ember_elite",
+      "gender": "male",
+      "slot": "bottom",
+      "rarity": "rare",
+      "price": 600,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/bottom/ember_elite_bottom.png",
+          "webp": "male/master/bottom/ember_elite_bottom.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/bottom/ember_elite_bottom.png",
+          "webp": "male/runtime/bottom/ember_elite_bottom.webp"
+        },
+        "compact": {
+          "png": "male/compact/bottom/ember_elite_bottom.png",
+          "webp": "male/compact/bottom/ember_elite_bottom.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/bottom/ember_elite_bottom.png"
+    },
+    {
+      "sku": "ember_elite.male.shoes",
+      "displayName": "Ember Elite — Shoes",
+      "collection": "ember_elite",
+      "gender": "male",
+      "slot": "shoes",
+      "rarity": "rare",
+      "price": 500,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/shoes/ember_elite_shoes.png",
+          "webp": "male/master/shoes/ember_elite_shoes.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/shoes/ember_elite_shoes.png",
+          "webp": "male/runtime/shoes/ember_elite_shoes.webp"
+        },
+        "compact": {
+          "png": "male/compact/shoes/ember_elite_shoes.png",
+          "webp": "male/compact/shoes/ember_elite_shoes.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/shoes/ember_elite_shoes.png"
+    },
+    {
+      "sku": "ember_elite.male.headwear",
+      "displayName": "Ember Elite — Headwear",
+      "collection": "ember_elite",
+      "gender": "male",
+      "slot": "headwear",
+      "rarity": "rare",
+      "price": 400,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/headwear/ember_elite_headwear.png",
+          "webp": "male/master/headwear/ember_elite_headwear.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/headwear/ember_elite_headwear.png",
+          "webp": "male/runtime/headwear/ember_elite_headwear.webp"
+        },
+        "compact": {
+          "png": "male/compact/headwear/ember_elite_headwear.png",
+          "webp": "male/compact/headwear/ember_elite_headwear.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/headwear/ember_elite_headwear.png"
+    },
+    {
+      "sku": "ember_elite.male.accessories",
+      "displayName": "Ember Elite — Accessories",
+      "collection": "ember_elite",
+      "gender": "male",
+      "slot": "accessories",
+      "rarity": "rare",
+      "price": 300,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/accessories/ember_elite_accessories.png",
+          "webp": "male/master/accessories/ember_elite_accessories.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/accessories/ember_elite_accessories.png",
+          "webp": "male/runtime/accessories/ember_elite_accessories.webp"
+        },
+        "compact": {
+          "png": "male/compact/accessories/ember_elite_accessories.png",
+          "webp": "male/compact/accessories/ember_elite_accessories.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/accessories/ember_elite_accessories.png"
+    },
+    {
+      "sku": "ember_elite.female.top",
+      "displayName": "Ember Elite — Top",
+      "collection": "ember_elite",
+      "gender": "female",
+      "slot": "top",
+      "rarity": "rare",
+      "price": 650,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/top/ember_elite_top.png",
+          "webp": "female/master/top/ember_elite_top.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/top/ember_elite_top.png",
+          "webp": "female/runtime/top/ember_elite_top.webp"
+        },
+        "compact": {
+          "png": "female/compact/top/ember_elite_top.png",
+          "webp": "female/compact/top/ember_elite_top.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/top/ember_elite_top.png"
+    },
+    {
+      "sku": "ember_elite.female.bottom",
+      "displayName": "Ember Elite — Bottom",
+      "collection": "ember_elite",
+      "gender": "female",
+      "slot": "bottom",
+      "rarity": "rare",
+      "price": 600,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/bottom/ember_elite_bottom.png",
+          "webp": "female/master/bottom/ember_elite_bottom.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/bottom/ember_elite_bottom.png",
+          "webp": "female/runtime/bottom/ember_elite_bottom.webp"
+        },
+        "compact": {
+          "png": "female/compact/bottom/ember_elite_bottom.png",
+          "webp": "female/compact/bottom/ember_elite_bottom.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/bottom/ember_elite_bottom.png"
+    },
+    {
+      "sku": "ember_elite.female.shoes",
+      "displayName": "Ember Elite — Shoes",
+      "collection": "ember_elite",
+      "gender": "female",
+      "slot": "shoes",
+      "rarity": "rare",
+      "price": 500,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/shoes/ember_elite_shoes.png",
+          "webp": "female/master/shoes/ember_elite_shoes.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/shoes/ember_elite_shoes.png",
+          "webp": "female/runtime/shoes/ember_elite_shoes.webp"
+        },
+        "compact": {
+          "png": "female/compact/shoes/ember_elite_shoes.png",
+          "webp": "female/compact/shoes/ember_elite_shoes.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/shoes/ember_elite_shoes.png"
+    },
+    {
+      "sku": "ember_elite.female.headwear",
+      "displayName": "Ember Elite — Headwear",
+      "collection": "ember_elite",
+      "gender": "female",
+      "slot": "headwear",
+      "rarity": "rare",
+      "price": 400,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/headwear/ember_elite_headwear.png",
+          "webp": "female/master/headwear/ember_elite_headwear.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/headwear/ember_elite_headwear.png",
+          "webp": "female/runtime/headwear/ember_elite_headwear.webp"
+        },
+        "compact": {
+          "png": "female/compact/headwear/ember_elite_headwear.png",
+          "webp": "female/compact/headwear/ember_elite_headwear.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/headwear/ember_elite_headwear.png"
+    },
+    {
+      "sku": "ember_elite.female.accessories",
+      "displayName": "Ember Elite — Accessories",
+      "collection": "ember_elite",
+      "gender": "female",
+      "slot": "accessories",
+      "rarity": "rare",
+      "price": 300,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/accessories/ember_elite_accessories.png",
+          "webp": "female/master/accessories/ember_elite_accessories.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/accessories/ember_elite_accessories.png",
+          "webp": "female/runtime/accessories/ember_elite_accessories.webp"
+        },
+        "compact": {
+          "png": "female/compact/accessories/ember_elite_accessories.png",
+          "webp": "female/compact/accessories/ember_elite_accessories.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/accessories/ember_elite_accessories.png"
+    },
+    {
+      "sku": "neon_night.male.top",
+      "displayName": "Neon Night — Top",
+      "collection": "neon_night",
+      "gender": "male",
+      "slot": "top",
+      "rarity": "epic",
+      "price": 880,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/top/neon_night_top.png",
+          "webp": "male/master/top/neon_night_top.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/top/neon_night_top.png",
+          "webp": "male/runtime/top/neon_night_top.webp"
+        },
+        "compact": {
+          "png": "male/compact/top/neon_night_top.png",
+          "webp": "male/compact/top/neon_night_top.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/top/neon_night_top.png"
+    },
+    {
+      "sku": "neon_night.male.bottom",
+      "displayName": "Neon Night — Bottom",
+      "collection": "neon_night",
+      "gender": "male",
+      "slot": "bottom",
+      "rarity": "epic",
+      "price": 810,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/bottom/neon_night_bottom.png",
+          "webp": "male/master/bottom/neon_night_bottom.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/bottom/neon_night_bottom.png",
+          "webp": "male/runtime/bottom/neon_night_bottom.webp"
+        },
+        "compact": {
+          "png": "male/compact/bottom/neon_night_bottom.png",
+          "webp": "male/compact/bottom/neon_night_bottom.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/bottom/neon_night_bottom.png"
+    },
+    {
+      "sku": "neon_night.male.shoes",
+      "displayName": "Neon Night — Shoes",
+      "collection": "neon_night",
+      "gender": "male",
+      "slot": "shoes",
+      "rarity": "epic",
+      "price": 680,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/shoes/neon_night_shoes.png",
+          "webp": "male/master/shoes/neon_night_shoes.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/shoes/neon_night_shoes.png",
+          "webp": "male/runtime/shoes/neon_night_shoes.webp"
+        },
+        "compact": {
+          "png": "male/compact/shoes/neon_night_shoes.png",
+          "webp": "male/compact/shoes/neon_night_shoes.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/shoes/neon_night_shoes.png"
+    },
+    {
+      "sku": "neon_night.male.headwear",
+      "displayName": "Neon Night — Headwear",
+      "collection": "neon_night",
+      "gender": "male",
+      "slot": "headwear",
+      "rarity": "epic",
+      "price": 540,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/headwear/neon_night_headwear.png",
+          "webp": "male/master/headwear/neon_night_headwear.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/headwear/neon_night_headwear.png",
+          "webp": "male/runtime/headwear/neon_night_headwear.webp"
+        },
+        "compact": {
+          "png": "male/compact/headwear/neon_night_headwear.png",
+          "webp": "male/compact/headwear/neon_night_headwear.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/headwear/neon_night_headwear.png"
+    },
+    {
+      "sku": "neon_night.male.accessories",
+      "displayName": "Neon Night — Accessories",
+      "collection": "neon_night",
+      "gender": "male",
+      "slot": "accessories",
+      "rarity": "epic",
+      "price": 400,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/accessories/neon_night_accessories.png",
+          "webp": "male/master/accessories/neon_night_accessories.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/accessories/neon_night_accessories.png",
+          "webp": "male/runtime/accessories/neon_night_accessories.webp"
+        },
+        "compact": {
+          "png": "male/compact/accessories/neon_night_accessories.png",
+          "webp": "male/compact/accessories/neon_night_accessories.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/accessories/neon_night_accessories.png"
+    },
+    {
+      "sku": "neon_night.female.top",
+      "displayName": "Neon Night — Top",
+      "collection": "neon_night",
+      "gender": "female",
+      "slot": "top",
+      "rarity": "epic",
+      "price": 880,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/top/neon_night_top.png",
+          "webp": "female/master/top/neon_night_top.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/top/neon_night_top.png",
+          "webp": "female/runtime/top/neon_night_top.webp"
+        },
+        "compact": {
+          "png": "female/compact/top/neon_night_top.png",
+          "webp": "female/compact/top/neon_night_top.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/top/neon_night_top.png"
+    },
+    {
+      "sku": "neon_night.female.bottom",
+      "displayName": "Neon Night — Bottom",
+      "collection": "neon_night",
+      "gender": "female",
+      "slot": "bottom",
+      "rarity": "epic",
+      "price": 810,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/bottom/neon_night_bottom.png",
+          "webp": "female/master/bottom/neon_night_bottom.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/bottom/neon_night_bottom.png",
+          "webp": "female/runtime/bottom/neon_night_bottom.webp"
+        },
+        "compact": {
+          "png": "female/compact/bottom/neon_night_bottom.png",
+          "webp": "female/compact/bottom/neon_night_bottom.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/bottom/neon_night_bottom.png"
+    },
+    {
+      "sku": "neon_night.female.shoes",
+      "displayName": "Neon Night — Shoes",
+      "collection": "neon_night",
+      "gender": "female",
+      "slot": "shoes",
+      "rarity": "epic",
+      "price": 680,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/shoes/neon_night_shoes.png",
+          "webp": "female/master/shoes/neon_night_shoes.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/shoes/neon_night_shoes.png",
+          "webp": "female/runtime/shoes/neon_night_shoes.webp"
+        },
+        "compact": {
+          "png": "female/compact/shoes/neon_night_shoes.png",
+          "webp": "female/compact/shoes/neon_night_shoes.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/shoes/neon_night_shoes.png"
+    },
+    {
+      "sku": "neon_night.female.headwear",
+      "displayName": "Neon Night — Headwear",
+      "collection": "neon_night",
+      "gender": "female",
+      "slot": "headwear",
+      "rarity": "epic",
+      "price": 540,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/headwear/neon_night_headwear.png",
+          "webp": "female/master/headwear/neon_night_headwear.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/headwear/neon_night_headwear.png",
+          "webp": "female/runtime/headwear/neon_night_headwear.webp"
+        },
+        "compact": {
+          "png": "female/compact/headwear/neon_night_headwear.png",
+          "webp": "female/compact/headwear/neon_night_headwear.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/headwear/neon_night_headwear.png"
+    },
+    {
+      "sku": "neon_night.female.accessories",
+      "displayName": "Neon Night — Accessories",
+      "collection": "neon_night",
+      "gender": "female",
+      "slot": "accessories",
+      "rarity": "epic",
+      "price": 400,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/accessories/neon_night_accessories.png",
+          "webp": "female/master/accessories/neon_night_accessories.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/accessories/neon_night_accessories.png",
+          "webp": "female/runtime/accessories/neon_night_accessories.webp"
+        },
+        "compact": {
+          "png": "female/compact/accessories/neon_night_accessories.png",
+          "webp": "female/compact/accessories/neon_night_accessories.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/accessories/neon_night_accessories.png"
+    },
+    {
+      "sku": "royal_crest.male.top",
+      "displayName": "Royal Crest — Top",
+      "collection": "royal_crest",
+      "gender": "male",
+      "slot": "top",
+      "rarity": "legendary",
+      "price": 1170,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/top/royal_crest_top.png",
+          "webp": "male/master/top/royal_crest_top.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/top/royal_crest_top.png",
+          "webp": "male/runtime/top/royal_crest_top.webp"
+        },
+        "compact": {
+          "png": "male/compact/top/royal_crest_top.png",
+          "webp": "male/compact/top/royal_crest_top.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/top/royal_crest_top.png"
+    },
+    {
+      "sku": "royal_crest.male.bottom",
+      "displayName": "Royal Crest — Bottom",
+      "collection": "royal_crest",
+      "gender": "male",
+      "slot": "bottom",
+      "rarity": "legendary",
+      "price": 1080,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/bottom/royal_crest_bottom.png",
+          "webp": "male/master/bottom/royal_crest_bottom.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/bottom/royal_crest_bottom.png",
+          "webp": "male/runtime/bottom/royal_crest_bottom.webp"
+        },
+        "compact": {
+          "png": "male/compact/bottom/royal_crest_bottom.png",
+          "webp": "male/compact/bottom/royal_crest_bottom.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/bottom/royal_crest_bottom.png"
+    },
+    {
+      "sku": "royal_crest.male.shoes",
+      "displayName": "Royal Crest — Shoes",
+      "collection": "royal_crest",
+      "gender": "male",
+      "slot": "shoes",
+      "rarity": "legendary",
+      "price": 900,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/shoes/royal_crest_shoes.png",
+          "webp": "male/master/shoes/royal_crest_shoes.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/shoes/royal_crest_shoes.png",
+          "webp": "male/runtime/shoes/royal_crest_shoes.webp"
+        },
+        "compact": {
+          "png": "male/compact/shoes/royal_crest_shoes.png",
+          "webp": "male/compact/shoes/royal_crest_shoes.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/shoes/royal_crest_shoes.png"
+    },
+    {
+      "sku": "royal_crest.male.headwear",
+      "displayName": "Royal Crest — Headwear",
+      "collection": "royal_crest",
+      "gender": "male",
+      "slot": "headwear",
+      "rarity": "legendary",
+      "price": 720,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/headwear/royal_crest_headwear.png",
+          "webp": "male/master/headwear/royal_crest_headwear.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/headwear/royal_crest_headwear.png",
+          "webp": "male/runtime/headwear/royal_crest_headwear.webp"
+        },
+        "compact": {
+          "png": "male/compact/headwear/royal_crest_headwear.png",
+          "webp": "male/compact/headwear/royal_crest_headwear.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/headwear/royal_crest_headwear.png"
+    },
+    {
+      "sku": "royal_crest.male.accessories",
+      "displayName": "Royal Crest — Accessories",
+      "collection": "royal_crest",
+      "gender": "male",
+      "slot": "accessories",
+      "rarity": "legendary",
+      "price": 540,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/accessories/royal_crest_accessories.png",
+          "webp": "male/master/accessories/royal_crest_accessories.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/accessories/royal_crest_accessories.png",
+          "webp": "male/runtime/accessories/royal_crest_accessories.webp"
+        },
+        "compact": {
+          "png": "male/compact/accessories/royal_crest_accessories.png",
+          "webp": "male/compact/accessories/royal_crest_accessories.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/accessories/royal_crest_accessories.png"
+    },
+    {
+      "sku": "royal_crest.female.top",
+      "displayName": "Royal Crest — Top",
+      "collection": "royal_crest",
+      "gender": "female",
+      "slot": "top",
+      "rarity": "legendary",
+      "price": 1170,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/top/royal_crest_top.png",
+          "webp": "female/master/top/royal_crest_top.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/top/royal_crest_top.png",
+          "webp": "female/runtime/top/royal_crest_top.webp"
+        },
+        "compact": {
+          "png": "female/compact/top/royal_crest_top.png",
+          "webp": "female/compact/top/royal_crest_top.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/top/royal_crest_top.png"
+    },
+    {
+      "sku": "royal_crest.female.bottom",
+      "displayName": "Royal Crest — Bottom",
+      "collection": "royal_crest",
+      "gender": "female",
+      "slot": "bottom",
+      "rarity": "legendary",
+      "price": 1080,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/bottom/royal_crest_bottom.png",
+          "webp": "female/master/bottom/royal_crest_bottom.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/bottom/royal_crest_bottom.png",
+          "webp": "female/runtime/bottom/royal_crest_bottom.webp"
+        },
+        "compact": {
+          "png": "female/compact/bottom/royal_crest_bottom.png",
+          "webp": "female/compact/bottom/royal_crest_bottom.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/bottom/royal_crest_bottom.png"
+    },
+    {
+      "sku": "royal_crest.female.shoes",
+      "displayName": "Royal Crest — Shoes",
+      "collection": "royal_crest",
+      "gender": "female",
+      "slot": "shoes",
+      "rarity": "legendary",
+      "price": 900,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/shoes/royal_crest_shoes.png",
+          "webp": "female/master/shoes/royal_crest_shoes.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/shoes/royal_crest_shoes.png",
+          "webp": "female/runtime/shoes/royal_crest_shoes.webp"
+        },
+        "compact": {
+          "png": "female/compact/shoes/royal_crest_shoes.png",
+          "webp": "female/compact/shoes/royal_crest_shoes.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/shoes/royal_crest_shoes.png"
+    },
+    {
+      "sku": "royal_crest.female.headwear",
+      "displayName": "Royal Crest — Headwear",
+      "collection": "royal_crest",
+      "gender": "female",
+      "slot": "headwear",
+      "rarity": "legendary",
+      "price": 720,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/headwear/royal_crest_headwear.png",
+          "webp": "female/master/headwear/royal_crest_headwear.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/headwear/royal_crest_headwear.png",
+          "webp": "female/runtime/headwear/royal_crest_headwear.webp"
+        },
+        "compact": {
+          "png": "female/compact/headwear/royal_crest_headwear.png",
+          "webp": "female/compact/headwear/royal_crest_headwear.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/headwear/royal_crest_headwear.png"
+    },
+    {
+      "sku": "royal_crest.female.accessories",
+      "displayName": "Royal Crest — Accessories",
+      "collection": "royal_crest",
+      "gender": "female",
+      "slot": "accessories",
+      "rarity": "legendary",
+      "price": 540,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/accessories/royal_crest_accessories.png",
+          "webp": "female/master/accessories/royal_crest_accessories.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/accessories/royal_crest_accessories.png",
+          "webp": "female/runtime/accessories/royal_crest_accessories.webp"
+        },
+        "compact": {
+          "png": "female/compact/accessories/royal_crest_accessories.png",
+          "webp": "female/compact/accessories/royal_crest_accessories.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/accessories/royal_crest_accessories.png"
+    },
+    {
+      "sku": "white_classic_cap.male",
+      "displayName": "White Classic Cap",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "headwear",
+      "rarity": "common",
+      "price": 5,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/headwear/white_classic_cap.png",
+          "webp": "male/master/headwear/white_classic_cap.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/headwear/white_classic_cap.png",
+          "webp": "male/runtime/headwear/white_classic_cap.webp"
+        },
+        "compact": {
+          "png": "male/compact/headwear/white_classic_cap.png",
+          "webp": "male/compact/headwear/white_classic_cap.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/headwear/white_classic_cap.png"
+    },
+    {
+      "sku": "red_knit_beanie.male",
+      "displayName": "Red Knit Beanie",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "headwear",
+      "rarity": "rare",
+      "price": 8,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/headwear/red_knit_beanie.png",
+          "webp": "male/master/headwear/red_knit_beanie.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/headwear/red_knit_beanie.png",
+          "webp": "male/runtime/headwear/red_knit_beanie.webp"
+        },
+        "compact": {
+          "png": "male/compact/headwear/red_knit_beanie.png",
+          "webp": "male/compact/headwear/red_knit_beanie.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/headwear/red_knit_beanie.png"
+    },
+    {
+      "sku": "black_performance_tank.male",
+      "displayName": "Black Performance Tank",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "top",
+      "rarity": "common",
+      "price": 5,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/top/black_performance_tank.png",
+          "webp": "male/master/top/black_performance_tank.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/top/black_performance_tank.png",
+          "webp": "male/runtime/top/black_performance_tank.webp"
+        },
+        "compact": {
+          "png": "male/compact/top/black_performance_tank.png",
+          "webp": "male/compact/top/black_performance_tank.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/top/black_performance_tank.png"
+    },
+    {
+      "sku": "orange_training_tee.male",
+      "displayName": "Orange Training Tee",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "top",
+      "rarity": "rare",
+      "price": 12,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/top/orange_training_tee.png",
+          "webp": "male/master/top/orange_training_tee.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/top/orange_training_tee.png",
+          "webp": "male/runtime/top/orange_training_tee.webp"
+        },
+        "compact": {
+          "png": "male/compact/top/orange_training_tee.png",
+          "webp": "male/compact/top/orange_training_tee.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/top/orange_training_tee.png"
+    },
+    {
+      "sku": "charcoal_zip_hoodie.male",
+      "displayName": "Charcoal Zip Hoodie",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "top",
+      "rarity": "rare",
+      "price": 15,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/top/charcoal_zip_hoodie.png",
+          "webp": "male/master/top/charcoal_zip_hoodie.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/top/charcoal_zip_hoodie.png",
+          "webp": "male/runtime/top/charcoal_zip_hoodie.webp"
+        },
+        "compact": {
+          "png": "male/compact/top/charcoal_zip_hoodie.png",
+          "webp": "male/compact/top/charcoal_zip_hoodie.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/top/charcoal_zip_hoodie.png"
+    },
+    {
+      "sku": "orange_pullover_hoodie.male",
+      "displayName": "Orange Pullover Hoodie",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "top",
+      "rarity": "epic",
+      "price": 25,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/top/orange_pullover_hoodie.png",
+          "webp": "male/master/top/orange_pullover_hoodie.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/top/orange_pullover_hoodie.png",
+          "webp": "male/runtime/top/orange_pullover_hoodie.webp"
+        },
+        "compact": {
+          "png": "male/compact/top/orange_pullover_hoodie.png",
+          "webp": "male/compact/top/orange_pullover_hoodie.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/top/orange_pullover_hoodie.png"
+    },
+    {
+      "sku": "red_pullover_hoodie.male",
+      "displayName": "Red Pullover Hoodie",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "top",
+      "rarity": "epic",
+      "price": 28,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/top/red_pullover_hoodie.png",
+          "webp": "male/master/top/red_pullover_hoodie.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/top/red_pullover_hoodie.png",
+          "webp": "male/runtime/top/red_pullover_hoodie.webp"
+        },
+        "compact": {
+          "png": "male/compact/top/red_pullover_hoodie.png",
+          "webp": "male/compact/top/red_pullover_hoodie.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/top/red_pullover_hoodie.png"
+    },
+    {
+      "sku": "inferno_flame_tee.male",
+      "displayName": "Inferno Flame Tee",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "top",
+      "rarity": "legendary",
+      "price": 55,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/top/inferno_flame_tee.png",
+          "webp": "male/master/top/inferno_flame_tee.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/top/inferno_flame_tee.png",
+          "webp": "male/runtime/top/inferno_flame_tee.webp"
+        },
+        "compact": {
+          "png": "male/compact/top/inferno_flame_tee.png",
+          "webp": "male/compact/top/inferno_flame_tee.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/top/inferno_flame_tee.png"
+    },
+    {
+      "sku": "gray_training_shorts.male",
+      "displayName": "Gray Training Shorts",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "bottom",
+      "rarity": "common",
+      "price": 6,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/bottom/gray_training_shorts.png",
+          "webp": "male/master/bottom/gray_training_shorts.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/bottom/gray_training_shorts.png",
+          "webp": "male/runtime/bottom/gray_training_shorts.webp"
+        },
+        "compact": {
+          "png": "male/compact/bottom/gray_training_shorts.png",
+          "webp": "male/compact/bottom/gray_training_shorts.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/bottom/gray_training_shorts.png"
+    },
+    {
+      "sku": "red_training_shorts.male",
+      "displayName": "Red Training Shorts",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "bottom",
+      "rarity": "rare",
+      "price": 12,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/bottom/red_training_shorts.png",
+          "webp": "male/master/bottom/red_training_shorts.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/bottom/red_training_shorts.png",
+          "webp": "male/runtime/bottom/red_training_shorts.webp"
+        },
+        "compact": {
+          "png": "male/compact/bottom/red_training_shorts.png",
+          "webp": "male/compact/bottom/red_training_shorts.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/bottom/red_training_shorts.png"
+    },
+    {
+      "sku": "black_elite_joggers.male",
+      "displayName": "Black Elite Joggers",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "bottom",
+      "rarity": "rare",
+      "price": 15,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/bottom/black_elite_joggers.png",
+          "webp": "male/master/bottom/black_elite_joggers.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/bottom/black_elite_joggers.png",
+          "webp": "male/runtime/bottom/black_elite_joggers.webp"
+        },
+        "compact": {
+          "png": "male/compact/bottom/black_elite_joggers.png",
+          "webp": "male/compact/bottom/black_elite_joggers.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/bottom/black_elite_joggers.png"
+    },
+    {
+      "sku": "camo_cargo_pants.male",
+      "displayName": "Camo Cargo Pants",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "bottom",
+      "rarity": "epic",
+      "price": 30,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/bottom/camo_cargo_pants.png",
+          "webp": "male/master/bottom/camo_cargo_pants.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/bottom/camo_cargo_pants.png",
+          "webp": "male/runtime/bottom/camo_cargo_pants.webp"
+        },
+        "compact": {
+          "png": "male/compact/bottom/camo_cargo_pants.png",
+          "webp": "male/compact/bottom/camo_cargo_pants.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/bottom/camo_cargo_pants.png"
+    },
+    {
+      "sku": "white_sprint_sneakers.male",
+      "displayName": "White Sprint Sneakers",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "shoes",
+      "rarity": "rare",
+      "price": 12,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/shoes/white_sprint_sneakers.png",
+          "webp": "male/master/shoes/white_sprint_sneakers.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/shoes/white_sprint_sneakers.png",
+          "webp": "male/runtime/shoes/white_sprint_sneakers.webp"
+        },
+        "compact": {
+          "png": "male/compact/shoes/white_sprint_sneakers.png",
+          "webp": "male/compact/shoes/white_sprint_sneakers.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/shoes/white_sprint_sneakers.png"
+    },
+    {
+      "sku": "red_power_sneakers.male",
+      "displayName": "Red Power Sneakers",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "shoes",
+      "rarity": "rare",
+      "price": 15,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/shoes/red_power_sneakers.png",
+          "webp": "male/master/shoes/red_power_sneakers.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/shoes/red_power_sneakers.png",
+          "webp": "male/runtime/shoes/red_power_sneakers.webp"
+        },
+        "compact": {
+          "png": "male/compact/shoes/red_power_sneakers.png",
+          "webp": "male/compact/shoes/red_power_sneakers.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/shoes/red_power_sneakers.png"
+    },
+    {
+      "sku": "black_shadow_hightops.male",
+      "displayName": "Black Shadow High-Tops",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "shoes",
+      "rarity": "epic",
+      "price": 25,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/shoes/black_shadow_hightops.png",
+          "webp": "male/master/shoes/black_shadow_hightops.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/shoes/black_shadow_hightops.png",
+          "webp": "male/runtime/shoes/black_shadow_hightops.webp"
+        },
+        "compact": {
+          "png": "male/compact/shoes/black_shadow_hightops.png",
+          "webp": "male/compact/shoes/black_shadow_hightops.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/shoes/black_shadow_hightops.png"
+    },
+    {
+      "sku": "orange_utility_boots.male",
+      "displayName": "Orange Utility Boots",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "shoes",
+      "rarity": "legendary",
+      "price": 55,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/shoes/orange_utility_boots.png",
+          "webp": "male/master/shoes/orange_utility_boots.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/shoes/orange_utility_boots.png",
+          "webp": "male/runtime/shoes/orange_utility_boots.webp"
+        },
+        "compact": {
+          "png": "male/compact/shoes/orange_utility_boots.png",
+          "webp": "male/compact/shoes/orange_utility_boots.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/shoes/orange_utility_boots.png"
+    },
+    {
+      "sku": "black_utility_belt.male",
+      "displayName": "Black Utility Belt",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "accessories",
+      "rarity": "common",
+      "price": 6,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/accessories/black_utility_belt.png",
+          "webp": "male/master/accessories/black_utility_belt.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/accessories/black_utility_belt.png",
+          "webp": "male/runtime/accessories/black_utility_belt.webp"
+        },
+        "compact": {
+          "png": "male/compact/accessories/black_utility_belt.png",
+          "webp": "male/compact/accessories/black_utility_belt.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/accessories/black_utility_belt.png"
+    },
+    {
+      "sku": "gold_power_chain.male",
+      "displayName": "Gold Power Chain",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "accessories",
+      "rarity": "epic",
+      "price": 25,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/accessories/gold_power_chain.png",
+          "webp": "male/master/accessories/gold_power_chain.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/accessories/gold_power_chain.png",
+          "webp": "male/runtime/accessories/gold_power_chain.webp"
+        },
+        "compact": {
+          "png": "male/compact/accessories/gold_power_chain.png",
+          "webp": "male/compact/accessories/gold_power_chain.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/accessories/gold_power_chain.png"
+    },
+    {
+      "sku": "compact_dumbbells.male",
+      "displayName": "Compact Dumbbells",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "accessories",
+      "rarity": "legendary",
+      "price": 60,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/accessories/compact_dumbbells.png",
+          "webp": "male/master/accessories/compact_dumbbells.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/accessories/compact_dumbbells.png",
+          "webp": "male/runtime/accessories/compact_dumbbells.webp"
+        },
+        "compact": {
+          "png": "male/compact/accessories/compact_dumbbells.png",
+          "webp": "male/compact/accessories/compact_dumbbells.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/accessories/compact_dumbbells.png"
+    },
+    {
+      "sku": "utility_backpack.male",
+      "displayName": "Utility Backpack",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "back",
+      "rarity": "epic",
+      "price": 35,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "male/master/back/utility_backpack.png",
+          "webp": "male/master/back/utility_backpack.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/back/utility_backpack.png",
+          "webp": "male/runtime/back/utility_backpack.webp"
+        },
+        "compact": {
+          "png": "male/compact/back/utility_backpack.png",
+          "webp": "male/compact/back/utility_backpack.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/back/utility_backpack.png"
+    },
+    {
+      "sku": "white_classic_cap.female",
+      "displayName": "White Classic Cap",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "headwear",
+      "rarity": "common",
+      "price": 5,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/headwear/white_classic_cap.png",
+          "webp": "female/master/headwear/white_classic_cap.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/headwear/white_classic_cap.png",
+          "webp": "female/runtime/headwear/white_classic_cap.webp"
+        },
+        "compact": {
+          "png": "female/compact/headwear/white_classic_cap.png",
+          "webp": "female/compact/headwear/white_classic_cap.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/headwear/white_classic_cap.png"
+    },
+    {
+      "sku": "red_knit_beanie.female",
+      "displayName": "Red Knit Beanie",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "headwear",
+      "rarity": "rare",
+      "price": 8,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/headwear/red_knit_beanie.png",
+          "webp": "female/master/headwear/red_knit_beanie.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/headwear/red_knit_beanie.png",
+          "webp": "female/runtime/headwear/red_knit_beanie.webp"
+        },
+        "compact": {
+          "png": "female/compact/headwear/red_knit_beanie.png",
+          "webp": "female/compact/headwear/red_knit_beanie.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/headwear/red_knit_beanie.png"
+    },
+    {
+      "sku": "black_performance_tank.female",
+      "displayName": "Black Performance Tank",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "top",
+      "rarity": "common",
+      "price": 5,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/top/black_performance_tank.png",
+          "webp": "female/master/top/black_performance_tank.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/top/black_performance_tank.png",
+          "webp": "female/runtime/top/black_performance_tank.webp"
+        },
+        "compact": {
+          "png": "female/compact/top/black_performance_tank.png",
+          "webp": "female/compact/top/black_performance_tank.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/top/black_performance_tank.png"
+    },
+    {
+      "sku": "orange_training_tee.female",
+      "displayName": "Orange Training Tee",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "top",
+      "rarity": "rare",
+      "price": 12,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/top/orange_training_tee.png",
+          "webp": "female/master/top/orange_training_tee.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/top/orange_training_tee.png",
+          "webp": "female/runtime/top/orange_training_tee.webp"
+        },
+        "compact": {
+          "png": "female/compact/top/orange_training_tee.png",
+          "webp": "female/compact/top/orange_training_tee.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/top/orange_training_tee.png"
+    },
+    {
+      "sku": "charcoal_zip_hoodie.female",
+      "displayName": "Charcoal Zip Hoodie",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "top",
+      "rarity": "rare",
+      "price": 15,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/top/charcoal_zip_hoodie.png",
+          "webp": "female/master/top/charcoal_zip_hoodie.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/top/charcoal_zip_hoodie.png",
+          "webp": "female/runtime/top/charcoal_zip_hoodie.webp"
+        },
+        "compact": {
+          "png": "female/compact/top/charcoal_zip_hoodie.png",
+          "webp": "female/compact/top/charcoal_zip_hoodie.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/top/charcoal_zip_hoodie.png"
+    },
+    {
+      "sku": "orange_pullover_hoodie.female",
+      "displayName": "Orange Pullover Hoodie",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "top",
+      "rarity": "epic",
+      "price": 25,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/top/orange_pullover_hoodie.png",
+          "webp": "female/master/top/orange_pullover_hoodie.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/top/orange_pullover_hoodie.png",
+          "webp": "female/runtime/top/orange_pullover_hoodie.webp"
+        },
+        "compact": {
+          "png": "female/compact/top/orange_pullover_hoodie.png",
+          "webp": "female/compact/top/orange_pullover_hoodie.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/top/orange_pullover_hoodie.png"
+    },
+    {
+      "sku": "red_pullover_hoodie.female",
+      "displayName": "Red Pullover Hoodie",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "top",
+      "rarity": "epic",
+      "price": 28,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/top/red_pullover_hoodie.png",
+          "webp": "female/master/top/red_pullover_hoodie.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/top/red_pullover_hoodie.png",
+          "webp": "female/runtime/top/red_pullover_hoodie.webp"
+        },
+        "compact": {
+          "png": "female/compact/top/red_pullover_hoodie.png",
+          "webp": "female/compact/top/red_pullover_hoodie.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/top/red_pullover_hoodie.png"
+    },
+    {
+      "sku": "inferno_flame_tee.female",
+      "displayName": "Inferno Flame Tee",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "top",
+      "rarity": "legendary",
+      "price": 55,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/top/inferno_flame_tee.png",
+          "webp": "female/master/top/inferno_flame_tee.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/top/inferno_flame_tee.png",
+          "webp": "female/runtime/top/inferno_flame_tee.webp"
+        },
+        "compact": {
+          "png": "female/compact/top/inferno_flame_tee.png",
+          "webp": "female/compact/top/inferno_flame_tee.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/top/inferno_flame_tee.png"
+    },
+    {
+      "sku": "gray_training_shorts.female",
+      "displayName": "Gray Training Shorts",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "bottom",
+      "rarity": "common",
+      "price": 6,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/bottom/gray_training_shorts.png",
+          "webp": "female/master/bottom/gray_training_shorts.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/bottom/gray_training_shorts.png",
+          "webp": "female/runtime/bottom/gray_training_shorts.webp"
+        },
+        "compact": {
+          "png": "female/compact/bottom/gray_training_shorts.png",
+          "webp": "female/compact/bottom/gray_training_shorts.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/bottom/gray_training_shorts.png"
+    },
+    {
+      "sku": "red_training_shorts.female",
+      "displayName": "Red Training Shorts",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "bottom",
+      "rarity": "rare",
+      "price": 12,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/bottom/red_training_shorts.png",
+          "webp": "female/master/bottom/red_training_shorts.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/bottom/red_training_shorts.png",
+          "webp": "female/runtime/bottom/red_training_shorts.webp"
+        },
+        "compact": {
+          "png": "female/compact/bottom/red_training_shorts.png",
+          "webp": "female/compact/bottom/red_training_shorts.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/bottom/red_training_shorts.png"
+    },
+    {
+      "sku": "black_elite_joggers.female",
+      "displayName": "Black Elite Joggers",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "bottom",
+      "rarity": "rare",
+      "price": 15,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/bottom/black_elite_joggers.png",
+          "webp": "female/master/bottom/black_elite_joggers.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/bottom/black_elite_joggers.png",
+          "webp": "female/runtime/bottom/black_elite_joggers.webp"
+        },
+        "compact": {
+          "png": "female/compact/bottom/black_elite_joggers.png",
+          "webp": "female/compact/bottom/black_elite_joggers.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/bottom/black_elite_joggers.png"
+    },
+    {
+      "sku": "camo_cargo_pants.female",
+      "displayName": "Camo Cargo Pants",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "bottom",
+      "rarity": "epic",
+      "price": 30,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/bottom/camo_cargo_pants.png",
+          "webp": "female/master/bottom/camo_cargo_pants.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/bottom/camo_cargo_pants.png",
+          "webp": "female/runtime/bottom/camo_cargo_pants.webp"
+        },
+        "compact": {
+          "png": "female/compact/bottom/camo_cargo_pants.png",
+          "webp": "female/compact/bottom/camo_cargo_pants.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/bottom/camo_cargo_pants.png"
+    },
+    {
+      "sku": "white_sprint_sneakers.female",
+      "displayName": "White Sprint Sneakers",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "shoes",
+      "rarity": "rare",
+      "price": 12,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/shoes/white_sprint_sneakers.png",
+          "webp": "female/master/shoes/white_sprint_sneakers.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/shoes/white_sprint_sneakers.png",
+          "webp": "female/runtime/shoes/white_sprint_sneakers.webp"
+        },
+        "compact": {
+          "png": "female/compact/shoes/white_sprint_sneakers.png",
+          "webp": "female/compact/shoes/white_sprint_sneakers.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/shoes/white_sprint_sneakers.png"
+    },
+    {
+      "sku": "red_power_sneakers.female",
+      "displayName": "Red Power Sneakers",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "shoes",
+      "rarity": "rare",
+      "price": 15,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/shoes/red_power_sneakers.png",
+          "webp": "female/master/shoes/red_power_sneakers.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/shoes/red_power_sneakers.png",
+          "webp": "female/runtime/shoes/red_power_sneakers.webp"
+        },
+        "compact": {
+          "png": "female/compact/shoes/red_power_sneakers.png",
+          "webp": "female/compact/shoes/red_power_sneakers.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/shoes/red_power_sneakers.png"
+    },
+    {
+      "sku": "black_shadow_hightops.female",
+      "displayName": "Black Shadow High-Tops",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "shoes",
+      "rarity": "epic",
+      "price": 25,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/shoes/black_shadow_hightops.png",
+          "webp": "female/master/shoes/black_shadow_hightops.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/shoes/black_shadow_hightops.png",
+          "webp": "female/runtime/shoes/black_shadow_hightops.webp"
+        },
+        "compact": {
+          "png": "female/compact/shoes/black_shadow_hightops.png",
+          "webp": "female/compact/shoes/black_shadow_hightops.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/shoes/black_shadow_hightops.png"
+    },
+    {
+      "sku": "orange_utility_boots.female",
+      "displayName": "Orange Utility Boots",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "shoes",
+      "rarity": "legendary",
+      "price": 55,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/shoes/orange_utility_boots.png",
+          "webp": "female/master/shoes/orange_utility_boots.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/shoes/orange_utility_boots.png",
+          "webp": "female/runtime/shoes/orange_utility_boots.webp"
+        },
+        "compact": {
+          "png": "female/compact/shoes/orange_utility_boots.png",
+          "webp": "female/compact/shoes/orange_utility_boots.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/shoes/orange_utility_boots.png"
+    },
+    {
+      "sku": "black_utility_belt.female",
+      "displayName": "Black Utility Belt",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "accessories",
+      "rarity": "common",
+      "price": 6,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/accessories/black_utility_belt.png",
+          "webp": "female/master/accessories/black_utility_belt.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/accessories/black_utility_belt.png",
+          "webp": "female/runtime/accessories/black_utility_belt.webp"
+        },
+        "compact": {
+          "png": "female/compact/accessories/black_utility_belt.png",
+          "webp": "female/compact/accessories/black_utility_belt.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/accessories/black_utility_belt.png"
+    },
+    {
+      "sku": "gold_power_chain.female",
+      "displayName": "Gold Power Chain",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "accessories",
+      "rarity": "epic",
+      "price": 25,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/accessories/gold_power_chain.png",
+          "webp": "female/master/accessories/gold_power_chain.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/accessories/gold_power_chain.png",
+          "webp": "female/runtime/accessories/gold_power_chain.webp"
+        },
+        "compact": {
+          "png": "female/compact/accessories/gold_power_chain.png",
+          "webp": "female/compact/accessories/gold_power_chain.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/accessories/gold_power_chain.png"
+    },
+    {
+      "sku": "compact_dumbbells.female",
+      "displayName": "Compact Dumbbells",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "accessories",
+      "rarity": "legendary",
+      "price": 60,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/accessories/compact_dumbbells.png",
+          "webp": "female/master/accessories/compact_dumbbells.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/accessories/compact_dumbbells.png",
+          "webp": "female/runtime/accessories/compact_dumbbells.webp"
+        },
+        "compact": {
+          "png": "female/compact/accessories/compact_dumbbells.png",
+          "webp": "female/compact/accessories/compact_dumbbells.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/accessories/compact_dumbbells.png"
+    },
+    {
+      "sku": "utility_backpack.female",
+      "displayName": "Utility Backpack",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "back",
+      "rarity": "epic",
+      "price": 35,
+      "currency": "pr",
+      "assets": {
+        "master": {
+          "png": "female/master/back/utility_backpack.png",
+          "webp": "female/master/back/utility_backpack.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/back/utility_backpack.png",
+          "webp": "female/runtime/back/utility_backpack.webp"
+        },
+        "compact": {
+          "png": "female/compact/back/utility_backpack.png",
+          "webp": "female/compact/back/utility_backpack.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/back/utility_backpack.png"
+    }
+  ],
+  "defaultResolution": "runtime"
+}

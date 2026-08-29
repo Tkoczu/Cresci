@@ -6,6 +6,8 @@ import { openDatabase, createRepository } from './src/db.js';
 import { searchWgerExercises } from './src/exercise-catalog.js';
 import { BackupManager, GoogleDriveProvider } from './src/backup.js';
 import { updateGoogleEnv } from './src/env-config.js';
+import { GitHubReleaseChecker } from './src/update-check.js';
+import { SystemUpdateManager } from './src/system-update.js';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const envPath = path.resolve(root,'.env');
@@ -13,10 +15,13 @@ if (fs.existsSync(envPath)) process.loadEnvFile(envPath);
 const port = Number(process.env.PORT || 4173);
 const host = process.env.HOST || '0.0.0.0';
 const databasePath = path.resolve(root, process.env.DATABASE_PATH || './data/gym-progress.sqlite');
+const packageInfo = JSON.parse(fs.readFileSync(path.resolve(root,'package.json'),'utf8').replace(/^\uFEFF/,''));
 const db = openDatabase(databasePath);
 const repo = createRepository(db);
 const googleDrive = new GoogleDriveProvider({ tokenPath:path.resolve(root,'data/google-drive-token.json'), clientId:process.env.GOOGLE_CLIENT_ID, clientSecret:process.env.GOOGLE_CLIENT_SECRET });
 const backups = new BackupManager({ exportData:()=>repo.exportData(), importData:payload=>repo.importData(payload), settingsPath:path.resolve(root,'data/backup-settings.json'), localDirectory:path.resolve(root,'backups/automatic'), googleDrive });
+const releaseChecker = new GitHubReleaseChecker({ currentVersion:packageInfo.version });
+const systemUpdates = new SystemUpdateManager({ appRoot:root });
 
 const mime = { '.html':'text/html; charset=utf-8', '.css':'text/css; charset=utf-8', '.js':'text/javascript; charset=utf-8', '.json':'application/json; charset=utf-8', '.png':'image/png', '.webp':'image/webp', '.ico':'image/x-icon' };
 const send = (res, status, body, type='application/json; charset=utf-8', headers={}) => {
@@ -32,11 +37,35 @@ const bodyJson = req => new Promise((resolve, reject) => {
 const positiveInt = value => Number.isInteger(Number(value)) && Number(value) > 0;
 const redirectUriFor = (req, url) => process.env.GOOGLE_REDIRECT_URI || `${req.headers['x-forwarded-proto'] || url.protocol.replace(':','')}://${req.headers.host || `localhost:${port}`}/api/google-drive/callback`;
 const redirect = (res, location) => { res.writeHead(302, { Location:location, 'Cache-Control':'no-store' }); res.end(); };
+const sameOrigin = req => {
+  const origin=String(req.headers.origin||'').replace(/\/$/,'');
+  if(!origin)return true;
+  const protocol=String(req.headers['x-forwarded-proto']||'http').split(',')[0].trim();
+  return origin===`${protocol}://${req.headers.host}`;
+};
 
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   try {
     if (req.method === 'GET' && url.pathname === '/api/bootstrap') return send(res, 200, repo.bootstrap());
+    if (req.method === 'GET' && url.pathname === '/api/version') return send(res,200,releaseChecker.versionInfo());
+    if (req.method === 'GET' && url.pathname === '/api/updates/check') {
+      try{return send(res,200,await releaseChecker.check());}
+      catch(error){return send(res,502,{error:error.message,current_version:releaseChecker.currentVersion});}
+    }
+    if(req.method==='GET'&&url.pathname==='/api/system/update-status')return send(res,200,systemUpdates.status(),'application/json; charset=utf-8',{'Cache-Control':'no-store'});
+    if(req.method==='POST'&&url.pathname==='/api/system/update'){
+      if(!sameOrigin(req)||req.headers['x-cresci-action']!=='update')return send(res,403,{error:'Żądanie aktualizacji nie przeszło kontroli bezpieczeństwa.'});
+      if(Number(req.headers['content-length']||0)>0||req.headers['transfer-encoding'])return send(res,400,{error:'Endpoint aktualizacji nie przyjmuje komend, ścieżek ani innych parametrów.'});
+      try{
+        const environment=systemUpdates.status();
+        if(!environment.available)return send(res,409,{error:environment.reason});
+        const release=await releaseChecker.check();
+        if(release.no_public_release)return send(res,409,{error:'Nie ma publicznego wydania CRESCI do zainstalowania.'});
+        if(!release.update_available)return send(res,409,{error:'Masz już najnowszą wersję CRESCI.'});
+        return send(res,202,await systemUpdates.start({targetVersion:release.latest_tag||`v${release.latest_version}`}),'application/json; charset=utf-8',{'Cache-Control':'no-store'});
+      }catch(error){return send(res,error.statusCode||502,{error:error.message});}
+    }
     if (req.method === 'GET' && url.pathname === '/api/history') return send(res, 200, repo.history({ profile_id:url.searchParams.get('profile_id'), exercise_id:url.searchParams.get('exercise_id') }));
     if (req.method === 'GET' && url.pathname === '/api/progress') {
       const profileId = url.searchParams.get('profile_id'); const exerciseId = url.searchParams.get('exercise_id');

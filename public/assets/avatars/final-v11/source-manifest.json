@@ -1,0 +1,578 @@
+{
+  "schemaVersion": "1.0.0",
+  "packId": "cresci-avatar-locked-rig-v11",
+  "version": "11.0.0",
+  "canvas": {
+    "width": 256,
+    "height": 384,
+    "transparent": true
+  },
+  "anchor": {
+    "name": "feet-center",
+    "x": 128,
+    "y": 379
+  },
+  "layerOrder": [
+    "body",
+    "eyes",
+    "hair",
+    "bottom",
+    "top",
+    "shoes",
+    "headwear",
+    "accessories"
+  ],
+  "genders": [
+    "male",
+    "female"
+  ],
+  "rendering": {
+    "cssImageRendering": "pixelated"
+  },
+  "assets": [
+    {
+      "id": "male.body.base.png",
+      "gender": "male",
+      "slot": "body",
+      "name": "base",
+      "format": "png",
+      "path": "male/body/base.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "ab167c031b10b576b8b13c3f226ef9d094cccdb64e0384d7952f58e577e5e16b"
+    },
+    {
+      "id": "male.body.base.webp",
+      "gender": "male",
+      "slot": "body",
+      "name": "base",
+      "format": "webp",
+      "path": "male/body/base.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "5e215f72c53a0258795c7aecbaf8c66c7d0d30964e1d4b4ee66f5dc50da0098f"
+    },
+    {
+      "id": "male.eyes.brown.png",
+      "gender": "male",
+      "slot": "eyes",
+      "name": "brown",
+      "format": "png",
+      "path": "male/eyes/brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "fde4d68afee8499e65a2a052617f0b15bee5052ab6285e5c3642d12632f8531f"
+    },
+    {
+      "id": "male.eyes.brown.webp",
+      "gender": "male",
+      "slot": "eyes",
+      "name": "brown",
+      "format": "webp",
+      "path": "male/eyes/brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "da71a491b9bd69f1264327783c9d7d6e0b732b2be08fe08acde6867d7f0bc618"
+    },
+    {
+      "id": "male.hair.short_brown.png",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_brown",
+      "format": "png",
+      "path": "male/hair/short_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "013789070cadd7f1923fc82a9763b6411b21b10da5696789374576cdeb7ec946"
+    },
+    {
+      "id": "male.hair.short_brown.webp",
+      "gender": "male",
+      "slot": "hair",
+      "name": "short_brown",
+      "format": "webp",
+      "path": "male/hair/short_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "6c438c314647ef89f16c35b861894f826553a97e8df6160ab229993130a63f96"
+    },
+    {
+      "id": "male.bottom.cresci_training_bottom.png",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "cresci_training_bottom",
+      "format": "png",
+      "path": "male/bottom/cresci_training_bottom.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e7a508f72adcb324cd139db023b313cbcb82f94f0ec28bd3d6a7f9dfbe80c9cb"
+    },
+    {
+      "id": "male.bottom.cresci_training_bottom.webp",
+      "gender": "male",
+      "slot": "bottom",
+      "name": "cresci_training_bottom",
+      "format": "webp",
+      "path": "male/bottom/cresci_training_bottom.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "3aaae41e5addde141795880c4f3ecb8d41f10346ddfd90514c163ef03dae2aa6"
+    },
+    {
+      "id": "male.top.cresci_training_top.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "cresci_training_top",
+      "format": "png",
+      "path": "male/top/cresci_training_top.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "353703bb258da0842c9cd5dd1097f36e88efd0a650dc4097dfc6061143c2f0f2"
+    },
+    {
+      "id": "male.top.cresci_training_top.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "cresci_training_top",
+      "format": "webp",
+      "path": "male/top/cresci_training_top.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "e945874ed7ae2e6f9de80e2a0fbba3db301afbae4569303ecd2462bed21e6820"
+    },
+    {
+      "id": "male.shoes.cresci_runners.png",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "cresci_runners",
+      "format": "png",
+      "path": "male/shoes/cresci_runners.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "a276bfe0fc20c821dd2a2b35b1e0cc527bd88b75aa44cbd049d0e58254ea25f5"
+    },
+    {
+      "id": "male.shoes.cresci_runners.webp",
+      "gender": "male",
+      "slot": "shoes",
+      "name": "cresci_runners",
+      "format": "webp",
+      "path": "male/shoes/cresci_runners.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "2365f6a988f794481f23210277835390f96ca7b51483650ee69ab96c268be589"
+    },
+    {
+      "id": "male.headwear.cresci_cap.png",
+      "gender": "male",
+      "slot": "headwear",
+      "name": "cresci_cap",
+      "format": "png",
+      "path": "male/headwear/cresci_cap.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "603ff6863aff04b40ef1a2a1bcd7f94cc5adc728804b9ebab3967c064267bd3b"
+    },
+    {
+      "id": "male.headwear.cresci_cap.webp",
+      "gender": "male",
+      "slot": "headwear",
+      "name": "cresci_cap",
+      "format": "webp",
+      "path": "male/headwear/cresci_cap.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b71d556bd0bbf9575ae53b2e3265be90f0a86968cb74835d73621e8c87c88741"
+    },
+    {
+      "id": "male.accessories.cresci_wristbands.png",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "cresci_wristbands",
+      "format": "png",
+      "path": "male/accessories/cresci_wristbands.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "dc50c09a433ffedfd4c1b2d8e224bc52a1aae8a6924724ba964d0b15e6ba19fb"
+    },
+    {
+      "id": "male.accessories.cresci_wristbands.webp",
+      "gender": "male",
+      "slot": "accessories",
+      "name": "cresci_wristbands",
+      "format": "webp",
+      "path": "male/accessories/cresci_wristbands.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "96c2a005b049d6e4a84f3194d809aa267b9ee1615c9b0943f2b7b81714cac0c6"
+    },
+    {
+      "id": "female.body.base.png",
+      "gender": "female",
+      "slot": "body",
+      "name": "base",
+      "format": "png",
+      "path": "female/body/base.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "0e1ca4287f0dc0436c49fe844a17527a3dca13b9328a52d5d88796ac9fc650c1"
+    },
+    {
+      "id": "female.body.base.webp",
+      "gender": "female",
+      "slot": "body",
+      "name": "base",
+      "format": "webp",
+      "path": "female/body/base.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "bb43e37f3786ceb1c8db5493de8a7896b9b2bc55950d9be1350de706b8601f79"
+    },
+    {
+      "id": "female.eyes.brown.png",
+      "gender": "female",
+      "slot": "eyes",
+      "name": "brown",
+      "format": "png",
+      "path": "female/eyes/brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "bb3f780dde4cf02b0bf382550e89a5f35e61a53ed43de4c227d615995f2c8036"
+    },
+    {
+      "id": "female.eyes.brown.webp",
+      "gender": "female",
+      "slot": "eyes",
+      "name": "brown",
+      "format": "webp",
+      "path": "female/eyes/brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "7a61bf57b997f634a194a2488cddf82a61bb26c1e132d27d1c97b55e7034b90b"
+    },
+    {
+      "id": "female.hair.ponytail_brown.png",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_brown",
+      "format": "png",
+      "path": "female/hair/ponytail_brown.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "6d5aaa85bbf84ba962315aae2457d1e2a1bd0ba415c3afc5ef2cce1987d3ed6c"
+    },
+    {
+      "id": "female.hair.ponytail_brown.webp",
+      "gender": "female",
+      "slot": "hair",
+      "name": "ponytail_brown",
+      "format": "webp",
+      "path": "female/hair/ponytail_brown.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "4fd9c467758921e64b69fa77966e657ac184e048edcc3f850db4582a4ec03d32"
+    },
+    {
+      "id": "female.bottom.cresci_training_bottom.png",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "cresci_training_bottom",
+      "format": "png",
+      "path": "female/bottom/cresci_training_bottom.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "58e354fd70a4d03b3f35a661ce225e9b59a27a37fb71b9f9f186914de20e9949"
+    },
+    {
+      "id": "female.bottom.cresci_training_bottom.webp",
+      "gender": "female",
+      "slot": "bottom",
+      "name": "cresci_training_bottom",
+      "format": "webp",
+      "path": "female/bottom/cresci_training_bottom.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "700e24529b71f0c5caa428b5257f6481e831dedd43f3b6db0619467dd349c82d"
+    },
+    {
+      "id": "female.top.cresci_training_top.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "cresci_training_top",
+      "format": "png",
+      "path": "female/top/cresci_training_top.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "4219aae227f6719c39c99a8f9175c91adc810dd8aa447a397e7b645ef1cb8d8f"
+    },
+    {
+      "id": "female.top.cresci_training_top.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "cresci_training_top",
+      "format": "webp",
+      "path": "female/top/cresci_training_top.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8476bb065f102e7007fdf7b9340f455c1c033c7ae02951cca8065d552237d69b"
+    },
+    {
+      "id": "female.shoes.cresci_runners.png",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "cresci_runners",
+      "format": "png",
+      "path": "female/shoes/cresci_runners.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8af5b1b564014b6c895d00c2a6516e7c6686f60eb62d8cee607c03f73904ea9b"
+    },
+    {
+      "id": "female.shoes.cresci_runners.webp",
+      "gender": "female",
+      "slot": "shoes",
+      "name": "cresci_runners",
+      "format": "webp",
+      "path": "female/shoes/cresci_runners.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "cfc2bbfac0b1ea61ffb2241a6fb908ca72c5bfa8e96e193a1744b5cb5518c069"
+    },
+    {
+      "id": "female.headwear.cresci_cap.png",
+      "gender": "female",
+      "slot": "headwear",
+      "name": "cresci_cap",
+      "format": "png",
+      "path": "female/headwear/cresci_cap.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "01ebc8f44c1f49cd863c50edab94685df77ee21344dabac7383774247e0189c1"
+    },
+    {
+      "id": "female.headwear.cresci_cap.webp",
+      "gender": "female",
+      "slot": "headwear",
+      "name": "cresci_cap",
+      "format": "webp",
+      "path": "female/headwear/cresci_cap.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b71d0c5d0737e72da76d032d8bd29b1e1c5907f264831580a5e6294658820238"
+    },
+    {
+      "id": "female.accessories.cresci_wristbands.png",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "cresci_wristbands",
+      "format": "png",
+      "path": "female/accessories/cresci_wristbands.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "694862092e80b38659cc031289cd1d734947009f6206d16ac38f346be970af26"
+    },
+    {
+      "id": "female.accessories.cresci_wristbands.webp",
+      "gender": "female",
+      "slot": "accessories",
+      "name": "cresci_wristbands",
+      "format": "webp",
+      "path": "female/accessories/cresci_wristbands.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "b21b699e8bf825b49c812c979229e00fad5c6fa06a7d102b460884206928b5a8"
+    }
+  ]
+}
