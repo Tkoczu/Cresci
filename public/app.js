@@ -218,9 +218,84 @@ function renderUpdateProgress(status){
   else{title.textContent='Aktualizacja rozpoczęta';label.textContent=status.stage==='queued'?'OCZEKIWANIE':'W TOKU';label.className='running';}
 }
 async function pollUpdateStatus(){
-  if(state.updatePolling)return;state.updatePolling=true;const deadline=Date.now()+10*60*1000;
-  try{while(Date.now()<deadline){try{const status=await api('/api/system/update-status');renderUpdateProgress(status);if(status.state==='success'){state.versionInfo=null;await renderInstalledVersion(true);$('#updateBadge').className='update-badge current';$('#updateBadge').textContent='AKTUALNA';$('#updateInstall').hidden=true;$('#updateResult').hidden=false;$('#updateResult').className='update-result current';$('#updateResult').innerHTML=`<h4>CRESCI zostało zaktualizowane do ${esc(status.target_version||state.versionInfo?.current_version||'najnowszej wersji')}</h4><p>Nowa wersja przeszła kontrolę działania.</p>`;return;}if(status.state==='failed')return;}catch{$('#updateProgress').hidden=false;$('#updateProgressTitle').textContent='Restart CRESCI';$('#updateProgressState').textContent='ŁĄCZENIE';$('#updateProgressState').className='running';$('#updateProgressMessage').textContent='Usługa uruchamia się ponownie. Próba połączenia nastąpi automatycznie.';}await wait(2000);}renderUpdateProgress({state:'failed',stage:'health_check',message:'Przekroczono czas oczekiwania. Sprawdź stan usługi CRESCI na LXC.',rollback_succeeded:null});}
-  finally{state.updatePolling=false;$('#installUpdate').disabled=false;}
+  if(state.updatePolling)return;
+
+  state.updatePolling=true;
+
+  const deadline=Date.now()+10*60*1000;
+  let connectionLost=false;
+
+  try{
+    while(Date.now()<deadline){
+      try{
+        const status=await api('/api/system/update-status');
+
+        renderUpdateProgress(status);
+
+        if(status.state==='success'){
+          $('#updateProgress').hidden=false;
+          $('#updateProgressTitle').textContent='Aktualizacja zakończona';
+          $('#updateProgressState').textContent='GOTOWE';
+          $('#updateProgressState').className='success';
+          $('#updateProgressMessage').textContent=
+            `CRESCI zostało zaktualizowane do ${status.target_version||'najnowszej wersji'}. Odświeżam aplikację…`;
+
+          state.versionInfo=null;
+          state.updateCheck=null;
+
+          await wait(1200);
+
+          const url=new URL(window.location.href);
+
+          url.searchParams.delete('drive');
+          url.searchParams.set('updated',Date.now().toString());
+
+          window.location.replace(url.toString());
+          return;
+        }
+
+        if(status.state==='failed'){
+          renderUpdateProgress(status);
+          return;
+        }
+
+        if(connectionLost){
+          $('#updateProgress').hidden=false;
+          $('#updateProgressTitle').textContent='CRESCI ponownie działa';
+          $('#updateProgressState').textContent='POŁĄCZONO';
+          $('#updateProgressState').className='running';
+          $('#updateProgressMessage').textContent='Kończenie aktualizacji…';
+
+          connectionLost=false;
+        }
+      }
+      catch{
+        connectionLost=true;
+
+        $('#updateProgress').hidden=false;
+        $('#updateProgressTitle').textContent='Restart CRESCI';
+        $('#updateProgressState').textContent='ŁĄCZENIE';
+        $('#updateProgressState').className='running';
+        $('#updateProgressMessage').textContent=
+          'Usługa uruchamia się ponownie. Próba połączenia nastąpi automatycznie.';
+      }
+
+      await wait(2000);
+    }
+
+    renderUpdateProgress({
+      state:'failed',
+      stage:'health_check',
+      message:'Przekroczono czas oczekiwania. Sprawdź stan usługi CRESCI na LXC.',
+      rollback_succeeded:null
+    });
+  }
+  finally{
+    state.updatePolling=false;
+
+    const button=$('#installUpdate');
+    if(button)button.disabled=false;
+  }
 }
 async function installUpdate(){
   const target=state.updateCheck?.latest_tag||state.updateCheck?.latest_version||'najnowszej wersji';
