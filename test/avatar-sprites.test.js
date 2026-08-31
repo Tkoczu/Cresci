@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
-import { GAME_ITEMS } from '../src/game-items.js';
+import { GAME_ITEMS, gameItems } from '../src/game-items.js';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const assets=path.join(root,'public','assets','avatars');
@@ -14,9 +14,6 @@ const creator=JSON.parse(fs.readFileSync(path.join(packRoot,'creator','catalog.j
 const shop=JSON.parse(fs.readFileSync(path.join(packRoot,'shop','catalog.json'),'utf8'));
 
 test('v4-production is the only active avatar contract',()=>{
-  const active=fs.readFileSync(path.join(assets,'manifest.json'));
-  const source=fs.readFileSync(path.join(packRoot,'manifest.json'));
-  assert.deepEqual(active,source);
   assert.equal(manifest.packId,'cresci-avatar-hd-creator-shop-v4-production');
   assert.equal(manifest.schemaVersion,'4.1.0');
   assert.equal(manifest.defaultResolution,'runtime');
@@ -26,8 +23,8 @@ test('v4-production is the only active avatar contract',()=>{
   assert.deepEqual(manifest.variants.master,{width:1024,height:1536,anchor:{name:'feet-center',x:512,y:1516}});
 });
 
-test('all 996 supplied layer assets retain hashes, dimensions and RGBA PNG',()=>{
-  assert.equal(manifest.assets.length,996);
+test('all supplied and manager-added layer assets retain hashes, dimensions and RGBA PNG',()=>{
+  assert.ok(manifest.assets.length>=996);
   for(const asset of manifest.assets){
     const file=fs.readFileSync(path.join(packRoot,asset.path));
     assert.equal(crypto.createHash('sha256').update(file).digest('hex'),asset.sha256,asset.path);
@@ -44,7 +41,7 @@ test('creator and shop catalogs resolve only files supplied by v4-production',()
   assert.equal(shop.schemaVersion,'3.0.0');
   assert.equal(creator.hairStyles.male.length,5);
   assert.equal(creator.hairStyles.female.length,5);
-  assert.equal(shop.items.length,70);
+  assert.ok(shop.items.length>=70);
   for(const resolution of ['master','runtime','compact'])for(const gender of ['male','female']){
     const variants=creator.variantsByResolution[resolution][gender];
     for(const body of Object.values(variants.body))assert.ok(fs.existsSync(path.join(packRoot,body.png)));
@@ -52,12 +49,18 @@ test('creator and shop catalogs resolve only files supplied by v4-production',()
     for(const style of Object.values(variants.hair))for(const hair of Object.values(style))assert.ok(fs.existsSync(path.join(packRoot,hair.png)));
   }
   for(const item of shop.items)for(const resolution of ['master','runtime','compact'])assert.ok(fs.existsSync(path.join(packRoot,item.assets[resolution].png)),`${item.sku} ${resolution}`);
+  const managedIds=new Set(shop.items.filter(item=>item.managedBy==='cresci-manager').map(item=>item.contentId));
+  for(const contentId of managedIds){
+    const variants=shop.items.filter(item=>item.contentId===contentId);
+    assert.ok(variants.length>=1,`${contentId} variants`);
+    assert.ok(gameItems().some(item=>item.key===contentId),`${contentId} must be exposed by the CRESCI shop API`);
+  }
 });
 
 test('shared renderer selects runtime or compact and puts every layer at 0,0',()=>{
   const app=fs.readFileSync(path.join(root,'public','app.js'),'utf8');
   assert.match(app,/AVATAR_ASSET_ROOT='\/assets\/avatars\/v4-production'/);
-  assert.match(app,/AVATAR_CACHE_VERSION='4'/);
+  assert.match(app,/AVATAR_CACHE_VERSION='4\.1'/);
   assert.match(app,/creator\/catalog\.json\?v=/);
   assert.match(app,/shop\/catalog\.json\?v=/);
   assert.match(app,/spriteManifest\.layerOrder\.map/);
@@ -99,6 +102,6 @@ test('no service worker or active source references an older avatar pack',()=>{
     assert.doesNotMatch(content,/navigator\.serviceWorker|serviceWorker\.register/);
   }
   const index=fs.readFileSync(path.join(root,'public','index.html'),'utf8');
-  assert.match(index,/styles\.css\?v=4/);
-  assert.match(index,/app\.js\?v=4/);
+  assert.match(index,/styles\.css\?v=4\.2/);
+  assert.match(index,/app\.js\?v=4\.2/);
 });

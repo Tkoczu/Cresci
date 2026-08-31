@@ -1,6 +1,6 @@
 # CRESCI — self-hosted gym progress tracker
 
-Działający prototyp aplikacji webowej do prowadzenia progresu treningowego dla profili **Marek** i **Domii**. Dane są przechowywane lokalnie w SQLite; aplikacja nie wysyła ich do internetu.
+Działający prototyp aplikacji webowej do prowadzenia progresu treningowego dla wielu użytkowników (z zachowaniem profili **Marek** i **Domii**). Dane są przechowywane lokalnie w SQLite; aplikacja nie wysyła ich do internetu poza świadomie włączonym backupem Google Drive i katalogiem ćwiczeń.
 
 ## Funkcje MVP
 
@@ -21,6 +21,8 @@ Działający prototyp aplikacji webowej do prowadzenia progresu treningowego dla
 ## Uruchomienie
 
 Wymagany jest **Node.js 22.5 lub nowszy** (SQLite jest częścią Node, więc nie trzeba instalować pakietów).
+
+Przy pierwszym uruchomieniu aplikacja prosi o utworzenie pierwszego użytkownika. Hasło jest opcjonalne. Kolejne konta można dodać na ekranie wyboru użytkownika albo w **Ustawienia → Ogólne → Konta użytkowników**, a przycisk **Wyloguj** wraca do wyboru konta. Profile istniejącej instalacji są zachowywane i po migracji można je wybrać bez hasła. Po zalogowaniu dashboard, historia, wykresy, Score i CRESCI GAME pokazują wyłącznie dane bieżącego `user_id`; backend odrzuca również próby zapisu lub edycji danych innego konta.
 
 ```bash
 npm start
@@ -47,7 +49,9 @@ Testy uruchomisz przez `npm test`. Endpoint kontrolny: `GET /api/health`.
 
 ## Backup i migracja danych
 
-Najwygodniej użyć w aplikacji zakładki **Ustawienia → Dane i backup → Eksportuj dane**. Powstaje plik JSON zawierający profile, ćwiczenia i całą historię. Import takiego pliku odtwarza komplet danych i zastępuje bieżącą zawartość.
+Najwygodniej użyć w aplikacji zakładki **Ustawienia → Dane i backup → Eksportuj dane**. Powstaje jeden plik JSON zawierający konta (z hasłami wyłącznie w postaci hashy), ćwiczenia, historię, Score, GAME, PR, osiągnięcia i inventory wszystkich użytkowników. Aktywne sesje logowania nigdy nie trafiają do kopii. Import takiego pliku odtwarza komplet danych i zastępuje bieżącą zawartość.
+
+Fizycznie CRESCI nadal używa jednej bazy `data/gym-progress.sqlite`. Jest to właściwy model także dla rozbudowanej aplikacji: relacje przez `user_id` zapewniają separację danych, a backup pozostaje atomowy i prosty do przywrócenia. Przy ręcznym kopiowaniu działającej bazy należy uwzględnić tryb SQLite WAL; dlatego zalecany jest eksport/backup z aplikacji albo zatrzymanie usługi przed skopiowaniem samego pliku `.sqlite`.
 
 Można również zatrzymać aplikację i skopiować plik `data/gym-progress.sqlite`. Jeśli serwer działa, preferowany jest eksport JSON. Schemat ma własny numer wersji (`schema_meta`) i jest przygotowany pod kolejne migracje.
 

@@ -1780,6 +1780,64 @@
         }
       },
       "thumbnail": "shop/thumbnails/female/back/utility_backpack.png"
+    },
+    {
+      "contentId": "itm_3c16014b385552b58e72bb13bd98b4d8",
+      "variantId": "male",
+      "sku": "itm_3c16014b385552b58e72bb13bd98b4d8.male",
+      "assetKey": "best_in_world_tee",
+      "displayName": "Best In World Tee",
+      "collection": "core_catalog",
+      "gender": "male",
+      "slot": "top",
+      "rarity": "rare",
+      "price": 1,
+      "currency": "pr",
+      "managedBy": "cresci-manager",
+      "assets": {
+        "master": {
+          "png": "male/master/top/best_in_world_tee.png",
+          "webp": "male/master/top/best_in_world_tee.webp"
+        },
+        "runtime": {
+          "png": "male/runtime/top/best_in_world_tee.png",
+          "webp": "male/runtime/top/best_in_world_tee.webp"
+        },
+        "compact": {
+          "png": "male/compact/top/best_in_world_tee.png",
+          "webp": "male/compact/top/best_in_world_tee.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/male/top/best_in_world_tee.png"
+    },
+    {
+      "contentId": "itm_3c16014b385552b58e72bb13bd98b4d8",
+      "variantId": "female",
+      "sku": "itm_3c16014b385552b58e72bb13bd98b4d8.female",
+      "assetKey": "best_in_world_tee",
+      "displayName": "Best In World Tee",
+      "collection": "core_catalog",
+      "gender": "female",
+      "slot": "top",
+      "rarity": "rare",
+      "price": 1,
+      "currency": "pr",
+      "managedBy": "cresci-manager",
+      "assets": {
+        "master": {
+          "png": "female/master/top/best_in_world_tee.png",
+          "webp": "female/master/top/best_in_world_tee.webp"
+        },
+        "runtime": {
+          "png": "female/runtime/top/best_in_world_tee.png",
+          "webp": "female/runtime/top/best_in_world_tee.webp"
+        },
+        "compact": {
+          "png": "female/compact/top/best_in_world_tee.png",
+          "webp": "female/compact/top/best_in_world_tee.webp"
+        }
+      },
+      "thumbnail": "shop/thumbnails/female/top/best_in_world_tee.png"
     }
   ],
   "defaultResolution": "runtime"

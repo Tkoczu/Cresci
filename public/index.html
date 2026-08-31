@@ -8,10 +8,16 @@
   <link rel="icon" type="image/png" href="/cresci-icon.png">
   <link rel="apple-touch-icon" href="/cresci-icon.png">
   <title>CRESCI — progres treningowy</title>
-  <link rel="stylesheet" href="/styles.css?v=4">
+  <link rel="stylesheet" href="/styles.css?v=4.2&auth=1">
 </head>
 <body>
-  <aside class="sidebar">
+  <section class="auth-screen" id="authScreen" aria-live="polite">
+    <div class="auth-card">
+      <header class="auth-brand"><img src="/cresci-icon.png" alt=""><div><strong>CRESCI</strong><small>PROGRESS TRACKER</small></div></header>
+      <div id="authContent"><p>Uruchamianie CRESCI…</p></div>
+    </div>
+  </section>
+  <aside class="sidebar" inert>
     <a class="brand" href="#dashboard"><img class="brand-mark" src="/cresci-icon.png" alt=""><span>CRESCI<small>PROGRESS TRACKER</small></span></a>
     <nav aria-label="Główna nawigacja">
       <button class="nav-item active" data-view="dashboard"><span>⌂</span> Dashboard</button>
@@ -24,11 +30,12 @@
       <button class="nav-item" id="achievementsNav" data-view="achievements" hidden><span>★</span> Osiągnięcia</button>
       <button class="nav-item" data-view="settings"><span>⚙</span> Ustawienia</button>
     </nav>
+    <div class="sidebar-account" id="sidebarAccount"><span class="account-avatar" id="accountAvatar"></span><div><strong id="accountName">Użytkownik</strong><small>Aktywne konto</small></div><button id="logoutButton" type="button">Wyloguj</button></div>
     <div class="sidebar-foot"><span class="status-dot"></span> Dane zapisane lokalnie<small>SQLite · self-hosted</small></div>
   </aside>
   <button class="menu-backdrop" id="menuBackdrop" type="button" aria-label="Zamknij menu" tabindex="-1"></button>
 
-  <main>
+  <main inert>
     <header class="topbar">
       <button class="menu-button" id="menuButton" aria-label="Otwórz menu" aria-expanded="false">☰</button>
       <div><p class="eyebrow">TRENING SIŁOWY</p><h1 id="pageTitle">Twój progres</h1></div>
@@ -75,6 +82,7 @@
       <div class="game-nav" aria-label="CRESCI GAME"><button data-game-view="character">Postać</button><button data-game-view="inventory">Ekwipunek</button><button class="active" data-game-view="shop">Sklep</button><button data-game-view="achievements">Osiągnięcia</button></div>
       <div class="section-heading"><div><p class="eyebrow">CRESCI GAME</p><h2>Sklep</h2></div><div class="filters"><select id="shopProfile" aria-label="Profil sklepu"></select></div></div>
       <div class="game-balance" id="shopBalance"></div>
+      <div class="shop-tools"><input class="search" id="shopSearch" type="search" placeholder="Szukaj przedmiotu…" aria-label="Szukaj przedmiotu w sklepie"><div class="slot-filters" id="shopFilters" aria-label="Kategorie przedmiotów"></div></div>
       <div class="item-grid shop-grid" id="shopGrid"></div>
     </section>
 
@@ -87,9 +95,13 @@
 
     <section class="view" id="settingsView">
       <div class="section-heading"><div><p class="eyebrow">USTAWIENIA APLIKACJI</p><h2>Ustawienia</h2></div></div>
-      <div class="settings-tabs" role="tablist" aria-label="Sekcje ustawień"><button class="settings-tab active" type="button" role="tab" aria-selected="true" data-settings-tab="general">Ogólne</button><button class="settings-tab" type="button" role="tab" aria-selected="false" data-settings-tab="backup">Dane i backup</button><button class="settings-tab" type="button" role="tab" aria-selected="false" data-settings-tab="updates">Aktualizacje</button></div>
+      <div class="settings-tabs" role="tablist" aria-label="Sekcje ustawień"><button class="settings-tab active" type="button" role="tab" aria-selected="true" data-settings-tab="general">Ogólne</button><button class="settings-tab" type="button" role="tab" aria-selected="false" data-settings-tab="game">GAME</button><button class="settings-tab" type="button" role="tab" aria-selected="false" data-settings-tab="backup">Dane i backup</button><button class="settings-tab" type="button" role="tab" aria-selected="false" data-settings-tab="updates">Aktualizacje</button></div>
       <section class="settings-panel active" data-settings-panel="general">
-        <div class="data-grid settings-general-grid"><article class="data-card"><span class="data-icon">◐</span><h3>Wygląd</h3><p>Wybierz jasny albo ciemny motyw interfejsu CRESCI.</p><button class="secondary" id="settingsThemeToggle" type="button">Zmień motyw</button></article><article class="data-card"><span class="data-icon">●</span><h3>Tryb aplikacji</h3><p>Dane są przechowywane w lokalnej bazie SQLite na tym serwerze.</p><span class="settings-status"><i></i> Self-hosted</span></article><article class="data-card score-settings-card"><span class="data-icon">★</span><h3>CRESCI Score</h3><p>Jawna punktacja aktywności i progresu z ostatnich 30 dni. Włącz osobno dla każdego profilu i ustaw cel treningów tygodniowo.</p><div class="score-settings-list" id="scoreSettingsList"></div></article><article class="data-card score-settings-card game-settings-card"><span class="data-icon">◆</span><h3>CRESCI GAME</h3><p>Avatar, poziomy i meldunki XP. Funkcja jest domyślnie wyłączona i działa osobno dla każdego profilu.</p><div class="score-settings-list" id="gameSettingsList"></div></article></div>
+        <div class="data-grid settings-general-grid"><article class="data-card"><span class="data-icon">◐</span><h3>Wygląd</h3><p>Wybierz jasny albo ciemny motyw interfejsu CRESCI.</p><button class="secondary" id="settingsThemeToggle" type="button">Zmień motyw</button></article><article class="data-card"><span class="data-icon">●</span><h3>Tryb aplikacji</h3><p>Dane są przechowywane w lokalnej bazie SQLite na tym serwerze.</p><span class="settings-status"><i></i> Self-hosted</span></article><article class="data-card account-settings-card"><span class="data-icon">◎</span><h3>Konta użytkowników</h3><p id="accountSettingsText">Zarządzaj aktualnie zalogowanym użytkownikiem.</p><div class="account-settings-actions"><button class="secondary" id="addAccountButton" type="button">Dodaj użytkownika</button><button class="danger-button" id="deleteAccountButton" type="button">Usuń moje konto i dane</button></div></article><article class="data-card score-settings-card"><span class="data-icon">★</span><h3>CRESCI Score</h3><p>Jawna punktacja aktywności i progresu z ostatnich 30 dni. Włącz osobno dla każdego profilu i ustaw cel treningów tygodniowo.</p><div class="score-settings-list" id="scoreSettingsList"></div></article></div>
+      </section>
+      <section class="settings-panel" data-settings-panel="game" hidden>
+        <div class="settings-subheading"><h3>CRESCI GAME</h3><p>Włącz grywalizację i zarządzaj nią osobno dla każdego profilu.</p></div>
+        <div class="data-grid settings-general-grid"><article class="data-card score-settings-card game-settings-card"><span class="data-icon">◆</span><h3>CRESCI GAME</h3><p>Avatar, poziomy i meldunki XP. Funkcja jest domyślnie wyłączona i działa osobno dla każdego profilu.</p><div class="score-settings-list" id="gameSettingsList"></div></article></div>
       </section>
       <section class="settings-panel" data-settings-panel="backup" hidden>
       <div class="settings-subheading"><h3>Dane i backup</h3><p>Eksport, import, Google Drive i automatyczne kopie zapasowe.</p></div>
@@ -149,6 +161,9 @@
 
   <dialog id="scoreDialog" class="score-dialog"><form method="dialog"><button class="dialog-close" type="button" data-close-dialog="scoreDialog" aria-label="Zamknij">×</button><p class="eyebrow">OSTATNIE 30 DNI</p><h2 id="scoreDialogTitle">CRESCI Score</h2><div id="scoreDialogContent"></div><button class="primary full" type="button" data-close-dialog="scoreDialog">Zamknij</button></form></dialog>
 
+  <dialog id="deleteAccountDialog"><form method="dialog" id="deleteAccountForm"><button class="dialog-close" type="button" data-close-dialog="deleteAccountDialog" aria-label="Zamknij">×</button><p class="eyebrow">USUWANIE KONTA</p><h2>Usuń konto i wszystkie dane</h2><p class="delete-account-warning">Ta operacja usunie historię treningów, ustawienia, CRESCI GAME, PR, osiągnięcia i ekwipunek tego użytkownika. Nie można jej cofnąć.</p><label>Wpisz nazwę konta <strong id="deleteAccountName"></strong><input name="confirm_name" required autocomplete="off"></label><label id="deleteAccountPasswordLabel">Hasło<input name="password" type="password" autocomplete="current-password"></label><button class="danger-button full" type="submit">Trwale usuń moje konto</button></form></dialog>
+  <dialog id="addAccountDialog"><form method="dialog" id="addAccountForm"><button class="dialog-close" type="button" data-close-dialog="addAccountDialog" aria-label="Zamknij">×</button><p class="eyebrow">NOWY UŻYTKOWNIK</p><h2>Dodaj konto</h2><label>Nazwa użytkownika<input name="name" minlength="2" maxlength="40" required autocomplete="off"></label><label>Kolor profilu<input name="color" type="color" value="#7c6df2"></label><label>Hasło <span class="muted">(opcjonalne)</span><input name="password" type="password" maxlength="256" autocomplete="new-password"></label><label>Powtórz hasło<input name="password_repeat" type="password" maxlength="256" autocomplete="new-password"></label><button class="primary full" type="submit">Dodaj użytkownika</button></form></dialog>
+
   <dialog id="itemDialog" class="item-dialog"><form method="dialog"><button class="dialog-close" type="button" data-close-dialog="itemDialog" aria-label="Zamknij">×</button><p class="eyebrow">CRESCI GAME ITEM</p><div id="itemDialogContent"></div><button class="primary full" id="itemEquipToggle" type="button">Załóż</button></form></dialog>
 
   <dialog id="avatarDialog" class="avatar-dialog"><form method="dialog" id="avatarForm"><button class="dialog-close" type="button" data-close-dialog="avatarDialog" aria-label="Zamknij">×</button><p class="eyebrow">KREATOR POSTACI</p><h2>Stwórz swoją postać</h2><input type="hidden" name="user_id"><div class="avatar-creator"><div><div class="avatar-preview" id="avatarPreview" aria-label="Podgląd warstwowego avatara pixel-art"></div><small class="sprite-hint">Podgląd używa warstw PNG 64 × 96 px. Finalne sprite’y można później podmienić bez zmiany kodu.</small></div><div class="avatar-controls"><label>Baza postaci<select name="gender"><option value="female">Kobieta</option><option value="male">Mężczyzna</option></select></label><label>Kolor skóry<select name="skin_tone"><option value="light">Jasny</option><option value="warm">Ciepły</option><option value="tan">Śniady</option><option value="deep">Ciemny</option></select></label><label>Kolor oczu<select name="eye_color"><option value="brown">Brązowe</option><option value="blue">Niebieskie</option><option value="green">Zielone</option><option value="gray">Szare</option></select></label><label>Fryzura<select name="hairstyle"><option value="short">Krótka</option><option value="fade">Fade</option><option value="long">Długa</option><option value="bun">Kok</option></select></label><label>Kolor włosów<select name="hair_color"><option value="black">Czarne</option><option value="brown">Brązowe</option><option value="blonde">Blond</option><option value="red">Rude</option></select></label><label>Góra stroju<select name="top_style"><option value="cresci_tank">Top CRESCI</option><option value="black_tee">Czarny T-shirt</option></select></label><label>Dół stroju<select name="bottom_style"><option value="training_shorts">Szorty treningowe</option><option value="leggings">Legginsy</option></select></label><label>Buty<select name="shoes_style"><option value="trainers">Buty treningowe</option><option value="high_tops">Buty wysokie</option></select></label><label>Nakrycie głowy<select name="headwear"><option value="none">Brak</option><option value="headband">Opaska</option><option value="cap">Czapka</option></select></label><label>Akcesorium<select name="accessory"><option value="none">Brak</option><option value="wrist_wraps">Owijki na nadgarstki</option><option value="lifting_belt">Pas treningowy</option></select></label></div></div><p class="avatar-note">Konfiguracja warstw zostanie zapisana tylko dla wybranego profilu. Możesz ją później zmienić na ekranie Postać.</p><button class="primary full" type="submit">Zapisz avatar i włącz GAME</button></form></dialog>
@@ -161,5 +176,5 @@
   </form></dialog>
 
   <div class="toast" id="toast" role="status"></div>
-  <script type="module" src="/app.js?v=4"></script>
+  <script type="module" src="/app.js?v=4.2&auth=1"></script>
 </body></html>

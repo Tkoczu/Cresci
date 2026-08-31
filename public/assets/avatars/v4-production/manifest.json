@@ -1,7 +1,7 @@
 {
   "schemaVersion": "4.1.0",
   "packId": "cresci-avatar-hd-creator-shop-v4-production",
-  "status": "PRODUCTION_READY_MASK_CLEANED",
+  "status": "CONTENT_RELEASE_CANDIDATE",
   "sourcePack": "cresci-avatar-hd-creator-shop-v1",
   "defaultResolution": "runtime",
   "layerOrder": [
@@ -3842,7 +3842,7 @@
         "x": 512,
         "y": 1516
       },
-      "sha256": "0a8b0362f5c29b59fc2b0563ac987e76bb741a2b51fdf60fcf8c82aaf877ab50"
+      "sha256": "5d1e2ed46e6b5b366df8b826e953ba8e641f1478d731ed1829b567bd7cb75522"
     },
     {
       "id": "male.hair.short_textured_black.master.webp",
@@ -3878,7 +3878,7 @@
         "x": 256,
         "y": 758
       },
-      "sha256": "f797b9cc527a6e07c948a0afc63c94c3399fd5052027a7b53c0b412b05ff7dba"
+      "sha256": "e86c235fcaa1b8709dd7811ed5fcad13503a33c3a40623e0d5181951ef4a283b"
     },
     {
       "id": "male.hair.short_textured_black.runtime.webp",
@@ -3914,7 +3914,7 @@
         "x": 128,
         "y": 379
       },
-      "sha256": "ccf57303a3dbeb786077964b99eef01b9110bc5af1856eb792e2ce267eed3964"
+      "sha256": "a856c1038126e3ad980987c9060f96a8f45970c0fb85682fabb12a77d85c6673"
     },
     {
       "id": "male.hair.short_textured_black.compact.webp",
@@ -17973,6 +17973,227 @@
         "y": 379
       },
       "sha256": "661be2e23d14989cd0bc1340a8bc87b094de012462f0895c8eabf4ac5dcb96b1"
+    },
+    {
+      "id": "male.top.best_in_world_tee.master.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "master",
+      "format": "png",
+      "path": "male/master/top/best_in_world_tee.png",
+      "canvas": {
+        "width": 1024,
+        "height": 1536
+      },
+      "anchor": {
+        "x": 512,
+        "y": 1516
+      },
+      "sha256": "f7e750aa099a0f1a2503d2bff4a8e4203101935aa6b43f2b4b315fa875138e7e"
+    },
+    {
+      "id": "male.top.best_in_world_tee.master.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "master",
+      "format": "webp",
+      "path": "male/master/top/best_in_world_tee.webp",
+      "canvas": {
+        "width": 1024,
+        "height": 1536
+      },
+      "anchor": {
+        "x": 512,
+        "y": 1516
+      },
+      "sha256": "222aab1ca0c2f7097bf2182f68fc7a6dfc99f699eaafc8f6f0672affb5035f47"
+    },
+    {
+      "id": "male.top.best_in_world_tee.runtime.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "runtime",
+      "format": "png",
+      "path": "male/runtime/top/best_in_world_tee.png",
+      "canvas": {
+        "width": 512,
+        "height": 768
+      },
+      "anchor": {
+        "x": 256,
+        "y": 758
+      },
+      "sha256": "121d290520fb4fb6ef9317630ec8146186f94655c736b6264c25af56de3f6d1b"
+    },
+    {
+      "id": "male.top.best_in_world_tee.runtime.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "runtime",
+      "format": "webp",
+      "path": "male/runtime/top/best_in_world_tee.webp",
+      "canvas": {
+        "width": 512,
+        "height": 768
+      },
+      "anchor": {
+        "x": 256,
+        "y": 758
+      },
+      "sha256": "7ae25672b45134e77c72ca4171dfc6ad3823a9fdcd9a0f9132c93a600510aced"
+    },
+    {
+      "id": "male.top.best_in_world_tee.compact.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "compact",
+      "format": "png",
+      "path": "male/compact/top/best_in_world_tee.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "bd4d67885fb3b2b1d5cfab63d6c5c2a615a961b1d334e5a4f7fa1ec90aa0dd79"
+    },
+    {
+      "id": "male.top.best_in_world_tee.compact.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "compact",
+      "format": "webp",
+      "path": "male/compact/top/best_in_world_tee.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "342214534398b90d179ddcb29feec4bccb1099e854159810759e963515c64fc5"
+    },
+    {
+      "id": "female.top.best_in_world_tee.master.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "master",
+      "format": "png",
+      "path": "female/master/top/best_in_world_tee.png",
+      "canvas": {
+        "width": 1024,
+        "height": 1536
+      },
+      "anchor": {
+        "x": 512,
+        "y": 1516
+      },
+      "sha256": "b3c30d26ab6264c2910eeebb8281773c099f112f202b2fa1f542ca8324eeca4d"
+    },
+    {
+      "id": "female.top.best_in_world_tee.master.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "master",
+      "format": "webp",
+      "path": "female/master/top/best_in_world_tee.webp",
+      "canvas": {
+        "width": 1024,
+        "height": 1536
+      },
+      "anchor": {
+        "x": 512,
+        "y": 1516
+      },
+      "sha256": "c026b233f730306f36d797a032de673fcdfaad0717a7660f785586f8c94a0c92"
+    },
+    {
+      "id": "female.top.best_in_world_tee.runtime.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "runtime",
+      "format": "png",
+      "path": "female/runtime/top/best_in_world_tee.png",
+      "canvas": {
+        "width": 512,
+        "height": 768
+      },
+      "anchor": {
+        "x": 256,
+        "y": 758
+      },
+      "sha256": "068bd22321d8fc8cf2f418c86a2ec7d4813879bc38d396a32b815edbbf1dffc5"
+    },
+    {
+      "id": "female.top.best_in_world_tee.runtime.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "runtime",
+      "format": "webp",
+      "path": "female/runtime/top/best_in_world_tee.webp",
+      "canvas": {
+        "width": 512,
+        "height": 768
+      },
+      "anchor": {
+        "x": 256,
+        "y": 758
+      },
+      "sha256": "20faf6c7774780b7bed3d3f1c38a9e1fc917e1a5a56616195c33dd25c1791976"
+    },
+    {
+      "id": "female.top.best_in_world_tee.compact.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "compact",
+      "format": "png",
+      "path": "female/compact/top/best_in_world_tee.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "542c64f832ef5737b928fa2dc7785d6f168a0391c7efd98eaf9ba3614ee0ee6e"
+    },
+    {
+      "id": "female.top.best_in_world_tee.compact.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "compact",
+      "format": "webp",
+      "path": "female/compact/top/best_in_world_tee.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "68d2e2561a7a44aaeffe4990f3348b9ac18ecdba6b22c73eab4dd1783742a2fb"
     }
-  ]
+  ],
+  "contentArchitecture": {
+    "stableItemIdField": "contentId",
+    "displayNameMutable": true,
+    "userDataIncluded": false
+  }
 }

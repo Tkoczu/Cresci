@@ -1,3 +1,6 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
 export const ITEM_SLOTS = Object.freeze(['back','top','bottom','shoes','headwear','accessories']);
 
 export const SLOT_LABELS = Object.freeze({
@@ -6,7 +9,7 @@ export const SLOT_LABELS = Object.freeze({
 
 export const RARITY_LABELS = Object.freeze({common:'Zwykły',rare:'Rzadki',epic:'Epicki',legendary:'Legendarny'});
 
-export const GAME_ITEMS = Object.freeze([
+const BUILTIN_GAME_ITEMS = [
   {key:'cresci_tank',name:'Top CRESCI',slot:'top',spriteName:'cresci_training_top',rarity:'common',pricePr:2,description:'Klasyczny treningowy top w stylistyce CRESCI.'},
   {key:'black_tee',name:'Czarny T-shirt',slot:'top',rarity:'common',pricePr:3,description:'Prosty czarny T-shirt do ciężkich treningów.'},
   {key:'orange_hoodie',name:'Pomarańczowa bluza',slot:'top',spriteName:'orange_pullover_hoodie',collection:'CRESCI Core',rarity:'rare',pricePr:6,description:'Bluza z mocnym pomarańczowym akcentem CRESCI.'},
@@ -61,10 +64,95 @@ export const GAME_ITEMS = Object.freeze([
   {key:'red_power_sneakers',name:'Czerwone sneakersy Power',slot:'shoes',spriteName:'red_power_sneakers',collection:'CRESCI Core',rarity:'rare',pricePr:15,description:'Czerwone sneakersy Power.'},
   {key:'compact_dumbbells',name:'Kompaktowe hantle',slot:'accessories',spriteName:'compact_dumbbells',collection:'CRESCI Core',rarity:'legendary',pricePr:60,description:'Legendarny zestaw kompaktowych hantli.'},
   {key:'utility_backpack',name:'Plecak Utility',slot:'back',spriteName:'utility_backpack',collection:'CRESCI Core',rarity:'epic',pricePr:35,description:'Plecak renderowany za postacią.'}
-]);
+];
 
-const itemMap=new Map(GAME_ITEMS.map(item=>[item.key,item]));
-export function gameItem(key){return itemMap.get(String(key))||null;}
+function loadCatalogItems(){
+  try{
+    const catalogPath=process.env.CRESCI_CONTENT_PACK
+      ?join(process.env.CRESCI_CONTENT_PACK,'shop','catalog.json')
+      :new URL('../public/assets/avatars/v4-production/shop/catalog.json',import.meta.url);
+    const catalog=JSON.parse(readFileSync(catalogPath,'utf8'));
+    return Array.isArray(catalog.items)?catalog.items:[];
+  }catch(error){
+    console.error('Nie udało się wczytać katalogu CRESCI:',error.message);
+    return null;
+  }
+}
+
+function catalogAssetName(variant){
+  const assetPath=variant?.assets?.runtime?.png||variant?.assets?.master?.png||variant?.assets?.compact?.png||'';
+  return String(assetPath).split('/').pop().replace(/\.png$/i,'');
+}
+
+function loadManagedItems(catalogItems){
+  try{
+    const logicalItems=new Map();
+    for(const variant of catalogItems){
+      if(variant.managedBy!=='cresci-manager'||!variant.contentId||!ITEM_SLOTS.includes(variant.slot))continue;
+      const existing=logicalItems.get(variant.contentId);
+      if(existing&&existing.spriteName!==variant.assetKey)throw new Error(`Niespójny assetKey dla ${variant.contentId}`);
+      logicalItems.set(variant.contentId,{
+        key:String(variant.contentId),
+        name:String(variant.displayName||variant.contentId),
+        slot:variant.slot,
+        spriteName:String(variant.assetKey||variant.contentId),
+        collection:String(variant.collection||'CRESCI Manager'),
+        rarity:String(variant.rarity||'common'),
+        pricePr:Math.max(0,Number(variant.price)||0),
+        description:'Przedmiot dodany przez CRESCI Manager.'
+      });
+    }
+    return [...logicalItems.values()];
+  }catch(error){
+    console.error('Nie udało się wczytać itemów CRESCI Manager:',error.message);
+    return [];
+  }
+}
+
+const builtinKeys=new Set(BUILTIN_GAME_ITEMS.map(item=>item.key));
+// Starter/legacy layers are part of the avatar base contract rather than the
+// editable shop catalog. Only these known catalog-backed built-ins disappear
+// when their catalog entry is removed in CRESCI Manager.
+const CATALOG_MANAGED_BUILTIN_ASSETS=new Set([
+  'black_elite_joggers','black_performance_tank','black_shadow_hightops','black_utility_belt','camo_cargo_pants',
+  'charcoal_zip_hoodie','compact_dumbbells','ember_elite_accessories','ember_elite_bottom','ember_elite_headwear',
+  'ember_elite_shoes','ember_elite_top','gold_power_chain','gray_training_shorts','inferno_flame_tee',
+  'neon_night_accessories','neon_night_bottom','neon_night_headwear','neon_night_shoes','neon_night_top',
+  'orange_pullover_hoodie','orange_training_tee','orange_utility_boots','red_knit_beanie','red_power_sneakers',
+  'red_pullover_hoodie','red_training_shorts','royal_crest_accessories','royal_crest_bottom','royal_crest_headwear',
+  'royal_crest_shoes','royal_crest_top','utility_backpack','white_classic_cap','white_sprint_sneakers'
+]);
+export function gameItems(){
+  const catalogItems=loadCatalogItems();
+  if(catalogItems===null)return [...BUILTIN_GAME_ITEMS];
+  const catalogByAsset=new Map();
+  for(const variant of catalogItems){
+    const assetName=catalogAssetName(variant);
+    if(assetName&&!catalogByAsset.has(assetName))catalogByAsset.set(assetName,variant);
+  }
+  const activeBuiltins=BUILTIN_GAME_ITEMS.flatMap(item=>{
+    if(!item.spriteName||!CATALOG_MANAGED_BUILTIN_ASSETS.has(item.spriteName))return [item];
+    const catalogItem=catalogByAsset.get(item.spriteName);
+    if(!catalogItem)return [];
+    const catalogPrice=Number(catalogItem.price);
+    return [{
+      ...item,
+      name:String(catalogItem.displayName||item.name),
+      collection:String(catalogItem.collection||item.collection||'CRESCI Core'),
+      rarity:String(catalogItem.rarity||item.rarity),
+      pricePr:Number.isFinite(catalogPrice)?Math.max(0,catalogPrice):item.pricePr
+    }];
+  });
+  const managedItems=loadManagedItems(catalogItems).filter(item=>!builtinKeys.has(item.key));
+  return [...activeBuiltins,...managedItems];
+}
+
+// Kept as a startup snapshot for backwards compatibility and static contract
+// tests. Runtime requests use gameItems(), so Manager changes are visible
+// immediately without restarting CRESCI.
+export const GAME_ITEMS=Object.freeze(gameItems());
+
+export function gameItem(key){return gameItems().find(item=>item.key===String(key))||null;}
 
 export function avatarFieldForSlot(slot){return{back:'back_style',top:'top_style',bottom:'bottom_style',shoes:'shoes_style',headwear:'headwear',accessories:'accessory'}[slot]||slot;}
 

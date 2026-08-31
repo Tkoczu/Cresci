@@ -4,9 +4,9 @@ import path from 'node:path';
 import { calculateCresciScore } from './cresci-score.js';
 import { CHECK_IN_XP, levelFromXp, validateAvatar } from './cresci-game.js';
 import { ACHIEVEMENTS, ACHIEVEMENT_CATEGORIES, achievementProgress, longestCompletedWeeklyStreak } from './achievements.js';
-import { GAME_ITEMS, ITEM_SLOTS, SLOT_LABELS, RARITY_LABELS, avatarFieldForSlot, avatarItems, gameItem } from './game-items.js';
+import { gameItems, ITEM_SLOTS, SLOT_LABELS, RARITY_LABELS, avatarFieldForSlot, avatarItems, gameItem } from './game-items.js';
 
-export const SCHEMA_VERSION = 9;
+export const SCHEMA_VERSION = 10;
 
 const seedExercises = [
   ['Wyciskanie sztangi leżąc', 'Klatka piersiowa', 'plates', 20, 1.25],
@@ -210,11 +210,27 @@ function runMigrations(db) {
     if (!columns.includes('back_style')) db.exec("ALTER TABLE game_profiles ADD COLUMN back_style TEXT NOT NULL DEFAULT 'none'");
     db.prepare('UPDATE schema_meta SET version=?').run(9);
   }
+  if (currentVersion < 10) {
+    const profileColumns = db.prepare('PRAGMA table_info(profiles)').all().map(column=>column.name);
+    if (!profileColumns.includes('password_hash')) db.exec('ALTER TABLE profiles ADD COLUMN password_hash TEXT');
+    if (!profileColumns.includes('password_salt')) db.exec('ALTER TABLE profiles ADD COLUMN password_salt TEXT');
+    db.exec(`
+      CREATE TABLE IF NOT EXISTS auth_sessions (
+        token_hash TEXT PRIMARY KEY,
+        profile_id INTEGER NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+        created_at TEXT NOT NULL,
+        expires_at TEXT NOT NULL,
+        last_seen_at TEXT NOT NULL
+      );
+      CREATE INDEX IF NOT EXISTS idx_auth_sessions_profile ON auth_sessions(profile_id,expires_at);
+    `);
+    db.prepare('UPDATE schema_meta SET version=?').run(10);
+  }
 }
 
-function seed(db) {
+function seed(db, { seedProfiles = true } = {}) {
   const count = db.prepare('SELECT COUNT(*) AS count FROM profiles').get().count;
-  if (count === 0) {
+  if (seedProfiles && count === 0) {
     db.prepare('INSERT INTO profiles(name, color) VALUES (?, ?)').run('Marek', '#ff5d45');
     db.prepare('INSERT INTO profiles(name, color) VALUES (?, ?)').run('Domii', '#7c6df2');
   }
@@ -228,16 +244,19 @@ function seed(db) {
   }
 }
 
-export function openDatabase(databasePath) {
+export function openDatabase(databasePath, options = {}) {
   fs.mkdirSync(path.dirname(databasePath), { recursive: true });
   const db = new DatabaseSync(databasePath);
   runMigrations(db);
-  seed(db);
+  seed(db, options);
   db.exec('PRAGMA optimize;');
   return db;
 }
 
 export function createRepository(db) {
+  const profileColumns=new Set(db.prepare('PRAGMA table_info(profiles)').all().map(column=>column.name));
+  const hasAccountColumns=profileColumns.has('password_hash')&&profileColumns.has('password_salt');
+  const hasAuthSessions=Boolean(db.prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name='auth_sessions'").get());
   const latestWeight = db.prepare(`
     SELECT new_weight FROM progress_entries
     WHERE profile_id = ? AND exercise_id = ?
@@ -359,46 +378,103 @@ export function createRepository(db) {
   }
 
   return {
-    bootstrap() {
-      const profiles = db.prepare('SELECT id, name, color FROM profiles ORDER BY id').all();
-      const scoreSettings = db.prepare(`SELECT p.id AS user_id, p.name AS user_name, p.color,
-        COALESCE(s.enabled,0) AS enabled, COALESCE(s.weekly_goal,3) AS weekly_goal
-        FROM profiles p LEFT JOIN score_settings s ON s.profile_id=p.id ORDER BY p.id`).all();
-      const gameSettings = this.gameSettings();
+    accountUsers() {
+      return db.prepare(`SELECT id,name,color,(password_hash IS NOT NULL) AS password_required,created_at
+        FROM profiles ORDER BY id`).all().map(user=>({...user,password_required:Boolean(user.password_required)}));
+    },
+
+    accountUser(userId) {
+      return db.prepare(`SELECT id,name,color,password_hash,password_salt,created_at FROM profiles WHERE id=?`).get(userId) || null;
+    },
+
+    createAccount({name,color,password_hash=null,password_salt=null}) {
+      const cleanName=String(name||'').trim();
+      if(cleanName.length<2||cleanName.length>40)throw new Error('Nazwa użytkownika musi mieć od 2 do 40 znaków.');
+      const cleanColor=/^#[0-9a-f]{6}$/i.test(String(color||''))?String(color):'#ff5d45';
+      const result=db.prepare('INSERT INTO profiles(name,color,password_hash,password_salt) VALUES(?,?,?,?)').run(cleanName,cleanColor,password_hash,password_salt);
+      return this.accountUsers().find(user=>user.id===Number(result.lastInsertRowid));
+    },
+
+    createAuthSession(userId,tokenHash,expiresAt) {
+      const now=new Date().toISOString();
+      db.prepare('DELETE FROM auth_sessions WHERE expires_at<=?').run(now);
+      db.prepare('INSERT INTO auth_sessions(token_hash,profile_id,created_at,expires_at,last_seen_at) VALUES(?,?,?,?,?)').run(tokenHash,userId,now,expiresAt,now);
+    },
+
+    authSession(tokenHash) {
+      if(!tokenHash)return null;
+      const now=new Date().toISOString();
+      const user=db.prepare(`SELECT p.id,p.name,p.color,(p.password_hash IS NOT NULL) AS password_required,s.expires_at
+        FROM auth_sessions s JOIN profiles p ON p.id=s.profile_id WHERE s.token_hash=? AND s.expires_at>?`).get(tokenHash,now);
+      if(user)db.prepare('UPDATE auth_sessions SET last_seen_at=? WHERE token_hash=?').run(now,tokenHash);
+      return user?{...user,password_required:Boolean(user.password_required)}:null;
+    },
+
+    deleteAuthSession(tokenHash) {
+      if(tokenHash)db.prepare('DELETE FROM auth_sessions WHERE token_hash=?').run(tokenHash);
+    },
+
+    deleteAccount(userId) {
+      const profile=this.accountUser(userId);if(!profile)return false;
+      db.exec('BEGIN IMMEDIATE');
+      try{
+        db.prepare('DELETE FROM progress_entries WHERE profile_id=?').run(userId);
+        db.prepare('DELETE FROM profiles WHERE id=?').run(userId);
+        db.exec('COMMIT');
+        return true;
+      }catch(error){db.exec('ROLLBACK');throw error;}
+    },
+
+    bootstrap(userId = null) {
+      const selectedId=userId?Number(userId):null;
+      const profiles = selectedId?db.prepare('SELECT id,name,color FROM profiles WHERE id=?').all(selectedId):db.prepare('SELECT id,name,color FROM profiles ORDER BY id').all();
+      const scoreSettings = this.scoreSettings(selectedId);
+      const gameSettings = this.gameSettings(selectedId);
       const exercises = db.prepare(`
         SELECT e.*,
-          (SELECT COUNT(*) FROM progress_entries count_entries WHERE count_entries.exercise_id=e.id) AS entry_count,
-          (SELECT pe.new_weight FROM progress_entries pe WHERE pe.exercise_id=e.id AND pe.profile_id=1 ORDER BY pe.performed_at DESC, pe.id DESC LIMIT 1) AS marek_weight,
-          (SELECT pe.performed_at FROM progress_entries pe WHERE pe.exercise_id=e.id AND pe.profile_id=1 ORDER BY pe.performed_at DESC, pe.id DESC LIMIT 1) AS marek_date,
-          (SELECT pe.plates_or_steps FROM progress_entries pe WHERE pe.exercise_id=e.id AND pe.profile_id=1 ORDER BY pe.performed_at DESC, pe.id DESC LIMIT 1) AS marek_plates,
-          (SELECT pe.new_weight FROM progress_entries pe WHERE pe.exercise_id=e.id AND pe.profile_id=2 ORDER BY pe.performed_at DESC, pe.id DESC LIMIT 1) AS domii_weight,
-          (SELECT pe.performed_at FROM progress_entries pe WHERE pe.exercise_id=e.id AND pe.profile_id=2 ORDER BY pe.performed_at DESC, pe.id DESC LIMIT 1) AS domii_date,
-          (SELECT pe.plates_or_steps FROM progress_entries pe WHERE pe.exercise_id=e.id AND pe.profile_id=2 ORDER BY pe.performed_at DESC, pe.id DESC LIMIT 1) AS domii_plates
+          (SELECT COUNT(*) FROM progress_entries count_entries WHERE count_entries.exercise_id=e.id${selectedId?' AND count_entries.profile_id=?':''}) AS entry_count
         FROM exercises e WHERE active=1 ORDER BY category, name
-      `).all();
+      `).all(...(selectedId?[selectedId]:[]));
+      const profileWeights=db.prepare(`SELECT p.id AS profile_id,p.name,p.color,
+        (SELECT pe.new_weight FROM progress_entries pe WHERE pe.exercise_id=? AND pe.profile_id=p.id ORDER BY pe.performed_at DESC,pe.id DESC LIMIT 1) AS weight,
+        (SELECT pe.performed_at FROM progress_entries pe WHERE pe.exercise_id=? AND pe.profile_id=p.id ORDER BY pe.performed_at DESC,pe.id DESC LIMIT 1) AS performed_at,
+        (SELECT pe.plates_or_steps FROM progress_entries pe WHERE pe.exercise_id=? AND pe.profile_id=p.id ORDER BY pe.performed_at DESC,pe.id DESC LIMIT 1) AS plates_or_steps
+        FROM profiles p${selectedId?' WHERE p.id=?':''} ORDER BY p.id`);
+      for(const exercise of exercises){
+        exercise.profile_weights=profileWeights.all(exercise.id,exercise.id,exercise.id,...(selectedId?[selectedId]:[]));
+        const first=exercise.profile_weights.find(item=>item.profile_id===1),second=exercise.profile_weights.find(item=>item.profile_id===2);
+        exercise.marek_weight=first?.weight??null;exercise.marek_date=first?.performed_at??null;exercise.marek_plates=first?.plates_or_steps??null;
+        exercise.domii_weight=second?.weight??null;exercise.domii_date=second?.performed_at??null;exercise.domii_plates=second?.plates_or_steps??null;
+      }
       const archivedExercises = db.prepare(`
         SELECT e.id, e.name, e.category, e.active,
-          (SELECT COUNT(*) FROM progress_entries pe WHERE pe.exercise_id=e.id) AS entry_count
+          (SELECT COUNT(*) FROM progress_entries pe WHERE pe.exercise_id=e.id${selectedId?' AND pe.profile_id=?':''}) AS entry_count
         FROM exercises e WHERE active=0 ORDER BY category, name
-      `).all();
+      `).all(...(selectedId?[selectedId]:[]));
       const stats = db.prepare(`
         SELECT
-          (SELECT COUNT(*) FROM progress_entries) AS entries,
+          (SELECT COUNT(*) FROM progress_entries${selectedId?' WHERE profile_id=?':''}) AS entries,
           (SELECT COUNT(*) FROM exercises WHERE active=1) AS exercises,
-          (SELECT COUNT(DISTINCT performed_at) FROM progress_entries) AS training_days
-      `).get();
+          (SELECT COUNT(DISTINCT performed_at) FROM progress_entries${selectedId?' WHERE profile_id=?':''}) AS training_days
+      `).get(...(selectedId?[selectedId,selectedId]:[]));
       return { profiles, exercises, archived_exercises:archivedExercises, score_settings:scoreSettings, game_settings:gameSettings, stats };
     },
 
-    gameSettings() {
-      return db.prepare(`SELECT p.id AS user_id,p.name AS user_name,p.color,
+    gameSettings(userId = null) {
+      const settings=db.prepare(`SELECT p.id AS user_id,p.name AS user_name,p.color,
         COALESCE(g.enabled,0) AS enabled,COALESCE(g.avatar_configured,0) AS avatar_configured,
         g.avatar_gender AS gender,g.skin_tone,g.eye_color,g.hairstyle,g.hair_color,COALESCE(g.back_style,'none') AS back_style,
         COALESCE(g.top_style,'cresci_tank') AS top_style,COALESCE(g.bottom_style,'training_shorts') AS bottom_style,
         COALESCE(g.shoes_style,'trainers') AS shoes_style,COALESCE(g.headwear,'none') AS headwear,COALESCE(g.accessory,'none') AS accessory,
         COALESCE(g.total_xp,0) AS total_xp,COALESCE(g.pr_balance,0) AS pr_balance,
         COALESCE(g.pr_total_earned,0) AS pr_total_earned
-        FROM profiles p LEFT JOIN game_profiles g ON g.profile_id=p.id ORDER BY p.id`).all();
+        FROM profiles p LEFT JOIN game_profiles g ON g.profile_id=p.id${userId?' WHERE p.id=?':''} ORDER BY p.id`).all(...(userId?[Number(userId)]:[]));
+      const activeItemKeys=new Set(gameItems().map(item=>item.key));
+      for(const profile of settings)for(const slot of ITEM_SLOTS){
+        const field=avatarFieldForSlot(slot),key=profile[field];
+        if(key&&key!=='none'&&!activeItemKeys.has(key))profile[field]='none';
+      }
+      return settings;
     },
 
     updateGameSettings(userId, input) {
@@ -490,7 +566,7 @@ export function createRepository(db) {
       return{
         user_id:profile.user_id,user_name:profile.user_name,color:profile.color,pr_balance:profile.pr_balance,
         slots:ITEM_SLOTS.map(slot=>({key:slot,label:SLOT_LABELS[slot],equipped_key:profile[avatarFieldForSlot(slot)]||'none'})),
-        items:GAME_ITEMS.filter(item=>owned.has(item.key)).map(item=>decoratedItem(item,owned.get(item.key),profile))
+        items:gameItems().filter(item=>owned.has(item.key)).map(item=>decoratedItem(item,owned.get(item.key),profile))
       };
     },
 
@@ -498,7 +574,7 @@ export function createRepository(db) {
       const profile=this.gameSettings().find(item=>item.user_id===Number(userId));
       if(!profile||!Number(profile.enabled))return null;
       const owned=new Map(db.prepare('SELECT * FROM user_items WHERE profile_id=?').all(userId).map(row=>[row.item_key,row]));
-      return{user_id:profile.user_id,user_name:profile.user_name,color:profile.color,pr_balance:profile.pr_balance,items:GAME_ITEMS.map(item=>decoratedItem(item,owned.get(item.key),profile))};
+      return{user_id:profile.user_id,user_name:profile.user_name,color:profile.color,pr_balance:profile.pr_balance,items:gameItems().map(item=>decoratedItem(item,owned.get(item.key),profile))};
     },
 
     purchaseItem(userId, itemKey) {
@@ -559,10 +635,10 @@ export function createRepository(db) {
       }catch(error){db.exec('ROLLBACK');throw error;}
     },
 
-    scoreSettings() {
+    scoreSettings(userId = null) {
       return db.prepare(`SELECT p.id AS user_id, p.name AS user_name, p.color,
         COALESCE(s.enabled,0) AS enabled, COALESCE(s.weekly_goal,3) AS weekly_goal
-        FROM profiles p LEFT JOIN score_settings s ON s.profile_id=p.id ORDER BY p.id`).all();
+        FROM profiles p LEFT JOIN score_settings s ON s.profile_id=p.id${userId?' WHERE p.id=?':''} ORDER BY p.id`).all(...(userId?[Number(userId)]:[]));
     },
 
     updateScoreSettings(userId,input) {
@@ -695,6 +771,10 @@ export function createRepository(db) {
       return true;
     },
 
+    entryBelongsTo(id,userId) {
+      return Boolean(db.prepare('SELECT 1 FROM progress_entries WHERE id=? AND profile_id=?').get(id,userId));
+    },
+
     history(filters = {}) {
       const where = [];
       const params = [];
@@ -759,7 +839,7 @@ export function createRepository(db) {
     exportData() {
       return {
         format: 'gym-progress-backup', version: SCHEMA_VERSION, exported_at: new Date().toISOString(),
-        profiles: db.prepare('SELECT id, name, color, created_at FROM profiles ORDER BY id').all(),
+        profiles: db.prepare(hasAccountColumns?'SELECT id, name, color, password_hash, password_salt, created_at FROM profiles ORDER BY id':'SELECT id, name, color, NULL AS password_hash, NULL AS password_salt, created_at FROM profiles ORDER BY id').all(),
         score_settings: db.prepare('SELECT profile_id,enabled,weekly_goal,updated_at FROM score_settings ORDER BY profile_id').all(),
         game_profiles: db.prepare('SELECT * FROM game_profiles ORDER BY profile_id').all(),
         game_events: db.prepare('SELECT * FROM game_events ORDER BY id').all(),
@@ -778,9 +858,9 @@ export function createRepository(db) {
       }
       db.exec('BEGIN IMMEDIATE');
       try {
-        db.exec('DELETE FROM user_items; DELETE FROM user_achievements; DELETE FROM pr_transactions; DELETE FROM game_events; DELETE FROM game_records; DELETE FROM game_profiles; DELETE FROM score_settings; DELETE FROM progress_entries; DELETE FROM exercises; DELETE FROM profiles;');
-        const profileInsert = db.prepare('INSERT INTO profiles(id,name,color,created_at) VALUES (?,?,?,?)');
-        for (const x of payload.profiles) profileInsert.run(x.id, x.name, x.color, x.created_at);
+        db.exec(`${hasAuthSessions?'DELETE FROM auth_sessions; ':''}DELETE FROM user_items; DELETE FROM user_achievements; DELETE FROM pr_transactions; DELETE FROM game_events; DELETE FROM game_records; DELETE FROM game_profiles; DELETE FROM score_settings; DELETE FROM progress_entries; DELETE FROM exercises; DELETE FROM profiles;`);
+        const profileInsert = db.prepare(hasAccountColumns?'INSERT INTO profiles(id,name,color,password_hash,password_salt,created_at) VALUES (?,?,?,?,?,?)':'INSERT INTO profiles(id,name,color,created_at) VALUES (?,?,?,?)');
+        for (const x of payload.profiles) hasAccountColumns?profileInsert.run(x.id,x.name,x.color,x.password_hash||null,x.password_salt||null,x.created_at):profileInsert.run(x.id,x.name,x.color,x.created_at);
         const scoreSettingsInsert=db.prepare('INSERT INTO score_settings(profile_id,enabled,weekly_goal,updated_at) VALUES(?,?,?,?)');
         for(const x of payload.score_settings||[])scoreSettingsInsert.run(x.profile_id,Number(Boolean(x.enabled)),Number(x.weekly_goal)||3,x.updated_at||new Date().toISOString());
         const gameProfileInsert=db.prepare(`INSERT INTO game_profiles(profile_id,enabled,avatar_configured,avatar_gender,skin_tone,eye_color,hairstyle,hair_color,back_style,top_style,bottom_style,shoes_style,headwear,accessory,total_xp,pr_balance,pr_total_earned,created_at,updated_at) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`);

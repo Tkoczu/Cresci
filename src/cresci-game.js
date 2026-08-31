@@ -1,9 +1,9 @@
-import { GAME_ITEMS, avatarFieldForSlot } from './game-items.js';
+import { gameItems, avatarFieldForSlot } from './game-items.js';
 
 export const CHECK_IN_XP = 25;
 
 const outfitOptions={back_style:['none'],top_style:['none'],bottom_style:['none'],shoes_style:['none'],headwear:['none'],accessory:['none']};
-for(const item of GAME_ITEMS){const field=avatarFieldForSlot(item.slot);if(!outfitOptions[field].includes(item.key))outfitOptions[field].push(item.key);}
+for(const item of gameItems()){const field=avatarFieldForSlot(item.slot);if(!outfitOptions[field].includes(item.key))outfitOptions[field].push(item.key);}
 
 export const AVATAR_OPTIONS = Object.freeze({
   gender: ['female', 'male'],
@@ -26,7 +26,13 @@ export const AVATAR_DEFAULTS = Object.freeze({
 
 export function validateAvatar(input = {}) {
   const avatar = {};
-  for (const [field, allowed] of Object.entries(AVATAR_OPTIONS)) {
+  const currentOptions={...AVATAR_OPTIONS};
+  for(const field of ['back_style','top_style','bottom_style','shoes_style','headwear','accessory'])currentOptions[field]=['none'];
+  for(const item of gameItems()){
+    const field=avatarFieldForSlot(item.slot);
+    if(!currentOptions[field].includes(item.key))currentOptions[field].push(item.key);
+  }
+  for (const [field, allowed] of Object.entries(currentOptions)) {
     const value = String(input[field] || AVATAR_DEFAULTS[field] || '');
     if (!allowed.includes(value)) throw new Error('Uzupełnij wszystkie opcje avatara.');
     avatar[field] = value;
