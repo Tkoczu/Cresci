@@ -13,12 +13,21 @@ function Fail {
     throw $Message
 }
 
+$packageChanged = $false
+$commitCreated = $false
+$originalPackageJson = $null
+$packagePath = $null
+
 try {
     Write-Host ""
     Write-Host "======================================"
     Write-Host "        CRESCI Publisher"
     Write-Host "======================================"
     Write-Host ""
+
+    # ---------------------------------------
+    # Kontrola projektu
+    # ---------------------------------------
 
     if (-not (Test-Path ".\package.json")) {
         Fail "Nie znaleziono package.json. Uruchom skrypt z glownego katalogu CRESCI."
@@ -28,7 +37,42 @@ try {
         Fail "Ten katalog nie wyglada na repozytorium Git."
     }
 
-    $packagePath = Resolve-Path ".\package.json"
+    # ---------------------------------------
+    # Kontrola GitHub CLI PRZED publikacja
+    # ---------------------------------------
+
+    Write-Host "Sprawdzanie GitHub CLI..."
+
+    $gh = Get-Command gh -ErrorAction SilentlyContinue
+
+    if (-not $gh) {
+        Fail @"
+GitHub CLI 'gh' nie jest zainstalowane.
+
+Zainstaluj je poleceniem:
+
+winget install --id GitHub.cli
+
+Potem uruchom:
+
+gh auth login
+"@
+    }
+
+    gh auth status | Out-Null
+
+    if ($LASTEXITCODE -ne 0) {
+        Fail "GitHub CLI nie jest zalogowane. Uruchom: gh auth login"
+    }
+
+    Write-Host "GitHub CLI: OK"
+    Write-Host ""
+
+    # ---------------------------------------
+    # Aktualna wersja
+    # ---------------------------------------
+
+    $packagePath = (Resolve-Path ".\package.json").Path
     $originalPackageJson = Get-Content $packagePath -Raw
 
     $package = $originalPackageJson | ConvertFrom-Json
@@ -37,10 +81,14 @@ try {
     Write-Host "Aktualna wersja: $currentVersion"
     Write-Host ""
 
-    $newVersion = Read-Host "Podaj nowa wersje, np. 1.0.3"
+    # ---------------------------------------
+    # Nowa wersja
+    # ---------------------------------------
+
+    $newVersion = Read-Host "Podaj nowa wersje, np. 1.0.4"
 
     if ($newVersion -notmatch '^\d+\.\d+\.\d+$') {
-        Fail "Nieprawidlowa wersja. Uzyj formatu X.Y.Z, np. 1.0.3."
+        Fail "Nieprawidlowa wersja. Uzyj formatu X.Y.Z, np. 1.0.4."
     }
 
     if ($newVersion -eq $currentVersion) {
@@ -49,32 +97,47 @@ try {
 
     $newTag = "v$newVersion"
 
-    $existingTag = git tag -l $newTag
+    $existingLocalTag = git tag -l $newTag
 
     if ($LASTEXITCODE -ne 0) {
-        Fail "Nie udalo sie sprawdzic tagow Git."
+        Fail "Nie udalo sie sprawdzic lokalnych tagow Git."
     }
 
-    if ($existingTag) {
-        Fail "Tag $newTag juz istnieje."
+    if ($existingLocalTag) {
+        Fail "Tag $newTag juz istnieje lokalnie."
     }
+
+    $existingRemoteTag = git ls-remote --tags origin "refs/tags/$newTag"
+
+    if ($LASTEXITCODE -ne 0) {
+        Fail "Nie udalo sie sprawdzic tagow na GitHubie."
+    }
+
+    if ($existingRemoteTag) {
+        Fail "Tag $newTag juz istnieje na GitHubie."
+    }
+
+    # ---------------------------------------
+    # Changelog
+    # ---------------------------------------
 
     Write-Host ""
     Write-Host "======================================"
     Write-Host "           OPIS ZMIAN"
     Write-Host "======================================"
     Write-Host ""
-    Write-Host "Wpisuj po jednej zmianie w linii."
-    Write-Host "Nie wpisuj numerow 1., 2., 3. - skrypt sam zrobi liste."
+    Write-Host "Wpisz lub wklej liste zmian."
+    Write-Host "Kazda zmiana powinna byc w osobnej linii."
+    Write-Host "Nie wpisuj numerow ani myslnikow."
     Write-Host "Pusta linia konczy wpisywanie."
     Write-Host ""
 
     $descriptionLines = @()
 
     while ($true) {
-        $line = Read-Host
+        $line = [Console]::ReadLine()
 
-        if ([string]::IsNullOrWhiteSpace($line)) {
+        if ($null -eq $line -or [string]::IsNullOrWhiteSpace($line)) {
             break
         }
 
@@ -85,7 +148,14 @@ try {
         Fail "Opis zmian nie moze byc pusty."
     }
 
-    $description = ($descriptionLines | ForEach-Object { "- $_" }) -join "`n"
+    $description = (
+        $descriptionLines |
+        ForEach-Object { "- $_" }
+    ) -join "`n"
+
+    # ---------------------------------------
+    # Podsumowanie
+    # ---------------------------------------
 
     Write-Host ""
     Write-Host "======================================"
@@ -108,10 +178,15 @@ try {
     $confirm = Read-Host "Publikowac $newTag? [y/N]"
 
     if ($confirm -notmatch '^(y|Y|yes|YES)$') {
+        Write-Host ""
         Write-Host "Anulowano."
         Pause-OnExit
         exit 0
     }
+
+    # ---------------------------------------
+    # package.json
+    # ---------------------------------------
 
     Write-Host ""
     Write-Host "[1/9] Aktualizacja package.json..."
@@ -126,32 +201,30 @@ try {
         (New-Object System.Text.UTF8Encoding($false))
     )
 
+    $packageChanged = $true
+
+    # ---------------------------------------
+    # Testy
+    # ---------------------------------------
+
     Write-Host "[2/9] Uruchamianie testow..."
 
     npm test
 
     if ($LASTEXITCODE -ne 0) {
-        [System.IO.File]::WriteAllText(
-            $packagePath,
-            $originalPackageJson,
-            (New-Object System.Text.UTF8Encoding($false))
-        )
-
-        Fail "Testy nie przeszly. package.json zostal przywrocony do wersji $currentVersion."
+        Fail "Testy nie przeszly."
     }
+
+    # ---------------------------------------
+    # Git add
+    # ---------------------------------------
 
     Write-Host "[3/9] Dodawanie zmian do Git..."
 
     git add -A
 
     if ($LASTEXITCODE -ne 0) {
-        [System.IO.File]::WriteAllText(
-            $packagePath,
-            $originalPackageJson,
-            (New-Object System.Text.UTF8Encoding($false))
-        )
-
-        Fail "git add nie powiodl sie. package.json zostal przywrocony do wersji $currentVersion."
+        Fail "git add nie powiodl sie."
     }
 
     Write-Host ""
@@ -171,32 +244,23 @@ try {
     $stagedFiles = git diff --cached --name-only
 
     if ($LASTEXITCODE -ne 0) {
-        Fail "Nie udalo sie odczytac staged files."
+        Fail "Nie udalo sie odczytac plikow przygotowanych do publikacji."
     }
 
     if (-not $stagedFiles) {
-        [System.IO.File]::WriteAllText(
-            $packagePath,
-            $originalPackageJson,
-            (New-Object System.Text.UTF8Encoding($false))
-        )
-
-        Fail "Brak zmian do opublikowania. package.json zostal przywrocony."
+        Fail "Brak zmian do opublikowania."
     }
 
     $confirmFiles = Read-Host "Kontynuowac z tymi plikami? [y/N]"
 
     if ($confirmFiles -notmatch '^(y|Y|yes|YES)$') {
-        git reset
-
-        [System.IO.File]::WriteAllText(
-            $packagePath,
-            $originalPackageJson,
-            (New-Object System.Text.UTF8Encoding($false))
-        )
-
-        Fail "Publikacja anulowana. Staging i package.json zostaly przywrocone."
+        git reset | Out-Null
+        Fail "Publikacja anulowana przed commitem."
     }
+
+    # ---------------------------------------
+    # Commit
+    # ---------------------------------------
 
     Write-Host ""
     Write-Host "[4/9] Tworzenie commita..."
@@ -207,6 +271,12 @@ try {
         Fail "Nie udalo sie utworzyc commita."
     }
 
+    $commitCreated = $true
+
+    # ---------------------------------------
+    # Push main
+    # ---------------------------------------
+
     Write-Host "[5/9] Push main..."
 
     git push origin main
@@ -214,6 +284,10 @@ try {
     if ($LASTEXITCODE -ne 0) {
         Fail "Push main nie powiodl sie."
     }
+
+    # ---------------------------------------
+    # Tag
+    # ---------------------------------------
 
     Write-Host "[6/9] Tworzenie taga..."
 
@@ -223,6 +297,10 @@ try {
         Fail "Nie udalo sie utworzyc taga."
     }
 
+    # ---------------------------------------
+    # Push tag
+    # ---------------------------------------
+
     Write-Host "[7/9] Push taga..."
 
     git push origin $newTag
@@ -231,31 +309,11 @@ try {
         Fail "Push taga nie powiodl sie."
     }
 
+    # ---------------------------------------
+    # GitHub Release
+    # ---------------------------------------
+
     Write-Host "[8/9] Tworzenie GitHub Release..."
-
-    $gh = Get-Command gh -ErrorAction SilentlyContinue
-
-    if (-not $gh) {
-        Fail @"
-GitHub CLI 'gh' nie jest zainstalowane.
-
-Commit, push i tag sa juz gotowe, ale GitHub Release nie zostal utworzony.
-
-Zainstaluj GitHub CLI i wykonaj:
-
-gh auth login
-
-Potem:
-
-gh release create $newTag --repo Tkoczu/Cresci --title "CRESCI $newTag"
-"@
-    }
-
-    gh auth status | Out-Null
-
-    if ($LASTEXITCODE -ne 0) {
-        Fail "GitHub CLI nie jest zalogowane. Uruchom: gh auth login"
-    }
 
     $notesFile = [System.IO.Path]::GetTempFileName()
 
@@ -270,14 +328,18 @@ gh release create $newTag --repo Tkoczu/Cresci --title "CRESCI $newTag"
             --repo "Tkoczu/Cresci" `
             --title "CRESCI $newTag" `
             --notes-file $notesFile
+
+        if ($LASTEXITCODE -ne 0) {
+            Fail "Nie udalo sie utworzyc GitHub Release."
+        }
     }
     finally {
-        Remove-Item $notesFile -ErrorAction SilentlyContinue
+        Remove-Item $notesFile -Force -ErrorAction SilentlyContinue
     }
 
-    if ($LASTEXITCODE -ne 0) {
-        Fail "Nie udalo sie utworzyc GitHub Release."
-    }
+    # ---------------------------------------
+    # Weryfikacja
+    # ---------------------------------------
 
     Write-Host "[9/9] Weryfikacja GitHub Release..."
 
@@ -286,9 +348,17 @@ gh release create $newTag --repo Tkoczu/Cresci --title "CRESCI $newTag"
         --json tagName `
         --jq '.tagName'
 
-    if ($LASTEXITCODE -ne 0 -or $releaseTag -ne $newTag) {
-        Fail "Release nie zostal poprawnie zweryfikowany."
+    if ($LASTEXITCODE -ne 0) {
+        Fail "Nie udalo sie zweryfikowac GitHub Release."
     }
+
+    if ($releaseTag.Trim() -ne $newTag) {
+        Fail "GitHub Release nie zostal poprawnie zweryfikowany."
+    }
+
+    # ---------------------------------------
+    # Sukces
+    # ---------------------------------------
 
     Write-Host ""
     Write-Host "======================================"
@@ -319,6 +389,36 @@ gh release create $newTag --repo Tkoczu/Cresci --title "CRESCI $newTag"
     Write-Host ""
 }
 catch {
+
+    # ---------------------------------------
+    # Automatyczne cofniecie package.json,
+    # ale tylko zanim powstanie commit.
+    # ---------------------------------------
+
+    if (
+        $packageChanged -and
+        -not $commitCreated -and
+        $null -ne $originalPackageJson -and
+        $null -ne $packagePath
+    ) {
+        try {
+            git reset | Out-Null
+
+            [System.IO.File]::WriteAllText(
+                $packagePath,
+                $originalPackageJson,
+                (New-Object System.Text.UTF8Encoding($false))
+            )
+
+            Write-Host ""
+            Write-Host "package.json zostal przywrocony do poprzedniej wersji."
+        }
+        catch {
+            Write-Host ""
+            Write-Host "UWAGA: Nie udalo sie automatycznie przywrocic package.json."
+        }
+    }
+
     Write-Host ""
     Write-Host "======================================"
     Write-Host "               BLAD"
