@@ -1,196 +1,331 @@
 $ErrorActionPreference = "Stop"
 
-Write-Host ""
-Write-Host "======================================"
-Write-Host "        CRESCI Publisher"
-Write-Host "======================================"
-Write-Host ""
-
-if (-not (Test-Path ".\package.json")) {
-    Write-Host "ERROR: package.json not found."
-    exit 1
+function Pause-OnExit {
+    Write-Host ""
+    Read-Host "Nacisnij Enter, aby zamknac"
 }
 
-if (-not (Test-Path ".\scripts\install-proxmox.sh")) {
-    Write-Host "ERROR: scripts\install-proxmox.sh not found."
-    exit 1
+function Fail {
+    param(
+        [string]$Message
+    )
+
+    throw $Message
 }
 
-$package = Get-Content ".\package.json" -Raw | ConvertFrom-Json
-$currentVersion = $package.version
+try {
+    Write-Host ""
+    Write-Host "======================================"
+    Write-Host "        CRESCI Publisher"
+    Write-Host "======================================"
+    Write-Host ""
 
-if ($currentVersion -notmatch '^(\d+)\.(\d+)\.(\d+)$') {
-    Write-Host "ERROR: Invalid version in package.json: $currentVersion"
-    exit 1
-}
-
-$major = [int]$Matches[1]
-$minor = [int]$Matches[2]
-$patch = [int]$Matches[3]
-
-Write-Host "Current version: $currentVersion"
-Write-Host ""
-Write-Host "Choose release type:"
-Write-Host "1. Patch  -> bugfix / small change"
-Write-Host "2. Minor  -> new feature"
-Write-Host "3. Major  -> breaking / major release"
-Write-Host ""
-
-$choice = Read-Host "Selection [1-3]"
-
-switch ($choice) {
-    "1" {
-        $patch++
+    if (-not (Test-Path ".\package.json")) {
+        Fail "Nie znaleziono package.json. Uruchom skrypt z glownego katalogu CRESCI."
     }
-    "2" {
-        $minor++
-        $patch = 0
+
+    if (-not (Test-Path ".\.git")) {
+        Fail "Ten katalog nie wyglada na repozytorium Git."
     }
-    "3" {
-        $major++
-        $minor = 0
-        $patch = 0
+
+    $packagePath = Resolve-Path ".\package.json"
+    $originalPackageJson = Get-Content $packagePath -Raw
+
+    $package = $originalPackageJson | ConvertFrom-Json
+    $currentVersion = $package.version
+
+    Write-Host "Aktualna wersja: $currentVersion"
+    Write-Host ""
+
+    $newVersion = Read-Host "Podaj nowa wersje, np. 1.0.3"
+
+    if ($newVersion -notmatch '^\d+\.\d+\.\d+$') {
+        Fail "Nieprawidlowa wersja. Uzyj formatu X.Y.Z, np. 1.0.3."
     }
-    default {
-        Write-Host "Cancelled."
+
+    if ($newVersion -eq $currentVersion) {
+        Fail "Nowa wersja jest taka sama jak aktualna: $currentVersion"
+    }
+
+    $newTag = "v$newVersion"
+
+    $existingTag = git tag -l $newTag
+
+    if ($LASTEXITCODE -ne 0) {
+        Fail "Nie udalo sie sprawdzic tagow Git."
+    }
+
+    if ($existingTag) {
+        Fail "Tag $newTag juz istnieje."
+    }
+
+    Write-Host ""
+    Write-Host "======================================"
+    Write-Host "           OPIS ZMIAN"
+    Write-Host "======================================"
+    Write-Host ""
+    Write-Host "Wpisuj po jednej zmianie w linii."
+    Write-Host "Nie wpisuj numerow 1., 2., 3. - skrypt sam zrobi liste."
+    Write-Host "Pusta linia konczy wpisywanie."
+    Write-Host ""
+
+    $descriptionLines = @()
+
+    while ($true) {
+        $line = Read-Host
+
+        if ([string]::IsNullOrWhiteSpace($line)) {
+            break
+        }
+
+        $descriptionLines += $line.Trim()
+    }
+
+    if ($descriptionLines.Count -eq 0) {
+        Fail "Opis zmian nie moze byc pusty."
+    }
+
+    $description = ($descriptionLines | ForEach-Object { "- $_" }) -join "`n"
+
+    Write-Host ""
+    Write-Host "======================================"
+    Write-Host "       PODSUMOWANIE RELEASE"
+    Write-Host "======================================"
+    Write-Host ""
+    Write-Host "Aktualna wersja: $currentVersion"
+    Write-Host "Nowa wersja:     $newVersion"
+    Write-Host "Tag:              $newTag"
+    Write-Host ""
+    Write-Host "Zmiany:"
+    Write-Host ""
+
+    foreach ($line in $descriptionLines) {
+        Write-Host "  - $line"
+    }
+
+    Write-Host ""
+
+    $confirm = Read-Host "Publikowac $newTag? [y/N]"
+
+    if ($confirm -notmatch '^(y|Y|yes|YES)$') {
+        Write-Host "Anulowano."
+        Pause-OnExit
         exit 0
     }
-}
 
-$newVersion = "$major.$minor.$patch"
-$newTag = "v$newVersion"
-
-Write-Host ""
-$description = Read-Host "Short description of changes"
-
-if ([string]::IsNullOrWhiteSpace($description)) {
-    Write-Host "ERROR: Description cannot be empty."
-    exit 1
-}
-
-Write-Host ""
-Write-Host "Release summary:"
-Write-Host "  Current: $currentVersion"
-Write-Host "  New:     $newVersion"
-Write-Host "  Tag:     $newTag"
-Write-Host "  Changes: $description"
-Write-Host ""
-
-$untracked = git ls-files --others --exclude-standard
-
-if ($untracked) {
-    Write-Host "WARNING: Untracked files detected:"
     Write-Host ""
+    Write-Host "[1/9] Aktualizacja package.json..."
 
-    foreach ($file in $untracked) {
-        Write-Host "  $file"
+    $package.version = $newVersion
+
+    $json = $package | ConvertTo-Json -Depth 20
+
+    [System.IO.File]::WriteAllText(
+        $packagePath,
+        $json,
+        (New-Object System.Text.UTF8Encoding($false))
+    )
+
+    Write-Host "[2/9] Uruchamianie testow..."
+
+    npm test
+
+    if ($LASTEXITCODE -ne 0) {
+        [System.IO.File]::WriteAllText(
+            $packagePath,
+            $originalPackageJson,
+            (New-Object System.Text.UTF8Encoding($false))
+        )
+
+        Fail "Testy nie przeszly. package.json zostal przywrocony do wersji $currentVersion."
+    }
+
+    Write-Host "[3/9] Dodawanie zmian do Git..."
+
+    git add -A
+
+    if ($LASTEXITCODE -ne 0) {
+        [System.IO.File]::WriteAllText(
+            $packagePath,
+            $originalPackageJson,
+            (New-Object System.Text.UTF8Encoding($false))
+        )
+
+        Fail "git add nie powiodl sie. package.json zostal przywrocony do wersji $currentVersion."
     }
 
     Write-Host ""
-    Write-Host "These files will NOT be added automatically."
+    Write-Host "======================================"
+    Write-Host "      BEDZIE OPUBLIKOWANE"
+    Write-Host "======================================"
     Write-Host ""
-}
 
-$confirm = Read-Host "Publish $newTag? [y/N]"
+    git status --short
 
-if ($confirm -notmatch '^(y|Y|yes|YES)$') {
-    Write-Host "Cancelled."
-    exit 0
-}
+    if ($LASTEXITCODE -ne 0) {
+        Fail "Nie udalo sie odczytac statusu Git."
+    }
 
-Write-Host ""
-Write-Host "[1/8] Updating version..."
+    Write-Host ""
 
-$package.version = $newVersion
-$package |
-    ConvertTo-Json -Depth 10 |
-    Set-Content ".\package.json" -Encoding UTF8
+    $stagedFiles = git diff --cached --name-only
 
-$installer = Get-Content ".\scripts\install-proxmox.sh" -Raw
+    if ($LASTEXITCODE -ne 0) {
+        Fail "Nie udalo sie odczytac staged files."
+    }
 
-$installer = $installer -replace `
-    'APP_VERSION="v\d+\.\d+\.\d+"', `
-    "APP_VERSION=`"$newTag`""
+    if (-not $stagedFiles) {
+        [System.IO.File]::WriteAllText(
+            $packagePath,
+            $originalPackageJson,
+            (New-Object System.Text.UTF8Encoding($false))
+        )
 
-Set-Content ".\scripts\install-proxmox.sh" $installer -Encoding UTF8
+        Fail "Brak zmian do opublikowania. package.json zostal przywrocony."
+    }
 
-Write-Host "[2/8] Staging tracked changes..."
+    $confirmFiles = Read-Host "Kontynuowac z tymi plikami? [y/N]"
 
-git add -u
+    if ($confirmFiles -notmatch '^(y|Y|yes|YES)$') {
+        git reset
 
-git add ".\package.json"
-git add ".\scripts\install-proxmox.sh"
+        [System.IO.File]::WriteAllText(
+            $packagePath,
+            $originalPackageJson,
+            (New-Object System.Text.UTF8Encoding($false))
+        )
 
-Write-Host ""
-Write-Host "Files to be committed:"
-git status --short
+        Fail "Publikacja anulowana. Staging i package.json zostaly przywrocone."
+    }
 
-Write-Host ""
+    Write-Host ""
+    Write-Host "[4/9] Tworzenie commita..."
 
-$confirmFiles = Read-Host "Continue with these files? [y/N]"
+    git commit -m "CRESCI $newTag - release"
 
-if ($confirmFiles -notmatch '^(y|Y|yes|YES)$') {
-    Write-Host "Cancelled before commit."
-    exit 0
-}
+    if ($LASTEXITCODE -ne 0) {
+        Fail "Nie udalo sie utworzyc commita."
+    }
 
-Write-Host ""
-Write-Host "[3/8] Creating commit..."
+    Write-Host "[5/9] Push main..."
 
-git commit -m "CRESCI $newTag - $description"
+    git push origin main
 
-Write-Host "[4/8] Pushing main..."
+    if ($LASTEXITCODE -ne 0) {
+        Fail "Push main nie powiodl sie."
+    }
 
-git push origin main
+    Write-Host "[6/9] Tworzenie taga..."
 
-Write-Host "[5/8] Creating tag..."
+    git tag -a $newTag -m "CRESCI $newTag"
 
-git tag -a $newTag -m "CRESCI $newTag"
+    if ($LASTEXITCODE -ne 0) {
+        Fail "Nie udalo sie utworzyc taga."
+    }
 
-Write-Host "[6/8] Pushing tag..."
+    Write-Host "[7/9] Push taga..."
 
-git push origin $newTag
+    git push origin $newTag
 
-Write-Host "[7/8] Creating GitHub Release..."
+    if ($LASTEXITCODE -ne 0) {
+        Fail "Push taga nie powiodl sie."
+    }
 
-$gh = Get-Command gh -ErrorAction SilentlyContinue
+    Write-Host "[8/9] Tworzenie GitHub Release..."
 
-if ($gh) {
+    $gh = Get-Command gh -ErrorAction SilentlyContinue
+
+    if (-not $gh) {
+        Fail @"
+GitHub CLI 'gh' nie jest zainstalowane.
+
+Commit, push i tag sa juz gotowe, ale GitHub Release nie zostal utworzony.
+
+Zainstaluj GitHub CLI i wykonaj:
+
+gh auth login
+
+Potem:
+
+gh release create $newTag --repo Tkoczu/Cresci --title "CRESCI $newTag"
+"@
+    }
+
+    gh auth status | Out-Null
+
+    if ($LASTEXITCODE -ne 0) {
+        Fail "GitHub CLI nie jest zalogowane. Uruchom: gh auth login"
+    }
+
+    $notesFile = [System.IO.Path]::GetTempFileName()
+
+    [System.IO.File]::WriteAllText(
+        $notesFile,
+        $description,
+        (New-Object System.Text.UTF8Encoding($false))
+    )
 
     try {
-        gh auth status | Out-Null
-
         gh release create $newTag `
             --repo "Tkoczu/Cresci" `
             --title "CRESCI $newTag" `
-            --notes $description
-
-        Write-Host "GitHub Release created."
+            --notes-file $notesFile
     }
-    catch {
-        Write-Host ""
-        Write-Host "GitHub CLI is installed, but release creation failed."
-        Write-Host "Create the release manually for tag $newTag."
+    finally {
+        Remove-Item $notesFile -ErrorAction SilentlyContinue
     }
 
-}
-else {
+    if ($LASTEXITCODE -ne 0) {
+        Fail "Nie udalo sie utworzyc GitHub Release."
+    }
+
+    Write-Host "[9/9] Weryfikacja GitHub Release..."
+
+    $releaseTag = gh release view $newTag `
+        --repo "Tkoczu/Cresci" `
+        --json tagName `
+        --jq '.tagName'
+
+    if ($LASTEXITCODE -ne 0 -or $releaseTag -ne $newTag) {
+        Fail "Release nie zostal poprawnie zweryfikowany."
+    }
 
     Write-Host ""
-    Write-Host "GitHub CLI (gh) is not installed."
-    Write-Host "Commit, push and tag are already done."
-    Write-Host "Create GitHub Release manually for:"
-    Write-Host "  $newTag"
+    Write-Host "======================================"
+    Write-Host "      CRESCI $newTag OPUBLIKOWANE"
+    Write-Host "======================================"
+    Write-Host ""
+    Write-Host "package.json:   $newVersion"
+    Write-Host "Testy:          OK"
+    Write-Host "Commit:         OK"
+    Write-Host "Push main:      OK"
+    Write-Host "Tag:            $newTag"
+    Write-Host "GitHub Release: OK"
+    Write-Host ""
+    Write-Host "Changelog:"
+    Write-Host ""
+
+    foreach ($line in $descriptionLines) {
+        Write-Host "  - $line"
+    }
+
+    Write-Host ""
+    Write-Host "Istniejace instalacje:"
+    Write-Host "  Ustawienia -> Sprawdz aktualizacje"
+    Write-Host ""
+    Write-Host "Nowa instalacja Proxmox:"
+    Write-Host ""
+    Write-Host '  bash -c "$(curl -fsSL https://raw.githubusercontent.com/Tkoczu/Cresci/main/scripts/install-proxmox.sh)"'
+    Write-Host ""
+}
+catch {
+    Write-Host ""
+    Write-Host "======================================"
+    Write-Host "               BLAD"
+    Write-Host "======================================"
+    Write-Host ""
+    Write-Host $_.Exception.Message
+    Write-Host ""
 }
 
-Write-Host ""
-Write-Host "[8/8] Done."
-Write-Host ""
-Write-Host "======================================"
-Write-Host "      CRESCI $newTag published"
-Write-Host "======================================"
-Write-Host ""
-Write-Host "On the LXC run:"
-Write-Host ""
-Write-Host "  cresci update"
-Write-Host ""
+Pause-OnExit

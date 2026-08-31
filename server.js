@@ -8,6 +8,7 @@ import { BackupManager, GoogleDriveProvider } from './src/backup.js';
 import { updateGoogleEnv } from './src/env-config.js';
 import { GitHubReleaseChecker } from './src/update-check.js';
 import { SystemUpdateManager } from './src/system-update.js';
+import { newSessionToken, passwordDigest, passwordMatches, tokenDigest } from './src/auth.js';
 
 const root = path.dirname(fileURLToPath(import.meta.url));
 const envPath = path.resolve(root,'.env');
@@ -16,7 +17,7 @@ const port = Number(process.env.PORT || 4173);
 const host = process.env.HOST || '0.0.0.0';
 const databasePath = path.resolve(root, process.env.DATABASE_PATH || './data/gym-progress.sqlite');
 const packageInfo = JSON.parse(fs.readFileSync(path.resolve(root,'package.json'),'utf8').replace(/^\uFEFF/,''));
-const db = openDatabase(databasePath);
+const db = openDatabase(databasePath,{seedProfiles:false});
 const repo = createRepository(db);
 const googleDrive = new GoogleDriveProvider({ tokenPath:path.resolve(root,'data/google-drive-token.json'), clientId:process.env.GOOGLE_CLIENT_ID, clientSecret:process.env.GOOGLE_CLIENT_SECRET });
 const backups = new BackupManager({ exportData:()=>repo.exportData(), importData:payload=>repo.importData(payload), settingsPath:path.resolve(root,'data/backup-settings.json'), localDirectory:path.resolve(root,'backups/automatic'), googleDrive });
@@ -43,11 +44,69 @@ const sameOrigin = req => {
   const protocol=String(req.headers['x-forwarded-proto']||'http').split(',')[0].trim();
   return origin===`${protocol}://${req.headers.host}`;
 };
+const SESSION_COOKIE='cresci_session';
+const SESSION_DAYS=30;
+const cookieValue=(req,name)=>String(req.headers.cookie||'').split(';').map(item=>item.trim()).find(item=>item.startsWith(`${name}=`))?.slice(name.length+1)||'';
+const sessionToken=req=>cookieValue(req,SESSION_COOKIE);
+const sessionUser=req=>repo.authSession(tokenDigest(sessionToken(req)));
+const sessionCookie=(req,token,maxAge=SESSION_DAYS*86400)=>{
+  const secure=String(req.headers['x-forwarded-proto']||'').split(',')[0].trim()==='https';
+  return `${SESSION_COOKIE}=${token}; Path=/; HttpOnly; SameSite=Strict; Max-Age=${maxAge}${secure?'; Secure':''}`;
+};
+const publicUser=user=>user&&({id:user.id,name:user.name,color:user.color,password_required:Boolean(user.password_required)});
+const startSession=(req,res,user,status=200)=>{
+  const token=newSessionToken(),expiresAt=new Date(Date.now()+SESSION_DAYS*86400000).toISOString();
+  repo.createAuthSession(user.id,tokenDigest(token),expiresAt);
+  return send(res,status,{authenticated:true,user:publicUser(user) },'application/json; charset=utf-8',{'Set-Cookie':sessionCookie(req,token),'Cache-Control':'no-store'});
+};
 
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
   try {
-    if (req.method === 'GET' && url.pathname === '/api/bootstrap') return send(res, 200, repo.bootstrap());
+    if(req.method==='GET'&&url.pathname==='/api/auth/status'){
+      const users=repo.accountUsers(),user=sessionUser(req);
+      return send(res,200,{authenticated:Boolean(user),setup_required:users.length===0,user:publicUser(user),users},'application/json; charset=utf-8',{'Cache-Control':'no-store'});
+    }
+    if(req.method==='POST'&&url.pathname==='/api/auth/register'){
+      if(!sameOrigin(req))return send(res,403,{error:'Żądanie nie przeszło kontroli bezpieczeństwa.'});
+      const input=await bodyJson(req),password=String(input.password||''),repeat=String(input.password_repeat||'');
+      if(password!==repeat)return send(res,400,{error:'Hasła nie są takie same.'});
+      try{
+        const digest=passwordDigest(password),user=repo.createAccount({name:input.name,color:input.color,...digest});
+        return startSession(req,res,user,201);
+      }catch(error){if(/UNIQUE constraint/.test(error.message))return send(res,409,{error:'Użytkownik o tej nazwie już istnieje.'});throw error;}
+    }
+    if(req.method==='POST'&&url.pathname==='/api/auth/login'){
+      if(!sameOrigin(req))return send(res,403,{error:'Żądanie nie przeszło kontroli bezpieczeństwa.'});
+      const input=await bodyJson(req),account=repo.accountUser(Number(input.user_id));
+      if(!account||!passwordMatches(input.password,account.password_salt,account.password_hash))return send(res,401,{error:'Nieprawidłowy użytkownik lub hasło.'});
+      return startSession(req,res,{...account,password_required:Boolean(account.password_hash)});
+    }
+    if(req.method==='POST'&&url.pathname==='/api/auth/logout'){
+      if(!sameOrigin(req))return send(res,403,{error:'Żądanie nie przeszło kontroli bezpieczeństwa.'});
+      repo.deleteAuthSession(tokenDigest(sessionToken(req)));
+      return send(res,200,{ok:true},'application/json; charset=utf-8',{'Set-Cookie':sessionCookie(req,'',0),'Cache-Control':'no-store'});
+    }
+    const currentUser=sessionUser(req);
+    if(url.pathname.startsWith('/api/')&&!['/api/health','/api/version','/api/google-drive/callback'].includes(url.pathname)&&!currentUser){
+      return send(res,401,{error:'Zaloguj się, aby korzystać z CRESCI.',code:'AUTH_REQUIRED'});
+    }
+    if(req.method==='DELETE'&&url.pathname==='/api/auth/account'){
+      if(!sameOrigin(req))return send(res,403,{error:'Żądanie nie przeszło kontroli bezpieczeństwa.'});
+      const input=await bodyJson(req),account=repo.accountUser(currentUser.id);
+      if(account.password_hash&&!passwordMatches(input.password,account.password_salt,account.password_hash))return send(res,401,{error:'Podane hasło jest nieprawidłowe.'});
+      if(String(input.confirm_name||'').trim()!==account.name)return send(res,400,{error:`Wpisz dokładnie „${account.name}”, aby potwierdzić usunięcie.`});
+      repo.deleteAccount(currentUser.id);
+      return send(res,200,{ok:true,setup_required:repo.accountUsers().length===0},'application/json; charset=utf-8',{'Set-Cookie':sessionCookie(req,'',0),'Cache-Control':'no-store'});
+    }
+    if(req.method==='POST'&&url.pathname==='/api/auth/accounts'){
+      if(!sameOrigin(req))return send(res,403,{error:'Żądanie nie przeszło kontroli bezpieczeństwa.'});
+      const input=await bodyJson(req),password=String(input.password||''),repeat=String(input.password_repeat||'');
+      if(password!==repeat)return send(res,400,{error:'Hasła nie są takie same.'});
+      try{return send(res,201,repo.createAccount({name:input.name,color:input.color,...passwordDigest(password)}));}
+      catch(error){if(/UNIQUE constraint/.test(error.message))return send(res,409,{error:'Użytkownik o tej nazwie już istnieje.'});throw error;}
+    }
+    if (req.method === 'GET' && url.pathname === '/api/bootstrap') return send(res, 200, repo.bootstrap(currentUser.id));
     if (req.method === 'GET' && url.pathname === '/api/version') return send(res,200,releaseChecker.versionInfo());
     if (req.method === 'GET' && url.pathname === '/api/updates/check') {
       try{return send(res,200,await releaseChecker.check());}
@@ -66,45 +125,40 @@ const server = http.createServer(async (req, res) => {
         return send(res,202,await systemUpdates.start({targetVersion:release.latest_tag||`v${release.latest_version}`}),'application/json; charset=utf-8',{'Cache-Control':'no-store'});
       }catch(error){return send(res,error.statusCode||502,{error:error.message});}
     }
-    if (req.method === 'GET' && url.pathname === '/api/history') return send(res, 200, repo.history({ profile_id:url.searchParams.get('profile_id'), exercise_id:url.searchParams.get('exercise_id') }));
+    if (req.method === 'GET' && url.pathname === '/api/history') return send(res, 200, repo.history({ profile_id:currentUser.id, exercise_id:url.searchParams.get('exercise_id') }));
     if (req.method === 'GET' && url.pathname === '/api/progress') {
-      const profileId = url.searchParams.get('profile_id'); const exerciseId = url.searchParams.get('exercise_id');
-      if (!positiveInt(profileId) || !positiveInt(exerciseId)) return send(res, 400, { error:'Wybierz osobę i ćwiczenie.' });
-      return send(res, 200, repo.progress(Number(profileId), Number(exerciseId)));
+      const exerciseId = url.searchParams.get('exercise_id');
+      if (!positiveInt(exerciseId)) return send(res, 400, { error:'Wybierz ćwiczenie.' });
+      return send(res, 200, repo.progress(currentUser.id, Number(exerciseId)));
     }
     if (req.method === 'GET' && url.pathname === '/api/overall-progress') {
-      const profileId = url.searchParams.get('profile_id');
-      if (profileId && !positiveInt(profileId)) return send(res, 400, { error:'Nieprawidłowy profil.' });
-      return send(res, 200, repo.overallProgress(profileId ? Number(profileId) : null));
+      return send(res, 200, repo.overallProgress(currentUser.id));
     }
-    if (req.method === 'GET' && url.pathname === '/api/cresci-score') return send(res,200,repo.cresciScores());
-    if (req.method === 'GET' && url.pathname === '/api/cresci-score/settings') return send(res,200,repo.scoreSettings());
+    if (req.method === 'GET' && url.pathname === '/api/cresci-score') return send(res,200,repo.cresciScores().filter(item=>item.user_id===currentUser.id));
+    if (req.method === 'GET' && url.pathname === '/api/cresci-score/settings') return send(res,200,repo.scoreSettings(currentUser.id));
     const scoreSettingsMatch=url.pathname.match(/^\/api\/cresci-score\/settings\/(\d+)$/);
-    if(req.method==='PUT'&&scoreSettingsMatch){const userId=Number(scoreSettingsMatch[1]),input=await bodyJson(req);const updated=repo.updateScoreSettings(userId,input);return updated?send(res,200,updated):send(res,404,{error:'Nie znaleziono użytkownika.'});}
-    if (req.method === 'GET' && url.pathname === '/api/cresci-game') return send(res,200,repo.gameStates());
-    if (req.method === 'GET' && url.pathname === '/api/cresci-game/settings') return send(res,200,repo.gameSettings());
+    if(req.method==='PUT'&&scoreSettingsMatch){if(Number(scoreSettingsMatch[1])!==currentUser.id)return send(res,403,{error:'Nie możesz zmieniać ustawień innego użytkownika.'});const input=await bodyJson(req);const updated=repo.updateScoreSettings(currentUser.id,input);return updated?send(res,200,updated):send(res,404,{error:'Nie znaleziono użytkownika.'});}
+    if (req.method === 'GET' && url.pathname === '/api/cresci-game') return send(res,200,repo.gameStates().filter(item=>item.user_id===currentUser.id));
+    if (req.method === 'GET' && url.pathname === '/api/cresci-game/settings') return send(res,200,repo.gameSettings(currentUser.id));
     const gameSettingsMatch=url.pathname.match(/^\/api\/cresci-game\/settings\/(\d+)$/);
-    if(req.method==='PUT'&&gameSettingsMatch){const userId=Number(gameSettingsMatch[1]),input=await bodyJson(req);const updated=repo.updateGameSettings(userId,input);return updated?send(res,200,updated):send(res,404,{error:'Nie znaleziono użytkownika.'});}
+    if(req.method==='PUT'&&gameSettingsMatch){if(Number(gameSettingsMatch[1])!==currentUser.id)return send(res,403,{error:'Nie możesz zmieniać ustawień innego użytkownika.'});const input=await bodyJson(req);const updated=repo.updateGameSettings(currentUser.id,input);return updated?send(res,200,updated):send(res,404,{error:'Nie znaleziono użytkownika.'});}
     const gameCheckInMatch=url.pathname.match(/^\/api\/cresci-game\/check-in\/(\d+)$/);
-    if(req.method==='POST'&&gameCheckInMatch){const result=repo.gameCheckIn(Number(gameCheckInMatch[1]));return send(res,201,result);}
+    if(req.method==='POST'&&gameCheckInMatch){if(Number(gameCheckInMatch[1])!==currentUser.id)return send(res,403,{error:'Nie możesz wykonać meldunku za innego użytkownika.'});const result=repo.gameCheckIn(currentUser.id);return send(res,201,result);}
     if(req.method==='GET'&&url.pathname==='/api/cresci-game/achievements'){
-      const userId=url.searchParams.get('user_id');if(!positiveInt(userId))return send(res,400,{error:'Wybierz użytkownika.'});
-      const result=repo.achievements(Number(userId));return result?send(res,200,result):send(res,404,{error:'CRESCI GAME nie jest włączony dla tego użytkownika.'});
+      const result=repo.achievements(currentUser.id);return result?send(res,200,result):send(res,404,{error:'CRESCI GAME nie jest włączony dla tego użytkownika.'});
     }
     if(req.method==='GET'&&url.pathname==='/api/cresci-game/inventory'){
-      const userId=url.searchParams.get('user_id');if(!positiveInt(userId))return send(res,400,{error:'Wybierz użytkownika.'});
-      const result=repo.inventory(Number(userId));return result?send(res,200,result):send(res,404,{error:'CRESCI GAME nie jest włączony dla tego użytkownika.'});
+      const result=repo.inventory(currentUser.id);return result?send(res,200,result):send(res,404,{error:'CRESCI GAME nie jest włączony dla tego użytkownika.'});
     }
     if(req.method==='GET'&&url.pathname==='/api/cresci-game/shop'){
-      const userId=url.searchParams.get('user_id');if(!positiveInt(userId))return send(res,400,{error:'Wybierz użytkownika.'});
-      const result=repo.shop(Number(userId));return result?send(res,200,result):send(res,404,{error:'CRESCI GAME nie jest włączony dla tego użytkownika.'});
+      const result=repo.shop(currentUser.id);return result?send(res,200,result):send(res,404,{error:'CRESCI GAME nie jest włączony dla tego użytkownika.'});
     }
     const purchaseMatch=url.pathname.match(/^\/api\/cresci-game\/shop\/(\d+)\/purchase$/);
-    if(req.method==='POST'&&purchaseMatch){const input=await bodyJson(req);return send(res,201,repo.purchaseItem(Number(purchaseMatch[1]),input.item_key));}
+    if(req.method==='POST'&&purchaseMatch){if(Number(purchaseMatch[1])!==currentUser.id)return send(res,403,{error:'Nie możesz kupować za PR innego użytkownika.'});const input=await bodyJson(req);return send(res,201,repo.purchaseItem(currentUser.id,input.item_key));}
     const equipmentMatch=url.pathname.match(/^\/api\/cresci-game\/equipment\/(\d+)$/);
-    if(req.method==='PUT'&&equipmentMatch){const input=await bodyJson(req);return send(res,200,repo.equipItem(Number(equipmentMatch[1]),input.slot,input.item_key||null));}
+    if(req.method==='PUT'&&equipmentMatch){if(Number(equipmentMatch[1])!==currentUser.id)return send(res,403,{error:'Nie możesz zmieniać ekwipunku innego użytkownika.'});const input=await bodyJson(req);return send(res,200,repo.equipItem(currentUser.id,input.slot,input.item_key||null));}
     const gameActionMatch=url.pathname.match(/^\/api\/cresci-game\/actions\/(\d+)$/);
-    if(req.method==='POST'&&gameActionMatch){const input=await bodyJson(req);return send(res,200,repo.recordGameAction(Number(gameActionMatch[1]),input.action,input.details||{}));}
+    if(req.method==='POST'&&gameActionMatch){if(Number(gameActionMatch[1])!==currentUser.id)return send(res,403,{error:'Nie możesz zapisywać akcji innego użytkownika.'});const input=await bodyJson(req);return send(res,200,repo.recordGameAction(currentUser.id,input.action,input.details||{}));}
     if (req.method === 'GET' && url.pathname === '/api/catalog/exercises') {
       const query = (url.searchParams.get('q') || '').trim();
       if (query.length < 2 || query.length > 80) return send(res, 400, { error:'Wpisz od 2 do 80 znaków.' });
@@ -114,6 +168,7 @@ const server = http.createServer(async (req, res) => {
     if (req.method === 'POST' && url.pathname === '/api/exercises') {
       const input = await bodyJson(req);
       if (!input.name?.trim()) return send(res, 400, { error:'Nazwa ćwiczenia jest wymagana.' });
+      input.creator_user_id=currentUser.id;
       return send(res, 201, repo.addExercise(input));
     }
     const exerciseMatch = url.pathname.match(/^\/api\/exercises\/(\d+)$/);
@@ -122,17 +177,19 @@ const server = http.createServer(async (req, res) => {
     if (req.method === 'POST' && url.pathname === '/api/entries') {
       const input = await bodyJson(req);
       const hasWeight = input.new_weight !== undefined && input.new_weight !== null && String(input.new_weight).trim() !== '';
-      if (!positiveInt(input.profile_id) || !positiveInt(input.exercise_id) || (hasWeight && (!Number.isFinite(Number(input.new_weight)) || Number(input.new_weight) < 0))) return send(res, 400, { error:'Uzupełnij osobę, ćwiczenie i — jeśli zmieniasz — poprawny ciężar.' });
+      if (!positiveInt(input.exercise_id) || (hasWeight && (!Number.isFinite(Number(input.new_weight)) || Number(input.new_weight) < 0))) return send(res, 400, { error:'Uzupełnij ćwiczenie i — jeśli zmieniasz — poprawny ciężar.' });
+      input.profile_id=currentUser.id;
       return send(res, 201, repo.addEntry(input));
     }
     const entryMatch = url.pathname.match(/^\/api\/entries\/(\d+)$/);
     if (req.method === 'PUT' && entryMatch) {
+      if(!repo.entryBelongsTo(Number(entryMatch[1]),currentUser.id))return send(res,404,{error:'Nie znaleziono wpisu.'});
       const input = await bodyJson(req);
       if (!Number.isFinite(Number(input.new_weight)) || Number(input.new_weight) < 0) return send(res, 400, { error:'Podaj poprawny ciężar.' });
       const updated = repo.updateEntry(Number(entryMatch[1]), input);
       return updated ? send(res, 200, updated) : send(res, 404, { error:'Nie znaleziono wpisu.' });
     }
-    if (req.method === 'DELETE' && entryMatch) return repo.deleteEntry(Number(entryMatch[1])) ? send(res, 200, { ok:true }) : send(res, 404, { error:'Nie znaleziono wpisu.' });
+    if (req.method === 'DELETE' && entryMatch) {if(!repo.entryBelongsTo(Number(entryMatch[1]),currentUser.id))return send(res,404,{error:'Nie znaleziono wpisu.'});return repo.deleteEntry(Number(entryMatch[1])) ? send(res, 200, { ok:true }) : send(res, 404, { error:'Nie znaleziono wpisu.' });}
     if (req.method === 'GET' && url.pathname === '/api/export') {
       const stamp = new Date().toISOString().slice(0,10);
       return send(res, 200, repo.exportData(), 'application/json; charset=utf-8', { 'Content-Disposition':`attachment; filename="gym-progress-${stamp}.json"` });

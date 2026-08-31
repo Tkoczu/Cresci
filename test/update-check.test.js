@@ -52,6 +52,7 @@ test('settings UI exposes update checking and delegates installation to the fixe
   assert.match(html,/id="checkUpdates"/);
   assert.match(html,/id="installUpdate"/);
   assert.match(app,/\/api\/updates\/check/);
+  assert.match(app,/Brak połączenia z serwerem CRESCI/);
   assert.match(css,/\.update-install\[hidden\]\{display:none!important\}/);
   assert.match(server,/url\.pathname === '\/api\/version'/);
   assert.match(server,/url\.pathname === '\/api\/updates\/check'/);
@@ -59,4 +60,14 @@ test('settings UI exposes update checking and delegates installation to the fixe
   assert.match(server,/\/api\/system\/update/);
   assert.doesNotMatch(server,/execFile|spawn\(|update\.sh/);
   assert.doesNotMatch(server,/\/api\/updates\/install/);
+});
+
+test('settings place GAME between general and backup without duplicating its controls',()=>{
+  const html=fs.readFileSync(path.join(root,'public','index.html'),'utf8');
+  const general=html.indexOf('data-settings-tab="general"');
+  const game=html.indexOf('data-settings-tab="game"');
+  const backup=html.indexOf('data-settings-tab="backup"');
+  assert.ok(general>=0&&general<game&&game<backup);
+  assert.match(html,/data-settings-panel="game"[\s\S]*?id="gameSettingsList"/);
+  assert.equal((html.match(/id="gameSettingsList"/g)||[]).length,1);
 });

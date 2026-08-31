@@ -12,3 +12,12 @@ data/backup-settings.json
 # Local backups
 backups/*
 !backups/.gitkeep
+
+# CRESCI local content tools
+.cresci-content-backups/
+.cresci-edit-candidate-*/
+.cresci-edit-candidate-*.zip
+cresci-content-next/
+cresci-content-next.zip
+cresci-generated-assets/
+public/assets/avatars/v4-production.zip

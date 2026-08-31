@@ -1,9 +1,8 @@
-﻿#!/usr/bin/env bash
-
-set -e
+#!/usr/bin/env bash
+set -euo pipefail
 
 APP_NAME="CRESCI"
-APP_VERSION="v1.0.2"
+GITHUB_REPO="Tkoczu/Cresci"
 REPO_URL="https://github.com/Tkoczu/Cresci.git"
 
 CPU_CORES=2
@@ -28,14 +27,47 @@ if ! command -v pct >/dev/null 2>&1; then
   exit 1
 fi
 
+if ! command -v curl >/dev/null 2>&1; then
+  echo "ERROR: curl is not installed on the Proxmox host."
+  exit 1
+fi
+
+echo "Checking latest CRESCI release..."
+
+APP_VERSION="$(
+  curl -fsSL \
+    -H "Accept: application/vnd.github+json" \
+    -H "User-Agent: CRESCI-Installer" \
+    "https://api.github.com/repos/${GITHUB_REPO}/releases/latest" |
+  sed -n 's/.*"tag_name":[[:space:]]*"\([^"]*\)".*/\1/p' |
+  head -n 1
+)"
+
+if ! printf '%s' "${APP_VERSION}" | grep -Eq '^v[0-9]+\.[0-9]+\.[0-9]+$'; then
+  echo "ERROR: Could not determine latest CRESCI release."
+  echo "Received version: ${APP_VERSION:-none}"
+  exit 1
+fi
+
+echo "Latest CRESCI release: ${APP_VERSION}"
+
+echo
 echo "[1/10] Detecting free container ID..."
+
 CTID="$(pvesh get /cluster/nextid)"
+
+if [ -z "${CTID}" ]; then
+  echo "ERROR: Could not determine next available container ID."
+  exit 1
+fi
+
 echo "Container ID: ${CTID}"
 
 echo
 echo "[2/10] Detecting storage..."
 
 ROOT_STORAGE=""
+
 for STORAGE in local-lvm local-zfs local; do
   if pvesm status 2>/dev/null | awk 'NR>1 {print $1}' | grep -qx "${STORAGE}"; then
     if pvesm status -storage "${STORAGE}" 2>/dev/null | grep -q "rootdir"; then
@@ -46,7 +78,10 @@ for STORAGE in local-lvm local-zfs local; do
 done
 
 if [ -z "${ROOT_STORAGE}" ]; then
-  ROOT_STORAGE="$(pvesm status -content rootdir 2>/dev/null | awk 'NR==2 {print $1}')"
+  ROOT_STORAGE="$(
+    pvesm status -content rootdir 2>/dev/null |
+    awk 'NR==2 {print $1}'
+  )"
 fi
 
 if [ -z "${ROOT_STORAGE}" ]; then
@@ -54,7 +89,10 @@ if [ -z "${ROOT_STORAGE}" ]; then
   exit 1
 fi
 
-TEMPLATE_STORAGE="$(pvesm status -content vztmpl 2>/dev/null | awk 'NR==2 {print $1}')"
+TEMPLATE_STORAGE="$(
+  pvesm status -content vztmpl 2>/dev/null |
+  awk 'NR==2 {print $1}'
+)"
 
 if [ -z "${TEMPLATE_STORAGE}" ]; then
   echo "ERROR: No storage supporting container templates was found."
@@ -65,14 +103,18 @@ echo "Container storage: ${ROOT_STORAGE}"
 echo "Template storage:  ${TEMPLATE_STORAGE}"
 
 echo
-echo "[3/10] Looking for Debian 13 template..."
+echo "[3/10] Looking for Debian 13 amd64 template..."
 
 pveam update >/dev/null
 
-TEMPLATE="$(pveam available --section system | awk '/debian-13-standard/ && /amd64/ {print $2}' | tail -n 1)"
+TEMPLATE="$(
+  pveam available --section system |
+  awk '/debian-13-standard/ && /amd64/ {print $2}' |
+  tail -n 1
+)"
 
 if [ -z "${TEMPLATE}" ]; then
-  echo "ERROR: Debian 13 LXC template was not found."
+  echo "ERROR: Debian 13 amd64 LXC template was not found."
   exit 1
 fi
 
@@ -112,9 +154,12 @@ echo
 echo "[6/10] Installing system packages..."
 
 pct exec "${CTID}" -- bash -c '
-set -e
+set -euo pipefail
+
+export DEBIAN_FRONTEND=noninteractive
 
 apt-get update
+
 apt-get install -y \
   ca-certificates \
   curl \
@@ -123,6 +168,7 @@ apt-get install -y \
   sudo
 
 curl -fsSL https://deb.nodesource.com/setup_22.x | bash -
+
 apt-get install -y nodejs
 
 echo "Node version:"
@@ -133,7 +179,7 @@ echo
 echo "[7/10] Downloading CRESCI ${APP_VERSION}..."
 
 pct exec "${CTID}" -- bash -c "
-set -e
+set -euo pipefail
 
 rm -rf /opt/cresci
 
@@ -162,7 +208,27 @@ EOF
 "
 
 echo
-echo "[9/10] Creating systemd service..."
+echo "[9/10] Creating service user and systemd service..."
+
+pct exec "${CTID}" -- bash -c '
+set -euo pipefail
+
+id cresci >/dev/null 2>&1 || \
+  useradd \
+    --system \
+    --home-dir /opt/cresci \
+    --shell /usr/sbin/nologin \
+    cresci
+
+chown -R root:root /opt/cresci
+
+chown -R cresci:cresci \
+  /opt/cresci/data \
+  /opt/cresci/backups
+
+chown cresci:cresci /opt/cresci/.env
+chmod 0600 /opt/cresci/.env
+'
 
 pct exec "${CTID}" -- bash -c "cat > /etc/systemd/system/cresci.service <<'EOF'
 [Unit]
@@ -185,28 +251,36 @@ Group=cresci
 [Install]
 WantedBy=multi-user.target
 EOF
-
-id cresci >/dev/null 2>&1 || useradd --system --home-dir /opt/cresci --shell /usr/sbin/nologin cresci
-chown -R root:root /opt/cresci
-chown -R cresci:cresci /opt/cresci/data /opt/cresci/backups
-chown cresci:cresci /opt/cresci/.env
-chmod 0600 /opt/cresci/.env
-systemctl daemon-reload
-systemctl enable cresci
-systemctl start cresci
 "
 
-echo
-echo "Installing CRESCI management command..."
+pct exec "${CTID}" -- bash -c '
+set -euo pipefail
 
-pct exec "${CTID}" -- bash -c "
+systemctl daemon-reload
+systemctl enable cresci
+'
+
+echo
+echo "Installing CRESCI management command and update helper..."
+
+pct exec "${CTID}" -- bash -c '
+set -euo pipefail
+
 chmod +x /opt/cresci/scripts/update.sh
 chmod +x /opt/cresci/scripts/cresci
 chmod +x /opt/cresci/scripts/update-runner.sh
 chmod +x /opt/cresci/scripts/install-update-helper.sh
+
 ln -sf /opt/cresci/scripts/cresci /usr/local/bin/cresci
+
 /opt/cresci/scripts/install-update-helper.sh
-"
+'
+
+echo
+echo "Starting CRESCI..."
+
+pct exec "${CTID}" -- systemctl start cresci
+
 echo
 echo "[10/10] Checking CRESCI..."
 
@@ -222,7 +296,14 @@ else
   exit 1
 fi
 
-IP="$(pct exec "${CTID}" -- hostname -I | awk '{print $1}')"
+IP="$(
+  pct exec "${CTID}" -- hostname -I |
+  awk '{print $1}'
+)"
+
+if [ -z "${IP}" ]; then
+  IP="unknown"
+fi
 
 echo
 echo "======================================"
@@ -240,5 +321,3 @@ echo
 echo "The container will start automatically"
 echo "with the Proxmox host."
 echo
-
-

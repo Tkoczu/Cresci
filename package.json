@@ -1,6 +1,6 @@
-﻿{
+{
     "name":  "cresci",
-    "version":  "1.0.2",
+    "version":  "1.0.3",
     "private":  true,
     "description":  "CRESCI - self-hosted gym progress tracker",
     "type":  "module",
@@ -13,4 +13,3 @@
                     "node":  "\u003e=22.5"
                 }
 }
-

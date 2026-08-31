@@ -17973,6 +17973,227 @@
         "y": 379
       },
       "sha256": "661be2e23d14989cd0bc1340a8bc87b094de012462f0895c8eabf4ac5dcb96b1"
+    },
+    {
+      "id": "male.top.best_in_world_tee.master.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "master",
+      "format": "png",
+      "path": "male/master/top/best_in_world_tee.png",
+      "canvas": {
+        "width": 1024,
+        "height": 1536
+      },
+      "anchor": {
+        "x": 512,
+        "y": 1516
+      },
+      "sha256": "f1e6319951dd3b47541ab246843c9b532167233265139f93b94f860ec0fc5b8c"
+    },
+    {
+      "id": "male.top.best_in_world_tee.master.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "master",
+      "format": "webp",
+      "path": "male/master/top/best_in_world_tee.webp",
+      "canvas": {
+        "width": 1024,
+        "height": 1536
+      },
+      "anchor": {
+        "x": 512,
+        "y": 1516
+      },
+      "sha256": "72dde2ab1a2ab5503bc3c39f510c97ec40b717698c949bfce458bed861e445f0"
+    },
+    {
+      "id": "male.top.best_in_world_tee.runtime.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "runtime",
+      "format": "png",
+      "path": "male/runtime/top/best_in_world_tee.png",
+      "canvas": {
+        "width": 512,
+        "height": 768
+      },
+      "anchor": {
+        "x": 256,
+        "y": 758
+      },
+      "sha256": "fbed784a59665a66da22b400e3b8bba8e00233eb34b07e632211a70c508182a6"
+    },
+    {
+      "id": "male.top.best_in_world_tee.runtime.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "runtime",
+      "format": "webp",
+      "path": "male/runtime/top/best_in_world_tee.webp",
+      "canvas": {
+        "width": 512,
+        "height": 768
+      },
+      "anchor": {
+        "x": 256,
+        "y": 758
+      },
+      "sha256": "83b2bf45f82cd335a05e0f9a233552e7b30291ab828303343028cd2263d34bdf"
+    },
+    {
+      "id": "male.top.best_in_world_tee.compact.png",
+      "gender": "male",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "compact",
+      "format": "png",
+      "path": "male/compact/top/best_in_world_tee.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "c2e00c3553426993125122c401fd850f990bea01a94725a5b18cc5a55a88782b"
+    },
+    {
+      "id": "male.top.best_in_world_tee.compact.webp",
+      "gender": "male",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "compact",
+      "format": "webp",
+      "path": "male/compact/top/best_in_world_tee.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "24fe22993d12c0f75137996f6b43687ff5709e7b0bea7cd31f749f2a2a8b52a9"
+    },
+    {
+      "id": "female.top.best_in_world_tee.master.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "master",
+      "format": "png",
+      "path": "female/master/top/best_in_world_tee.png",
+      "canvas": {
+        "width": 1024,
+        "height": 1536
+      },
+      "anchor": {
+        "x": 512,
+        "y": 1516
+      },
+      "sha256": "0e0890657c30957f158bb12fe665824a6e752bcc8d83dd9955bba8fb020aed17"
+    },
+    {
+      "id": "female.top.best_in_world_tee.master.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "master",
+      "format": "webp",
+      "path": "female/master/top/best_in_world_tee.webp",
+      "canvas": {
+        "width": 1024,
+        "height": 1536
+      },
+      "anchor": {
+        "x": 512,
+        "y": 1516
+      },
+      "sha256": "cf7a55757a9dba8adb85851bf4d310ef3b1ce212e489b421aac6abd1e2940bb4"
+    },
+    {
+      "id": "female.top.best_in_world_tee.runtime.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "runtime",
+      "format": "png",
+      "path": "female/runtime/top/best_in_world_tee.png",
+      "canvas": {
+        "width": 512,
+        "height": 768
+      },
+      "anchor": {
+        "x": 256,
+        "y": 758
+      },
+      "sha256": "a6d45d44655c62085ef41544ed6df4fbe329356ff73746d7ca749c659d702977"
+    },
+    {
+      "id": "female.top.best_in_world_tee.runtime.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "runtime",
+      "format": "webp",
+      "path": "female/runtime/top/best_in_world_tee.webp",
+      "canvas": {
+        "width": 512,
+        "height": 768
+      },
+      "anchor": {
+        "x": 256,
+        "y": 758
+      },
+      "sha256": "f155a9fbaeb2c1f37ae07a3c38a8cdc81b5d55352fc98ea7f13e6d39a89ee9e4"
+    },
+    {
+      "id": "female.top.best_in_world_tee.compact.png",
+      "gender": "female",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "compact",
+      "format": "png",
+      "path": "female/compact/top/best_in_world_tee.png",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "f1eb4c7f9e37f7c49259d93510cc1c716cd830d2e50046ec7b40ff9c35054334"
+    },
+    {
+      "id": "female.top.best_in_world_tee.compact.webp",
+      "gender": "female",
+      "slot": "top",
+      "name": "best_in_world_tee",
+      "variant": "compact",
+      "format": "webp",
+      "path": "female/compact/top/best_in_world_tee.webp",
+      "canvas": {
+        "width": 256,
+        "height": 384
+      },
+      "anchor": {
+        "x": 128,
+        "y": 379
+      },
+      "sha256": "8c3b282e09608b6e94914bdb318ab30ec4eece815988bf116d296b94a289d658"
     }
-  ]
+  ],
+  "contentArchitecture": {
+    "stableItemIdField": "contentId",
+    "displayNameMutable": true,
+    "userDataIncluded": false
+  }
 }
