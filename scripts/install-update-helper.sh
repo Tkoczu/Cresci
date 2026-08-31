@@ -51,7 +51,7 @@ Type=oneshot
 User=root
 Group=root
 UMask=0027
-ExecStart=/usr/local/libexec/cresci-update-runner --web
+ExecStart=/opt/cresci/scripts/update-runner.sh --web
 EOF
 
 install -d -m 0755 -o root -g root /etc/systemd/system/cresci.service.d
