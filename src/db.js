@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { calculateCresciScore } from './cresci-score.js';
 import { CHECK_IN_XP, levelFromXp, validateAvatar } from './cresci-game.js';
-import { ACHIEVEMENTS, ACHIEVEMENT_CATEGORIES, achievementProgress, longestCompletedWeeklyStreak } from './achievements.js';
+import { achievementCatalog, ACHIEVEMENT_CATEGORIES, achievementProgress, longestCompletedWeeklyStreak } from './achievements.js';
 import { gameItems, ITEM_SLOTS, SLOT_LABELS, RARITY_LABELS, avatarFieldForSlot, avatarItems, gameItem } from './game-items.js';
 
 export const SCHEMA_VERSION = 10;
@@ -346,7 +346,7 @@ export function createRepository(db) {
   function evaluateAchievements(profileId, unlockedAt = new Date().toISOString()) {
     if(!db.prepare('SELECT enabled FROM game_profiles WHERE profile_id=?').get(profileId)?.enabled)return[];
     const metrics=achievementMetrics(profileId),existing=new Set(db.prepare('SELECT achievement_key FROM user_achievements WHERE profile_id=?').all(profileId).map(row=>row.achievement_key));
-    const candidates=ACHIEVEMENTS.filter(definition=>!existing.has(definition.key)&&achievementProgress(definition,metrics).complete);
+    const candidates=achievementCatalog().filter(definition=>!existing.has(definition.key)&&achievementProgress(definition,metrics).complete);
     const unlocked=[];
     for(const definition of candidates){
       const inserted=db.prepare(`INSERT OR IGNORE INTO user_achievements(profile_id,achievement_key,unlocked_at,reward_pr,reward_item_key,reward_item_granted,metadata_json)
@@ -546,7 +546,8 @@ export function createRepository(db) {
       if(!profile||!Number(profile.enabled))return null;
       const metrics=achievementMetrics(Number(userId));
       const unlocked=new Map(db.prepare('SELECT * FROM user_achievements WHERE profile_id=?').all(userId).map(row=>[row.achievement_key,row]));
-      const items=ACHIEVEMENTS.map(definition=>{
+      const definitions=achievementCatalog();
+      const items=definitions.map(definition=>{
         const saved=unlocked.get(definition.key),progress=achievementProgress(definition,metrics),masked=definition.hidden&&!saved;
         return{
           key:definition.key,category:definition.category,category_label:ACHIEVEMENT_CATEGORIES[definition.category],
@@ -555,7 +556,7 @@ export function createRepository(db) {
           progress:masked?null:progress,unlocked:Boolean(saved),unlocked_at:saved?.unlocked_at||null
         };
       });
-      return{user_id:profile.user_id,user_name:profile.user_name,color:profile.color,unlocked_count:unlocked.size,total_count:ACHIEVEMENTS.length,items};
+      return{user_id:profile.user_id,user_name:profile.user_name,color:profile.color,unlocked_count:items.filter(item=>item.unlocked).length,total_count:definitions.length,items};
     },
 
     inventory(userId) {

@@ -1,3 +1,5 @@
+import { readFileSync } from 'node:fs';
+
 export const ACHIEVEMENTS = Object.freeze([
   {key:'first_step',category:'training',name:'Pierwszy krok',description:'Zamelduj się po raz pierwszy.',metric:'check_ins',target:1,rewardPr:1},
   {key:'getting_started',category:'training',name:'Rozkręcamy się',description:'Zapisz 10 meldunków.',metric:'check_ins',target:10,rewardPr:2},
@@ -35,6 +37,28 @@ export const ACHIEVEMENTS = Object.freeze([
 ]);
 
 export const ACHIEVEMENT_CATEGORIES = Object.freeze({training:'Trening',progress:'Progres',regularity:'Regularność',exploration:'Eksploracja',hidden:'Ukryte'});
+
+const ACHIEVEMENT_METRICS=new Set(['check_ins','records','records_single_exercise','weekly_streak','custom_exercises','distinct_exercises','chart_views','saved_results','items_acquired','purchases','full_equipment','night_check_ins','early_check_ins','comeback_check_ins','pr_balance']);
+const CATALOG_URL=new URL('../public/content/achievements.json',import.meta.url);
+
+export function achievementCatalog(){
+  try{
+    const parsed=JSON.parse(readFileSync(CATALOG_URL,'utf8'));
+    if(!Array.isArray(parsed?.items))throw new Error('items is not an array');
+    const keys=new Set(),items=[];
+    for(const raw of parsed.items){
+      const key=String(raw?.key||'');
+      const target=Number(raw?.target),rewardPr=Number(raw?.rewardPr||0);
+      if(raw?.active===false||!/^[a-z][a-z0-9_]{2,63}$/.test(key)||keys.has(key)||!ACHIEVEMENT_CATEGORIES[raw?.category]||!ACHIEVEMENT_METRICS.has(raw?.metric)||!Number.isInteger(target)||target<1||!Number.isInteger(rewardPr)||rewardPr<0)continue;
+      keys.add(key);
+      items.push(Object.freeze({key,category:raw.category,name:String(raw.name||key),description:String(raw.description||''),metric:raw.metric,target,rewardPr,hidden:Boolean(raw.hidden),rewardItemKey:raw.rewardItemKey||null}));
+    }
+    return items.length?Object.freeze(items):ACHIEVEMENTS;
+  }catch(error){
+    console.error('Nie udało się odczytać katalogu achievementów; używam katalogu wbudowanego.',error.message);
+    return ACHIEVEMENTS;
+  }
+}
 
 function mondayUtc(dateText){const date=new Date(`${dateText}T00:00:00Z`),day=(date.getUTCDay()+6)%7;date.setUTCDate(date.getUTCDate()-day);return date;}
 

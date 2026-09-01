@@ -13,6 +13,15 @@ test('sidebar navigation remains scrollable in a short window',()=>{
   assert.match(css,/overscroll-behavior:contain/);
 });
 
+test('mobile layout always occupies the full visual viewport',()=>{
+  const css=fs.readFileSync(path.join(root,'public','styles.css'),'utf8');
+  const html=fs.readFileSync(path.join(root,'public','index.html'),'utf8');
+  assert.match(html,/width=device-width, initial-scale=1, viewport-fit=cover/);
+  assert.match(css,/html\{width:100%;min-width:0;overflow-x:hidden[^}]*text-size-adjust:100%\}/);
+  assert.match(css,/body\{width:100%;min-width:0;overflow-x:hidden\}/);
+  assert.match(css,/@media\(max-width:900px\)\{main\{width:100%;max-width:100%;min-width:0;margin-left:0\}\.topbar,\.view\{width:100%;max-width:100%;min-width:0\}\}/);
+});
+
 test('shop exposes client-side search and slot filters',()=>{
   const html=fs.readFileSync(path.join(root,'public','index.html'),'utf8');
   const app=fs.readFileSync(path.join(root,'public','app.js'),'utf8');
