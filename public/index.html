@@ -3,12 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <script>try{document.documentElement.dataset.ui=localStorage.getItem('cresci-ui-mode')==='pixel'?'pixel':'classic'}catch{document.documentElement.dataset.ui='classic'}</script>
   <meta name="theme-color" content="#101315">
   <meta name="description" content="CRESCI — self-hosted dziennik progresu treningowego Marka i Domii">
   <link rel="icon" type="image/png" href="/cresci-icon.png">
   <link rel="apple-touch-icon" href="/cresci-icon.png">
   <title>CRESCI — progres treningowy</title>
   <link rel="stylesheet" href="/styles.css?v=4.2&auth=1&mobile-layout=2">
+  <link rel="stylesheet" href="/styles-pixel.css?v=1">
 </head>
 <body>
   <section class="auth-screen" id="authScreen" aria-live="polite">
@@ -23,6 +25,7 @@
       <button class="nav-item active" data-view="dashboard"><span>⌂</span> Dashboard</button>
       <button class="nav-item" data-view="history"><span>↗</span> Historia</button>
       <button class="nav-item" data-view="chart"><span>⌁</span> Wykres progresu</button>
+      <button class="nav-item pixel-only" id="recordsNav" data-view="records"><span>◈</span> Rekordy</button>
       <button class="nav-item" data-view="exercises"><span>＋</span> Ćwiczenia</button>
       <button class="nav-item" id="characterNav" data-view="character" hidden><span>◆</span> Postać</button>
       <button class="nav-item" id="inventoryNav" data-view="inventory" hidden><span>▦</span> Ekwipunek</button>
@@ -38,14 +41,29 @@
   <main inert>
     <header class="topbar">
       <button class="menu-button" id="menuButton" aria-label="Otwórz menu" aria-expanded="false">☰</button>
-      <div><p class="eyebrow">TRENING SIŁOWY</p><h1 id="pageTitle">Twój progres</h1></div>
+      <div class="classic-topbar-title"><p class="eyebrow">TRENING SIŁOWY</p><h1 id="pageTitle">Twój progres</h1></div>
+      <div class="pixel-hud pixel-only" id="pixelHud" aria-label="Statystyki CRESCI GAME"><span class="pixel-loading">ŁADOWANIE HUD…</span></div>
+      <button class="pixel-return-classic pixel-only" id="pixelReturnClassic" type="button" title="Wróć do CRESCI Classic">CLASSIC</button>
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="Włącz ciemny motyw" title="Zmień motyw">☾</button>
     </header>
 
     <section class="view active" id="dashboardView">
+      <section class="pixel-dashboard pixel-only" id="pixelDashboard" aria-live="polite">
+        <div class="pixel-page-title"><div><p class="eyebrow">CENTRUM DOWODZENIA</p><h2>Dashboard</h2></div><button class="primary" type="button" data-pixel-action="quick-entry">＋ ZAPISZ WYNIK</button></div>
+        <div class="pixel-stat-grid" id="pixelStats"><span class="pixel-loading">ŁADOWANIE STATYSTYK…</span></div>
+        <div class="pixel-dashboard-grid">
+          <article class="pixel-panel pixel-progress-panel"><header><h3>PROGRES W CZASIE</h3><button type="button" data-pixel-view="chart">OTWÓRZ ↗</button></header><div class="pixel-chart-summary" id="pixelChartSummary"></div><canvas id="pixelProgressChart" height="280" aria-label="Ogólny progres użytkownika"></canvas><div class="pixel-empty" id="pixelProgressEmpty" hidden>Dodaj wyniki, aby zobaczyć trend.</div></article>
+          <article class="pixel-panel pixel-game-panel" id="pixelGamePanel"><span class="pixel-loading">ŁADOWANIE CRESCI GAME…</span></article>
+          <article class="pixel-panel"><header><h3>OSTATNIE WPISY</h3><button type="button" data-pixel-view="history">WSZYSTKIE ↗</button></header><div class="pixel-list" id="pixelRecentEntries"></div></article>
+          <article class="pixel-panel"><header><h3>REKORDY</h3><button type="button" data-pixel-view="records">WSZYSTKIE ↗</button></header><div class="pixel-list" id="pixelRecordPreview"></div></article>
+          <article class="pixel-panel"><header><h3>OSIĄGNIĘCIA</h3><button type="button" data-pixel-view="achievements">WSZYSTKIE ↗</button></header><div class="pixel-achievement-preview" id="pixelAchievementPreview"></div></article>
+        </div>
+      </section>
+      <div class="dashboard-core">
       <section class="score-section" id="scoreSection" hidden><div class="score-section-heading"><div><p class="eyebrow">OSTATNIE 30 DNI</p><h2>CRESCI Score</h2></div><small>Porównanie z poprzednimi 30 dniami</small></div><div class="score-grid" id="scoreGrid"></div></section>
       <div class="section-heading"><div><p class="eyebrow">AKTUALNY PLAN</p><h2>Twoje ciężary</h2></div><div class="dashboard-tools"><input class="search" id="exerciseSearch" type="search" placeholder="Szukaj ćwiczenia…" aria-label="Szukaj ćwiczenia"><button class="primary" id="quickAdd">+ Zapisz serię</button></div></div>
       <div class="exercise-grid" id="exerciseGrid"></div>
+      </div>
     </section>
 
     <section class="view" id="historyView">
@@ -57,6 +75,11 @@
       <div class="section-heading"><div><p class="eyebrow">TREND W CZASIE</p><h2>Wykres progresu</h2></div><div class="filters"><select id="chartProfile" aria-label="Osoby na wykresie"></select><select id="chartExercise" aria-label="Ćwiczenie na wykresie"></select></div></div>
       <div class="chart-card"><div class="chart-summary" id="chartSummary"></div><div class="chart-legend" id="chartLegend"></div><canvas id="progressChart" height="360" aria-label="Wykres zmian ciężaru"></canvas><div class="empty-chart" id="emptyChart">Dodaj co najmniej jeden wpis, aby zobaczyć wykres.</div></div>
       <aside class="index-note" id="indexNote"><strong>Jak działa indeks całego planu?</strong><span>Każde ćwiczenie zaczyna od 100. Wykres pokazuje średnią procentową zmianę ciężaru we wszystkich rozpoczętych ćwiczeniach, więc ciężkie boje nie dominują nad lekkimi. To wskaźnik kierunku, nie medyczny pomiar siły — zapis samych kilogramów nie uwzględnia liczby powtórzeń, serii, techniki ani zakresu ruchu.</span></aside>
+    </section>
+
+    <section class="view" id="recordsView">
+      <div class="section-heading"><div><p class="eyebrow">NAJLEPSZE WYNIKI</p><h2>Rekordy</h2></div></div>
+      <div class="pixel-record-grid" id="recordsGrid"><div class="empty">Ładowanie rekordów…</div></div>
     </section>
 
     <section class="view" id="exercisesView">
@@ -97,7 +120,7 @@
       <div class="section-heading"><div><p class="eyebrow">USTAWIENIA APLIKACJI</p><h2>Ustawienia</h2></div></div>
       <div class="settings-tabs" role="tablist" aria-label="Sekcje ustawień"><button class="settings-tab active" type="button" role="tab" aria-selected="true" data-settings-tab="general">Ogólne</button><button class="settings-tab" type="button" role="tab" aria-selected="false" data-settings-tab="game">GAME</button><button class="settings-tab" type="button" role="tab" aria-selected="false" data-settings-tab="backup">Dane i backup</button><button class="settings-tab" type="button" role="tab" aria-selected="false" data-settings-tab="updates">Aktualizacje</button></div>
       <section class="settings-panel active" data-settings-panel="general">
-        <div class="data-grid settings-general-grid"><article class="data-card"><span class="data-icon">◐</span><h3>Wygląd</h3><p>Wybierz jasny albo ciemny motyw interfejsu CRESCI.</p><button class="secondary" id="settingsThemeToggle" type="button">Zmień motyw</button></article><article class="data-card"><span class="data-icon">●</span><h3>Tryb aplikacji</h3><p>Dane są przechowywane w lokalnej bazie SQLite na tym serwerze.</p><span class="settings-status"><i></i> Self-hosted</span></article><article class="data-card account-settings-card"><span class="data-icon">◎</span><h3>Konta użytkowników</h3><p id="accountSettingsText">Zarządzaj aktualnie zalogowanym użytkownikiem.</p><div class="account-settings-actions"><button class="secondary" id="addAccountButton" type="button">Dodaj użytkownika</button><button class="danger-button" id="deleteAccountButton" type="button">Usuń moje konto i dane</button></div></article><article class="data-card score-settings-card"><span class="data-icon">★</span><h3>CRESCI Score</h3><p>Jawna punktacja aktywności i progresu z ostatnich 30 dni. Włącz osobno dla każdego profilu i ustaw cel treningów tygodniowo.</p><div class="score-settings-list" id="scoreSettingsList"></div></article></div>
+        <div class="data-grid settings-general-grid"><article class="data-card appearance-card"><span class="data-icon">◐</span><h3>Wygląd</h3><p>Wybierz interfejs i motyw CRESCI. Pixel UI jest wersją beta i zawsze możesz bezpiecznie wrócić do Classic.</p><fieldset class="ui-mode-picker"><legend>Interfejs</legend><label><input type="radio" name="ui_mode" value="classic"><span><strong>CRESCI Classic</strong><small>Dotychczasowy, stabilny interfejs</small></span></label><label><input type="radio" name="ui_mode" value="pixel"><span><strong>CRESCI Pixel UI <b>BETA</b></strong><small>Gamingowy interfejs retro RPG</small></span></label></fieldset><button class="secondary" id="settingsThemeToggle" type="button">Zmień motyw</button></article><article class="data-card"><span class="data-icon">●</span><h3>Tryb aplikacji</h3><p>Dane są przechowywane w lokalnej bazie SQLite na tym serwerze.</p><span class="settings-status"><i></i> Self-hosted</span></article><article class="data-card account-settings-card"><span class="data-icon">◎</span><h3>Konta użytkowników</h3><p id="accountSettingsText">Zarządzaj aktualnie zalogowanym użytkownikiem.</p><div class="account-settings-actions"><button class="secondary" id="addAccountButton" type="button">Dodaj użytkownika</button><button class="danger-button" id="deleteAccountButton" type="button">Usuń moje konto i dane</button></div></article><article class="data-card score-settings-card"><span class="data-icon">★</span><h3>CRESCI Score</h3><p>Jawna punktacja aktywności i progresu z ostatnich 30 dni. Włącz osobno dla każdego profilu i ustaw cel treningów tygodniowo.</p><div class="score-settings-list" id="scoreSettingsList"></div></article></div>
       </section>
       <section class="settings-panel" data-settings-panel="game" hidden>
         <div class="settings-subheading"><h3>CRESCI GAME</h3><p>Włącz grywalizację i zarządzaj nią osobno dla każdego profilu.</p></div>
@@ -176,5 +199,5 @@
   </form></dialog>
 
   <div class="toast" id="toast" role="status"></div>
-  <script type="module" src="/app.js?v=4.2&auth=1"></script>
+  <script type="module" src="/app.js?v=4.2&auth=1&pixel-ui=1"></script>
 </body></html>

@@ -85,3 +85,6 @@
 html{width:100%;min-width:0;overflow-x:hidden;background:var(--bg);-webkit-text-size-adjust:100%;text-size-adjust:100%}
 body{width:100%;min-width:0;overflow-x:hidden}
 @media(max-width:900px){main{width:100%;max-width:100%;min-width:0;margin-left:0}.topbar,.view{width:100%;max-width:100%;min-width:0}}
+
+/* Wspólny, minimalny kontroler wyboru warstwy prezentacji. */
+.ui-mode-picker{display:grid;gap:8px;margin:15px 0 18px;padding:0;border:0}.ui-mode-picker legend{margin-bottom:7px;color:var(--muted);font-size:10px;font-weight:850;text-transform:uppercase}.ui-mode-picker label{display:grid;grid-template-columns:auto 1fr;align-items:center;gap:10px;padding:11px;border:1px solid var(--line);border-radius:9px;background:var(--bg);cursor:pointer}.ui-mode-picker label:has(input:checked){border-color:var(--accent);box-shadow:inset 3px 0 var(--accent)}.ui-mode-picker input{width:18px;height:18px;accent-color:var(--accent)}.ui-mode-picker span{display:grid}.ui-mode-picker small{color:var(--muted);font-size:10px}.ui-mode-picker b{color:var(--accent);font-size:8px}
