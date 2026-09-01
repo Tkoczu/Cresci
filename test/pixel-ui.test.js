@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {normalizeUiMode,storedUiMode,persistUiMode,calculateTrainingStreak,recordRows,UI_MODE_KEY} from '../public/pixel-ui.js';
+import {normalizeUiMode,storedUiMode,persistUiMode,calculateTrainingStreak,recordRows,pixelCharacterMarkup,UI_MODE_KEY} from '../public/pixel-ui.js';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 
@@ -48,4 +48,11 @@ test('Pixel character scene hides the technical sprite checkerboard',()=>{
   const css=fs.readFileSync(path.join(root,'public','styles-pixel.css'),'utf8');
   assert.match(css,/\.pixel-avatar-scene \.sprite-stage\{[^}]*background-color:transparent;[^}]*background-image:none;/);
   assert.match(css,/\.pixel-avatar-main\{[^}]*width:min\(320px,78%\)!important/);
+});
+
+test('Pixel character exposes symmetric clothing and appearance slots without a fake platform',()=>{
+  const markup=pixelCharacterMarkup({user_id:7,user_name:'Marek',color:'#ff7410',level:2,required_xp:125,current_xp:0,total_xp:100,pr_balance:0,pr_total_earned:4,progress_percent:0,checked_in_today:false,check_in_xp:25},{escape:String,spriteAvatar:()=>'<div class="avatar"></div>',slotSource:()=>null});
+  for(const slot of ['headwear','top','bottom','shoes','back','accessories','hair','eyes'])assert.match(markup,new RegExp(`data-equipment-slot="${slot}"`));
+  assert.doesNotMatch(markup,/pixel-avatar-platform/);
+  assert.match(markup,/data-equipment-user="7"/);
 });
