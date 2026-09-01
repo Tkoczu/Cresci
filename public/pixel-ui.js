@@ -46,6 +46,7 @@ export function pixelCharacterMarkup(item,{escape,spriteAvatar,slotSource}){
     const editor=['hair','eyes'].includes(layer)?' data-avatar-appearance-part="true"':'';
     return `<button class="pixel-equip-slot" type="button" data-equipment-slot="${layer}" data-equipment-user="${item.user_id}"${editor} aria-label="Zmień: ${escape(label)}"><span>${escape(label)}</span><div>${source?`<img src="${escape(source)}" alt="" loading="lazy">`:'<i>—</i>'}</div></button>`;
   };
+  const rank=item.level>=40?'DIAMENTOWY':item.level>=25?'ZŁOTY':item.level>=15?'SREBRNY':item.level>=5?'BRĄZOWY':'ŻELAZNY';
   return `<article class="character-card pixel-character-card" style="--profile-color:${escape(item.color)}">
     <div class="pixel-character-layout">
       <section class="pixel-character-preview">
@@ -59,9 +60,9 @@ export function pixelCharacterMarkup(item,{escape,spriteAvatar,slotSource}){
       </section>
       <aside class="pixel-character-side">
         <section class="pixel-character-stats"><h3>STATYSTYKI POSTACI</h3><dl><div><dt>Profil</dt><dd>${escape(item.user_name)}</dd></div><div><dt>Poziom</dt><dd>${item.level}</dd></div><div><dt>Całkowite XP</dt><dd>${item.total_xp}</dd></div><div><dt>PR</dt><dd>${item.pr_balance}</dd></div><div><dt>Łącznie zdobyte PR</dt><dd>${item.pr_total_earned}</dd></div></dl></section>
-        <section class="pixel-character-rank"><span>POSTĘP POZIOMU</span><strong>${item.required_xp-item.current_xp} XP</strong><small>do poziomu ${item.level+1}</small><div class="pixel-xp-track"><i style="width:${item.progress_percent}%"></i></div><p>${item.current_xp} / ${item.required_xp} XP</p></section>
+        <section class="pixel-character-rank"><div class="pixel-rank-badge"><span>${item.level}</span></div><div><span>RANGA</span><strong>${rank}</strong><small>Zdobywaj XP i wspinaj się wyżej</small><div class="pixel-xp-track"><i style="width:${item.progress_percent}%"></i></div><p>${item.current_xp} / ${item.required_xp} XP</p></div></section>
       </aside>
     </div>
-    <div class="pixel-character-actions"><button class="secondary" type="button" data-game-check-in="${item.user_id}" ${item.checked_in_today?'disabled':''}>${item.checked_in_today?'✓ ZAMELDOWANO':`ZAMELDUJ SIĘ · +${item.check_in_xp} XP`}</button></div>
+    <section class="pixel-character-quick"><header><h3>SZYBKA PERSONALIZACJA</h3><span>Wygląd bazowy</span></header><div><button type="button" data-edit-avatar="${item.user_id}"><i class="pixel-skin-swatch"></i><span>Kolor skóry</span></button><button type="button" data-edit-avatar="${item.user_id}"><i class="pixel-eye-swatch">●</i><span>Kolor oczu</span></button><button type="button" data-edit-avatar="${item.user_id}"><i class="pixel-hair-swatch">◆</i><span>Fryzura</span></button><button type="button" data-edit-avatar="${item.user_id}"><i class="pixel-color-swatch">◒</i><span>Kolor włosów</span></button></div></section>
   </article>`;
 }

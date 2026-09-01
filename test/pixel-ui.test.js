@@ -39,7 +39,9 @@ test('Pixel UI is loaded as an isolated optional presentation with early no-flas
   assert.match(html,/styles-pixel\.css/);
   assert.match(html,/CRESCI Pixel UI <b>BETA<\/b>/);
   assert.match(css,/html:not\(\[data-ui="pixel"\]\) \.pixel-only\{display:none!important\}/);
-  assert.match(css,/\[data-ui="pixel"\] #inventoryNav,\[data-ui="pixel"\] #shopNav\{display:none!important\}/);
+  assert.match(css,/\[data-ui="pixel"\] #inventoryNav,\[data-ui="pixel"\] #shopNav\{display:block!important\}/);
+  assert.match(css,/\[data-ui="pixel"\] \.topbar\{[^}]*width:calc\(100% \+ 276px\)[^}]*margin-left:-276px/);
+  assert.match(css,/\[data-ui="pixel"\] #dashboardView \.pixel-page-title,\[data-ui="pixel"\] #dashboardView \.pixel-stat-grid\{display:none!important\}/);
   assert.match(app,/\/\/ PIXEL UI/);
   assert.doesNotMatch(fs.readFileSync(path.join(root,'public','pixel-ui.js'),'utf8'),/fetch\(/);
 });
@@ -47,8 +49,9 @@ test('Pixel UI is loaded as an isolated optional presentation with early no-flas
 test('Pixel character scene hides the technical sprite checkerboard',()=>{
   const css=fs.readFileSync(path.join(root,'public','styles-pixel.css'),'utf8');
   assert.match(css,/\.pixel-avatar-scene \.sprite-stage\{[^}]*background-color:transparent;[^}]*background-image:none;/);
-  assert.match(css,/\.pixel-avatar-main\{[^}]*width:min\(300px,72%\)!important/);
-  assert.match(css,/\.pixel-character-layout\{[^}]*grid-template-columns:minmax\(560px,1\.35fr\) minmax\(280px,\.85fr\)/);
+  assert.match(css,/\[data-ui="pixel"\] \.sprite-stage\{[^}]*background-color:transparent;[^}]*background-image:none;/);
+  assert.match(css,/\.pixel-avatar-main\{[^}]*width:min\(250px,66%\)!important/);
+  assert.match(css,/\.pixel-character-layout\{[^}]*grid-template-columns:minmax\(520px,1\.05fr\) minmax\(420px,\.95fr\)/);
 });
 
 test('Pixel character exposes symmetric clothing and appearance slots without a fake platform',()=>{

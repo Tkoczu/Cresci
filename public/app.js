@@ -1,4 +1,4 @@
-import {normalizeUiMode,storedUiMode,persistUiMode,calculateTrainingStreak,recordRows,pixelCharacterMarkup} from './pixel-ui.js';
+import {normalizeUiMode,storedUiMode,persistUiMode,calculateTrainingStreak,recordRows,pixelCharacterMarkup} from './pixel-ui.js?v=3';
 
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
