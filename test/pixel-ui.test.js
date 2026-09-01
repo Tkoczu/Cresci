@@ -47,7 +47,8 @@ test('Pixel UI is loaded as an isolated optional presentation with early no-flas
 test('Pixel character scene hides the technical sprite checkerboard',()=>{
   const css=fs.readFileSync(path.join(root,'public','styles-pixel.css'),'utf8');
   assert.match(css,/\.pixel-avatar-scene \.sprite-stage\{[^}]*background-color:transparent;[^}]*background-image:none;/);
-  assert.match(css,/\.pixel-avatar-main\{[^}]*width:min\(320px,78%\)!important/);
+  assert.match(css,/\.pixel-avatar-main\{[^}]*width:min\(300px,72%\)!important/);
+  assert.match(css,/\.pixel-character-layout\{[^}]*grid-template-columns:minmax\(560px,1\.35fr\) minmax\(280px,\.85fr\)/);
 });
 
 test('Pixel character exposes symmetric clothing and appearance slots without a fake platform',()=>{
