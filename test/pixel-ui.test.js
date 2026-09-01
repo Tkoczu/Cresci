@@ -43,3 +43,9 @@ test('Pixel UI is loaded as an isolated optional presentation with early no-flas
   assert.match(app,/\/\/ PIXEL UI/);
   assert.doesNotMatch(fs.readFileSync(path.join(root,'public','pixel-ui.js'),'utf8'),/fetch\(/);
 });
+
+test('Pixel character scene hides the technical sprite checkerboard',()=>{
+  const css=fs.readFileSync(path.join(root,'public','styles-pixel.css'),'utf8');
+  assert.match(css,/\.pixel-avatar-scene \.sprite-stage\{[^}]*background-color:transparent;[^}]*background-image:none;/);
+  assert.match(css,/\.pixel-avatar-main\{[^}]*width:min\(320px,78%\)!important/);
+});
