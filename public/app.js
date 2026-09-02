@@ -96,9 +96,9 @@ function applyUiMode(mode,{persist=true,render=true}={}){
   if(state.data){renderCharacters();if(state.view==='chart')renderChart();if(render&&normalized==='pixel')refreshPixelUi().catch(error=>{document.documentElement.dataset.ui='classic';state.uiMode='classic';persistUiMode('classic');syncUiModeControls();toast(`Pixel UI został wyłączony po błędzie: ${error.message}`);});}
 }
 function pixelHudMarkup(game){
-  const user=state.auth?.user||{},trainingDays=Number(state.data?.stats?.training_days)||0,streak=calculateTrainingStreak(state.pixelHistory);
+  const user=state.auth?.user||{},trainingDays=Number(state.data?.stats?.training_days)||0;
   const avatar=game?spriteAvatar(game,'item-avatar'):`<span class="account-avatar" style="--user-color:${esc(user.color||'#ff7410')}">${esc(authInitial(user.name))}</span>`;
-  return `<div class="pixel-hud-card"><span>Poziom</span><strong>${game?.level||1}</strong><b>★</b>${game?`<div class="pixel-hud-progress"><i style="width:${game.progress_percent}%"></i></div>`:''}</div><div class="pixel-hud-card"><span>PR</span><strong>${fmt(game?.pr_balance||0)}</strong><b>◉</b></div><div class="pixel-hud-card"><span>Treningi</span><strong>${trainingDays}</strong><b>▰</b></div><div class="pixel-hud-card"><span>Seria</span><strong>${streak}</strong><b>▲</b></div><div class="pixel-hud-card pixel-hud-user">${avatar}<span>${esc(user.name||'Użytkownik')}</span><strong>${game?`Poziom ${game.level}`:'CRESCI CORE'}</strong></div>`;
+  return `<div class="pixel-hud-card"><span>Poziom</span><strong>${game?.level||1}</strong><b>★</b>${game?`<div class="pixel-hud-progress"><i style="width:${game.progress_percent}%"></i></div>`:''}</div><div class="pixel-hud-card"><span>PR</span><strong>${fmt(game?.pr_balance||0)}</strong><b>◉</b></div><div class="pixel-hud-card"><span>Treningi</span><strong>${trainingDays}</strong><b>▰</b></div><div class="pixel-hud-card pixel-hud-user">${avatar}<span>${esc(user.name||'Użytkownik')}</span><strong>${game?`Poziom ${game.level}`:'CRESCI CORE'}</strong></div>`;
 }
 function renderRecords(){
   const grid=$('#recordsGrid'),rows=state.pixelRecords;
@@ -406,7 +406,6 @@ function toggleTheme(){const theme=document.documentElement.dataset.theme==='dar
 applyTheme(preferredTheme);$('#themeToggle').onclick=toggleTheme;$('#settingsThemeToggle').onclick=toggleTheme;$('.settings-tabs').onclick=e=>{const button=e.target.closest('[data-settings-tab]');if(button)switchSettingsTab(button.dataset.settingsTab);};$('#checkUpdates').onclick=checkUpdates;$('#installUpdate').onclick=installUpdate;
 applyUiMode(state.uiMode,{persist:false,render:false});
 $('.ui-mode-picker').onchange=e=>{const input=e.target.closest('input[name="ui_mode"]');if(input)applyUiMode(input.value);};
-$('#pixelReturnClassic').onclick=()=>{applyUiMode('classic');toast('Włączono CRESCI Classic.');};
 $('#logoutButton').onclick=async()=>{try{await api('/api/auth/logout',{method:'POST',body:'{}'});closeMenu();$$('dialog[open]').forEach(dialog=>dialog.close());await showAuth();}catch(error){toast(error.message)}};
 $('#addAccountButton').onclick=()=>{const form=$('#addAccountForm');form.reset();form.elements.color.value='#7c6df2';$('#addAccountDialog').showModal();};
 $('#addAccountForm').onsubmit=async event=>{event.preventDefault();const button=event.currentTarget.querySelector('button[type="submit"]');try{button.disabled=true;const user=await api('/api/auth/accounts',{method:'POST',body:JSON.stringify(Object.fromEntries(new FormData(event.currentTarget)))});$('#addAccountDialog').close();await load();toast(`Użytkownik „${user.name}” został dodany. Pojawi się na ekranie wyboru po wylogowaniu.`);}catch(error){toast(error.message)}finally{button.disabled=false;}};

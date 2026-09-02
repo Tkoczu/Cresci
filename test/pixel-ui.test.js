@@ -44,6 +44,9 @@ test('Pixel UI is loaded as an isolated optional presentation with early no-flas
   assert.match(css,/\[data-ui="pixel"\] #dashboardView \.pixel-page-title,\[data-ui="pixel"\] #dashboardView \.pixel-stat-grid\{display:none!important\}/);
   assert.match(app,/\/\/ PIXEL UI/);
   assert.doesNotMatch(fs.readFileSync(path.join(root,'public','pixel-ui.js'),'utf8'),/fetch\(/);
+  assert.doesNotMatch(html,/pixelReturnClassic|pixel-return-classic/);
+  const hudMarkup=app.match(/function pixelHudMarkup\(game\)\{([\s\S]*?)\n\}/)?.[1]||'';
+  assert.doesNotMatch(hudMarkup,/<span>Seria<\/span>/);
 });
 
 test('Pixel character scene hides the technical sprite checkerboard',()=>{
