@@ -9,7 +9,7 @@
   <link rel="icon" type="image/png" href="/cresci-icon.png">
   <link rel="apple-touch-icon" href="/cresci-icon.png">
   <title>CRESCI — progres treningowy</title>
-  <link rel="stylesheet" href="/styles.css?v=4.2&auth=1&mobile-layout=2">
+  <link rel="stylesheet" href="/styles.css?v=4.3&auth=1&mobile-layout=2">
   <link rel="stylesheet" href="/styles-pixel.css?v=4">
 </head>
 <body>
@@ -111,8 +111,8 @@
 
     <section class="view" id="achievementsView">
       <div class="game-nav" aria-label="CRESCI GAME"><button data-game-view="character">Postać</button><button data-game-view="inventory">Ekwipunek</button><button data-game-view="shop">Sklep</button><button class="active" data-game-view="achievements">Osiągnięcia</button></div>
-      <div class="section-heading"><div><p class="eyebrow">CRESCI GAME</p><h2>Osiągnięcia</h2></div><div class="filters"><select id="achievementProfile" aria-label="Profil osiągnięć"></select></div></div>
-      <div class="achievement-summary" id="achievementSummary"></div>
+      <div class="section-heading achievement-page-heading"><div><p class="eyebrow">CRESCI GAME</p><h2>Osiągnięcia</h2></div><div class="achievement-summary" id="achievementSummary"></div></div>
+      <input type="hidden" id="achievementProfile">
       <div class="achievement-groups" id="achievementGroups"></div>
     </section>
 
@@ -200,5 +200,5 @@
   </form></dialog>
 
   <div class="toast" id="toast" role="status"></div>
-  <script type="module" src="/app.js?v=4.4&auth=1&pixel-ui=3"></script>
+  <script type="module" src="/app.js?v=4.5&auth=1&pixel-ui=3"></script>
 </body></html>

@@ -60,3 +60,14 @@ test('Pixel character exposes symmetric clothing and appearance slots without a 
   assert.doesNotMatch(markup,/pixel-avatar-platform/);
   assert.match(markup,/data-equipment-user="7"/);
 });
+
+test('achievements use the authenticated user and one ungrouped grid',()=>{
+  const html=fs.readFileSync(path.join(root,'public','index.html'),'utf8');
+  const app=fs.readFileSync(path.join(root,'public','app.js'),'utf8');
+  assert.match(html,/<input type="hidden" id="achievementProfile">/);
+  assert.doesNotMatch(html,/Profil osiągnięć/);
+  assert.match(app,/\$\('#achievementProfile'\)\.value=String\(enabledRows\[0\]\?\.user_id\|\|''\)/);
+  assert.doesNotMatch(app,/const groups=\[\.\.\.new Set\(result\.items\.map\(item=>item\.category\)\)\]/);
+  assert.match(app,/achievementGroups'\)\.innerHTML=`<div class="achievement-grid">\$\{result\.items\.map/);
+  assert.doesNotMatch(app,/achievementSummary'\)\.innerHTML=`<div><span/);
+});
