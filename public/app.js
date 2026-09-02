@@ -62,7 +62,7 @@ function spriteAvatar(item,sizeClass=''){
 function hydrateSpriteStages(root=document){root.querySelectorAll('[data-sprite-avatar]').forEach(avatar=>{const stage=avatar.querySelector('.sprite-stage'),images=[...stage.querySelectorAll('img')],canvas=stage.querySelector('[data-avatar-canvas]');const updateScale=()=>{if(!canvas)return;const width=Number(stage.dataset.avatarWidth)||512,height=Number(stage.dataset.avatarHeight)||768,anchorY=Number(stage.dataset.avatarAnchorY)||height,scale=Math.min(stage.clientWidth/width,stage.clientHeight/height),anchorOffset=-(height-anchorY)*scale;stage.style.setProperty('--avatar-scale',String(scale));stage.style.setProperty('--avatar-anchor-offset',`${anchorOffset}px`);stage.dataset.avatarScale=String(scale);};const update=()=>{const failed=images.filter(image=>image.dataset.spriteFailed==='1').length,loaded=images.filter(image=>image.complete&&image.naturalWidth>0&&image.dataset.spriteFailed!=='1').length;stage.classList.toggle('assets-ready',images.length>0&&loaded===images.length&&failed===0);stage.classList.toggle('assets-missing',failed>0);updateScale();};for(const image of images){image.addEventListener('load',()=>{delete image.dataset.spriteFailed;image.hidden=false;update();});image.addEventListener('error',()=>{image.dataset.spriteFailed='1';image.hidden=true;update();});}update();if(canvas&&typeof ResizeObserver!=='undefined'){const observer=new ResizeObserver(updateScale);observer.observe(stage);stage._avatarResizeObserver=observer;}});}
 function renderGameSettings(){const rows=state.data.game_settings||[];$('#gameSettingsList').innerHTML=rows.map(item=>`<div class="score-setting-row" data-game-setting="${item.user_id}"><div class="score-setting-user"><i style="background:${item.color}"></i><strong>${esc(item.user_name)}</strong>${item.avatar_configured?'<small>avatar gotowy</small>':''}</div><label class="score-switch"><input type="checkbox" data-game-enabled ${Number(item.enabled)?'checked':''}><span></span><b>${Number(item.enabled)?'ON':'OFF'}</b></label></div>`).join('');}
 async function renderGame(){
-  const enabledRows=(state.data.game_settings||[]).filter(item=>Number(item.enabled)),enabled=enabledRows.length>0;
+  const activeUserId=Number(state.auth?.user?.id),enabledRows=(state.data.game_settings||[]).filter(item=>Number(item.user_id)===activeUserId&&Number(item.enabled)),enabled=enabledRows.length>0;
   for(const id of ['characterNav','inventoryNav','shopNav','achievementsNav'])$(`#${id}`).hidden=!enabled;
   if(!enabled){
     state.gameResults=[];state.achievementResult=null;state.inventoryResult=null;state.shopResult=null;
@@ -98,7 +98,9 @@ function applyUiMode(mode,{persist=true,render=true}={}){
 function pixelHudMarkup(game){
   const user=state.auth?.user||{},trainingDays=Number(state.data?.stats?.training_days)||0;
   const avatar=game?spriteAvatar(game,'item-avatar'):`<span class="account-avatar" style="--user-color:${esc(user.color||'#ff7410')}">${esc(authInitial(user.name))}</span>`;
-  return `<div class="pixel-hud-card"><span>Poziom</span><strong>${game?.level||1}</strong><b>★</b>${game?`<div class="pixel-hud-progress"><i style="width:${game.progress_percent}%"></i></div>`:''}</div><div class="pixel-hud-card"><span>PR</span><strong>${fmt(game?.pr_balance||0)}</strong><b>◉</b></div><div class="pixel-hud-card"><span>Treningi</span><strong>${trainingDays}</strong><b>▰</b></div><div class="pixel-hud-card pixel-hud-user">${avatar}<span>${esc(user.name||'Użytkownik')}</span><strong>${game?`Poziom ${game.level}`:'CRESCI CORE'}</strong></div>`;
+  const training=`<div class="pixel-hud-card"><span>Treningi</span><strong>${trainingDays}</strong><b>▰</b></div>`,account=`<div class="pixel-hud-card pixel-hud-user">${avatar}<span>${esc(user.name||'Użytkownik')}</span><strong>${game?`Poziom ${game.level}`:'CRESCI CORE'}</strong></div>`;
+  if(!game)return training+account;
+  return `<div class="pixel-hud-card"><span>Poziom</span><strong>${game.level}</strong><b>★</b><div class="pixel-hud-progress"><i style="width:${game.progress_percent}%"></i></div></div><div class="pixel-hud-card"><span>PR</span><strong>${fmt(game.pr_balance)}</strong><b>◉</b></div>${training}${account}`;
 }
 function renderRecords(){
   const grid=$('#recordsGrid'),rows=state.pixelRecords;
@@ -107,13 +109,14 @@ function renderRecords(){
 async function refreshPixelUi(){
   syncUiModeControls();if(state.uiMode!=='pixel'||!state.data||!state.auth?.user)return;
   const userId=Number(state.auth.user.id),game=state.gameResults.find(item=>item.user_id===userId)||null;
+  $('#pixelDashboard').hidden=!game;$('#pixelHud').classList.toggle('game-disabled',!game);$('#pixelHud').innerHTML=pixelHudMarkup(game);hydrateSpriteStages($('#pixelHud'));
+  if(!game){state.pixelHistory=[];state.pixelRecords=[];state.pixelProgress=[];return;}
   const [historyRows,progressRows,achievementResult]=await Promise.all([
     api(`/api/history?profile_id=${userId}&exercise_id=`),
     api(`/api/overall-progress?profile_id=${userId}`),
     game?api(`/api/cresci-game/achievements?user_id=${userId}`):Promise.resolve(null)
   ]);
   state.pixelHistory=historyRows;state.pixelRecords=recordRows(historyRows);renderRecords();
-  $('#pixelHud').innerHTML=pixelHudMarkup(game);hydrateSpriteStages($('#pixelHud'));
   const streak=calculateTrainingStreak(historyRows),trainingDays=Number(state.data.stats?.training_days)||0;
   $('#pixelStats').innerHTML=`<article class="pixel-stat"><span>Poziom</span><strong>${game?.level||1}</strong><b>★</b><small>${game?`${game.current_xp} / ${game.required_xp} XP`:'GAME WYŁĄCZONY'}</small>${game?`<div class="pixel-hud-progress"><i style="width:${game.progress_percent}%"></i></div>`:''}</article><article class="pixel-stat"><span>PR</span><strong>${fmt(game?.pr_balance||0)}</strong><b>◉</b><small>WALUTA</small></article><article class="pixel-stat"><span>Treningi</span><strong>${trainingDays}</strong><b>▰</b><small>DNI Z WPISAMI</small></article><article class="pixel-stat"><span>Seria</span><strong>${streak}</strong><b>▲</b><small>KOLEJNE TRENINGI</small></article>`;
   const recent=historyRows.slice(0,4);$('#pixelRecentEntries').innerHTML=recent.length?recent.map(row=>`<div class="pixel-list-row"><strong>${esc(row.exercise_name)}</strong><b>${fmt(row.new_weight)} kg</b></div>`).join(''):'<div class="pixel-empty">BRAK WPISÓW</div>';

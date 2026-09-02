@@ -103,5 +103,5 @@ test('no service worker or active source references an older avatar pack',()=>{
   }
   const index=fs.readFileSync(path.join(root,'public','index.html'),'utf8');
   assert.match(index,/styles\.css\?v=4\.3/);
-  assert.match(index,/app\.js\?v=4\.8/);
+  assert.match(index,/app\.js\?v=4\.9/);
 });

@@ -39,7 +39,7 @@ test('Pixel UI is loaded as an isolated optional presentation with early no-flas
   assert.match(html,/styles-pixel\.css/);
   assert.match(html,/CRESCI Pixel UI <b>BETA<\/b>/);
   assert.match(css,/html:not\(\[data-ui="pixel"\]\) \.pixel-only\{display:none!important\}/);
-  assert.match(css,/\[data-ui="pixel"\] #inventoryNav,\[data-ui="pixel"\] #shopNav\{display:block!important\}/);
+  assert.doesNotMatch(css,/#inventoryNav,[^\n]*#shopNav\{display:block!important\}/);
   assert.match(css,/\[data-ui="pixel"\] \.topbar\{[^}]*width:calc\(100% \+ 276px\)[^}]*margin-left:-276px/);
   assert.match(css,/\[data-ui="pixel"\] \.brand \.brand-mark\{[^}]*border:0[^}]*image-rendering:auto/);
   assert.match(css,/\.brand \.brand-mark\{[^}]*clip-path:inset\(8\.5% round 20%\)[^}]*transform:scale\(1\.16\)/);
@@ -52,6 +52,9 @@ test('Pixel UI is loaded as an isolated optional presentation with early no-flas
   assert.doesNotMatch(hudMarkup,/<span>Seria<\/span>/);
   const dashboardLists=app.match(/const recent=historyRows\.slice\(0,4\);([\s\S]*?)if\(game\)/)?.[1]||'';
   assert.doesNotMatch(dashboardLists,/dateFmt\(row\.performed_at\)/);
+  assert.match(app,/\$\('#pixelDashboard'\)\.hidden=!game/);
+  assert.match(app,/if\(!game\)\{state\.pixelHistory=\[\];state\.pixelRecords=\[\];state\.pixelProgress=\[\];return;\}/);
+  assert.match(app,/Number\(item\.user_id\)===activeUserId&&Number\(item\.enabled\)/);
 });
 
 test('Pixel character scene hides the technical sprite checkerboard',()=>{
