@@ -64,8 +64,10 @@ test('Pixel character exposes symmetric clothing and appearance slots without a 
 test('achievements use the authenticated user and one ungrouped grid',()=>{
   const html=fs.readFileSync(path.join(root,'public','index.html'),'utf8');
   const app=fs.readFileSync(path.join(root,'public','app.js'),'utf8');
+  const achievementsMarkup=html.match(/<section class="view" id="achievementsView">([\s\S]*?)<\/section>/)?.[1]||'';
   assert.match(html,/<input type="hidden" id="achievementProfile">/);
   assert.doesNotMatch(html,/Profil osiągnięć/);
+  assert.doesNotMatch(achievementsMarkup,/class="game-nav"/);
   assert.match(app,/\$\('#achievementProfile'\)\.value=String\(enabledRows\[0\]\?\.user_id\|\|''\)/);
   assert.doesNotMatch(app,/const groups=\[\.\.\.new Set\(result\.items\.map\(item=>item\.category\)\)\]/);
   assert.match(app,/achievementGroups'\)\.innerHTML=`<div class="achievement-grid">\$\{result\.items\.map/);
