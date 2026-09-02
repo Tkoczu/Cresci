@@ -61,13 +61,15 @@ test('Pixel character exposes symmetric clothing and appearance slots without a 
   assert.match(markup,/data-equipment-user="7"/);
 });
 
-test('achievements use the authenticated user and one ungrouped grid',()=>{
+test('game screens use the main navigation without duplicate submenus',()=>{
   const html=fs.readFileSync(path.join(root,'public','index.html'),'utf8');
   const app=fs.readFileSync(path.join(root,'public','app.js'),'utf8');
-  const achievementsMarkup=html.match(/<section class="view" id="achievementsView">([\s\S]*?)<\/section>/)?.[1]||'';
+  for(const id of ['characterView','inventoryView','shopView','achievementsView']){
+    const markup=html.match(new RegExp(`<section class="view" id="${id}">([\\s\\S]*?)<\\/section>`))?.[1]||'';
+    assert.doesNotMatch(markup,/class="game-nav"/);
+  }
   assert.match(html,/<input type="hidden" id="achievementProfile">/);
   assert.doesNotMatch(html,/Profil osiągnięć/);
-  assert.doesNotMatch(achievementsMarkup,/class="game-nav"/);
   assert.match(app,/\$\('#achievementProfile'\)\.value=String\(enabledRows\[0\]\?\.user_id\|\|''\)/);
   assert.doesNotMatch(app,/const groups=\[\.\.\.new Set\(result\.items\.map\(item=>item\.category\)\)\]/);
   assert.match(app,/achievementGroups'\)\.innerHTML=`<div class="achievement-grid">\$\{result\.items\.map/);
