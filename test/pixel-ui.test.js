@@ -69,8 +69,13 @@ test('game screens use the main navigation without duplicate submenus',()=>{
     assert.doesNotMatch(markup,/class="game-nav"/);
   }
   assert.match(html,/<input type="hidden" id="achievementProfile">/);
+  assert.match(html,/<input type="hidden" id="inventoryProfile">/);
+  assert.match(html,/<input type="hidden" id="shopProfile">/);
   assert.doesNotMatch(html,/Profil osiągnięć/);
-  assert.match(app,/\$\('#achievementProfile'\)\.value=String\(enabledRows\[0\]\?\.user_id\|\|''\)/);
+  assert.doesNotMatch(html,/Profil (?:ekwipunku|sklepu)/);
+  assert.match(app,/for\(const id of \['achievementProfile','inventoryProfile','shopProfile'\]\)\$\(`#\$\{id\}`\)\.value=String\(enabledRows\[0\]\?\.user_id\|\|''\)/);
+  assert.doesNotMatch(app,/inventoryBalance'\)\.innerHTML=`<span>\$\{esc\(result\.user_name\)\}/);
+  assert.doesNotMatch(app,/shopBalance'\)\.innerHTML=`<span>\$\{esc\(result\.user_name\)\}/);
   assert.doesNotMatch(app,/const groups=\[\.\.\.new Set\(result\.items\.map\(item=>item\.category\)\)\]/);
   assert.match(app,/achievementGroups'\)\.innerHTML=`<div class="achievement-grid">\$\{result\.items\.map/);
   assert.doesNotMatch(app,/achievementSummary'\)\.innerHTML=`<div><span/);

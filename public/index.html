@@ -93,14 +93,16 @@
     </section>
 
     <section class="view" id="inventoryView">
-      <div class="section-heading"><div><p class="eyebrow">CRESCI GAME</p><h2>Ekwipunek</h2></div><div class="filters"><select id="inventoryProfile" aria-label="Profil ekwipunku"></select></div></div>
+      <div class="section-heading"><div><p class="eyebrow">CRESCI GAME</p><h2>Ekwipunek</h2></div></div>
+      <input type="hidden" id="inventoryProfile">
       <div class="game-balance" id="inventoryBalance"></div>
       <div class="slot-filters" id="inventoryFilters"></div>
       <div class="item-grid" id="inventoryGrid"></div>
     </section>
 
     <section class="view" id="shopView">
-      <div class="section-heading"><div><p class="eyebrow">CRESCI GAME</p><h2>Sklep</h2></div><div class="filters"><select id="shopProfile" aria-label="Profil sklepu"></select></div></div>
+      <div class="section-heading"><div><p class="eyebrow">CRESCI GAME</p><h2>Sklep</h2></div></div>
+      <input type="hidden" id="shopProfile">
       <div class="game-balance" id="shopBalance"></div>
       <div class="shop-tools"><input class="search" id="shopSearch" type="search" placeholder="Szukaj przedmiotu…" aria-label="Szukaj przedmiotu w sklepie"><div class="slot-filters" id="shopFilters" aria-label="Kategorie przedmiotów"></div></div>
       <div class="item-grid shop-grid" id="shopGrid"></div>
@@ -196,5 +198,5 @@
   </form></dialog>
 
   <div class="toast" id="toast" role="status"></div>
-  <script type="module" src="/app.js?v=4.5&auth=1&pixel-ui=3"></script>
+  <script type="module" src="/app.js?v=4.6&auth=1&pixel-ui=3"></script>
 </body></html>
