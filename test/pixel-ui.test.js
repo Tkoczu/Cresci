@@ -41,6 +41,8 @@ test('Pixel UI is loaded as an isolated optional presentation with early no-flas
   assert.match(css,/html:not\(\[data-ui="pixel"\]\) \.pixel-only\{display:none!important\}/);
   assert.match(css,/\[data-ui="pixel"\] #inventoryNav,\[data-ui="pixel"\] #shopNav\{display:block!important\}/);
   assert.match(css,/\[data-ui="pixel"\] \.topbar\{[^}]*width:calc\(100% \+ 276px\)[^}]*margin-left:-276px/);
+  assert.match(css,/\[data-ui="pixel"\] \.brand \.brand-mark\{[^}]*border:0[^}]*image-rendering:auto/);
+  assert.doesNotMatch(css,/\.brand \.brand-mark\{[^}]*image-rendering:pixelated/);
   assert.match(css,/\[data-ui="pixel"\] #dashboardView \.pixel-page-title,\[data-ui="pixel"\] #dashboardView \.pixel-stat-grid\{display:none!important\}/);
   assert.match(app,/\/\/ PIXEL UI/);
   assert.doesNotMatch(fs.readFileSync(path.join(root,'public','pixel-ui.js'),'utf8'),/fetch\(/);

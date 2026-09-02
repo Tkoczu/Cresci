@@ -20,8 +20,8 @@ html:not([data-ui="pixel"]) .pixel-only{display:none!important}
 
 /* PIXEL UI — globalny layout i sidebar */
 [data-ui="pixel"] .sidebar{top:0;z-index:7;width:276px;padding:106px 14px 14px;background:linear-gradient(180deg,#0b0e10,#07090a);border:1px solid #2b2e2e;border-left:0;border-top-color:var(--pixel-border);box-shadow:12px 0 34px #0008}
-[data-ui="pixel"] .brand{position:absolute;z-index:8;left:0;top:0;width:276px;height:92px;padding:12px 24px;border-bottom:1px solid var(--pixel-border);background:#090b0d;font-family:ui-monospace,"Cascadia Mono",monospace;font-size:28px;font-style:italic;color:var(--pixel-orange);text-shadow:2px 2px #421700}
-[data-ui="pixel"] .brand .brand-mark{width:52px;height:52px;border-radius:4px;border:1px solid var(--pixel-border-active);background:#080a0b;image-rendering:pixelated}
+[data-ui="pixel"] .brand{position:absolute;z-index:8;left:0;top:0;width:276px;height:92px;padding:12px 24px;border-bottom:1px solid var(--pixel-border);background:#090b0d;font-family:ui-monospace,"Cascadia Mono",monospace;font-size:28px;font-style:italic;color:var(--pixel-orange);text-shadow:none}
+[data-ui="pixel"] .brand .brand-mark{display:block;width:52px;height:52px;border:0;border-radius:0;background:transparent;object-fit:contain;image-rendering:auto}
 [data-ui="pixel"] .brand small{color:#777b79;font-size:8px;font-style:normal}
 [data-ui="pixel"] .sidebar nav{display:flex;flex-direction:column;gap:5px;margin-top:22px;padding:0 0 12px}
 [data-ui="pixel"] .nav-item{position:relative;min-height:49px;border:1px solid transparent;border-radius:2px;padding:11px 13px;color:#b8bab7;text-transform:uppercase;letter-spacing:.045em}
