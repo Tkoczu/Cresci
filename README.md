@@ -1,5 +1,6 @@
-![CRESCI](cresci-banner.png)
+
 # 🟠 CRESCI
+![CRESCI](cresci-banner.png)
 
 ### Grow. Progress. Repeat.
 
