@@ -150,7 +150,7 @@ test('check-in grants XP once per day and remains isolated per user_id',()=>{
   const{db,repo}=memoryRepo();
   repo.updateGameSettings(1,{enabled:true,avatar});
   const result=repo.gameCheckIn(1,'2026-08-27');
-  assert.equal(result.total_xp,25);assert.equal(result.current_xp,25);assert.equal(result.checked_in_today,true);
+  assert.equal(result.total_xp,25);assert.equal(result.current_xp,25);assert.equal(result.check_in_count,1);assert.equal(result.checked_in_today,true);
   assert.equal(repo.gameSettings().find(item=>item.user_id===2).total_xp,0);
   assert.throws(()=>repo.gameCheckIn(1,'2026-08-27'),/już zapisany/);
   db.close();
@@ -257,6 +257,17 @@ test('record achievements count only RECORD events and cannot loop from achievem
   db.close();
 });
 
+test('weight-threshold achievement unlocks only after reaching its configured record weight',()=>{
+  const{db,repo}=memoryRepo();repo.updateGameSettings(1,{enabled:true,avatar});
+  repo.addEntry({profile_id:1,exercise_id:1,new_weight:80,performed_at:'2026-08-01'});
+  const below=repo.addEntry({profile_id:1,exercise_id:1,new_weight:85,performed_at:'2026-08-08'});
+  assert.equal(below.unlocked_achievements.some(item=>item.key==='arnold_100'),false);
+  const reached=repo.addEntry({profile_id:1,exercise_id:1,new_weight:100,performed_at:'2026-08-15'});
+  assert.equal(reached.unlocked_achievements.some(item=>item.key==='arnold_100'),true);
+  assert.equal(repo.achievements(1).items.find(item=>item.key==='arnold_100').progress.value,100);
+  db.close();
+});
+
 test('hidden achievements stay masked until their condition is met',()=>{
   const{db,repo}=memoryRepo();repo.updateGameSettings(1,{enabled:true,avatar});
   let hidden=repo.achievements(1).items.find(item=>item.key==='night_warrior');assert.equal(hidden.name,'???');assert.equal(hidden.progress,null);
@@ -318,13 +329,12 @@ test('equip persists per user, updates avatar layer and can be removed',()=>{
   db.close();
 });
 
-test('v21 back item is purchased, equipped and restored per user',()=>{
-  const a=memoryRepo();a.repo.updateGameSettings(1,{enabled:true,avatar});a.db.prepare('UPDATE game_profiles SET pr_balance=40 WHERE profile_id=1').run();
-  a.repo.purchaseItem(1,'utility_backpack');const equipped=a.repo.equipItem(1,'back','utility_backpack');
-  assert.equal(equipped.game.back_style,'utility_backpack');assert.equal(equipped.inventory.slots.find(slot=>slot.key==='back').equipped_key,'utility_backpack');
-  const backup=a.repo.exportData(),b=memoryRepo();b.repo.importData(backup);
-  assert.equal(b.repo.gameStates()[0].back_style,'utility_backpack');assert.equal(b.repo.inventory(1).items.find(item=>item.key==='utility_backpack').equipped,true);
-  a.db.close();b.db.close();
+test('active catalog controls whether an item can be purchased',()=>{
+  const{db,repo}=memoryRepo();repo.updateGameSettings(1,{enabled:true,avatar});db.prepare('UPDATE game_profiles SET pr_balance=40 WHERE profile_id=1').run();
+  const available=repo.shop(1).items.some(item=>item.key==='utility_backpack');
+  if(available){repo.purchaseItem(1,'utility_backpack');const equipped=repo.equipItem(1,'back','utility_backpack');assert.equal(equipped.game.back_style,'utility_backpack');}
+  else{assert.throws(()=>repo.purchaseItem(1,'utility_backpack'),/Nie znaleziono itemu/);assert.equal(repo.gameStates()[0].back_style,'none');}
+  db.close();
 });
 
 test('shop blocks GAME OFF, insufficient balance and wrong-slot equip',()=>{

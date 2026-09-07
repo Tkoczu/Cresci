@@ -50,11 +50,17 @@ test('Pixel UI is loaded as an isolated optional presentation with early no-flas
   assert.doesNotMatch(html,/pixelReturnClassic|pixel-return-classic/);
   const hudMarkup=app.match(/function pixelHudMarkup\(game\)\{([\s\S]*?)\n\}/)?.[1]||'';
   assert.doesNotMatch(hudMarkup,/<span>Seria<\/span>/);
+  assert.match(hudMarkup,/<span>Meldunki<\/span>/);
+  assert.match(hudMarkup,/Number\(game\.check_in_count\)/);
+  assert.match(hudMarkup,/if\(!game\)return account/);
+  assert.doesNotMatch(hudMarkup,/account-avatar/);
+  assert.doesNotMatch(hudMarkup,/>★<\/b>/);
   const dashboardLists=app.match(/const recent=historyRows\.slice\(0,4\);([\s\S]*?)if\(game\)/)?.[1]||'';
   assert.doesNotMatch(dashboardLists,/dateFmt\(row\.performed_at\)/);
   assert.match(app,/\$\('#pixelDashboard'\)\.hidden=!game/);
   assert.match(app,/if\(!game\)\{state\.pixelHistory=\[\];state\.pixelRecords=\[\];state\.pixelProgress=\[\];return;\}/);
   assert.match(app,/Number\(item\.user_id\)===activeUserId&&Number\(item\.enabled\)/);
+  assert.match(app,/state\.scoreResults=\(await api\('\/api\/cresci-score'\)\)\.filter\(score=>Number\(score\.user_id\)===activeUserId\)/);
 });
 
 test('Pixel character scene hides the technical sprite checkerboard',()=>{

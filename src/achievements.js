@@ -38,7 +38,7 @@ export const ACHIEVEMENTS = Object.freeze([
 
 export const ACHIEVEMENT_CATEGORIES = Object.freeze({training:'Trening',progress:'Progres',regularity:'Regularność',exploration:'Eksploracja',hidden:'Ukryte'});
 
-const ACHIEVEMENT_METRICS=new Set(['check_ins','records','records_single_exercise','weekly_streak','custom_exercises','distinct_exercises','chart_views','saved_results','items_acquired','purchases','full_equipment','night_check_ins','early_check_ins','comeback_check_ins','pr_balance']);
+const ACHIEVEMENT_METRICS=new Set(['check_ins','records','records_single_exercise','max_record_weight','weekly_streak','custom_exercises','distinct_exercises','chart_views','saved_results','items_acquired','purchases','full_equipment','night_check_ins','early_check_ins','comeback_check_ins','pr_balance']);
 const CATALOG_URL=new URL('../public/content/achievements.json',import.meta.url);
 
 export function achievementCatalog(){

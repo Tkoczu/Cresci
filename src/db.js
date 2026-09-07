@@ -328,6 +328,7 @@ export function createRepository(db) {
       check_ins:checkIns.length,
       records:records.length,
       records_single_exercise:Math.max(0,...recordsByExercise.values()),
+      max_record_weight:Number(db.prepare('SELECT MAX(record_weight) AS weight FROM game_records WHERE profile_id=?').get(profileId)?.weight)||0,
       weekly_streak:longestCompletedWeeklyStreak(checkIns.map(event=>event.event_key),weeklyGoal),
       custom_exercises:eventCount('custom_exercise'),
       distinct_exercises:new Set(savedResults.map(event=>safeMetadata(event.metadata_json).exercise_id).filter(Boolean)).size,
@@ -508,6 +509,7 @@ export function createRepository(db) {
       return this.gameSettings().filter(item=>item.enabled).map(item=>({
         ...item,
         ...levelFromXp(item.total_xp),
+        check_in_count: Number(db.prepare(`SELECT COUNT(*) AS count FROM game_events WHERE profile_id=? AND event_type='check_in'`).get(item.user_id)?.count)||0,
         checked_in_today: Boolean(db.prepare(`SELECT 1 FROM game_events WHERE profile_id=? AND event_type='check_in' AND event_key=?`).get(item.user_id,asOf)),
         check_in_xp: CHECK_IN_XP
       }));
