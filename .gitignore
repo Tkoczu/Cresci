@@ -15,9 +15,16 @@ backups/*
 
 # CRESCI local content tools
 .cresci-content-backups/
+.cresci-asset-studio/
 .cresci-edit-candidate-*/
 .cresci-edit-candidate-*.zip
+.cresci-import-candidate-*/
+.cresci-import-candidate-*.zip
+.cresci-manager-test-backups/
 cresci-content-next/
 cresci-content-next.zip
 cresci-generated-assets/
 public/assets/avatars/v4-production.zip
+
+# Local safety copies created while editing content
+*.bak
