@@ -256,7 +256,8 @@ export function openDatabase(databasePath, options = {}) {
 export function createRepository(db, dependencies = {}) {
   const repositoryAchievementCatalog=dependencies.achievementCatalog||achievementCatalog;
   const repositoryGameItems=dependencies.gameItems||gameItems;
-  const repositoryGameItem=key=>repositoryGameItems().find(item=>item.key===String(key))||null;
+  const repositoryAllGameItems=()=>repositoryGameItems({includeHidden:true});
+  const repositoryGameItem=key=>repositoryAllGameItems().find(item=>item.key===String(key))||null;
   const repositoryAvatarItems=avatar=>ITEM_SLOTS.map(slot=>({slot,key:avatar?.[avatarFieldForSlot(slot)]})).filter(item=>item.key&&item.key!=='none'&&repositoryGameItem(item.key));
   const profileColumns=new Set(db.prepare('PRAGMA table_info(profiles)').all().map(column=>column.name));
   const hasAccountColumns=profileColumns.has('password_hash')&&profileColumns.has('password_salt');
@@ -345,20 +346,46 @@ export function createRepository(db, dependencies = {}) {
       early_check_ins:checkIns.filter(event=>Number(safeMetadata(event.metadata_json).local_hour)<6).length,
       comeback_check_ins:checkIns.filter(event=>Number(safeMetadata(event.metadata_json).gap_days)>=30).length,
       pr_balance:Number(db.prepare('SELECT pr_balance FROM game_profiles WHERE profile_id=?').get(profileId)?.pr_balance)||0
+      ,level:levelFromXp(Number(db.prepare('SELECT total_xp FROM game_profiles WHERE profile_id=?').get(profileId)?.total_xp)||0).level
+      ,achievements_unlocked:Number(db.prepare('SELECT COUNT(*) count FROM user_achievements WHERE profile_id=?').get(profileId)?.count)||0
     };
+  }
+
+  function grantAchievementItem(profileId, definition, unlockedAt) {
+    const key=definition.rewardItemKey&&String(definition.rewardItemKey);
+    if(!key)return null;
+    const item=repositoryGameItem(key);
+    if(!item)return null;
+    const result=db.prepare(`INSERT OR IGNORE INTO user_items(profile_id,item_key,acquired_source,acquired_at,purchased_price,metadata_json)
+      VALUES(?,?,'ACHIEVEMENT',?,0,?)`).run(profileId,key,unlockedAt,JSON.stringify({achievement_key:definition.key,slot:item.slot,rarity:item.rarity}));
+    if(Number(result.changes))db.prepare(`INSERT OR IGNORE INTO game_events(profile_id,event_type,event_key,xp_delta,pr_delta,metadata_json,occurred_at)
+      VALUES(?,'item_acquired',?,0,0,?,?)`).run(profileId,key,JSON.stringify({item_key:key,source:'ACHIEVEMENT',achievement_key:definition.key}),unlockedAt);
+    db.prepare('UPDATE user_achievements SET reward_item_granted=1 WHERE profile_id=? AND achievement_key=?').run(profileId,definition.key);
+    return{key:item.key,name:item.name,granted:Boolean(result.changes),already_owned:!Number(result.changes)};
   }
 
   function evaluateAchievements(profileId, unlockedAt = new Date().toISOString()) {
     if(!db.prepare('SELECT enabled FROM game_profiles WHERE profile_id=?').get(profileId)?.enabled)return[];
-    const metrics=achievementMetrics(profileId),existing=new Set(db.prepare('SELECT achievement_key FROM user_achievements WHERE profile_id=?').all(profileId).map(row=>row.achievement_key));
-    const candidates=repositoryAchievementCatalog().filter(definition=>!existing.has(definition.key)&&achievementProgress(definition,metrics).complete);
-    const unlocked=[];
-    for(const definition of candidates){
-      const inserted=db.prepare(`INSERT OR IGNORE INTO user_achievements(profile_id,achievement_key,unlocked_at,reward_pr,reward_item_key,reward_item_granted,metadata_json)
-        VALUES(?,?,?,?,?,0,?)`).run(profileId,definition.key,unlockedAt,definition.rewardPr,definition.rewardItemKey||null,JSON.stringify({metric:definition.metric,value:metrics[definition.metric],target:definition.target}));
-      if(!Number(inserted.changes))continue;
-      postPrTransaction(profileId,'ACHIEVEMENT',definition.key,definition.rewardPr,{achievement_key:definition.key},unlockedAt);
-      unlocked.push({...definition,unlocked_at:unlockedAt});
+    const allDefinitions=repositoryAchievementCatalog({includeHidden:true}),definitions=allDefinitions.filter(item=>item.active!==false);
+    const existing=new Set(db.prepare('SELECT achievement_key FROM user_achievements WHERE profile_id=?').all(profileId).map(row=>row.achievement_key)),unlocked=[];
+    // Fixed-point iteration lets a meta achievement unlock after the final normal
+    // achievement while the hard pass limit makes recursive content deterministic.
+    for(let pass=0;pass<definitions.length;pass++){
+      let changed=false;
+      for(const definition of definitions){
+        if(existing.has(definition.key))continue;
+        const metrics=achievementMetrics(profileId);metrics.achievements_unlocked=existing.size;
+        const progress=achievementProgress(definition,metrics,{unlocked:existing,catalog:definitions});
+        if(!progress.complete)continue;
+        const inserted=db.prepare(`INSERT OR IGNORE INTO user_achievements(profile_id,achievement_key,unlocked_at,reward_pr,reward_item_key,reward_item_granted,metadata_json)
+          VALUES(?,?,?,?,?,0,?)`).run(profileId,definition.key,unlockedAt,definition.rewardPr,definition.rewardItemKey||null,JSON.stringify({condition_type:definition.conditionType,metric:definition.metric,value:progress.value,target:progress.target}));
+        if(!Number(inserted.changes)){existing.add(definition.key);continue;}
+        existing.add(definition.key);changed=true;
+        postPrTransaction(profileId,'ACHIEVEMENT',definition.key,definition.rewardPr,{achievement_key:definition.key},unlockedAt);
+        const reward_item=grantAchievementItem(profileId,definition,unlockedAt);
+        unlocked.push({...definition,unlocked_at:unlockedAt,reward_item});
+      }
+      if(!changed)break;
     }
     return unlocked;
   }
@@ -474,7 +501,7 @@ export function createRepository(db, dependencies = {}) {
         COALESCE(g.total_xp,0) AS total_xp,COALESCE(g.pr_balance,0) AS pr_balance,
         COALESCE(g.pr_total_earned,0) AS pr_total_earned
         FROM profiles p LEFT JOIN game_profiles g ON g.profile_id=p.id${userId?' WHERE p.id=?':''} ORDER BY p.id`).all(...(userId?[Number(userId)]:[]));
-      const activeItemKeys=new Set(repositoryGameItems().map(item=>item.key));
+      const activeItemKeys=new Set(repositoryAllGameItems().map(item=>item.key));
       for(const profile of settings)for(const slot of ITEM_SLOTS){
         const field=avatarFieldForSlot(slot),key=profile[field];
         if(key&&key!=='none'&&!activeItemKeys.has(key))profile[field]='none';
@@ -552,13 +579,14 @@ export function createRepository(db, dependencies = {}) {
       if(!profile||!Number(profile.enabled))return null;
       const metrics=achievementMetrics(Number(userId));
       const unlocked=new Map(db.prepare('SELECT * FROM user_achievements WHERE profile_id=?').all(userId).map(row=>[row.achievement_key,row]));
-      const definitions=repositoryAchievementCatalog();
+      const allDefinitions=repositoryAchievementCatalog({includeHidden:true});
+      const definitions=allDefinitions.filter(item=>item.active!==false||unlocked.has(item.key));
       const items=definitions.map(definition=>{
-        const saved=unlocked.get(definition.key),progress=achievementProgress(definition,metrics),masked=definition.hidden&&!saved;
+        const saved=unlocked.get(definition.key),progress=achievementProgress(definition,metrics,{unlocked:new Set(unlocked.keys()),catalog:allDefinitions.filter(item=>item.active!==false)}),masked=definition.hidden&&!saved;
         return{
           key:definition.key,category:definition.category,category_label:ACHIEVEMENT_CATEGORIES[definition.category],
           name:masked?'???':definition.name,description:masked?'Ukryte osiągnięcie':definition.description,
-          icon:masked?'?':definition.category.slice(0,2).toUpperCase(),reward_pr:definition.rewardPr,reward_item_key:definition.rewardItemKey||null,
+          icon:masked?'?':definition.category.slice(0,2).toUpperCase(),reward_pr:definition.rewardPr,reward_item_key:definition.rewardItemKey||null,reward_item_granted:Boolean(saved?.reward_item_granted),active:definition.active!==false,
           progress:masked?null:progress,unlocked:Boolean(saved),unlocked_at:saved?.unlocked_at||null
         };
       });
@@ -573,7 +601,7 @@ export function createRepository(db, dependencies = {}) {
       return{
         user_id:profile.user_id,user_name:profile.user_name,color:profile.color,pr_balance:profile.pr_balance,
         slots:ITEM_SLOTS.map(slot=>({key:slot,label:SLOT_LABELS[slot],equipped_key:profile[avatarFieldForSlot(slot)]||'none'})),
-        items:repositoryGameItems().filter(item=>owned.has(item.key)).map(item=>decoratedItem(item,owned.get(item.key),profile))
+        items:repositoryAllGameItems().filter(item=>owned.has(item.key)).map(item=>decoratedItem(item,owned.get(item.key),profile))
       };
     },
 
@@ -585,7 +613,7 @@ export function createRepository(db, dependencies = {}) {
     },
 
     purchaseItem(userId, itemKey) {
-      const definition=repositoryGameItem(itemKey);if(!definition)throw new Error('Nie znaleziono itemu.');
+      const definition=repositoryGameItem(itemKey);if(!definition||definition.available===false)throw new Error('Ten item nie jest obecnie dostępny w sklepie.');
       const game=db.prepare('SELECT * FROM game_profiles WHERE profile_id=?').get(userId);
       if(!game?.enabled)throw new Error('CRESCI GAME nie jest włączony dla tego użytkownika.');
       if(db.prepare('SELECT 1 FROM user_items WHERE profile_id=? AND item_key=?').get(userId,itemKey))throw new Error('Ten item jest już w ekwipunku.');

@@ -65,12 +65,21 @@ test('shared renderer selects runtime or compact and puts every layer at 0,0',()
   assert.match(app,/AVATAR_CACHE_VERSION='4\.1'/);
   assert.match(app,/creator\/catalog\.json\?v=/);
   assert.match(app,/shop\/catalog\.json\?v=/);
+  assert.match(app,/avatarAssetVersions=new Map/);
+  assert.match(app,/asset\.sha256\|\|AVATAR_CACHE_VERSION/);
+  assert.match(app,/avatarAssetVersions\.get\(path\)\|\|AVATAR_CACHE_VERSION/);
   assert.match(app,/spriteManifest\.layerOrder\.map/);
   assert.match(app,/class="avatar-layer avatar-layer-\$\{layer\}"/);
   assert.match(app,/sizeClass\?spriteManifest\.compactResolution/);
   assert.match(app,/Math\.min\(stage\.clientWidth\/width,stage\.clientHeight\/height\)/);
   assert.doesNotMatch(app,/standard-v3|hd-proof-v2|final-v21/);
   assert.doesNotMatch(app,/spriteLayerOffset|layer-offset-y/);
+});
+
+test('shop thumbnails show only the advertised item and never leak equipped layers',()=>{
+  const app=fs.readFileSync(path.join(root,'public','app.js'),'utf8');
+  assert.match(app,/for\(const field of Object\.values\(avatarFieldBySlot\)\)avatar\[field\]='none'/);
+  assert.match(app,/const field=avatarFieldBySlot\[item\.slot\];if\(field\)avatar\[field\]=item\.key/);
 });
 
 test('CSS uses contain and one common canvas without filters or per-layer transforms',()=>{
@@ -103,5 +112,5 @@ test('no service worker or active source references an older avatar pack',()=>{
   }
   const index=fs.readFileSync(path.join(root,'public','index.html'),'utf8');
   assert.match(index,/styles\.css\?v=4\.3/);
-  assert.match(index,/app\.js\?v=5\.0/);
+  assert.match(index,/app\.js\?v=5\.2/);
 });

@@ -15,7 +15,7 @@ const TEST_ITEMS=[
   {key:'utility_backpack',name:'Plecak',slot:'back',rarity:'epic',pricePr:35}
 ];
 
-function memoryRepo() {
+function memoryRepo(achievementDefinitions=TEST_ACHIEVEMENTS,itemDefinitions=TEST_ITEMS) {
   const db = new DatabaseSync(':memory:');
   db.exec(`PRAGMA foreign_keys=ON;
     CREATE TABLE profiles(id INTEGER PRIMARY KEY,name TEXT,color TEXT,created_at TEXT DEFAULT CURRENT_TIMESTAMP);
@@ -30,7 +30,7 @@ function memoryRepo() {
     CREATE TABLE user_items(profile_id INTEGER REFERENCES profiles(id) ON DELETE CASCADE,item_key TEXT,acquired_source TEXT,acquired_at TEXT,purchased_price INTEGER DEFAULT 0,metadata_json TEXT DEFAULT '{}',PRIMARY KEY(profile_id,item_key));
     INSERT INTO profiles(id,name,color) VALUES(1,'Marek','#f00'),(2,'Domii','#70f');
     INSERT INTO exercises(id,name,category,load_mode,bar_weight,step_size) VALUES(1,'Przysiad','Nogi','plates',20,2.5);`);
-  return { db, repo:createRepository(db,{achievementCatalog:()=>TEST_ACHIEVEMENTS,gameItems:()=>TEST_ITEMS}) };
+  return { db, repo:createRepository(db,{achievementCatalog:()=>achievementDefinitions,gameItems:(options={})=>options.includeHidden?itemDefinitions:itemDefinitions.filter(item=>item.available!==false)}) };
 }
 
 test('entry derives old weight, increment and change type', () => {
@@ -47,6 +47,47 @@ test('profiles keep independent progress', () => {
   repo.addEntry({profile_id:1,exercise_id:1,new_weight:90,performed_at:'2026-08-01'});
   repo.addEntry({profile_id:2,exercise_id:1,new_weight:55,performed_at:'2026-08-01'});
   assert.equal(repo.progress(1,1)[0].new_weight,90); assert.equal(repo.progress(2,1)[0].new_weight,55);
+  db.close();
+});
+
+test('achievement reward item is granted once, records its source and supports a HIDDEN reward',()=>{
+  const definitions=[
+    {key:'one_check',category:'training',name:'Jeden',description:'Check-in',conditionType:'check_in_count',metric:'check_ins',target:1,rewardPr:0,rewardItemKey:'champion_belt',countsTowardCompletion:true,active:true},
+    {key:'master_all',category:'progress',name:'Mistrz',description:'Wszystkie',conditionType:'all_achievements',metric:'achievements_unlocked',target:1,rewardPr:0,rewardItemKey:'champion_belt',countsTowardCompletion:false,active:true}
+  ];
+  const items=[...TEST_ITEMS,{key:'champion_belt',name:'Pas mistrzowski',slot:'accessories',rarity:'legendary',pricePr:0,active:false,available:false}];
+  const {db,repo}=memoryRepo(definitions,items);repo.updateGameSettings(1,{enabled:true,avatar});
+  const result=repo.gameCheckIn(1,'2026-09-07',{local_hour:12});
+  assert.deepEqual(result.unlocked_achievements.map(item=>item.key),['one_check','master_all']);
+  const owned=db.prepare("SELECT * FROM user_items WHERE profile_id=1 AND item_key='champion_belt'").get();
+  assert.equal(owned.acquired_source,'ACHIEVEMENT');
+  const rows=db.prepare("SELECT * FROM user_achievements WHERE profile_id=1 ORDER BY achievement_key").all();
+  assert.equal(rows.length,2);assert.equal(rows.every(row=>row.reward_item_granted===1),true);
+  repo.recordGameAction(1,'view_progress_chart');
+  assert.equal(db.prepare("SELECT COUNT(*) count FROM user_items WHERE profile_id=1 AND item_key='champion_belt'").get().count,1);
+  assert.equal(db.prepare("SELECT COUNT(*) count FROM user_achievements WHERE profile_id=1").get().count,2);
+  db.close();
+});
+
+test('reward grant is idempotent when the user already owns the item',()=>{
+  const definitions=[{key:'one_check',category:'training',name:'Jeden',description:'Check-in',conditionType:'check_in_count',metric:'check_ins',target:1,rewardPr:0,rewardItemKey:'beanie',countsTowardCompletion:true,active:true}];
+  const {db,repo}=memoryRepo(definitions,TEST_ITEMS);repo.updateGameSettings(1,{enabled:true,avatar});
+  db.prepare("INSERT INTO user_items(profile_id,item_key,acquired_source,acquired_at,purchased_price,metadata_json) VALUES(1,'beanie','PURCHASE','2026-09-01',6,'{}')").run();
+  repo.gameCheckIn(1,'2026-09-07',{local_hour:12});
+  assert.equal(db.prepare("SELECT acquired_source FROM user_items WHERE profile_id=1 AND item_key='beanie'").get().acquired_source,'PURCHASE');
+  assert.equal(db.prepare("SELECT reward_item_granted FROM user_achievements WHERE profile_id=1 AND achievement_key='one_check'").get().reward_item_granted,1);
+  assert.equal(db.prepare("SELECT COUNT(*) count FROM user_items WHERE profile_id=1 AND item_key='beanie'").get().count,1);
+  db.close();
+});
+
+test('a HIDDEN item disappears from shop but remains owned, visible and equippable',()=>{
+  const items=[...TEST_ITEMS,{key:'legacy_belt',name:'Pas',slot:'accessories',rarity:'epic',pricePr:50,active:false,available:false}];
+  const {db,repo}=memoryRepo([],items);repo.updateGameSettings(1,{enabled:true,avatar});
+  db.prepare("INSERT INTO user_items(profile_id,item_key,acquired_source,acquired_at,purchased_price,metadata_json) VALUES(1,'legacy_belt','PURCHASE','2026-09-01',50,'{}')").run();
+  assert.equal(repo.shop(1).items.some(item=>item.key==='legacy_belt'),false);
+  assert.equal(repo.inventory(1).items.some(item=>item.key==='legacy_belt'),true);
+  repo.equipItem(1,'accessories','legacy_belt');
+  assert.equal(repo.inventory(1).items.find(item=>item.key==='legacy_belt').equipped,true);
   db.close();
 });
 

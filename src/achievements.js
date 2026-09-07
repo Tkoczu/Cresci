@@ -38,10 +38,11 @@ export const ACHIEVEMENTS = Object.freeze([
 
 export const ACHIEVEMENT_CATEGORIES = Object.freeze({training:'Trening',progress:'Progres',regularity:'Regularność',exploration:'Eksploracja',hidden:'Ukryte'});
 
-export const ACHIEVEMENT_METRICS=new Set(['check_ins','records','records_single_exercise','max_record_weight','weekly_streak','custom_exercises','distinct_exercises','chart_views','saved_results','items_acquired','purchases','full_equipment','night_check_ins','early_check_ins','comeback_check_ins','pr_balance']);
+export const ACHIEVEMENT_METRICS=new Set(['check_ins','records','records_single_exercise','max_record_weight','weekly_streak','custom_exercises','distinct_exercises','chart_views','saved_results','items_acquired','purchases','full_equipment','night_check_ins','early_check_ins','comeback_check_ins','pr_balance','level','achievements_unlocked']);
+export const ACHIEVEMENT_CONDITION_TYPES=new Set(['metric_threshold','weight_record','record_count','check_in_count','level_reached','achievement_count','all_achievements','category_all','achievement_set']);
 const CATALOG_URL=new URL('../public/content/achievements.json',import.meta.url);
 
-export function achievementCatalog(){
+export function achievementCatalog(options={}){
   try{
     const parsed=JSON.parse(readFileSync(CATALOG_URL,'utf8'));
     if(!Array.isArray(parsed?.items))throw new Error('items is not an array');
@@ -49,9 +50,13 @@ export function achievementCatalog(){
     for(const raw of parsed.items){
       const key=String(raw?.key||'');
       const target=Number(raw?.target),rewardPr=Number(raw?.rewardPr||0);
-      if(raw?.active===false||!/^[a-z][a-z0-9_]{2,63}$/.test(key)||keys.has(key)||!ACHIEVEMENT_CATEGORIES[raw?.category]||!ACHIEVEMENT_METRICS.has(raw?.metric)||!Number.isInteger(target)||target<1||!Number.isInteger(rewardPr)||rewardPr<0)continue;
+      const conditionType=String(raw?.conditionType||'metric_threshold');
+      const metric=String(raw?.metric||'');
+      if((raw?.active===false&&!options.includeHidden)||!/^[a-z][a-z0-9_]{2,63}$/.test(key)||keys.has(key)||!ACHIEVEMENT_CATEGORIES[raw?.category]||!ACHIEVEMENT_CONDITION_TYPES.has(conditionType)||!Number.isInteger(rewardPr)||rewardPr<0)continue;
+      if(conditionType==='metric_threshold'&&!ACHIEVEMENT_METRICS.has(metric))continue;
+      if(['metric_threshold','weight_record','record_count','check_in_count','level_reached','achievement_count'].includes(conditionType)&&(!Number.isFinite(target)||target<1))continue;
       keys.add(key);
-      items.push(Object.freeze({key,category:raw.category,name:String(raw.name||key),description:String(raw.description||''),metric:raw.metric,target,rewardPr,hidden:Boolean(raw.hidden),rewardItemKey:raw.rewardItemKey||null}));
+      items.push(Object.freeze({key,category:raw.category,name:String(raw.name||key),description:String(raw.description||''),metric,target:Number.isFinite(target)?target:1,rewardPr,hidden:Boolean(raw.hidden),active:raw.active!==false,conditionType,conditionParams:raw.conditionParams&&typeof raw.conditionParams==='object'?raw.conditionParams:{},countsTowardCompletion:raw.countsTowardCompletion!==false,rewardItemKey:raw.rewardItemKey||null}));
     }
     return Object.freeze(items);
   }catch(error){
@@ -71,4 +76,22 @@ export function longestCompletedWeeklyStreak(dateTexts,weeklyGoal){
   return longest;
 }
 
-export function achievementProgress(definition,metrics){const value=Math.max(0,Number(metrics[definition.metric])||0);return{value,target:definition.target,complete:value>=definition.target,percent:Math.min(100,Math.round(value/definition.target*100))};}
+export function achievementProgress(definition,metrics,context={}){
+  const type=definition.conditionType||'metric_threshold',unlocked=context.unlocked||new Set(),catalog=context.catalog||[];
+  let value=0,target=Math.max(1,Number(definition.target)||1),complete=false;
+  if(type==='all_achievements'){
+    const required=catalog.filter(item=>item.key!==definition.key&&item.active!==false&&item.countsTowardCompletion!==false);
+    value=required.filter(item=>unlocked.has(item.key)).length;target=required.length;complete=target>0&&value>=target;
+  }else if(type==='category_all'){
+    const category=String(definition.conditionParams?.category||'');
+    const required=catalog.filter(item=>item.key!==definition.key&&item.active!==false&&item.category===category&&item.countsTowardCompletion!==false);
+    value=required.filter(item=>unlocked.has(item.key)).length;target=required.length;complete=target>0&&value>=target;
+  }else if(type==='achievement_set'){
+    const required=[...new Set((definition.conditionParams?.achievementKeys||[]).map(String))].filter(key=>key!==definition.key);
+    value=required.filter(key=>unlocked.has(key)).length;target=required.length;complete=target>0&&value>=target;
+  }else{
+    const metric={weight_record:'max_record_weight',record_count:'records',check_in_count:'check_ins',level_reached:'level',achievement_count:'achievements_unlocked'}[type]||definition.metric;
+    value=Math.max(0,Number(metrics[metric])||0);complete=value>=target;
+  }
+  return{value,target,complete,percent:target?Math.min(100,Math.round(value/target*100)):0};
+}

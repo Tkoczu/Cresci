@@ -88,7 +88,7 @@ function loadManagedItems(catalogItems){
   try{
     const logicalItems=new Map();
     for(const variant of catalogItems){
-      if(variant.active===false||!['cresci-manager','cresci-asset-studio'].includes(variant.managedBy)||!variant.contentId||!ITEM_SLOTS.includes(variant.slot))continue;
+      if(!['cresci-manager','cresci-asset-studio'].includes(variant.managedBy)||!variant.contentId||!ITEM_SLOTS.includes(variant.slot))continue;
       const existing=logicalItems.get(variant.contentId);
       if(existing&&existing.spriteName!==variant.assetKey)throw new Error(`Niespójny assetKey dla ${variant.contentId}`);
       logicalItems.set(variant.contentId,{
@@ -99,7 +99,8 @@ function loadManagedItems(catalogItems){
         collection:String(variant.collection||'CRESCI Manager'),
         rarity:String(variant.rarity||'common'),
         pricePr:Math.max(0,Number(variant.price)||0),
-        description:'Przedmiot dodany przez CRESCI Manager.'
+        description:String(variant.description||'Przedmiot dodany przez CRESCI Manager.'),
+        active:variant.active!==false,available:variant.active!==false&&variant.available!==false
       });
     }
     return [...logicalItems.values()];
@@ -122,12 +123,12 @@ const CATALOG_MANAGED_BUILTIN_ASSETS=new Set([
   'red_pullover_hoodie','red_training_shorts','royal_crest_accessories','royal_crest_bottom','royal_crest_headwear',
   'royal_crest_shoes','royal_crest_top','utility_backpack','white_classic_cap','white_sprint_sneakers'
 ]);
-export function gameItems(){
+export function gameItems(options={}){
+  const includeHidden=Boolean(options.includeHidden);
   const catalogItems=loadCatalogItems();
   if(catalogItems===null)return [...BUILTIN_GAME_ITEMS];
   const catalogByAsset=new Map();
   for(const variant of catalogItems){
-    if(variant.active===false)continue;
     const assetName=catalogAssetName(variant);
     if(assetName&&!catalogByAsset.has(assetName))catalogByAsset.set(assetName,variant);
   }
@@ -141,11 +142,13 @@ export function gameItems(){
       name:String(catalogItem.displayName||item.name),
       collection:String(catalogItem.collection||item.collection||'CRESCI Core'),
       rarity:String(catalogItem.rarity||item.rarity),
-      pricePr:Number.isFinite(catalogPrice)?Math.max(0,catalogPrice):item.pricePr
+      pricePr:Number.isFinite(catalogPrice)?Math.max(0,catalogPrice):item.pricePr,
+      active:catalogItem.active!==false,available:catalogItem.active!==false&&catalogItem.available!==false
     }];
   });
   const managedItems=loadManagedItems(catalogItems).filter(item=>!builtinKeys.has(item.key));
-  return [...activeBuiltins,...managedItems];
+  const items=[...activeBuiltins,...managedItems];
+  return includeHidden?items:items.filter(item=>item.available!==false);
 }
 
 // Kept as a startup snapshot for backwards compatibility and static contract
@@ -153,7 +156,7 @@ export function gameItems(){
 // immediately without restarting CRESCI.
 export const GAME_ITEMS=Object.freeze(gameItems());
 
-export function gameItem(key){return gameItems().find(item=>item.key===String(key))||null;}
+export function gameItem(key){return gameItems({includeHidden:true}).find(item=>item.key===String(key))||null;}
 
 export function avatarFieldForSlot(slot){return{back:'back_style',top:'top_style',bottom:'bottom_style',shoes:'shoes_style',headwear:'headwear',accessories:'accessory'}[slot]||slot;}
 
