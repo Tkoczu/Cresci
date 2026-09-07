@@ -4,7 +4,7 @@ import path from 'node:path';
 import { calculateCresciScore } from './cresci-score.js';
 import { CHECK_IN_XP, levelFromXp, validateAvatar } from './cresci-game.js';
 import { achievementCatalog, ACHIEVEMENT_CATEGORIES, achievementProgress, longestCompletedWeeklyStreak } from './achievements.js';
-import { gameItems, ITEM_SLOTS, SLOT_LABELS, RARITY_LABELS, avatarFieldForSlot, avatarItems, gameItem } from './game-items.js';
+import { gameItems, ITEM_SLOTS, SLOT_LABELS, RARITY_LABELS, avatarFieldForSlot } from './game-items.js';
 
 export const SCHEMA_VERSION = 10;
 
@@ -253,7 +253,11 @@ export function openDatabase(databasePath, options = {}) {
   return db;
 }
 
-export function createRepository(db) {
+export function createRepository(db, dependencies = {}) {
+  const repositoryAchievementCatalog=dependencies.achievementCatalog||achievementCatalog;
+  const repositoryGameItems=dependencies.gameItems||gameItems;
+  const repositoryGameItem=key=>repositoryGameItems().find(item=>item.key===String(key))||null;
+  const repositoryAvatarItems=avatar=>ITEM_SLOTS.map(slot=>({slot,key:avatar?.[avatarFieldForSlot(slot)]})).filter(item=>item.key&&item.key!=='none'&&repositoryGameItem(item.key));
   const profileColumns=new Set(db.prepare('PRAGMA table_info(profiles)').all().map(column=>column.name));
   const hasAccountColumns=profileColumns.has('password_hash')&&profileColumns.has('password_salt');
   const hasAuthSessions=Boolean(db.prepare("SELECT 1 FROM sqlite_master WHERE type='table' AND name='auth_sessions'").get());
@@ -295,7 +299,7 @@ export function createRepository(db) {
   function grantAvatarOwnership(profileId, avatar, source='STARTER') {
     const insert=db.prepare(`INSERT OR IGNORE INTO user_items(profile_id,item_key,acquired_source,acquired_at,purchased_price,metadata_json) VALUES(?,?,?,?,0,'{}')`);
     const acquiredAt=new Date().toISOString();
-    for(const item of avatarItems(avatar))insert.run(profileId,item.key,source,acquiredAt);
+    for(const item of repositoryAvatarItems(avatar))insert.run(profileId,item.key,source,acquiredAt);
   }
 
   function decoratedItem(definition, ownedRow, profile) {
@@ -347,7 +351,7 @@ export function createRepository(db) {
   function evaluateAchievements(profileId, unlockedAt = new Date().toISOString()) {
     if(!db.prepare('SELECT enabled FROM game_profiles WHERE profile_id=?').get(profileId)?.enabled)return[];
     const metrics=achievementMetrics(profileId),existing=new Set(db.prepare('SELECT achievement_key FROM user_achievements WHERE profile_id=?').all(profileId).map(row=>row.achievement_key));
-    const candidates=achievementCatalog().filter(definition=>!existing.has(definition.key)&&achievementProgress(definition,metrics).complete);
+    const candidates=repositoryAchievementCatalog().filter(definition=>!existing.has(definition.key)&&achievementProgress(definition,metrics).complete);
     const unlocked=[];
     for(const definition of candidates){
       const inserted=db.prepare(`INSERT OR IGNORE INTO user_achievements(profile_id,achievement_key,unlocked_at,reward_pr,reward_item_key,reward_item_granted,metadata_json)
@@ -470,7 +474,7 @@ export function createRepository(db) {
         COALESCE(g.total_xp,0) AS total_xp,COALESCE(g.pr_balance,0) AS pr_balance,
         COALESCE(g.pr_total_earned,0) AS pr_total_earned
         FROM profiles p LEFT JOIN game_profiles g ON g.profile_id=p.id${userId?' WHERE p.id=?':''} ORDER BY p.id`).all(...(userId?[Number(userId)]:[]));
-      const activeItemKeys=new Set(gameItems().map(item=>item.key));
+      const activeItemKeys=new Set(repositoryGameItems().map(item=>item.key));
       for(const profile of settings)for(const slot of ITEM_SLOTS){
         const field=avatarFieldForSlot(slot),key=profile[field];
         if(key&&key!=='none'&&!activeItemKeys.has(key))profile[field]='none';
@@ -487,7 +491,7 @@ export function createRepository(db) {
       if (input.avatar) avatar = validateAvatar(input.avatar);
       if (enabled && !avatar && !current?.avatar_configured) throw new Error('Najpierw utwórz avatar postaci.');
       if(current?.avatar_configured&&avatar){
-        for(const item of avatarItems(avatar)){
+        for(const item of repositoryAvatarItems(avatar)){
           const field=avatarFieldForSlot(item.slot);
           if(current[field]!==item.key&&!db.prepare('SELECT 1 FROM user_items WHERE profile_id=? AND item_key=?').get(userId,item.key))throw new Error('Ten element stroju nie znajduje się w ekwipunku. Użyj sklepu CRESCI GAME.');
         }
@@ -548,7 +552,7 @@ export function createRepository(db) {
       if(!profile||!Number(profile.enabled))return null;
       const metrics=achievementMetrics(Number(userId));
       const unlocked=new Map(db.prepare('SELECT * FROM user_achievements WHERE profile_id=?').all(userId).map(row=>[row.achievement_key,row]));
-      const definitions=achievementCatalog();
+      const definitions=repositoryAchievementCatalog();
       const items=definitions.map(definition=>{
         const saved=unlocked.get(definition.key),progress=achievementProgress(definition,metrics),masked=definition.hidden&&!saved;
         return{
@@ -569,7 +573,7 @@ export function createRepository(db) {
       return{
         user_id:profile.user_id,user_name:profile.user_name,color:profile.color,pr_balance:profile.pr_balance,
         slots:ITEM_SLOTS.map(slot=>({key:slot,label:SLOT_LABELS[slot],equipped_key:profile[avatarFieldForSlot(slot)]||'none'})),
-        items:gameItems().filter(item=>owned.has(item.key)).map(item=>decoratedItem(item,owned.get(item.key),profile))
+        items:repositoryGameItems().filter(item=>owned.has(item.key)).map(item=>decoratedItem(item,owned.get(item.key),profile))
       };
     },
 
@@ -577,11 +581,11 @@ export function createRepository(db) {
       const profile=this.gameSettings().find(item=>item.user_id===Number(userId));
       if(!profile||!Number(profile.enabled))return null;
       const owned=new Map(db.prepare('SELECT * FROM user_items WHERE profile_id=?').all(userId).map(row=>[row.item_key,row]));
-      return{user_id:profile.user_id,user_name:profile.user_name,color:profile.color,pr_balance:profile.pr_balance,items:gameItems().map(item=>decoratedItem(item,owned.get(item.key),profile))};
+      return{user_id:profile.user_id,user_name:profile.user_name,color:profile.color,pr_balance:profile.pr_balance,items:repositoryGameItems().map(item=>decoratedItem(item,owned.get(item.key),profile))};
     },
 
     purchaseItem(userId, itemKey) {
-      const definition=gameItem(itemKey);if(!definition)throw new Error('Nie znaleziono itemu.');
+      const definition=repositoryGameItem(itemKey);if(!definition)throw new Error('Nie znaleziono itemu.');
       const game=db.prepare('SELECT * FROM game_profiles WHERE profile_id=?').get(userId);
       if(!game?.enabled)throw new Error('CRESCI GAME nie jest włączony dla tego użytkownika.');
       if(db.prepare('SELECT 1 FROM user_items WHERE profile_id=? AND item_key=?').get(userId,itemKey))throw new Error('Ten item jest już w ekwipunku.');
@@ -609,7 +613,7 @@ export function createRepository(db) {
       if(!game?.enabled)throw new Error('CRESCI GAME nie jest włączony dla tego użytkownika.');
       const field=avatarFieldForSlot(slot),key=itemKey&&itemKey!=='none'?String(itemKey):'none';
       if(key!=='none'){
-        const definition=gameItem(key);if(!definition||definition.slot!==slot)throw new Error('Ten item nie pasuje do wybranego slotu.');
+        const definition=repositoryGameItem(key);if(!definition||definition.slot!==slot)throw new Error('Ten item nie pasuje do wybranego slotu.');
         if(!db.prepare('SELECT 1 FROM user_items WHERE profile_id=? AND item_key=?').get(userId,key))throw new Error('Najpierw zdobądź ten item.');
       }
       const occurredAt=new Date().toISOString();let unlockedAchievements=[];

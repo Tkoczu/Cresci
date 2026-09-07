@@ -88,7 +88,7 @@ function loadManagedItems(catalogItems){
   try{
     const logicalItems=new Map();
     for(const variant of catalogItems){
-      if(variant.managedBy!=='cresci-manager'||!variant.contentId||!ITEM_SLOTS.includes(variant.slot))continue;
+      if(variant.active===false||!['cresci-manager','cresci-asset-studio'].includes(variant.managedBy)||!variant.contentId||!ITEM_SLOTS.includes(variant.slot))continue;
       const existing=logicalItems.get(variant.contentId);
       if(existing&&existing.spriteName!==variant.assetKey)throw new Error(`Niespójny assetKey dla ${variant.contentId}`);
       logicalItems.set(variant.contentId,{
@@ -127,6 +127,7 @@ export function gameItems(){
   if(catalogItems===null)return [...BUILTIN_GAME_ITEMS];
   const catalogByAsset=new Map();
   for(const variant of catalogItems){
+    if(variant.active===false)continue;
     const assetName=catalogAssetName(variant);
     if(assetName&&!catalogByAsset.has(assetName))catalogByAsset.set(assetName,variant);
   }

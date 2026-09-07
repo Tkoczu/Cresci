@@ -2,6 +2,18 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { DatabaseSync } from 'node:sqlite';
 import { createRepository } from '../src/db.js';
+import { ACHIEVEMENTS } from '../src/achievements.js';
+
+const TEST_ACHIEVEMENTS=[...ACHIEVEMENTS,{key:'test_weight_100',category:'progress',name:'100 kg',description:'Osiągnij rekord 100 kg.',metric:'max_record_weight',target:100,rewardPr:100}];
+const TEST_ITEMS=[
+  {key:'cresci_tank',name:'Top',slot:'top',rarity:'common',pricePr:2},
+  {key:'training_shorts',name:'Szorty',slot:'bottom',rarity:'common',pricePr:2},
+  {key:'trainers',name:'Buty',slot:'shoes',rarity:'common',pricePr:2},
+  {key:'wrist_wraps',name:'Owijki',slot:'accessories',rarity:'common',pricePr:2},
+  {key:'headband',name:'Opaska',slot:'headwear',rarity:'common',pricePr:2},
+  {key:'beanie',name:'Beanie',slot:'headwear',rarity:'rare',pricePr:6},
+  {key:'utility_backpack',name:'Plecak',slot:'back',rarity:'epic',pricePr:35}
+];
 
 function memoryRepo() {
   const db = new DatabaseSync(':memory:');
@@ -18,7 +30,7 @@ function memoryRepo() {
     CREATE TABLE user_items(profile_id INTEGER REFERENCES profiles(id) ON DELETE CASCADE,item_key TEXT,acquired_source TEXT,acquired_at TEXT,purchased_price INTEGER DEFAULT 0,metadata_json TEXT DEFAULT '{}',PRIMARY KEY(profile_id,item_key));
     INSERT INTO profiles(id,name,color) VALUES(1,'Marek','#f00'),(2,'Domii','#70f');
     INSERT INTO exercises(id,name,category,load_mode,bar_weight,step_size) VALUES(1,'Przysiad','Nogi','plates',20,2.5);`);
-  return { db, repo:createRepository(db) };
+  return { db, repo:createRepository(db,{achievementCatalog:()=>TEST_ACHIEVEMENTS,gameItems:()=>TEST_ITEMS}) };
 }
 
 test('entry derives old weight, increment and change type', () => {
@@ -261,10 +273,10 @@ test('weight-threshold achievement unlocks only after reaching its configured re
   const{db,repo}=memoryRepo();repo.updateGameSettings(1,{enabled:true,avatar});
   repo.addEntry({profile_id:1,exercise_id:1,new_weight:80,performed_at:'2026-08-01'});
   const below=repo.addEntry({profile_id:1,exercise_id:1,new_weight:85,performed_at:'2026-08-08'});
-  assert.equal(below.unlocked_achievements.some(item=>item.key==='arnold_100'),false);
+  assert.equal(below.unlocked_achievements.some(item=>item.key==='test_weight_100'),false);
   const reached=repo.addEntry({profile_id:1,exercise_id:1,new_weight:100,performed_at:'2026-08-15'});
-  assert.equal(reached.unlocked_achievements.some(item=>item.key==='arnold_100'),true);
-  assert.equal(repo.achievements(1).items.find(item=>item.key==='arnold_100').progress.value,100);
+  assert.equal(reached.unlocked_achievements.some(item=>item.key==='test_weight_100'),true);
+  assert.equal(repo.achievements(1).items.find(item=>item.key==='test_weight_100').progress.value,100);
   db.close();
 });
 
@@ -329,11 +341,9 @@ test('equip persists per user, updates avatar layer and can be removed',()=>{
   db.close();
 });
 
-test('active catalog controls whether an item can be purchased',()=>{
+test('item purchase and equip use the repository catalog',()=>{
   const{db,repo}=memoryRepo();repo.updateGameSettings(1,{enabled:true,avatar});db.prepare('UPDATE game_profiles SET pr_balance=40 WHERE profile_id=1').run();
-  const available=repo.shop(1).items.some(item=>item.key==='utility_backpack');
-  if(available){repo.purchaseItem(1,'utility_backpack');const equipped=repo.equipItem(1,'back','utility_backpack');assert.equal(equipped.game.back_style,'utility_backpack');}
-  else{assert.throws(()=>repo.purchaseItem(1,'utility_backpack'),/Nie znaleziono itemu/);assert.equal(repo.gameStates()[0].back_style,'none');}
+  repo.purchaseItem(1,'utility_backpack');const equipped=repo.equipItem(1,'back','utility_backpack');assert.equal(equipped.game.back_style,'utility_backpack');
   db.close();
 });
 

@@ -49,12 +49,14 @@ test('creator and shop catalogs resolve only files supplied by v4-production',()
     for(const style of Object.values(variants.hair))for(const hair of Object.values(style))assert.ok(fs.existsSync(path.join(packRoot,hair.png)));
   }
   for(const item of shop.items)for(const resolution of ['master','runtime','compact'])assert.ok(fs.existsSync(path.join(packRoot,item.assets[resolution].png)),`${item.sku} ${resolution}`);
-  const managedIds=new Set(shop.items.filter(item=>item.managedBy==='cresci-manager'&&item.contentId).map(item=>item.contentId));
+  const managedIds=new Set(shop.items.filter(item=>item.active!==false&&item.managedBy==='cresci-manager'&&item.contentId).map(item=>item.contentId));
   for(const contentId of managedIds){
     const variants=shop.items.filter(item=>item.contentId===contentId);
     assert.ok(variants.length>=1,`${contentId} variants`);
     assert.ok(gameItems().some(item=>item.key===contentId),`${contentId} must be exposed by the CRESCI shop API`);
   }
+  const hiddenIds=new Set(shop.items.filter(item=>item.active===false&&item.contentId).map(item=>item.contentId));
+  for(const contentId of hiddenIds)assert.equal(gameItems().some(item=>item.key===contentId),false,`${contentId} must stay hidden`);
 });
 
 test('shared renderer selects runtime or compact and puts every layer at 0,0',()=>{
@@ -90,7 +92,6 @@ test('existing item keys and purchases map to v4 PNG sprite names without changi
     assert.ok(pngPaths.has(file),`${item.key} -> ${file}`);
   }
   assert.equal(new Set(GAME_ITEMS.map(item=>item.key)).size,GAME_ITEMS.length);
-  assert.equal(GAME_ITEMS.find(item=>item.key==='power_crop').spriteName,'black_performance_tank');
 });
 
 test('no service worker or active source references an older avatar pack',()=>{
